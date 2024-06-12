@@ -4,15 +4,26 @@ import 'package:go_router/go_router.dart';
 import '../../screen/pages.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/initialRoute',
+  initialLocation: '/',
   routes: [
     GoRoute(
-      path: '/initialRoute',
+      path: '/',
       builder: (context, state) => const InitialPage(),
+    ),
+    GoRoute(
+      path: '/registerScreen',
+      builder: (context, state) => const RegisterScreen(),
     ),
   ],
 );
 
 class RouterSimpleCubit extends Cubit<GoRouter> {
   RouterSimpleCubit() : super(appRouter);
+  void goBack() {
+    state.pop();
+  }
+
+  void pushRoute(String route) {
+    state.push(route);
+  }
 }

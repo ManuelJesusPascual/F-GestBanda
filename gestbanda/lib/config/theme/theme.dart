@@ -4,18 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 var theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.cyan, brightness: Brightness.light),
+      seedColor: const Color(0x00023047), brightness: Brightness.light),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
       fontSize: 72,
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.exo(
+    titleLarge: GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.bold,
     ),
-    bodyMedium: GoogleFonts.exo(),
-    displaySmall: GoogleFonts.exo(
+    bodyMedium: GoogleFonts.poppins(),
+    displaySmall: GoogleFonts.poppins(
       fontSize: 18,
     ),
   ),
@@ -23,19 +23,19 @@ var theme = ThemeData(
 
 var darkTheme = ThemeData(
   useMaterial3: true,
-  colorScheme:
-      ColorScheme.fromSeed(seedColor: Colors.cyan, brightness: Brightness.dark),
+  colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0x00023047), brightness: Brightness.dark),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
       fontSize: 72,
       fontWeight: FontWeight.bold,
     ),
-    titleLarge: GoogleFonts.exo(
+    titleLarge: GoogleFonts.poppins(
       fontSize: 28,
       fontWeight: FontWeight.bold,
     ),
-    bodyMedium: GoogleFonts.exo(),
-    displaySmall: GoogleFonts.exo(
+    bodyMedium: GoogleFonts.poppins(),
+    displaySmall: GoogleFonts.poppins(
       fontSize: 18,
     ),
   ),

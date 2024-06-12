@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../config/config.dart';
+import '../../widgets/widgets.dart';
 
 class InitialPage extends StatelessWidget {
   const InitialPage({super.key});
@@ -12,11 +18,20 @@ class InitialPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Flexible(
+              // Wrap SvgPicture.asset with Flexible widget
+              child: SvgPicture.asset(
+                "assets/svg/initial_screen.svg",
+                width: 300,
+                height: 300,
+                semanticsLabel: "Imagen de una persona tocando la trompeta",
+              ),
+            ).animate().fade(duration: 800.ms).scale(),
             Text(
               '¡Gestiona tu banda \n en unos simples pasos!',
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
-            ),
+            ).animate().fade(duration: 800.ms).scale(),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
@@ -24,66 +39,38 @@ class InitialPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
-            ),
+            ).animate().fade(duration: 800.ms).scale(),
             const SizedBox(height: 50),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(
                   text: "Iniciar Sesion",
                   color: "primary",
-                  br: BorderRadius.only(
+                  br: const BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
                   ),
+                  onPressed: () {
+                    print("Iniciar Sesion");
+                  },
                 ),
                 CustomButton(
                   text: "Registrarse",
                   color: "secondary",
-                  br: BorderRadius.only(
+                  br: const BorderRadius.only(
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10),
                   ),
+                  onPressed: () {
+                    context
+                        .read<RouterSimpleCubit>()
+                        .pushRoute("/registerScreen");
+                  },
                 ),
               ],
-            ),
+            ).animate().fade(duration: 800.ms).scale(),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {super.key, required this.text, required this.color, required this.br});
-
-  final String text;
-  final String color;
-  final BorderRadius br;
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return ElevatedButton(
-      style: TextButton.styleFrom(
-        backgroundColor: color == "primary"
-            ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.secondary,
-        fixedSize: const Size(140, 70),
-        shape: RoundedRectangleBorder(
-          borderRadius: br,
-        ),
-      ),
-      onPressed: () => {},
-      child: Text(
-        text,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
-          color: color == "primary"
-              ? Theme.of(context).colorScheme.onPrimary
-              : Theme.of(context).colorScheme.onSecondary,
         ),
       ),
     );

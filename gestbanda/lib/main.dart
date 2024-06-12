@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestbanda/blocs/blocs.dart';
+import 'package:gestbanda/blocs/registerForm/register_form_bloc_events.dart';
 import 'config/config.dart';
 
 void main() {
@@ -15,6 +17,9 @@ class BlocsProviders extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => RouterSimpleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterFormBloc()..add(const InitEvent()),
         ),
       ],
       child: const MainApp(),
