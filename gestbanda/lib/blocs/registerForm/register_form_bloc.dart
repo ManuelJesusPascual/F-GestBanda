@@ -79,15 +79,19 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             error: event.confirmPassword.value
                     .isValidConfirmPassword(event.password)
                 ? null
-                : "La contraseña debe tener 8 caracteres, mayúscula,\nminúscula, número y caracter especial")));
+                : "Las contraseñas deben coincidir")));
   }
 
   Future<void> _onFormSubmitted(
       FormSubmitEvent event, Emitter<RegisterFormState> emitter) async {
+    bool submitStatus = false;
     if (_formKey.currentState!.validate()) {
       print("Formulario válido");
+      submitStatus = true;
     } else {
       print("Formulario inválido");
+      submitStatus = false;
     }
+    emit(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
   }
 }

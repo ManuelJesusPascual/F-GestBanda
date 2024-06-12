@@ -112,6 +112,9 @@ class RegisterScreen extends StatelessWidget {
                                   confirmPassword: BlocFormItem(value: val)));
                         },
                         validator: (val) {
+                          print("AAAAA " + state.confirmPassword.value);
+                          print("AAAAA " + state.password.value);
+
                           return state.confirmPassword.error;
                         },
                       ),
@@ -128,7 +131,7 @@ class RegisterScreen extends StatelessWidget {
                                     .add(const FormSubmitEvent());
                               }),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
