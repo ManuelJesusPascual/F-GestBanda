@@ -20,13 +20,11 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
 
   Future<void> _initRegisterFormState(
       InitEvent event, Emitter<RegisterFormState> emitter) async {
-    emit(state.copyWith(formKey: _formKey)); //TODO: Revisar
+    emit(state.copyWith(formKey: _formKey));
   }
 
   Future<void> _onNameChanged(
       NameChangedEvent event, Emitter<RegisterFormState> emitter) async {
-    print("Nombre changed " + event.name.value);
-
     emit(state.copyWith(
         formKey: _formKey,
         name: BlocFormItem(
@@ -38,7 +36,6 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
 
   Future<void> _onEmailChanged(
       EmailChangedEvent event, Emitter<RegisterFormState> emitter) async {
-    print("Email changed " + event.email.value);
     emit(state.copyWith(
         formKey: _formKey,
         email: BlocFormItem(
@@ -86,10 +83,8 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
       FormSubmitEvent event, Emitter<RegisterFormState> emitter) async {
     bool submitStatus = false;
     if (_formKey.currentState!.validate()) {
-      print("Formulario válido");
       submitStatus = true;
     } else {
-      print("Formulario inválido");
       submitStatus = false;
     }
     emit(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
