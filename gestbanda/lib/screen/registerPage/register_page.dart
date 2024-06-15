@@ -18,19 +18,25 @@ class RegisterScreen extends StatelessWidget {
       body: BlocListener<RegisterFormBloc, RegisterFormState>(
         listener: (context, state) => {
           if (state.submitStatus)
-            {context.read<RouterSimpleCubit>().pushRoute("/test")}
+            {
+              context
+                  .read<RouterSimpleCubit>()
+                  .changeRouter(authenticatedRouter),
+              context.read<RouterSimpleCubit>().pushRoute("/")
+            }
         },
         child: BlocBuilder<RegisterFormBloc, RegisterFormState>(
           builder: (context, state) {
             return SafeArea(
               child: Center(
+                heightFactor: 1.3,
                 child: Form(
                   key: state.formKey,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(30.0),
+                          padding: const EdgeInsets.only(bottom: 30.0, top: 10),
                           child: Text(
                             '¡Bienvenido!',
                             style: Theme.of(context).textTheme.titleLarge,
@@ -125,7 +131,7 @@ class RegisterScreen extends StatelessWidget {
                         SizedBox(
                           width: 300,
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 70),
+                            padding: const EdgeInsets.only(top: 50),
                             child: CustomButton(
                                 text: "Registarse",
                                 color: "primary",

@@ -1,3 +1,3 @@
 export './initialPage/initial_page.dart';
 export './registerPage/register_page.dart';
-export './registerPage/page2.dart';
+export 'onBoardingPages/selector_join_type_page.dart';

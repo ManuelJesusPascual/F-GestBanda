@@ -19,7 +19,6 @@ class InitialPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
-              // Wrap SvgPicture.asset with Flexible widget
               child: SvgPicture.asset(
                 "assets/svg/initial_screen.svg",
                 width: 300,
