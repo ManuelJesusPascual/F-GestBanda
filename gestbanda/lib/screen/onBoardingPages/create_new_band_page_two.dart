@@ -30,8 +30,8 @@ class CreateNewBandPageTwo extends StatelessWidget {
         ),
         SvgPicture.asset(
           "assets/svg/create_new_band_page_two.svg",
-          height: 300,
-          width: 300,
+          height: 250,
+          width: 250,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 35, bottom: 35),
@@ -88,6 +88,29 @@ class CreateNewBandPageTwo extends StatelessWidget {
               height: 200,
             )
           ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                "Al comprar cualquiera de nuestros productos aceptas nuestras",
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  textStyle: Theme.of(context).textTheme.bodySmall,
+                  overlayColor: Colors.transparent,
+                ),
+                child: const Text(
+                  "políticas de compras y devoluciones",
+                ),
+              ),
+            ],
+          ),
         )
       ])),
     );
