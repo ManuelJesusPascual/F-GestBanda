@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/widgets/widgets.dart';
+
+import '../../config/config.dart';
 
 class CreateNewBandPageOne extends StatelessWidget {
   const CreateNewBandPageOne({super.key});
+
+//TODO: Crear bloc para controlar el textInput (ver que es válido y meterlo en un objeto del tipo CreateBandRequest) y crear la lógica de la imagen, de cuando se setee hacer que el background de ese IconButton sea la imagen que has seleccionado
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +89,11 @@ class CreateNewBandPageOne extends StatelessWidget {
                   icon: Icons.arrow_right_alt_rounded,
                   br: BorderRadius.circular(10),
                   width: 350,
-                  onPressed: () {}),
+                  onPressed: () {
+                    context
+                        .read<RouterSimpleCubit>()
+                        .pushRoute("/create_band_two");
+                  }),
             )
           ],
         ),

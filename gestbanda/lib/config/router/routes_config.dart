@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../screen/pages.dart';
@@ -35,6 +36,10 @@ final authenticatedRouter = GoRouter(
     GoRoute(
       path: '/create_band_one',
       builder: (context, state) => const CreateNewBandPageOne(),
+    ),
+    GoRoute(
+      path: '/create_band_two',
+      builder: (context, state) => const CreateNewBandPageTwo(),
     ),
   ],
 );
