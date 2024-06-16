@@ -36,13 +36,13 @@ class LoginPage extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 30.0, top: 10),
                           child: Text(
-                            '¡Bienvenido!',
+                            '¡Bienvenido de nuevo!',
                             style: Theme.of(context).textTheme.titleLarge,
                             textAlign: TextAlign.center,
                           ).animate().fade(duration: 500.ms).scale(),
                         ),
                         Text(
-                          "Por favor, introduce tus datos para crear una cuenta.",
+                          "Por favor, inicia sesión con tus credenciales.",
                           style: Theme.of(context).textTheme.bodyMedium,
                           textAlign: TextAlign.center,
                         ).animate().fade(duration: 500.ms).scale(),
