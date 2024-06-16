@@ -1,3 +1,6 @@
-export './initialPage/initial_page.dart';
-export './registerPage/register_page.dart';
+export 'initialPages/initial_page.dart';
+export 'initialPages/registerPage/register_page.dart';
+export 'initialPages/loginPage/login_page.dart';
 export 'onBoardingPages/selector_join_type_page.dart';
+export 'onBoardingPages/create_new_band_page_one.dart';
+export 'onBoardingPages/join_band_page.dart';

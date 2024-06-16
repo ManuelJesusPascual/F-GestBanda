@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/blocs/registerForm/register_form_bloc_events.dart';
 import 'package:gestbanda/models/BlocFormItem.dart';
 
-import '../../blocs/blocs.dart';
-import '../../config/config.dart';
-import '../../widgets/widgets.dart';
+import '../../../blocs/blocs.dart';
+import '../../../config/config.dart';
+import '../../../widgets/widgets.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +55,7 @@ class RegisterScreen extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<RegisterFormBloc>(context).add(
-                                NameChangedEvent(
+                                RegisterFormNameChangedEvent(
                                     name: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -72,7 +71,7 @@ class RegisterScreen extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<RegisterFormBloc>(context).add(
-                                EmailChangedEvent(
+                                RegisterFormEmailChangedEvent(
                                     email: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -88,7 +87,7 @@ class RegisterScreen extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<RegisterFormBloc>(context).add(
-                                PhoneChangedEvent(
+                                RegisterFormPhoneChangedEvent(
                                     phone: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -104,7 +103,7 @@ class RegisterScreen extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<RegisterFormBloc>(context).add(
-                                PasswordChangedEvent(
+                                RegisterFormPasswordChangedEvent(
                                     password: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -120,7 +119,7 @@ class RegisterScreen extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<RegisterFormBloc>(context).add(
-                                ConfirmPasswordChangedEvent(
+                                RegisterFormConfirmPasswordChangedEvent(
                                     password: state.password.value,
                                     confirmPassword: BlocFormItem(value: val)));
                           },
@@ -138,7 +137,7 @@ class RegisterScreen extends StatelessWidget {
                                 br: const BorderRadius.all(Radius.circular(10)),
                                 onPressed: () {
                                   BlocProvider.of<RegisterFormBloc>(context)
-                                      .add(const FormSubmitEvent());
+                                      .add(const RegisterFormFormSubmitEvent());
                                 }),
                           ),
                         ),

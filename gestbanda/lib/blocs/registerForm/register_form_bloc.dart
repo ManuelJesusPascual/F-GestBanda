@@ -7,24 +7,24 @@ import 'package:gestbanda/utils/extensions.dart';
 
 class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
   RegisterFormBloc() : super(const RegisterFormState()) {
-    on<InitEvent>(_initRegisterFormState);
-    on<NameChangedEvent>(_onNameChanged);
-    on<EmailChangedEvent>(_onEmailChanged);
-    on<PhoneChangedEvent>(_onPhoneChanged);
-    on<PasswordChangedEvent>(_onPasswordChanged);
-    on<ConfirmPasswordChangedEvent>(_onConfirmPasswordChanged);
-    on<FormSubmitEvent>(_onFormSubmitted);
+    on<RegisterFormInitEvent>(_initRegisterFormState);
+    on<RegisterFormNameChangedEvent>(_onNameChanged);
+    on<RegisterFormEmailChangedEvent>(_onEmailChanged);
+    on<RegisterFormPhoneChangedEvent>(_onPhoneChanged);
+    on<RegisterFormPasswordChangedEvent>(_onPasswordChanged);
+    on<RegisterFormConfirmPasswordChangedEvent>(_onConfirmPasswordChanged);
+    on<RegisterFormFormSubmitEvent>(_onFormSubmitted);
   }
 
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _initRegisterFormState(
-      InitEvent event, Emitter<RegisterFormState> emitter) async {
+      RegisterFormInitEvent event, Emitter<RegisterFormState> emitter) async {
     emit(state.copyWith(formKey: _formKey));
   }
 
-  Future<void> _onNameChanged(
-      NameChangedEvent event, Emitter<RegisterFormState> emitter) async {
+  Future<void> _onNameChanged(RegisterFormNameChangedEvent event,
+      Emitter<RegisterFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
         name: BlocFormItem(
@@ -34,8 +34,8 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 : "Introduce un nombre válido")));
   }
 
-  Future<void> _onEmailChanged(
-      EmailChangedEvent event, Emitter<RegisterFormState> emitter) async {
+  Future<void> _onEmailChanged(RegisterFormEmailChangedEvent event,
+      Emitter<RegisterFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
         email: BlocFormItem(
@@ -45,8 +45,8 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 : "Introduce un email válido")));
   }
 
-  Future<void> _onPhoneChanged(
-      PhoneChangedEvent event, Emitter<RegisterFormState> emitter) async {
+  Future<void> _onPhoneChanged(RegisterFormPhoneChangedEvent event,
+      Emitter<RegisterFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
         phone: BlocFormItem(
@@ -56,8 +56,8 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 : "Introduce un teléfono válido")));
   }
 
-  Future<void> _onPasswordChanged(
-      PasswordChangedEvent event, Emitter<RegisterFormState> emitter) async {
+  Future<void> _onPasswordChanged(RegisterFormPasswordChangedEvent event,
+      Emitter<RegisterFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
         password: BlocFormItem(
@@ -67,7 +67,8 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 : "La contraseña debe tener 8 caracteres, mayúscula,\nminúscula, número y caracter especial")));
   }
 
-  Future<void> _onConfirmPasswordChanged(ConfirmPasswordChangedEvent event,
+  Future<void> _onConfirmPasswordChanged(
+      RegisterFormConfirmPasswordChangedEvent event,
       Emitter<RegisterFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
@@ -79,8 +80,10 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 : "Las contraseñas deben coincidir")));
   }
 
-  Future<void> _onFormSubmitted(
-      FormSubmitEvent event, Emitter<RegisterFormState> emitter) async {
+  Future<void> _onFormSubmitted(RegisterFormFormSubmitEvent event,
+      Emitter<RegisterFormState> emitter) async {
+    //TODO: Cambiar por lógica que llame a la BBDD y registre a un usuario, tras eso almacenarlo en localStorage o donde sea que se alamacena en flutter
+
     bool submitStatus = false;
     if (_formKey.currentState!.validate()) {
       submitStatus = true;

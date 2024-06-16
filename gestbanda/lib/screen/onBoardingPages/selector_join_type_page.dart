@@ -5,6 +5,8 @@ import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../config/config.dart';
 
+//TODO: Quizas añadir aqui un boton para logout, en caso de que el usuario haya iniciado sesión con una cuenta incorrecta o algo por el estilo. (tiene dos cuentas, una esta metida en la banda y la otra la creó por error y se mete en la que creó por error, no quiere meter esa otra cuenta en la banda, ni crear una nueva porque es absurdo)
+
 class RegisterSelectorPage extends StatelessWidget {
   const RegisterSelectorPage({super.key});
 

@@ -20,7 +20,7 @@ class InitialPage extends StatelessWidget {
           children: [
             Flexible(
               child: SvgPicture.asset(
-                "assets/svg/initial_screen.svg",
+                "assets/svg/initial_page.svg",
                 width: 300,
                 height: 300,
                 semanticsLabel: "Imagen de una persona tocando la trompeta",
@@ -51,7 +51,7 @@ class InitialPage extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                   ),
                   onPressed: () {
-                    print("Iniciar Sesion");
+                    context.read<RouterSimpleCubit>().pushRoute("/login");
                   },
                 ),
                 CustomButton(
@@ -62,9 +62,7 @@ class InitialPage extends StatelessWidget {
                     bottomRight: Radius.circular(10),
                   ),
                   onPressed: () {
-                    context
-                        .read<RouterSimpleCubit>()
-                        .pushRoute("/registerScreen");
+                    context.read<RouterSimpleCubit>().pushRoute("/register");
                   },
                 ),
               ],

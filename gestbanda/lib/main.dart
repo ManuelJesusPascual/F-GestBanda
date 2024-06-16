@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/blocs/blocs.dart';
-import 'package:gestbanda/blocs/registerForm/register_form_bloc_events.dart';
 import 'config/config.dart';
 
 void main() {
@@ -16,10 +15,15 @@ class BlocsProviders extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RouterSimpleCubit(authenticatedRouter),
+          create: (context) => RouterSimpleCubit(unauthenticatedRouter),
         ),
         BlocProvider(
-          create: (context) => RegisterFormBloc()..add(const InitEvent()),
+          //TODO: Esto y el del login causa excepción, revisar porque
+          create: (context) =>
+              RegisterFormBloc()..add(const RegisterFormInitEvent()),
+        ),
+        BlocProvider(
+          create: (context) => LoginFormBloc()..add(const LoginFormInitEvent()),
         ),
       ],
       child: const MainApp(),

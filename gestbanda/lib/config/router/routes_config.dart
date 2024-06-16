@@ -1,6 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_one.dart';
-import 'package:gestbanda/screen/onBoardingPages/join_band_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../screen/pages.dart';
@@ -13,8 +11,12 @@ final unauthenticatedRouter = GoRouter(
       builder: (context, state) => const InitialPage(),
     ),
     GoRoute(
-      path: '/registerScreen',
-      builder: (context, state) => const RegisterScreen(),
+      path: '/register',
+      builder: (context, state) => const RegisterPage(),
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => const LoginPage(),
     ),
   ],
 );
