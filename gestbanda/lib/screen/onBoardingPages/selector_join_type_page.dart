@@ -17,6 +17,9 @@ class RegisterSelectorPage extends StatelessWidget {
         Container(
             alignment: Alignment.centerRight,
             child: TextButton(
+                style: TextButton.styleFrom(
+                  overlayColor: Colors.transparent,
+                ),
                 onPressed: () {
                   context
                       .read<RouterSimpleCubit>()

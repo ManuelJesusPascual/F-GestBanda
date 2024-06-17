@@ -29,6 +29,7 @@ class RegisterUserFormBloc
     emit(state.copyWith(
         formKey: _formKey,
         name: BlocFormItem(
+            labelText: event.name.labelText,
             value: event.name.value,
             error: event.name.value.isValidName
                 ? null
@@ -40,6 +41,7 @@ class RegisterUserFormBloc
     emit(state.copyWith(
         formKey: _formKey,
         email: BlocFormItem(
+            labelText: event.email.labelText,
             value: event.email.value,
             error: event.email.value.isValidEmail
                 ? null
@@ -51,6 +53,7 @@ class RegisterUserFormBloc
     emit(state.copyWith(
         formKey: _formKey,
         phone: BlocFormItem(
+            labelText: event.phone.labelText,
             value: event.phone.value,
             error: event.phone.value.isValidPhone
                 ? null
@@ -62,6 +65,7 @@ class RegisterUserFormBloc
     emit(state.copyWith(
         formKey: _formKey,
         password: BlocFormItem(
+            labelText: event.password.labelText,
             value: event.password.value,
             error: event.password.value.isValidPassword
                 ? null
@@ -74,6 +78,7 @@ class RegisterUserFormBloc
     emit(state.copyWith(
         formKey: _formKey,
         confirmPassword: BlocFormItem(
+            labelText: event.confirmPassword.labelText,
             value: event.confirmPassword.value,
             error: event.confirmPassword.value
                     .isValidConfirmPassword(event.password)

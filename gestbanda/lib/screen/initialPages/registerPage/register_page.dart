@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/BlocFormItem.dart';
@@ -56,7 +57,9 @@ class RegisterPage extends StatelessWidget {
                           onChanged: (val) {
                             BlocProvider.of<RegisterUserFormBloc>(context).add(
                                 RegisterUserFormNameChangedEvent(
-                                    name: BlocFormItem(value: val)));
+                                    name: BlocFormItem(
+                                        value: val,
+                                        labelText: state.name.labelText)));
                           },
                           validator: (val) {
                             return state.name.error;
@@ -72,7 +75,9 @@ class RegisterPage extends StatelessWidget {
                           onChanged: (val) {
                             BlocProvider.of<RegisterUserFormBloc>(context).add(
                                 RegisterUserFormEmailChangedEvent(
-                                    email: BlocFormItem(value: val)));
+                                    email: BlocFormItem(
+                                        value: val,
+                                        labelText: state.email.labelText)));
                           },
                           validator: (val) {
                             return state.email.error;
@@ -82,13 +87,19 @@ class RegisterPage extends StatelessWidget {
                           label: state.phone.labelText,
                           hint: state.phone.hintText,
                           keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(9)
+                          ],
                           topPadding: 20.0,
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<RegisterUserFormBloc>(context).add(
                                 RegisterUserFormPhoneChangedEvent(
-                                    phone: BlocFormItem(value: val)));
+                                    phone: BlocFormItem(
+                                        value: val,
+                                        labelText: state.phone.labelText)));
                           },
                           validator: (val) {
                             return state.phone.error;
@@ -104,7 +115,9 @@ class RegisterPage extends StatelessWidget {
                           onChanged: (val) {
                             BlocProvider.of<RegisterUserFormBloc>(context).add(
                                 RegisterUserFormPasswordChangedEvent(
-                                    password: BlocFormItem(value: val)));
+                                    password: BlocFormItem(
+                                        value: val,
+                                        labelText: state.password.labelText)));
                           },
                           validator: (val) {
                             return state.password.error;
@@ -121,7 +134,10 @@ class RegisterPage extends StatelessWidget {
                             BlocProvider.of<RegisterUserFormBloc>(context).add(
                                 RegisterUserFormConfirmPasswordChangedEvent(
                                     password: state.password.value,
-                                    confirmPassword: BlocFormItem(value: val)));
+                                    confirmPassword: BlocFormItem(
+                                        value: val,
+                                        labelText:
+                                            state.confirmPassword.labelText)));
                           },
                           validator: (val) {
                             return state.confirmPassword.error;

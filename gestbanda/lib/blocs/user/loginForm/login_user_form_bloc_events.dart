@@ -8,24 +8,24 @@ abstract class LoginUserFormEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoginFormInitEvent extends LoginUserFormEvent {
-  const LoginFormInitEvent();
+class LoginUserFormInitEvent extends LoginUserFormEvent {
+  const LoginUserFormInitEvent();
 }
 
-class LoginFormEmailChangedEvent extends LoginUserFormEvent {
-  const LoginFormEmailChangedEvent({required this.email});
+class LoginUserFormEmailChangedEvent extends LoginUserFormEvent {
+  const LoginUserFormEmailChangedEvent({required this.email});
   final BlocFormItem email;
   @override
   List<Object> get props => [email];
 }
 
-class LoginFormPasswordChangedEvent extends LoginUserFormEvent {
-  const LoginFormPasswordChangedEvent({required this.password});
+class LoginUserFormPasswordChangedEvent extends LoginUserFormEvent {
+  const LoginUserFormPasswordChangedEvent({required this.password});
   final BlocFormItem password;
   @override
   List<Object> get props => [password];
 }
 
-class LoginFormSubmitEvent extends LoginUserFormEvent {
-  const LoginFormSubmitEvent();
+class LoginUserFormSubmitEvent extends LoginUserFormEvent {
+  const LoginUserFormSubmitEvent();
 }

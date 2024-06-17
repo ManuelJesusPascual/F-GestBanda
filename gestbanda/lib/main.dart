@@ -18,13 +18,17 @@ class BlocsProviders extends StatelessWidget {
           create: (context) => RouterSimpleCubit(unauthenticatedRouter),
         ),
         BlocProvider(
-          //TODO: Esto y el del login causa excepción, revisar porque
+          //TODO: Este y los demás lanzan excepción, revisar porque
           create: (context) =>
               RegisterUserFormBloc()..add(const RegisterUserFormInitEvent()),
         ),
         BlocProvider(
           create: (context) =>
-              LoginUserFormBloc()..add(const LoginFormInitEvent()),
+              LoginUserFormBloc()..add(const LoginUserFormInitEvent()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              RegisterBandFormBloc()..add(const RegisterBandFormInitEvent()),
         ),
       ],
       child: const MainApp(),

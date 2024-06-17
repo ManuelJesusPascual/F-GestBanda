@@ -23,7 +23,7 @@ class RegisterUserFormState extends Equatable {
           hintText: "nombre@example.com",
           error: "Introduce un email válido"),
       this.phone = const BlocFormItem(
-          labelText: "Telefono",
+          labelText: "Telefono (+34)",
           hintText: "633333333",
           error: "Introduce un teléfono válido"),
       this.password = const BlocFormItem(

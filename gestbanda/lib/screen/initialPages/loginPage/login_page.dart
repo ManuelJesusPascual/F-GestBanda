@@ -55,8 +55,10 @@ class LoginPage extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<LoginUserFormBloc>(context).add(
-                                LoginFormEmailChangedEvent(
-                                    email: BlocFormItem(value: val)));
+                                LoginUserFormEmailChangedEvent(
+                                    email: BlocFormItem(
+                                        value: val,
+                                        labelText: state.email.labelText)));
                           },
                           validator: (val) {
                             return state.email.error;
@@ -71,8 +73,10 @@ class LoginPage extends StatelessWidget {
                           rightPadding: 40.0,
                           onChanged: (val) {
                             BlocProvider.of<LoginUserFormBloc>(context).add(
-                                LoginFormPasswordChangedEvent(
-                                    password: BlocFormItem(value: val)));
+                                LoginUserFormPasswordChangedEvent(
+                                    password: BlocFormItem(
+                                        value: val,
+                                        labelText: state.password.labelText)));
                           },
                         ),
                         SizedBox(
@@ -85,7 +89,7 @@ class LoginPage extends StatelessWidget {
                                 br: const BorderRadius.all(Radius.circular(10)),
                                 onPressed: () {
                                   BlocProvider.of<LoginUserFormBloc>(context)
-                                      .add(const LoginFormSubmitEvent());
+                                      .add(const LoginUserFormSubmitEvent());
                                 }),
                           ),
                         ),
