@@ -4,8 +4,8 @@ import 'package:gestbanda/blocs/blocs.dart';
 import 'package:gestbanda/models/BlocFormItem.dart';
 import 'package:gestbanda/utils/extensions.dart';
 
-class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
-  LoginFormBloc() : super(const LoginFormState()) {
+class LoginFormBloc extends Bloc<LoginUserFormEvent, LoginUserFormState> {
+  LoginFormBloc() : super(const LoginUserFormState()) {
     on<LoginFormInitEvent>(_initLoginFormState);
     on<LoginFormEmailChangedEvent>(_onEmailChanged);
     on<LoginFormPasswordChangedEvent>(_onPasswordChanged);
@@ -15,12 +15,12 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _initLoginFormState(
-      LoginFormInitEvent event, Emitter<LoginFormState> emitter) async {
+      LoginFormInitEvent event, Emitter<LoginUserFormState> emitter) async {
     emit(state.copyWith(formKey: _formKey));
   }
 
-  Future<void> _onEmailChanged(
-      LoginFormEmailChangedEvent event, Emitter<LoginFormState> emitter) async {
+  Future<void> _onEmailChanged(LoginFormEmailChangedEvent event,
+      Emitter<LoginUserFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
         email: BlocFormItem(
@@ -31,7 +31,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   }
 
   Future<void> _onPasswordChanged(LoginFormPasswordChangedEvent event,
-      Emitter<LoginFormState> emitter) async {
+      Emitter<LoginUserFormState> emitter) async {
     emit(state.copyWith(
         formKey: _formKey,
         password: BlocFormItem(
@@ -40,7 +40,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   }
 
   Future<void> _onFormSubmitted(
-      LoginFormSubmitEvent event, Emitter<LoginFormState> emitter) async {
+      LoginFormSubmitEvent event, Emitter<LoginUserFormState> emitter) async {
     //TODO: Cambiar por lógica que llame a la BBDD y loguee a un usuario, tras eso almacenarlo en localStorage o donde sea que se alamacena en flutter
     bool submitStatus = false;
     if (_formKey.currentState!.validate()) {

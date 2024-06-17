@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/widgets/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../config/config.dart';
 
@@ -12,6 +15,7 @@ class CreateNewBandPageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    File? img;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
@@ -41,12 +45,16 @@ class CreateNewBandPageOne extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                 ),
               ),
-              onPressed: () {},
-              icon: const Icon(
-                Icons.image_outlined,
-                color: Colors.black,
-                weight: 0.2,
-              ),
+              onPressed: () {
+                img = pickImageFromGallery();
+              },
+              icon: img != null
+                  ? Image.file(img)
+                  : const Icon(
+                      Icons.image_outlined,
+                      color: Colors.black,
+                      weight: 0.2,
+                    ),
               iconSize: 90,
             ),
             const CustomTextInput(
@@ -99,5 +107,15 @@ class CreateNewBandPageOne extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<File?> pickImageFromGallery() async {
+    final returnedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (returnedImage != null) {
+    } else {
+      return null;
+    }
   }
 }

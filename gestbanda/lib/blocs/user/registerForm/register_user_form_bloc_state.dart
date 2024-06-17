@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:gestbanda/models/BlocFormItem.dart';
 
-class RegisterFormState extends Equatable {
+class RegisterUserFormState extends Equatable {
   final BlocFormItem name;
   final BlocFormItem email;
   final BlocFormItem phone;
@@ -13,7 +13,7 @@ class RegisterFormState extends Equatable {
 
   final GlobalKey<FormState>? formKey;
 
-  const RegisterFormState(
+  const RegisterUserFormState(
       {this.name = const BlocFormItem(
           labelText: "Nombre",
           hintText: "Francisco Perez García",
@@ -36,7 +36,7 @@ class RegisterFormState extends Equatable {
       this.submitStatus = false,
       this.formKey});
 
-  RegisterFormState copyWith({
+  RegisterUserFormState copyWith({
     BlocFormItem? name,
     BlocFormItem? email,
     BlocFormItem? phone,
@@ -45,7 +45,7 @@ class RegisterFormState extends Equatable {
     bool? submitStatus,
     GlobalKey<FormState>? formKey,
   }) {
-    return RegisterFormState(
+    return RegisterUserFormState(
       name: name ?? this.name,
       email: email ?? this.email,
       phone: phone ?? this.phone,

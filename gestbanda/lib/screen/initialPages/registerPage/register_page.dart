@@ -14,7 +14,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: BlocListener<RegisterFormBloc, RegisterFormState>(
+      body: BlocListener<RegisterUserFormBloc, RegisterUserFormState>(
         listener: (context, state) => {
           if (state.submitStatus)
             {
@@ -24,7 +24,7 @@ class RegisterPage extends StatelessWidget {
               context.read<RouterSimpleCubit>().pushRoute("/")
             }
         },
-        child: BlocBuilder<RegisterFormBloc, RegisterFormState>(
+        child: BlocBuilder<RegisterUserFormBloc, RegisterUserFormState>(
           builder: (context, state) {
             return SafeArea(
               child: Center(
@@ -54,8 +54,8 @@ class RegisterPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<RegisterFormBloc>(context).add(
-                                RegisterFormNameChangedEvent(
+                            BlocProvider.of<RegisterUserFormBloc>(context).add(
+                                RegisterUserFormNameChangedEvent(
                                     name: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -70,8 +70,8 @@ class RegisterPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<RegisterFormBloc>(context).add(
-                                RegisterFormEmailChangedEvent(
+                            BlocProvider.of<RegisterUserFormBloc>(context).add(
+                                RegisterUserFormEmailChangedEvent(
                                     email: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -86,8 +86,8 @@ class RegisterPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<RegisterFormBloc>(context).add(
-                                RegisterFormPhoneChangedEvent(
+                            BlocProvider.of<RegisterUserFormBloc>(context).add(
+                                RegisterUserFormPhoneChangedEvent(
                                     phone: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -102,8 +102,8 @@ class RegisterPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<RegisterFormBloc>(context).add(
-                                RegisterFormPasswordChangedEvent(
+                            BlocProvider.of<RegisterUserFormBloc>(context).add(
+                                RegisterUserFormPasswordChangedEvent(
                                     password: BlocFormItem(value: val)));
                           },
                           validator: (val) {
@@ -118,8 +118,8 @@ class RegisterPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<RegisterFormBloc>(context).add(
-                                RegisterFormConfirmPasswordChangedEvent(
+                            BlocProvider.of<RegisterUserFormBloc>(context).add(
+                                RegisterUserFormConfirmPasswordChangedEvent(
                                     password: state.password.value,
                                     confirmPassword: BlocFormItem(value: val)));
                           },
@@ -136,8 +136,9 @@ class RegisterPage extends StatelessWidget {
                                 color: "primary",
                                 br: const BorderRadius.all(Radius.circular(10)),
                                 onPressed: () {
-                                  BlocProvider.of<RegisterFormBloc>(context)
-                                      .add(const RegisterFormFormSubmitEvent());
+                                  BlocProvider.of<RegisterUserFormBloc>(context)
+                                      .add(
+                                          const RegisterUserFormFormSubmitEvent());
                                 }),
                           ),
                         ),

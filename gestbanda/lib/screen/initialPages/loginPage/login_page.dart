@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: BlocListener<LoginFormBloc, LoginFormState>(
+      body: BlocListener<LoginUserFormBloc, LoginUserFormState>(
         listener: (context, state) => {
           if (state.submitStatus)
             {
@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
               context.read<RouterSimpleCubit>().pushRoute("/")
             }
         },
-        child: BlocBuilder<LoginFormBloc, LoginFormState>(
+        child: BlocBuilder<LoginUserFormBloc, LoginUserFormState>(
           builder: (context, state) {
             return SafeArea(
               child: Center(
@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<LoginFormBloc>(context).add(
+                            BlocProvider.of<LoginUserFormBloc>(context).add(
                                 LoginFormEmailChangedEvent(
                                     email: BlocFormItem(value: val)));
                           },
@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                           leftPadding: 40.0,
                           rightPadding: 40.0,
                           onChanged: (val) {
-                            BlocProvider.of<LoginFormBloc>(context).add(
+                            BlocProvider.of<LoginUserFormBloc>(context).add(
                                 LoginFormPasswordChangedEvent(
                                     password: BlocFormItem(value: val)));
                           },
@@ -84,7 +84,7 @@ class LoginPage extends StatelessWidget {
                                 color: "primary",
                                 br: const BorderRadius.all(Radius.circular(10)),
                                 onPressed: () {
-                                  BlocProvider.of<LoginFormBloc>(context)
+                                  BlocProvider.of<LoginUserFormBloc>(context)
                                       .add(const LoginFormSubmitEvent());
                                 }),
                           ),

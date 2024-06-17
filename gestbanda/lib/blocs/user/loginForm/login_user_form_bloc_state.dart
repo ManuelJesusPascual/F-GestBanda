@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:gestbanda/models/BlocFormItem.dart';
 
-class LoginFormState extends Equatable {
+class LoginUserFormState extends Equatable {
   final BlocFormItem email;
   final BlocFormItem password;
 
@@ -10,7 +10,7 @@ class LoginFormState extends Equatable {
 
   final GlobalKey<FormState>? formKey;
 
-  const LoginFormState(
+  const LoginUserFormState(
       {this.email = const BlocFormItem(
           labelText: "Email",
           hintText: "nombre@example.com",
@@ -21,13 +21,13 @@ class LoginFormState extends Equatable {
       this.submitStatus = false,
       this.formKey});
 
-  LoginFormState copyWith({
+  LoginUserFormState copyWith({
     BlocFormItem? email,
     BlocFormItem? password,
     bool? submitStatus,
     GlobalKey<FormState>? formKey,
   }) {
-    return LoginFormState(
+    return LoginUserFormState(
       email: email ?? this.email,
       password: password ?? this.password,
       submitStatus: submitStatus ?? this.submitStatus,

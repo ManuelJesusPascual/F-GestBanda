@@ -20,10 +20,11 @@ class BlocsProviders extends StatelessWidget {
         BlocProvider(
           //TODO: Esto y el del login causa excepción, revisar porque
           create: (context) =>
-              RegisterFormBloc()..add(const RegisterFormInitEvent()),
+              RegisterUserFormBloc()..add(const RegisterUserFormInitEvent()),
         ),
         BlocProvider(
-          create: (context) => LoginFormBloc()..add(const LoginFormInitEvent()),
+          create: (context) =>
+              LoginUserFormBloc()..add(const LoginFormInitEvent()),
         ),
       ],
       child: const MainApp(),
