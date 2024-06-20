@@ -15,6 +15,7 @@ class RegisterBandFormBloc
     on<RegisterBandFormInitEvent>(_initRegisterBandFormState);
     on<RegisterBandFormNameChangedEvent>(_onNameChanged);
     on<RegisterBandFormImgChangedEvent>(_onImgChanged);
+    on<RegisterBandFromSubmitEvent>(_onSubmitBandForm);
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -46,5 +47,16 @@ class RegisterBandFormBloc
     } else {
       emit(state.copyWith(formKey: _formKey, img: null));
     }
+  }
+
+  Future<void> _onSubmitBandForm(RegisterBandFromSubmitEvent event,
+      Emitter<RegisterBandFormState> emitter) async {
+    bool submitStatus = false;
+    if (_formKey.currentState!.validate() && state.img != null) {
+      submitStatus = true;
+    } else {
+      submitStatus = false;
+    }
+    emit(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
   }
 }
