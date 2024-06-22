@@ -19,6 +19,7 @@ class RegisterBandFormBloc
   }
 
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   Future<void> _initRegisterBandFormState(RegisterBandFormInitEvent event,
       Emitter<RegisterBandFormState> emitter) async {
@@ -40,23 +41,35 @@ class RegisterBandFormBloc
 //Solucionar que si se hace doble click en el boton se lanza excepcion, hacer loadingState
   Future<void> _onImgChanged(RegisterBandFormImgChangedEvent event,
       Emitter<RegisterBandFormState> emitter) async {
-    final returnedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (returnedImage != null) {
-      emitter(state.copyWith(formKey: _formKey, img: File(returnedImage.path)));
-    } else {
-      emitter(state.copyWith(formKey: _formKey, img: null));
+    if (!loading) {
+      loading = true;
+      final returnedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (returnedImage != null) {
+        emitter(
+            state.copyWith(formKey: _formKey, img: File(returnedImage.path)));
+      } else {
+        emitter(state.copyWith(formKey: _formKey, img: null));
+      }
+      loading = false;
     }
   }
 
   Future<void> _onSubmitBandForm(RegisterBandFromSubmitEvent event,
       Emitter<RegisterBandFormState> emitter) async {
-    bool submitStatus = false;
-    if (_formKey.currentState!.validate() && state.img != null) {
-      submitStatus = true;
-    } else {
+    if (!loading) {
+      loading = true;
+      bool submitStatus = false;
+      if (_formKey.currentState!.validate() && state.img != null) {
+        submitStatus = true;
+      } else {
+        submitStatus = false;
+      }
+      emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
       submitStatus = false;
+      emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
+
+      loading = false;
     }
-    emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
   }
 }

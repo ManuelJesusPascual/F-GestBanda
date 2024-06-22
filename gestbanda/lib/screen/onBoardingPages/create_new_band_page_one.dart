@@ -74,6 +74,16 @@ class CreateNewBandPageOne extends StatelessWidget {
                             ),
                       iconSize: 100,
                     ),
+                    state.img == null //TODO: Ver como hacer esto bien hecho
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 25),
+                            child: Text(
+                              "Debes introducir una imagen",
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.error),
+                            ),
+                          )
+                        : const SizedBox(),
                     CustomTextInput(
                       label: state.name.labelText,
                       hint: state.name.hintText,
@@ -87,7 +97,7 @@ class CreateNewBandPageOne extends StatelessWidget {
                       validator: (val) {
                         return state.name.error;
                       },
-                      topPadding: 50.0,
+                      topPadding: 40.0,
                       leftPadding: 40.0,
                       rightPadding: 40.0,
                       bottomPadding: 40,
@@ -125,7 +135,6 @@ class CreateNewBandPageOne extends StatelessWidget {
                           br: BorderRadius.circular(10),
                           width: 350,
                           onPressed: () {
-                            //TODO: Tras que todo este ok y navegues a la siguiente página, cuando vuelves, submitstatus sigue a true y hace cosas raras, ver como solucionar eso
                             BlocProvider.of<RegisterBandFormBloc>(context)
                                 .add(const RegisterBandFromSubmitEvent());
                           }),
