@@ -10,6 +10,7 @@ class RegisterBandFormState extends Equatable {
   final File? img;
 
   final bool submitStatus;
+  final bool imgSelected;
   final GlobalKey<FormState>? formKey;
 
   const RegisterBandFormState(
@@ -19,22 +20,25 @@ class RegisterBandFormState extends Equatable {
           error: "No puedes introducir un nombre vacío"),
       this.img,
       this.submitStatus = false,
+      this.imgSelected = true,
       this.formKey});
 
   RegisterBandFormState copyWith({
     BlocFormItem? name,
     File? img,
     bool? submitStatus,
+    bool? imgSelected,
     GlobalKey<FormState>? formKey,
   }) {
     return RegisterBandFormState(
       name: name ?? this.name,
       img: img ?? this.img,
       submitStatus: submitStatus ?? this.submitStatus,
+      imgSelected: imgSelected ?? this.imgSelected,
       formKey: formKey ?? this.formKey,
     );
   }
 
   @override
-  List<Object?> get props => [name, img, submitStatus, formKey];
+  List<Object?> get props => [name, img, submitStatus, imgSelected, formKey];
 }

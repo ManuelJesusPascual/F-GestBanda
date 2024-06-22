@@ -60,14 +60,24 @@ class RegisterBandFormBloc
     if (!loading) {
       loading = true;
       bool submitStatus = false;
+      bool imgSelected = true;
       if (_formKey.currentState!.validate() && state.img != null) {
         submitStatus = true;
+      } else if (state.img == null) {
+        imgSelected = false;
+        submitStatus = false;
       } else {
         submitStatus = false;
       }
-      emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
+      emitter(state.copyWith(
+          formKey: _formKey,
+          submitStatus: submitStatus,
+          imgSelected: imgSelected));
       submitStatus = false;
-      emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
+      emitter(state.copyWith(
+          formKey: _formKey,
+          submitStatus: submitStatus,
+          imgSelected: imgSelected));
 
       loading = false;
     }

@@ -49,7 +49,6 @@ class CreateNewBandPageOne extends StatelessWidget {
                       ).animate().fade(duration: 500.ms).scale(),
                     ),
                     IconButton(
-                      //TODO: Añadir texto error la imagen no puede estar vacía
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.zero,
                         fixedSize: const Size(150, 150),
@@ -74,16 +73,15 @@ class CreateNewBandPageOne extends StatelessWidget {
                             ),
                       iconSize: 100,
                     ),
-                    state.img == null //TODO: Ver como hacer esto bien hecho
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: Text(
-                              "Debes introducir una imagen",
-                              style: TextStyle(
-                                  color: Theme.of(context).colorScheme.error),
-                            ),
-                          )
-                        : const SizedBox(),
+                    if (state.imgSelected == false)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25),
+                        child: Text(
+                          "Debes introducir una imagen",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.error),
+                        ),
+                      ),
                     CustomTextInput(
                       label: state.name.labelText,
                       hint: state.name.hintText,
