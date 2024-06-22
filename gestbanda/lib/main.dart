@@ -15,10 +15,9 @@ class BlocsProviders extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RouterSimpleCubit(authenticatedRouter),
+          create: (context) => RouterSimpleCubit(unauthenticatedRouter),
         ),
         BlocProvider(
-          //TODO: Este y los demás lanzan excepción, revisar porque
           create: (context) =>
               RegisterUserFormBloc()..add(const RegisterUserFormInitEvent()),
         ),

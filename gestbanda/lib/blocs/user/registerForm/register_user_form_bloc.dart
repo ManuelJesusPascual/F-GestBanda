@@ -38,7 +38,7 @@ class RegisterUserFormBloc
 
   Future<void> _onEmailChanged(RegisterUserFormEmailChangedEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         email: BlocFormItem(
             labelText: event.email.labelText,
@@ -50,7 +50,7 @@ class RegisterUserFormBloc
 
   Future<void> _onPhoneChanged(RegisterUserFormPhoneChangedEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         phone: BlocFormItem(
             labelText: event.phone.labelText,
@@ -62,7 +62,7 @@ class RegisterUserFormBloc
 
   Future<void> _onPasswordChanged(RegisterUserFormPasswordChangedEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         password: BlocFormItem(
             labelText: event.password.labelText,
@@ -75,7 +75,7 @@ class RegisterUserFormBloc
   Future<void> _onConfirmPasswordChanged(
       RegisterUserFormConfirmPasswordChangedEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         confirmPassword: BlocFormItem(
             labelText: event.confirmPassword.labelText,
@@ -96,6 +96,6 @@ class RegisterUserFormBloc
     } else {
       submitStatus = false;
     }
-    emit(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
+    emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
   }
 }

@@ -22,12 +22,12 @@ class RegisterBandFormBloc
 
   Future<void> _initRegisterBandFormState(RegisterBandFormInitEvent event,
       Emitter<RegisterBandFormState> emitter) async {
-    emit(state.copyWith(formKey: _formKey));
+    emitter(state.copyWith(formKey: _formKey));
   }
 
   Future<void> _onNameChanged(RegisterBandFormNameChangedEvent event,
       Emitter<RegisterBandFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         name: BlocFormItem(
             labelText: event.name.labelText,
@@ -43,9 +43,9 @@ class RegisterBandFormBloc
     final returnedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (returnedImage != null) {
-      emit(state.copyWith(formKey: _formKey, img: File(returnedImage.path)));
+      emitter(state.copyWith(formKey: _formKey, img: File(returnedImage.path)));
     } else {
-      emit(state.copyWith(formKey: _formKey, img: null));
+      emitter(state.copyWith(formKey: _formKey, img: null));
     }
   }
 
@@ -57,6 +57,6 @@ class RegisterBandFormBloc
     } else {
       submitStatus = false;
     }
-    emit(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
+    emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
   }
 }

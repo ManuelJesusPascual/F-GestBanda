@@ -16,12 +16,12 @@ class LoginUserFormBloc extends Bloc<LoginUserFormEvent, LoginUserFormState> {
 
   Future<void> _initLoginFormState(
       LoginUserFormInitEvent event, Emitter<LoginUserFormState> emitter) async {
-    emit(state.copyWith(formKey: _formKey));
+    emitter(state.copyWith(formKey: _formKey));
   }
 
   Future<void> _onEmailChanged(LoginUserFormEmailChangedEvent event,
       Emitter<LoginUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         email: BlocFormItem(
             labelText: event.email.labelText,
@@ -33,7 +33,7 @@ class LoginUserFormBloc extends Bloc<LoginUserFormEvent, LoginUserFormState> {
 
   Future<void> _onPasswordChanged(LoginUserFormPasswordChangedEvent event,
       Emitter<LoginUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         password: BlocFormItem(
           labelText: event.password.labelText,
@@ -50,6 +50,6 @@ class LoginUserFormBloc extends Bloc<LoginUserFormEvent, LoginUserFormState> {
     } else {
       submitStatus = false;
     }
-    emit(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
+    emitter(state.copyWith(formKey: _formKey, submitStatus: submitStatus));
   }
 }
