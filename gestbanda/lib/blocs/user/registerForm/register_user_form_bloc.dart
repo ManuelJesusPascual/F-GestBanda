@@ -22,12 +22,12 @@ class RegisterUserFormBloc
 
   Future<void> _initRegisterUserFormState(RegisterUserFormInitEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    emit(state.copyWith(formKey: _formKey));
+    emitter(state.copyWith(formKey: _formKey));
   }
 
   Future<void> _onNameChanged(RegisterUserFormNameChangedEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    emit(state.copyWith(
+    emitter(state.copyWith(
         formKey: _formKey,
         name: BlocFormItem(
             labelText: event.name.labelText,

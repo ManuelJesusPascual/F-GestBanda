@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/blocs/blocs.dart';
 import 'package:gestbanda/widgets/widgets.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../config/config.dart';
 import '../../models/BlocFormItem.dart';
