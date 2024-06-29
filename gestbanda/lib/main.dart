@@ -15,7 +15,7 @@ class BlocsProviders extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RouterSimpleCubit(authenticatedRouter),
+          create: (context) => RouterSimpleCubit(unauthenticatedRouter),
         ),
         BlocProvider(
           create: (context) =>
