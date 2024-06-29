@@ -7,11 +7,15 @@ var theme = ThemeData(
       seedColor: const Color(0x00023047), brightness: Brightness.light),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
-      fontSize: 72,
+      fontSize: 50,
       fontWeight: FontWeight.bold,
     ),
     titleLarge: GoogleFonts.poppins(
       fontSize: 28,
+      fontWeight: FontWeight.bold,
+    ),
+    titleSmall: GoogleFonts.poppins(
+      fontSize: 22,
       fontWeight: FontWeight.bold,
     ),
     bodyMedium: GoogleFonts.poppins(),
@@ -27,11 +31,15 @@ var darkTheme = ThemeData(
       seedColor: const Color(0x00023047), brightness: Brightness.dark),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
-      fontSize: 72,
+      fontSize: 50,
       fontWeight: FontWeight.bold,
     ),
     titleLarge: GoogleFonts.poppins(
       fontSize: 28,
+      fontWeight: FontWeight.bold,
+    ),
+    titleSmall: GoogleFonts.poppins(
+      fontSize: 22,
       fontWeight: FontWeight.bold,
     ),
     bodyMedium: GoogleFonts.poppins(),

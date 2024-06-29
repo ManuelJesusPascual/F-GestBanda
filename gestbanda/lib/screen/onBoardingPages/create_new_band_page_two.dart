@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gestbanda/widgets/widgets.dart';
+
+import '../../config/config.dart';
 
 class CreateNewBandPageTwo extends StatelessWidget {
   const CreateNewBandPageTwo({super.key});
@@ -99,7 +102,9 @@ class CreateNewBandPageTwo extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<RouterSimpleCubit>().pushRoute("/return_policy");
+                },
                 style: TextButton.styleFrom(
                   foregroundColor: Theme.of(context).colorScheme.primary,
                   textStyle: Theme.of(context).textTheme.bodySmall,

@@ -41,6 +41,10 @@ final authenticatedRouter = GoRouter(
       path: '/create_band_two',
       builder: (context, state) => const CreateNewBandPageTwo(),
     ),
+    GoRoute(
+      path: '/return_policy',
+      builder: (context, state) => const ReturnPolicy(),
+    ),
   ],
 );
 
