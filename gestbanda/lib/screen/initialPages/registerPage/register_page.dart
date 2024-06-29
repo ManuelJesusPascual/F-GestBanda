@@ -158,6 +158,35 @@ class RegisterPage extends StatelessWidget {
                                 }),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Al registrarte en gestbanda, estás aceptando nuestra",
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  context
+                                      .read<RouterSimpleCubit>()
+                                      .pushRoute("/private_policy");
+                                },
+                                style: TextButton.styleFrom(
+                                  foregroundColor:
+                                      Theme.of(context).colorScheme.primary,
+                                  textStyle:
+                                      Theme.of(context).textTheme.bodySmall,
+                                  overlayColor: Colors.transparent,
+                                ),
+                                child: const Text(
+                                  "política de privacidad",
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),

@@ -19,6 +19,10 @@ final unauthenticatedRouter = GoRouter(
       path: '/login',
       builder: (context, state) => const LoginPage(),
     ),
+    GoRoute(
+      path: '/private_policy',
+      builder: (context, state) => const PrivatePolicy(),
+    ),
   ],
 );
 
