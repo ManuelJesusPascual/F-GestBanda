@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/widgets/widgets.dart';
+
+import '../../config/config.dart';
 
 class JoinBandPage extends StatelessWidget {
   const JoinBandPage({super.key});
@@ -44,7 +47,10 @@ class JoinBandPage extends StatelessWidget {
           CustomButton(
             text: 'Unirse a la banda',
             color: "primary",
-            onPressed: () {},
+            onPressed: () {
+              context.read<RouterSimpleCubit>().changeRouter(directorRouter);
+              context.read<RouterSimpleCubit>().pushRoute("/");
+            },
             width: 350,
             br: BorderRadius.circular(10),
           )

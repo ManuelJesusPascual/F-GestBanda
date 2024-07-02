@@ -70,7 +70,10 @@ class CreateNewBandPageTwo extends StatelessWidget {
               text: "Pack Mensual\n\n70€",
               color: "primary",
               br: BorderRadius.circular(10),
-              onPressed: () {},
+              onPressed: () {
+                context.read<RouterSimpleCubit>().changeRouter(directorRouter);
+                context.read<RouterSimpleCubit>().pushRoute("/");
+              },
               width: 120,
               height: 200,
             ),
@@ -78,7 +81,10 @@ class CreateNewBandPageTwo extends StatelessWidget {
               text: "Pack Semestral\n\n410€",
               color: "primary",
               br: BorderRadius.circular(10),
-              onPressed: () {},
+              onPressed: () {
+                context.read<RouterSimpleCubit>().changeRouter(directorRouter);
+                context.read<RouterSimpleCubit>().pushRoute("/");
+              },
               width: 120,
               height: 200,
             ),
@@ -86,7 +92,10 @@ class CreateNewBandPageTwo extends StatelessWidget {
               text: "Pack Anual\n\n820€",
               color: "primary",
               br: BorderRadius.circular(10),
-              onPressed: () {},
+              onPressed: () {
+                context.read<RouterSimpleCubit>().changeRouter(directorRouter);
+                context.read<RouterSimpleCubit>().pushRoute("/");
+              },
               width: 120,
               height: 200,
             )

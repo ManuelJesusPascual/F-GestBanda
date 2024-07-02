@@ -52,6 +52,24 @@ final authenticatedRouter = GoRouter(
   ],
 );
 
+final directorRouter = GoRouter(
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/return_policy',
+      builder: (context, state) => const ReturnPolicy(),
+    ),
+    GoRoute(
+      path: '/private_policy',
+      builder: (context, state) => const PrivatePolicy(),
+    ),
+  ],
+);
+
 class RouterSimpleCubit extends Cubit<GoRouter> {
   RouterSimpleCubit(super.router);
   void goBack() {
