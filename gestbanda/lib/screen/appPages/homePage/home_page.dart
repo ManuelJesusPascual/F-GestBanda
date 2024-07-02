@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.settings),
+                    color: Theme.of(context).colorScheme.onSurface,
                     onPressed: () {},
                   )
                 ],
