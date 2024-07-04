@@ -72,84 +72,50 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 50, bottom: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Event(
-                      date: DateTime(2024, 7, 3),
-                      eventName: "Pasacalles",
-                    ),
-                    Event(
-                      date: DateTime(2024, 8, 23),
-                      eventName: "Salida Procesional",
-                    ),
-                    Event(
-                      date: DateTime(2024, 9, 14),
-                      eventName: "Concierto",
-                    ),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Event(
+                    date: DateTime(2024, 7, 3),
+                    eventName: "Pasacalles",
+                  ),
+                  Event(
+                    date: DateTime(2024, 8, 23),
+                    eventName: "Salida Procesional",
+                  ),
+                  Event(
+                    date: DateTime(2024, 9, 14),
+                    eventName: "Concierto",
+                  ),
+                ],
               ),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: Text(
-                    "Tus Instrumentos:",
-                    style: Theme.of(context).textTheme.titleSmall,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomButton(
+                    text: "Instrumentos",
+                    color: "primary",
+                    imgSvgAsset: "assets/svg/instruments_page.svg",
+                    imgHeight: 100,
+                    imgWidth: 100,
+                    onPressed: () {},
+                    br: BorderRadius.circular(10),
+                    width: 170,
+                    height: 250,
                   ),
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Instrument(
-                      imagePath: "assets/trompeta.png",
-                      instrumentName: "Trompeta Do/Sib",
-                      quantity: "5",
-                    ),
-                    Instrument(
-                      imagePath: "assets/corneta.png",
-                      instrumentName: "Corneta Do/Reb",
-                      quantity: "2",
-                    ),
-                    Instrument(
-                      imagePath: "assets/trombon.png",
-                      instrumentName: "Trombon Sib/Do",
-                      quantity: "3",
-                    )
-                  ],
-                )
-              ]),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15, top: 15),
-                  child: Text(
-                    "Tu Ropa:",
-                    style: Theme.of(context).textTheme.titleSmall,
+                  CustomButton(
+                    text: "Ropa",
+                    color: "primary",
+                    imgSvgAsset: "assets/svg/clothes_page.svg",
+                    imgHeight: 100,
+                    imgWidth: 100,
+                    onPressed: () {},
+                    br: BorderRadius.circular(10),
+                    width: 170,
+                    height: 250,
                   ),
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Instrument(
-                      imagePath: "assets/camisa.png",
-                      instrumentName: "Camisa",
-                      quantity: "2",
-                    ),
-                    Instrument(
-                      imagePath: "assets/corbata.png",
-                      instrumentName: "Corbata",
-                      quantity: "1",
-                    ),
-                    Instrument(
-                      imagePath: "assets/pantalon.png",
-                      instrumentName: "Pantalon",
-                      quantity: "3",
-                    )
-                  ],
-                )
-              ])
+                ],
+              )
             ],
           ),
         ),

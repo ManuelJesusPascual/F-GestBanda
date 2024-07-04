@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton(
       {super.key,
-      required this.text,
+      this.text,
       required this.color,
       this.icon,
       this.br,
@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
       this.imgWidth,
       required this.onPressed});
 
-  final String text;
+  final String? text;
   final String color;
   final IconData? icon;
   final BorderRadius? br;
@@ -59,17 +59,18 @@ class CustomButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                text,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
-                  color: color == "primary"
-                      ? Theme.of(context).colorScheme.onPrimary
-                      : Theme.of(context).colorScheme.onSecondary,
+              if (text != null)
+                Text(
+                  text!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
+                    color: color == "primary"
+                        ? Theme.of(context).colorScheme.onPrimary
+                        : Theme.of(context).colorScheme.onSecondary,
+                  ),
                 ),
-              ),
               Icon(
                 icon,
                 size: 40,
@@ -80,17 +81,18 @@ class CustomButton extends StatelessWidget {
             ],
           ),
         if (icon == null)
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
-              color: color == "primary"
-                  ? Theme.of(context).colorScheme.onPrimary
-                  : Theme.of(context).colorScheme.onSecondary,
+          if (text != null)
+            Text(
+              text!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
+                color: color == "primary"
+                    ? Theme.of(context).colorScheme.onPrimary
+                    : Theme.of(context).colorScheme.onSecondary,
+              ),
             ),
-          ),
       ]),
     );
   }
