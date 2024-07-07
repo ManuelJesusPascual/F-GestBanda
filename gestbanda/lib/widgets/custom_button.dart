@@ -65,7 +65,8 @@ class CustomButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
+                    fontFamily: GoogleFonts.exo().fontFamily,
+                    fontSize: 12,
                     color: color == "primary"
                         ? Theme.of(context).colorScheme.onPrimary
                         : Theme.of(context).colorScheme.onSecondary,
@@ -87,7 +88,8 @@ class CustomButton extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontFamily: GoogleFonts.exo(fontSize: 18).fontFamily,
+                fontFamily: GoogleFonts.exo().fontFamily,
+                fontSize: 12,
                 color: color == "primary"
                     ? Theme.of(context).colorScheme.onPrimary
                     : Theme.of(context).colorScheme.onSecondary,

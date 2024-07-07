@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import '../../../widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
-  //TODO: Cambiar a BLOC
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,12 +39,12 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             label: "Profile",
             icon: Icon(Icons.people),
-          )
+          ),
         ],
       ),
       body: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 7.0),
                       child: Text(
                         "Banda Municipal de Villaejemplo",
-                        style: Theme.of(context).textTheme.titleSmall,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -68,10 +68,13 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     icon: const Icon(Icons.settings),
                     color: Theme.of(context).colorScheme.onSurface,
-                    onPressed: () {},
+                    onPressed: () {
+                      // Implementar la navegación a la pantalla de configuración
+                    },
                   )
                 ],
               ),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -89,6 +92,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -98,10 +102,12 @@ class _HomePageState extends State<HomePage> {
                     imgSvgAsset: "assets/svg/instruments_page.svg",
                     imgHeight: 100,
                     imgWidth: 100,
-                    onPressed: () {},
+                    onPressed: () {
+                      // Implementar la navegación a la página de instrumentos
+                    },
                     br: BorderRadius.circular(10),
-                    width: 170,
-                    height: 250,
+                    width: 150,
+                    height: 200,
                   ),
                   CustomButton(
                     text: "Ropa",
@@ -109,13 +115,15 @@ class _HomePageState extends State<HomePage> {
                     imgSvgAsset: "assets/svg/clothes_page.svg",
                     imgHeight: 100,
                     imgWidth: 100,
-                    onPressed: () {},
+                    onPressed: () {
+                      // Implementar la navegación a la página de ropa
+                    },
                     br: BorderRadius.circular(10),
-                    width: 170,
-                    height: 250,
+                    width: 150,
+                    height: 200,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

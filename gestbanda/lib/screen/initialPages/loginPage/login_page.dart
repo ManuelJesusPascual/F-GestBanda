@@ -9,29 +9,28 @@ import '../../../widgets/widgets.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: BlocListener<LoginUserFormBloc, LoginUserFormState>(
-        listener: (context, state) => {
-          if (state.submitStatus)
-            {
-              context
-                  .read<RouterSimpleCubit>()
-                  .changeRouter(authenticatedRouter),
-              context.read<RouterSimpleCubit>().pushRoute("/")
-            }
+        listener: (context, state) {
+          if (state.submitStatus) {
+            context.read<RouterSimpleCubit>().changeRouter(authenticatedRouter);
+            context.read<RouterSimpleCubit>().pushRoute("/");
+          }
         },
         child: BlocBuilder<LoginUserFormBloc, LoginUserFormState>(
           builder: (context, state) {
             return SafeArea(
-              child: Center(
-                heightFactor: 1.3,
-                child: Form(
-                  key: state.formKey,
-                  child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30.0),
+                  child: Form(
+                    key: state.formKey,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 30.0, top: 10),
@@ -79,18 +78,21 @@ class LoginPage extends StatelessWidget {
                                         labelText: state.password.labelText)));
                           },
                         ),
-                        SizedBox(
-                          width: 300,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: CustomButton(
+                        Center(
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: CustomButton(
                                 text: "Iniciar Sesión",
                                 color: "primary",
                                 br: const BorderRadius.all(Radius.circular(10)),
                                 onPressed: () {
                                   BlocProvider.of<LoginUserFormBloc>(context)
                                       .add(const LoginUserFormSubmitEvent());
-                                }),
+                                },
+                              ),
+                            ),
                           ),
                         ),
                       ],

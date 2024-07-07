@@ -13,68 +13,83 @@ class RegisterSelectorPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
-          child: Column(children: [
-        Container(
-            alignment: Alignment.centerRight,
-            child: TextButton(
-                style: TextButton.styleFrom(
-                  overlayColor: Colors.transparent,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    overlayColor: Colors.transparent,
+                  ),
+                  onPressed: () {
+                    context
+                        .read<RouterSimpleCubit>()
+                        .changeRouter(unauthenticatedRouter);
+                  },
+                  child: const Icon(Icons.logout_outlined),
                 ),
-                onPressed: () {
-                  context
-                      .read<RouterSimpleCubit>()
-                      .changeRouter(unauthenticatedRouter);
-                },
-                child: const Icon(Icons.logout_outlined))),
-        Padding(
-          padding: const EdgeInsets.only(top: 90, bottom: 30.0),
-          child: Text(
-            'Selecciona una opción',
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          ).animate().fade(duration: 500.ms).scale(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 20.0),
+                child: Text(
+                  'Selecciona una opción',
+                  style: Theme.of(context).textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                ).animate().fade(duration: 500.ms).scale(),
+              ),
+              Text(
+                "Elige cómo quieres continuar con tu cuenta",
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center,
+              ).animate().fade(duration: 500.ms).scale(),
+              const SizedBox(height: 120),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomButton(
+                    text: "Registra tu propia banda",
+                    color: "primary",
+                    imgSvgAsset: "assets/svg/register_new_band.svg",
+                    imgHeight: 150,
+                    imgWidth: 150,
+                    onPressed: () {
+                      context
+                          .read<RouterSimpleCubit>()
+                          .pushRoute("/create_band_one");
+                    },
+                    br: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    width: 160,
+                    height: 300,
+                  ),
+                  CustomButton(
+                    text: "Únete a una banda mediante un código",
+                    color: "secondary",
+                    imgSvgAsset: "assets/svg/join_to_band.svg",
+                    imgHeight: 150,
+                    imgWidth: 150,
+                    onPressed: () {
+                      context.read<RouterSimpleCubit>().pushRoute("/join_band");
+                    },
+                    br: const BorderRadius.only(
+                      topRight: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    width: 160,
+                    height: 300,
+                  )
+                ],
+              ),
+              Spacer(),
+            ],
+          ),
         ),
-        Text(
-          "Elige como quieres continuar con tu cuenta",
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ).animate().fade(duration: 500.ms).scale(),
-        Center(
-          heightFactor: 1.3,
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            CustomButton(
-              text: "Registra tu propia banda",
-              color: "primary",
-              imgSvgAsset: "assets/svg/register_new_band.svg",
-              imgHeight: 150,
-              imgWidth: 150,
-              onPressed: () {
-                context.read<RouterSimpleCubit>().pushRoute("/create_band_one");
-              },
-              br: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10)),
-              width: 180,
-              height: 350,
-            ),
-            CustomButton(
-              text: "Únete a una banda mediante un código",
-              color: "secondary",
-              imgSvgAsset: "assets/svg/join_to_band.svg",
-              imgHeight: 150,
-              imgWidth: 150,
-              onPressed: () {
-                context.read<RouterSimpleCubit>().pushRoute("/join_band");
-              },
-              br: const BorderRadius.only(
-                  topRight: Radius.circular(10),
-                  bottomRight: Radius.circular(10)),
-              width: 180,
-              height: 350,
-            )
-          ]),
-        ),
-      ])),
+      ),
     );
   }
 }
