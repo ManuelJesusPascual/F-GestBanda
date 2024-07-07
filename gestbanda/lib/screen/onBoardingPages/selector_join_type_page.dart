@@ -85,7 +85,7 @@ class RegisterSelectorPage extends StatelessWidget {
                   )
                 ],
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),

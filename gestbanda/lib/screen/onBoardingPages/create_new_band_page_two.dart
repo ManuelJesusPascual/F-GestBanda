@@ -7,7 +7,7 @@ import 'package:gestbanda/widgets/widgets.dart';
 import '../../config/config.dart';
 
 class CreateNewBandPageTwo extends StatelessWidget {
-  const CreateNewBandPageTwo({Key? key});
+  const CreateNewBandPageTwo({super.key});
 
   @override
   Widget build(BuildContext context) {

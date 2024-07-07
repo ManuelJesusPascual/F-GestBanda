@@ -8,7 +8,7 @@ import '../../config/config.dart';
 import '../../models/BlocFormItem.dart';
 
 class CreateNewBandPageOne extends StatelessWidget {
-  const CreateNewBandPageOne({Key? key});
+  const CreateNewBandPageOne({super.key});
 
   @override
   Widget build(BuildContext context) {

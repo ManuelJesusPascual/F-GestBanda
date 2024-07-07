@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/BlocFormItem.dart';
 
@@ -38,13 +37,13 @@ class LoginPage extends StatelessWidget {
                             '¡Bienvenido de nuevo!',
                             style: Theme.of(context).textTheme.titleLarge,
                             textAlign: TextAlign.center,
-                          ).animate().fade(duration: 500.ms).scale(),
+                          ),
                         ),
                         Text(
                           "Por favor, inicia sesión con tus credenciales.",
                           style: Theme.of(context).textTheme.bodyMedium,
                           textAlign: TextAlign.center,
-                        ).animate().fade(duration: 500.ms).scale(),
+                        ),
                         CustomTextInput(
                           label: state.email.labelText,
                           hint: state.email.hintText,

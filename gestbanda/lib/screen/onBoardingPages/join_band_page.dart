@@ -62,7 +62,7 @@ class JoinBandPage extends StatelessWidget {
                 width: 350,
                 br: BorderRadius.circular(10),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         ),

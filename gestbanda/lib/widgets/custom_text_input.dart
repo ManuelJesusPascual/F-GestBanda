@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class CustomTextInput extends StatelessWidget {
   const CustomTextInput(
@@ -47,7 +46,7 @@ class CustomTextInput extends StatelessWidget {
             hintText: hint,
           ),
           onChanged: onChanged,
-        )).animate().moveX(duration: 1000.ms);
+        ));
   }
 }
 
