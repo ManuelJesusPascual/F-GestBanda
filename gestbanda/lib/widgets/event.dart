@@ -15,7 +15,7 @@ class Event extends StatelessWidget {
     final String formattedDate = formatDate(date);
 
     return Container(
-      //TODO: Cambiar esto por un boton que te lleve a los detalles de esa salida
+      //TODO: Cambiar el container por un boton que te lleve a los detalles de esa salida
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).colorScheme.primary,

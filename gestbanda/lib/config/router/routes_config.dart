@@ -57,7 +57,7 @@ final directorRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => const MainPage(),
     ),
     GoRoute(
       path: '/return_policy',
