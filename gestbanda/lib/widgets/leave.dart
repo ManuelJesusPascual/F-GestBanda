@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class Event extends StatelessWidget {
+class Leave extends StatelessWidget {
   final DateTime date;
   final String eventName;
 
-  const Event({
+  const Leave({
     super.key,
     required this.date,
     required this.eventName,

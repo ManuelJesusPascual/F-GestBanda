@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/blocs/blocs.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'config/config.dart';
 
 void main() {
-  runApp(const BlocsProviders());
+  initializeDateFormatting().then((_) => runApp(
+      const BlocsProviders())); //El initializeDateFormatting para que el calendario pueda estar en español
 }
 
 class BlocsProviders extends StatelessWidget {

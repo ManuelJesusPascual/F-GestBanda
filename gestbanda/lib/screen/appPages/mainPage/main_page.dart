@@ -80,7 +80,6 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 70),
               Expanded(
                 child: IndexedStack(
                   index: selectedIndex,

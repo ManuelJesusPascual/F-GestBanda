@@ -9,18 +9,19 @@ class HomePage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          const SizedBox(height: 70),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Event(
+              Leave(
                 date: DateTime(2024, 7, 3),
                 eventName: "Pasacalles",
               ),
-              Event(
+              Leave(
                 date: DateTime(2024, 8, 23),
                 eventName: "Salida Procesional",
               ),
-              Event(
+              Leave(
                 date: DateTime(2024, 9, 14),
                 eventName: "Concierto",
               ),
