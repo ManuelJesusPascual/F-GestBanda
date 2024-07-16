@@ -56,7 +56,7 @@ class Leave extends StatelessWidget {
                   eventName,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 12,
+                    fontSize: 10,
                   ),
                   textAlign: TextAlign.center,
                 ),
