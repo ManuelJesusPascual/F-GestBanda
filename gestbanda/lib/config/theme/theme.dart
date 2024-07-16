@@ -8,7 +8,7 @@ var theme = ThemeData(
       brightness: Brightness.light,
       surface: const Color(0xFFFFFFFF), // Fondo de superficie blanco
       primary: const Color(0xFF2E7D32), // Color primario (verde oscuro)
-      secondary: const Color(0xFFCDDC39), // Marrón oscuro
+      secondary: const Color(0xFFC5E1A5), // Marrón oscuro
       onPrimary: const Color(0xFFFFFFFF), // Texto en color primario (blanco)
       onSecondary:
           const Color(0xFFFFFFFF), // Texto en color secundario (blanco)
@@ -41,7 +41,7 @@ var darkTheme = ThemeData(
       brightness: Brightness.dark,
       surface: const Color(0xFF121212), // Fondo de superficie oscuro
       primary: const Color(0xFF81C784), // Verde claro derivado del verde oscuro
-      secondary: const Color(0xFFCDDC39), // Marrón oscuro
+      secondary: const Color(0xFFC5E1A5), // Marrón oscuro
       onPrimary: const Color(0xFF121212), // Texto en color primario (oscuro)
       onSecondary:
           const Color(0xFFFFFFFF), // Texto en color secundario (blanco)
