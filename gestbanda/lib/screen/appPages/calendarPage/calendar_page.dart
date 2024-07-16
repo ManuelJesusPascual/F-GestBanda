@@ -52,7 +52,7 @@ class _CalendarPageState extends State<CalendarPage> {
             markerDecoration: BoxDecoration(
               color: Theme.of(context)
                   .colorScheme
-                  .tertiary, // Change this color to your desired marker color
+                  .secondary, // Change this color to your desired marker color
               shape: BoxShape.circle,
             ),
           ),
@@ -92,17 +92,18 @@ List<Event> _getEventsForDay(DateTime day) {
           event.date.year == day.year &&
           event.date.month == day.month &&
           event.date.day == day.day)
-      .toList();
+      .toList()
+    ..sort((a, b) => b.date.compareTo(a.date));
 }
 
 final _kEventSource = [
   Event('Concierto Almería', DateTime(2024, 7, 9, 17, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 9, 20, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 9, 20, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 9, 20, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 9, 20, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 9, 20, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 9, 20, 30)),
+  Event('Salida extraordinaria', DateTime(2024, 7, 16, 15, 30)),
+  Event('Salida extraordinaria', DateTime(2024, 7, 16, 16, 30)),
+  Event('Salida extraordinaria', DateTime(2024, 7, 16, 17, 30)),
+  Event('Salida extraordinaria', DateTime(2024, 7, 16, 18, 30)),
+  Event('Salida extraordinaria', DateTime(2024, 7, 16, 19, 30)),
+  Event('Salida extraordinaria', DateTime(2024, 7, 16, 20, 30)),
   Event('Lunes Santo', DateTime(2024, 7, 15)),
   Event('Pasacalles Navideño', DateTime(2024, 7, 1)),
   Event('Pasacalles Pasión', DateTime(2024, 7, 1)),

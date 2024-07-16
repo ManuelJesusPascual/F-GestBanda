@@ -24,7 +24,8 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        selectedItemColor: Theme.of(context).colorScheme.onPrimary,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
+        unselectedItemColor: Theme.of(context).colorScheme.surface,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: selectedIndex,

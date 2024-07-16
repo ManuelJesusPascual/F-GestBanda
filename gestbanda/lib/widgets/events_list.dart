@@ -25,8 +25,8 @@ class EventsList extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: value[index].date.compareTo(DateTime.now()) < 0
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.tertiary,
+                    ? Colors.grey
+                    : Theme.of(context).colorScheme.secondary,
                 border: Border.all(),
                 borderRadius: BorderRadius.circular(12.0),
               ),
