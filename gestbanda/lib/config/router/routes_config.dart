@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
@@ -67,6 +68,10 @@ final directorRouter = GoRouter(
       path: '/private_policy',
       builder: (context, state) => const PrivatePolicy(),
     ),
+    GoRoute(
+      path: '/event_detail',
+      builder: (context, state) => EventDetailPage(event: state.extra as Event),
+    ),
   ],
 );
 
@@ -76,8 +81,8 @@ class RouterSimpleCubit extends Cubit<GoRouter> {
     state.pop();
   }
 
-  void pushRoute(String route) {
-    state.push(route);
+  void pushRoute(String route, {Object? extra}) {
+    state.push(route, extra: extra);
   }
 
   void changeRouter(GoRouter router) {

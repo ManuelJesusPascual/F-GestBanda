@@ -4,16 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 var theme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF2E7D32), // Verde oscuro
+      seedColor: const Color(0xFF2E7D32),
       brightness: Brightness.light,
-      surface: const Color(0xFFFFFFFF), // Fondo de superficie blanco
-      primary: const Color(0xFF2E7D32), // Color primario (verde oscuro)
-      secondary: const Color(0xFFC5E1A5), // Marrón oscuro
-      onPrimary: const Color(0xFFFFFFFF), // Texto en color primario (blanco)
-      onSecondary:
-          const Color(0xFFFFFFFF), // Texto en color secundario (blanco)
-      onSurface: const Color(
-          0xFF000000)), // Texto en superficies (negro)// Texto en superficies (negro),
+      surface: const Color(0xFFFFFFFF),
+      primary: const Color(0xFF2E7D32),
+      secondary: const Color(0xFFC5E1A5),
+      onPrimary: const Color(0xFFFFFFFF),
+      onSecondary: const Color(0xFFFFFFFF),
+      onSurface: const Color(0xFF000000)),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
       fontSize: 50,
@@ -37,15 +35,14 @@ var theme = ThemeData(
 var darkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF2E7D32), // Verde oscuro
+      seedColor: const Color(0xFF2E7D32),
       brightness: Brightness.dark,
-      surface: const Color(0xFF121212), // Fondo de superficie oscuro
-      primary: const Color(0xFF81C784), // Verde claro derivado del verde oscuro
-      secondary: const Color(0xFFC5E1A5), // Marrón oscuro
-      onPrimary: const Color(0xFF121212), // Texto en color primario (oscuro)
-      onSecondary:
-          const Color(0xFFFFFFFF), // Texto en color secundario (blanco)
-      onSurface: const Color(0xFFFFFFFF)), // Texto en superficies (blanco)
+      surface: const Color(0xFF121212),
+      primary: const Color(0xFF81C784),
+      secondary: const Color(0xFFC5E1A5),
+      onPrimary: const Color(0xFF121212),
+      onSecondary: const Color(0xFFFFFFFF),
+      onSurface: const Color(0xFFFFFFFF)),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
       fontSize: 50,

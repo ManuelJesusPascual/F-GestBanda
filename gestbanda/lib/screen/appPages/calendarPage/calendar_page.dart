@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../models/Event.dart';
@@ -89,24 +90,96 @@ class _CalendarPageState extends State<CalendarPage> {
 List<Event> _getEventsForDay(DateTime day) {
   return _kEventSource
       .where((event) =>
-          event.date.year == day.year &&
-          event.date.month == day.month &&
-          event.date.day == day.day)
+          event.initDate.year == day.year &&
+          event.initDate.month == day.month &&
+          event.initDate.day == day.day)
       .toList()
-    ..sort((a, b) => b.date.compareTo(a.date));
+    ..sort((a, b) => b.initDate.compareTo(a.initDate));
 }
 
 final _kEventSource = [
-  Event('Concierto Almería', DateTime(2024, 7, 9, 17, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 16, 15, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 16, 16, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 16, 17, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 16, 18, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 16, 19, 30)),
-  Event('Salida extraordinaria', DateTime(2024, 7, 16, 20, 30)),
-  Event('Lunes Santo', DateTime(2024, 7, 15)),
-  Event('Pasacalles Navideño', DateTime(2024, 7, 1)),
-  Event('Pasacalles Pasión', DateTime(2024, 7, 1)),
-  Event('Concierto de otoño', DateTime(2024, 8, 23)),
-  Event('Concierto de verano', DateTime(2024, 8, 1)),
+  Event(
+      title: 'Concierto Almería',
+      type: EventType.concierto,
+      initDate: DateTime(2024, 7, 9, 17, 30),
+      endDate: DateTime(2024, 7, 9, 20, 30),
+      description: "a",
+      location: "Almeria"),
+  Event(
+      title: 'Salida extraordinaria',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 16, 15, 30),
+      endDate: DateTime(2024, 7, 16, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Salida extraordinaria',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 16, 16, 30),
+      endDate: DateTime(2024, 7, 16, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Salida extraordinaria',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 16, 17, 30),
+      endDate: DateTime(2024, 7, 16, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Salida extraordinaria',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 16, 18, 30),
+      endDate: DateTime(2024, 7, 16, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Salida extraordinaria',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 16, 19, 30),
+      endDate: DateTime(2024, 7, 16, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Salida extraordinaria',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 16, 20, 30),
+      endDate: DateTime(2024, 7, 16, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Lunes Santo',
+      type: EventType.salida_procesional,
+      initDate: DateTime(2024, 7, 15),
+      endDate: DateTime(2024, 7, 15, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Pasacalles Navideño',
+      type: EventType.pasacalles,
+      initDate: DateTime(2024, 7, 1),
+      endDate: DateTime(2024, 7, 1, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Pasacalles Pasión',
+      type: EventType.pasacalles,
+      initDate: DateTime(2024, 7, 1),
+      endDate: DateTime(2024, 8, 23, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Concierto de otoño',
+      type: EventType.concierto,
+      initDate: DateTime(2024, 8, 23),
+      endDate: DateTime(2024, 8, 23, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
+  Event(
+      title: 'Concierto de verano',
+      type: EventType.concierto,
+      initDate: DateTime(2024, 8, 1),
+      endDate: DateTime(2024, 8, 1, 20, 30),
+      description: "a",
+      location: "Sanlucar de Barrameda"),
 ];

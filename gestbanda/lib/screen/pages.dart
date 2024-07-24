@@ -8,3 +8,4 @@ export 'policyPages/return_policy.dart';
 export 'policyPages/private_policy.dart';
 export 'appPages/mainPage/main_page.dart';
 export 'appPages/homePage/home_page.dart';
+export 'appPages/eventDetailsPage/event_detail_page.dart';
