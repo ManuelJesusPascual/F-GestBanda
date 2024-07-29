@@ -1,7 +1,6 @@
 enum EventType { pasacalles, salida_procesional, concierto }
 
 extension EventTypeExtension on EventType {
-  // Convierte el enum a una cadena
   String get toJson {
     switch (this) {
       case EventType.pasacalles:
@@ -15,7 +14,6 @@ extension EventTypeExtension on EventType {
     }
   }
 
-  // Convierte una cadena a un enum
   static EventType fromJson(String json) {
     switch (json) {
       case 'pasacalles':

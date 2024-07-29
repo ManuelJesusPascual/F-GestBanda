@@ -1,9 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
+import 'package:gestbanda/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 
-import '../../../models/Event.dart';
+import '../../../../config/config.dart';
+import '../../../../models/Event.dart';
 
 class EventDetailPage extends StatefulWidget {
   final Event event;
@@ -48,13 +51,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                               fit: BoxFit.cover,
                               width: MediaQuery.of(context).size.width)))
                       .toList()
-                  : [
-                      Center(
-                          child: Image.network(
-                              "",
-                              fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width))
-                    ],
+                  : [const Center(child: ImagePlaceholder())],
             ),
             if (widget.event.imgList != null &&
                 widget.event.imgList!.isNotEmpty)
@@ -77,10 +74,24 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 }).toList(),
               ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20),
-              child: Text(
-                widget.event.title,
-                style: Theme.of(context).textTheme.titleSmall,
+              padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.event.title,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      context.read<RouterSimpleCubit>().pushRoute(
+                          "/event_create_modify",
+                          extra: widget.event);
+                    },
+                  ),
+                ],
               ),
             ),
             Row(

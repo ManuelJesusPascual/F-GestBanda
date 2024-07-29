@@ -38,7 +38,7 @@ class RegisterBandFormBloc
                 : "No puedes introducir un nombre vacío")));
   }
 
-//Solucionar que si se hace doble click en el boton se lanza excepcion, hacer loadingState
+//TODO:Solucionar que si se hace doble click en el boton se lanza excepcion, hacer loadingState
   Future<void> _onImgChanged(RegisterBandFormImgChangedEvent event,
       Emitter<RegisterBandFormState> emitter) async {
     if (!loading) {

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Event.dart';
+import 'package:gestbanda/screen/appPages/calendarPage/calendar_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
@@ -58,7 +59,11 @@ final directorRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const MainPage(),
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/calendar',
+      builder: (context, state) => const CalendarPage(),
     ),
     GoRoute(
       path: '/return_policy',
@@ -71,6 +76,13 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/event_detail',
       builder: (context, state) => EventDetailPage(event: state.extra as Event),
+    ),
+    GoRoute(
+      path: '/event_create_modify',
+      builder: (context, state) {
+        final Event? event = state.extra as Event?;
+        return EventCreateModify(event: event);
+      },
     ),
   ],
 );

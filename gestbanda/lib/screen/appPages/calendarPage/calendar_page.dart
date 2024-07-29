@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
+import 'package:gestbanda/widgets/main_bottom_bar.dart';
+import 'package:gestbanda/widgets/main_header.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../../config/config.dart';
 import '../../../models/Event.dart';
 import '../../../widgets/widgets.dart';
 
@@ -34,152 +38,227 @@ class _CalendarPageState extends State<CalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TableCalendar<Event>(
-          locale: 'es_ES',
-          firstDay: DateTime(2020, 1, 1),
-          lastDay: DateTime(2025, 12, 31),
-          availableCalendarFormats: const {
-            CalendarFormat.month: 'Mes',
-          },
-          headerStyle: const HeaderStyle(
-            formatButtonVisible: false, // Hide the format button
-            titleCentered: true, // Center the title
+    return Scaffold(
+      bottomNavigationBar: const MainBottomBar(currentIndex: 0),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const MainHeader(),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Column(
+                      children: [
+                        TableCalendar<Event>(
+                          locale: 'es_ES',
+                          firstDay: DateTime(2020, 1, 1),
+                          lastDay: DateTime(2025, 12, 31),
+                          availableCalendarFormats: const {
+                            CalendarFormat.month: 'Mes',
+                          },
+                          headerStyle: const HeaderStyle(
+                            formatButtonVisible: false,
+                            titleCentered: true,
+                          ),
+                          focusedDay: _focusedDay,
+                          startingDayOfWeek: StartingDayOfWeek.monday,
+                          calendarStyle: CalendarStyle(
+                            markerDecoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.secondary,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          calendarBuilders: CalendarBuilders(
+                            selectedBuilder: (context, date, _) {
+                              return Container(
+                                margin: const EdgeInsets.all(4.0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .primary
+                                      .withOpacity(0.2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${date.day}',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
+                                  ),
+                                ),
+                              );
+                            },
+                            todayBuilder: (context, date, _) {
+                              return Container(
+                                margin: const EdgeInsets.all(4.0),
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary
+                                      .withOpacity(0.3),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${date.day}',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          selectedDayPredicate: (day) {
+                            return isSameDay(_selectedDay, day);
+                          },
+                          onDaySelected: (selectedDay, focusedDay) {
+                            setState(() {
+                              _selectedDay = selectedDay;
+                              _focusedDay = focusedDay;
+                              _selectedEvents.value =
+                                  _getEventsForDay(selectedDay);
+                            });
+                          },
+                          onPageChanged: (focusedDay) {
+                            _focusedDay = focusedDay;
+                          },
+                          calendarFormat: _calendarFormat,
+                          onFormatChanged: (format) {
+                            setState(() {
+                              _calendarFormat = format;
+                            });
+                          },
+                          eventLoader: _getEventsForDay,
+                        ),
+                        const SizedBox(height: 25.0),
+                        Expanded(
+                          child: EventsList(selectedEvents: _selectedEvents),
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 2.0,
+                      right: 2.0,
+                      child: FloatingActionButton(
+                        onPressed: () {
+                          context.read<RouterSimpleCubit>().pushRoute(
+                                "/event_create_modify",
+                              );
+                        },
+                        child: const Icon(Icons.add),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          focusedDay: _focusedDay,
-          startingDayOfWeek: StartingDayOfWeek.monday,
-          calendarStyle: CalendarStyle(
-            markerDecoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .secondary, // Change this color to your desired marker color
-              shape: BoxShape.circle,
-            ),
-          ),
-          selectedDayPredicate: (day) {
-            return isSameDay(_selectedDay, day);
-          },
-          onDaySelected: (selectedDay, focusedDay) {
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-              _selectedEvents.value = _getEventsForDay(selectedDay);
-            });
-          },
-          onPageChanged: (focusedDay) {
-            _focusedDay = focusedDay;
-          },
-          calendarFormat: _calendarFormat,
-          onFormatChanged: (format) {
-            setState(() {
-              _calendarFormat = format;
-            });
-          },
-          eventLoader: _getEventsForDay,
         ),
-        const SizedBox(height: 25.0),
-        Expanded(
-          child: EventsList(selectedEvents: _selectedEvents),
-        ),
-      ],
+      ),
     );
   }
-}
 
-List<Event> _getEventsForDay(DateTime day) {
-  return _kEventSource
-      .where((event) =>
-          event.initDate.year == day.year &&
-          event.initDate.month == day.month &&
-          event.initDate.day == day.day)
-      .toList()
-    ..sort((a, b) => b.initDate.compareTo(a.initDate));
-}
+  List<Event> _getEventsForDay(DateTime day) {
+    return _kEventSource
+        .where((event) =>
+            event.initDate.year == day.year &&
+            event.initDate.month == day.month &&
+            event.initDate.day == day.day)
+        .toList()
+      ..sort((a, b) => b.initDate.compareTo(a.initDate));
+  }
 
-final _kEventSource = [
-  Event(
-      title: 'Concierto Almería',
-      type: EventType.concierto,
-      initDate: DateTime(2024, 7, 9, 17, 30),
-      endDate: DateTime(2024, 7, 9, 20, 30),
-      description: "a",
-      location: "Almeria"),
-  Event(
-      title: 'Salida extraordinaria',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 16, 15, 30),
-      endDate: DateTime(2024, 7, 16, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Salida extraordinaria',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 16, 16, 30),
-      endDate: DateTime(2024, 7, 16, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Salida extraordinaria',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 16, 17, 30),
-      endDate: DateTime(2024, 7, 16, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Salida extraordinaria',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 16, 18, 30),
-      endDate: DateTime(2024, 7, 16, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Salida extraordinaria',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 16, 19, 30),
-      endDate: DateTime(2024, 7, 16, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Salida extraordinaria',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 16, 20, 30),
-      endDate: DateTime(2024, 7, 16, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Lunes Santo',
-      type: EventType.salida_procesional,
-      initDate: DateTime(2024, 7, 15),
-      endDate: DateTime(2024, 7, 15, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Pasacalles Navideño',
-      type: EventType.pasacalles,
-      initDate: DateTime(2024, 7, 1),
-      endDate: DateTime(2024, 7, 1, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Pasacalles Pasión',
-      type: EventType.pasacalles,
-      initDate: DateTime(2024, 7, 1),
-      endDate: DateTime(2024, 8, 23, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Concierto de otoño',
-      type: EventType.concierto,
-      initDate: DateTime(2024, 8, 23),
-      endDate: DateTime(2024, 8, 23, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-  Event(
-      title: 'Concierto de verano',
-      type: EventType.concierto,
-      initDate: DateTime(2024, 8, 1),
-      endDate: DateTime(2024, 8, 1, 20, 30),
-      description: "a",
-      location: "Sanlucar de Barrameda"),
-];
+  final _kEventSource = [
+    Event(
+        title: 'Concierto Almería',
+        type: EventType.concierto,
+        initDate: DateTime(2024, 7, 9, 17, 30),
+        endDate: DateTime(2024, 7, 9, 20, 30),
+        description: "a",
+        location: "Almeria"),
+    Event(
+        title: 'Salida extraordinaria',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 16, 15, 30),
+        endDate: DateTime(2024, 7, 16, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Salida extraordinaria',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 16, 16, 30),
+        endDate: DateTime(2024, 7, 16, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Salida extraordinaria',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 16, 17, 30),
+        endDate: DateTime(2024, 7, 16, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Salida extraordinaria',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 16, 18, 30),
+        endDate: DateTime(2024, 7, 16, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Salida extraordinaria',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 16, 19, 30),
+        endDate: DateTime(2024, 7, 16, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Salida extraordinaria',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 16, 20, 30),
+        endDate: DateTime(2024, 7, 16, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Lunes Santo',
+        type: EventType.salida_procesional,
+        initDate: DateTime(2024, 7, 15),
+        endDate: DateTime(2024, 7, 15, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Pasacalles Navideño',
+        type: EventType.pasacalles,
+        initDate: DateTime(2024, 7, 1),
+        endDate: DateTime(2024, 7, 1, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Pasacalles Pasión',
+        type: EventType.pasacalles,
+        initDate: DateTime(2024, 7, 1),
+        endDate: DateTime(2024, 8, 23, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Concierto de otoño',
+        type: EventType.concierto,
+        initDate: DateTime(2024, 8, 23),
+        endDate: DateTime(2024, 8, 23, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Concierto de verano',
+        type: EventType.concierto,
+        initDate: DateTime(2024, 8, 1),
+        endDate: DateTime(2024, 8, 1, 20, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+  ];
+}

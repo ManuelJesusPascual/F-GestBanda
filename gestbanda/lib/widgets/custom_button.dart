@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -47,14 +46,13 @@ class CustomButton extends StatelessWidget {
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         if (imgSvgAsset != null)
           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SvgPicture.asset(
-              imgSvgAsset ?? '',
-              width: imgWidth ?? 150,
-              height: imgHeight ?? 150,
-              semanticsLabel: imgSemanticLabel ?? '',
-            ).animate().fade(duration: 800.ms).scale(),
-          ),
+              padding: const EdgeInsets.all(10.0),
+              child: SvgPicture.asset(
+                imgSvgAsset ?? '',
+                width: imgWidth ?? 150,
+                height: imgHeight ?? 150,
+                semanticsLabel: imgSemanticLabel ?? '',
+              )),
         if (icon != null)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

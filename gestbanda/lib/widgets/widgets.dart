@@ -1,5 +1,9 @@
 export './custom_button.dart';
 export './custom_text_input.dart';
-export 'event_item.dart';
+export './event_item.dart';
 export './instrument.dart';
 export './events_list.dart';
+export './date_modal.dart';
+export './time_modal.dart';
+export './custom_image_container.dart';
+export './image_placeholder.dart';

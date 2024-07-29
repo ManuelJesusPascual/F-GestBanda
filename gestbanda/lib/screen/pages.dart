@@ -6,6 +6,6 @@ export 'onBoardingPages/create_new_band_page_one.dart';
 export 'onBoardingPages/join_band_page.dart';
 export 'policyPages/return_policy.dart';
 export 'policyPages/private_policy.dart';
-export 'appPages/mainPage/main_page.dart';
 export 'appPages/homePage/home_page.dart';
-export 'appPages/eventDetailsPage/event_detail_page.dart';
+export 'appPages/eventPages/eventDetailsPage/event_detail_page.dart';
+export 'appPages/eventPages/eventCreateModify/event_create_modify_page.dart';
