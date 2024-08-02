@@ -66,14 +66,6 @@ final directorRouter = GoRouter(
       builder: (context, state) => const CalendarPage(),
     ),
     GoRoute(
-      path: '/return_policy',
-      builder: (context, state) => const ReturnPolicy(),
-    ),
-    GoRoute(
-      path: '/private_policy',
-      builder: (context, state) => const PrivatePolicy(),
-    ),
-    GoRoute(
       path: '/event_detail',
       builder: (context, state) => EventDetailPage(event: state.extra as Event),
     ),
@@ -83,6 +75,22 @@ final directorRouter = GoRouter(
         final Event? event = state.extra as Event?;
         return EventCreateModify(event: event);
       },
+    ),
+    GoRoute(
+      path: '/user_list',
+      builder: (context, state) => UserList(),
+    ),
+    GoRoute(
+      path: '/code_list',
+      builder: (context, state) => CodeList(),
+    ),
+    GoRoute(
+      path: '/return_policy',
+      builder: (context, state) => const ReturnPolicy(),
+    ),
+    GoRoute(
+      path: '/private_policy',
+      builder: (context, state) => const PrivatePolicy(),
     ),
   ],
 );
@@ -95,6 +103,10 @@ class RouterSimpleCubit extends Cubit<GoRouter> {
 
   void pushRoute(String route, {Object? extra}) {
     state.push(route, extra: extra);
+  }
+
+  void go(String route, {Object? extra}) {
+    state.go(route, extra: extra);
   }
 
   void changeRouter(GoRouter router) {

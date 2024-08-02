@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../config/config.dart';
 import '../../../../models/Event.dart';
+import '../../../../utils/string_utilites.dart';
 
 class EventDetailPage extends StatefulWidget {
   final Event event;
@@ -122,13 +123,15 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Text(formatDateTime(widget.event.initDate)),
+                  child: Text(formatDateTime(
+                      widget.event.initDate, 'dd/MM/yyyy HH:mm')),
                 ),
                 const Text(" - "),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Text(formatDateTime(widget.event.endDate)),
+                  child: Text(
+                      formatDateTime(widget.event.endDate, 'dd/MM/yyyy HH:mm')),
                 ),
               ],
             ),
@@ -142,10 +145,5 @@ class _EventDetailPageState extends State<EventDetailPage> {
         ),
       ),
     );
-  }
-
-  String formatDateTime(DateTime dateTime) {
-    final DateFormat dateFormat = DateFormat('dd/MM/yyyy HH:mm');
-    return dateFormat.format(dateTime);
   }
 }

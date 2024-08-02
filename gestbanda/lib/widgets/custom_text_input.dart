@@ -16,7 +16,7 @@ class CustomTextInput extends StatelessWidget {
       this.keyboardType = TextInputType.text,
       this.obscure = false,
       this.initalValue,
-      this.maxLines});
+      this.maxLines = 1});
 
   final String label;
   final String hint;

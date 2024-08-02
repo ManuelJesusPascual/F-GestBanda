@@ -20,11 +20,12 @@ class MainBottomBar extends StatelessWidget {
       currentIndex: currentIndex,
       onTap: (value) {
         if (value != currentIndex) {
-          value == 0
-              ? context.read<RouterSimpleCubit>().pushRoute("/calendar")
-              : value == 1
-                  ? context.read<RouterSimpleCubit>().pushRoute("/")
-                  : context.read<RouterSimpleCubit>().pushRoute("/");
+          final routes = [
+            '/calendar',
+            '/',
+            '/user_list',
+          ];
+          context.read<RouterSimpleCubit>().go(routes[value]);
         }
       },
       items: const [
