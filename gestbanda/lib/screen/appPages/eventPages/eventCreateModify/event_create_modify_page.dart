@@ -48,7 +48,8 @@ class _EventCreateModifyState extends State<EventCreateModify> {
   }
 
   Future<void> _selectDateTime(BuildContext context) async {
-    final newDateRange = await showDateModal(context, dateRange);
+    final newDateRange = await showDateModal(context,
+        initialDateRange: dateRange, isRangeSelection: true);
 
     if (newDateRange != null) {
       setState(() {

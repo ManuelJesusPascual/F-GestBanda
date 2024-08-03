@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Code.dart';
 import 'package:gestbanda/widgets/main_header.dart';
 
+import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
 
 class CodeList extends StatefulWidget {
   CodeList({super.key});
   List<Code> codes = [
-    Code("34532", DateTime.now().subtract(const Duration(days: 35)),
-        DateTime.now().add(const Duration(days: 20))),
-    Code("42583", DateTime.now().subtract(const Duration(days: 15)),
-        DateTime.now().add(const Duration(days: 4))),
-    Code("92745", DateTime.now().subtract(const Duration(days: 6)),
-        DateTime.now().add(const Duration(days: 999999999999999999))),
-    Code("09284", DateTime.now().subtract(const Duration(days: 20)),
-        DateTime.now().subtract(const Duration(days: 10))),
-    Code("92874", DateTime.now().subtract(const Duration(days: 35)),
-        DateTime.now().add(const Duration(days: 20))),
-    Code("82642", DateTime.now().subtract(const Duration(days: 70)),
-        DateTime.now().add(const Duration(days: 90))),
+    Code(
+        code: "34532",
+        dateCreated: DateTime.now().subtract(const Duration(days: 35)),
+        dateEnd: DateTime.now().add(const Duration(days: 20))),
+    Code(
+        code: "42583",
+        dateCreated: DateTime.now().subtract(const Duration(days: 15)),
+        dateEnd: DateTime.now().add(const Duration(days: 4))),
+    Code(
+        code: "92745",
+        dateCreated: DateTime.now().subtract(const Duration(days: 6)),
+        dateEnd: DateTime.now().add(const Duration(days: 999999999999999999))),
+    Code(
+        code: "09284",
+        dateCreated: DateTime.now().subtract(const Duration(days: 20)),
+        dateEnd: DateTime.now().subtract(const Duration(days: 10))),
+    Code(
+        code: "92874",
+        dateCreated: DateTime.now().subtract(const Duration(days: 35)),
+        dateEnd: DateTime.now().add(const Duration(days: 20))),
+    Code(
+        code: "82642",
+        dateCreated: DateTime.now().subtract(const Duration(days: 70)),
+        dateEnd: DateTime.now().add(const Duration(days: 90))),
   ];
   @override
   State<CodeList> createState() => _CodeListState();
@@ -31,7 +45,9 @@ class _CodeListState extends State<CodeList> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<RouterSimpleCubit>().pushRoute("/code_create_modify");
+        },
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
@@ -62,6 +78,11 @@ class _CodeListState extends State<CodeList> {
                             textColor: code.dateEnd.isAfter(DateTime.now())
                                 ? Theme.of(context).colorScheme.primary
                                 : Theme.of(context).colorScheme.error,
+                            onEdit: () {
+                              context.read<RouterSimpleCubit>().pushRoute(
+                                  "/code_create_modify",
+                                  extra: code);
+                            },
                             onDelete: () {
                               setState(() {
                                 widget.codes.removeAt(index);

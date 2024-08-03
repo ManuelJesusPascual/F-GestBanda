@@ -16,7 +16,8 @@ class CustomTextInput extends StatelessWidget {
       this.keyboardType = TextInputType.text,
       this.obscure = false,
       this.initalValue,
-      this.maxLines = 1});
+      this.maxLines = 1,
+      this.enabled = true});
 
   final String label;
   final String hint;
@@ -31,6 +32,7 @@ class CustomTextInput extends StatelessWidget {
   final bool obscure;
   final String? initalValue;
   final int? maxLines;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class CustomTextInput extends StatelessWidget {
           inputFormatters: inputFormatters,
           validator: validator,
           maxLines: maxLines,
+          enabled: enabled,
           decoration: InputDecoration(
             labelText: label,
             hintText: hint,

@@ -4,6 +4,7 @@ import 'package:gestbanda/screen/appPages/calendarPage/calendar_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../models/Code.dart';
 import '../../screen/pages.dart';
 
 final unauthenticatedRouter = GoRouter(
@@ -83,6 +84,13 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/code_list',
       builder: (context, state) => CodeList(),
+    ),
+    GoRoute(
+      path: '/code_create_modify',
+      builder: (context, state) {
+        final Code? code = state.extra as Code?;
+        return CodeCreateModify(code: code);
+      },
     ),
     GoRoute(
       path: '/return_policy',
