@@ -60,7 +60,7 @@ class JoinBandPage extends StatelessWidget {
                   context.read<RouterSimpleCubit>().pushRoute("/");
                 },
                 width: 350,
-                br: BorderRadius.circular(10),
+                br: BorderRadius.circular(16),
               ),
               const Spacer(),
             ],

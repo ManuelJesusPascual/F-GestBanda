@@ -88,11 +88,10 @@ class _CodeCreateModifyState extends State<CodeCreateModify> {
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(16), // Bordes redondeados
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 10), // Espaciado interno
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 ),
                 onPressed: () async {
                   await _selectDateTime(context);

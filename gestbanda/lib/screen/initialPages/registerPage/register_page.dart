@@ -147,7 +147,7 @@ class RegisterPage extends StatelessWidget {
                             child: CustomButton(
                               text: "Registrarse",
                               color: "primary",
-                              br: const BorderRadius.all(Radius.circular(10)),
+                              br: const BorderRadius.all(Radius.circular(16)),
                               onPressed: () {
                                 BlocProvider.of<RegisterUserFormBloc>(context)
                                     .add(

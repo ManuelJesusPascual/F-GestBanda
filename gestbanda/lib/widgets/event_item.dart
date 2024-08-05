@@ -16,11 +16,11 @@ class EventItem extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(16),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
         padding: const EdgeInsets.all(8.0),
-        fixedSize: const Size(100, 130), // Fija el tamaño del botón
+        fixedSize: const Size(100, 130),
       ),
       onPressed: () {
         context
@@ -71,7 +71,6 @@ class EventItem extends StatelessWidget {
     );
   }
 
-  // Método para formatear la fecha
   String getMonth(DateTime date) {
     final List<String> months = [
       'Enero',

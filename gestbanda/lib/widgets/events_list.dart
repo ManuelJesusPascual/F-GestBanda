@@ -30,7 +30,7 @@ class EventsList extends StatelessWidget {
                     ? Colors.grey
                     : Theme.of(context).colorScheme.secondary,
                 border: Border.all(),
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(16.0),
               ),
               child: ListTile(
                 onTap: () => (context

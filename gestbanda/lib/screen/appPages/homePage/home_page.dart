@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
 import 'package:gestbanda/widgets/main_bottom_bar.dart';
 import 'package:gestbanda/widgets/main_header.dart';
+import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -79,8 +81,12 @@ class HomePage extends StatelessWidget {
                             imgSvgAsset: "assets/svg/instruments_page.svg",
                             imgHeight: 100,
                             imgWidth: 100,
-                            onPressed: () {},
-                            br: BorderRadius.circular(10),
+                            onPressed: () {
+                              context
+                                  .read<RouterSimpleCubit>()
+                                  .pushRoute("/instruments_list");
+                            },
+                            br: BorderRadius.circular(16),
                             width: 150,
                             height: 200,
                           ),
@@ -91,7 +97,7 @@ class HomePage extends StatelessWidget {
                             imgHeight: 100,
                             imgWidth: 100,
                             onPressed: () {},
-                            br: BorderRadius.circular(10),
+                            br: BorderRadius.circular(16),
                             width: 150,
                             height: 200,
                           ),

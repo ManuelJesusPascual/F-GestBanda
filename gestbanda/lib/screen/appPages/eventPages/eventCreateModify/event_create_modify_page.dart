@@ -1,5 +1,3 @@
-// event_create_modify.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,7 +8,6 @@ import '../../../../utils/enums/EventTypeEnum.dart';
 
 class EventCreateModify extends StatefulWidget {
   final Event event;
-
   EventCreateModify({super.key, Event? event})
       : event = (event ??
                 Event(
@@ -35,6 +32,7 @@ class _EventCreateModifyState extends State<EventCreateModify> {
   XFile? _image1;
   XFile? _image2;
   XFile? _image3;
+  bool? edit;
 
   @override
   void initState() {
@@ -45,6 +43,7 @@ class _EventCreateModifyState extends State<EventCreateModify> {
     );
     initTime = TimeOfDay.fromDateTime(widget.event.initDate);
     endTime = TimeOfDay.fromDateTime(widget.event.endDate);
+    edit = widget.event.title.isNotEmpty ? true : false;
   }
 
   Future<void> _selectDateTime(BuildContext context) async {
@@ -112,9 +111,7 @@ class _EventCreateModifyState extends State<EventCreateModify> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  widget.event.title.isNotEmpty
-                      ? "Modificar Evento"
-                      : "Crear Evento",
+                  edit! ? "Modificar Evento" : "Crear Evento",
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Padding(
@@ -231,11 +228,10 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(16), // Bordes redondeados
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 10), // Espaciado interno
+                          horizontal: 14, vertical: 10),
                     ),
                     onPressed: () async {
                       await _selectDateTime(context);
@@ -305,7 +301,7 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                   height: 60,
                   text: "Guardar",
                   color: "primary",
-                  br: const BorderRadius.all(Radius.circular(10)),
+                  br: const BorderRadius.all(Radius.circular(16)),
                   onPressed: () {
                     context.read<RouterSimpleCubit>().goBack();
                   },

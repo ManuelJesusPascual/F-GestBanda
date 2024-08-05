@@ -44,7 +44,6 @@ class LoginUserFormBloc extends Bloc<LoginUserFormEvent, LoginUserFormState> {
 
   Future<void> _onFormSubmitted(LoginUserFormSubmitEvent event,
       Emitter<LoginUserFormState> emitter) async {
-    //TODO: Cambiar por lógica que llame a la BBDD y loguee a un usuario, tras eso almacenarlo en localStorage o donde sea que se alamacena en flutter
     if (!loading) {
       loading = true;
       bool submitStatus = false;

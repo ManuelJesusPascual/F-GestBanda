@@ -129,7 +129,7 @@ class CreateNewBandPageOne extends StatelessWidget {
                           text: "¡Solo unos pasos más!",
                           color: "primary",
                           icon: Icons.arrow_right_alt_rounded,
-                          br: BorderRadius.circular(10),
+                          br: BorderRadius.circular(16),
                           width: 350,
                           onPressed: () {
                             BlocProvider.of<RegisterBandFormBloc>(context)

@@ -12,3 +12,4 @@ export 'appPages/eventPages/eventCreateModify/event_create_modify_page.dart';
 export 'appPages/userListPage/user_list_page.dart';
 export 'appPages/codePages/code_list_page.dart';
 export 'appPages/codePages/code_create_modify_page.dart';
+export 'appPages/instrumentsPages/instrument_page.dart';

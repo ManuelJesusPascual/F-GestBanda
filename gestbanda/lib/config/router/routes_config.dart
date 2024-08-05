@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Event.dart';
+import 'package:gestbanda/models/Instrument.dart';
 import 'package:gestbanda/screen/appPages/calendarPage/calendar_page.dart';
+import 'package:gestbanda/screen/appPages/instrumentsPages/instrument_create_modify_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
@@ -90,6 +92,17 @@ final directorRouter = GoRouter(
       builder: (context, state) {
         final Code? code = state.extra as Code?;
         return CodeCreateModify(code: code);
+      },
+    ),
+    GoRoute(
+      path: '/instruments_list',
+      builder: (context, state) => const InstrumentPage(),
+    ),
+    GoRoute(
+      path: '/instrument_create_modify',
+      builder: (context, state) {
+        final Instrument? instrument = state.extra as Instrument?;
+        return InstrumentCreateModifyPage(instrument: instrument);
       },
     ),
     GoRoute(

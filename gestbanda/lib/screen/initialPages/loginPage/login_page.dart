@@ -85,7 +85,7 @@ class LoginPage extends StatelessWidget {
                               child: CustomButton(
                                 text: "Iniciar Sesión",
                                 color: "primary",
-                                br: const BorderRadius.all(Radius.circular(10)),
+                                br: const BorderRadius.all(Radius.circular(16)),
                                 onPressed: () {
                                   BlocProvider.of<LoginUserFormBloc>(context)
                                       .add(const LoginUserFormSubmitEvent());

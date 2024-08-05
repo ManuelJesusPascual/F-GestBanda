@@ -89,7 +89,6 @@ class RegisterUserFormBloc
 
   Future<void> _onFormSubmitted(RegisterUserFormFormSubmitEvent event,
       Emitter<RegisterUserFormState> emitter) async {
-    //TODO: Cambiar por lógica que llame a la BBDD y registre a un usuario, tras eso almacenarlo en localStorage o donde sea que se alamacena en flutter
     if (!loading) {
       loading = true;
       bool submitStatus = false;

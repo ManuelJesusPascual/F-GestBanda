@@ -22,10 +22,10 @@ class CustomImageContainer extends StatelessWidget {
         height: 150,
         width: 100,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(16.0),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(16.0),
           child: Stack(
             children: [
               if (imagePath != null)
