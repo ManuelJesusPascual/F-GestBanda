@@ -5,12 +5,28 @@ import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
 import '../../../models/Instrument.dart';
+import '../../../models/User.dart';
 
 class InstrumentCreateModifyPage extends StatefulWidget {
   final Instrument instrument;
   InstrumentCreateModifyPage({super.key, Instrument? instrument})
       : instrument = (instrument ??
             Instrument(name: "", img: "", quantity: 0, borrowedQuantity: 0));
+
+  final List<User> users = [
+    User("Alice", "Admin", "Corneta"),
+    User("Bob", "User", "Corneta"),
+    User("Charlie Pepito Rodriguez", "User", "Trompeta"),
+    User("Dave", "Admin", "Corneta"),
+    User("Eve", "Guest", "Trompeta"),
+    User("Usuario de ejemplo", "Admin", "Corneta"),
+    User("Alice", "Admin", "Trombon"),
+    User("Bob", "User", "Trombon"),
+    User("Charlie Pepito Rodriguez", "User", "Corneta"),
+    User("Dave", "Admin", "Trombon"),
+    User("Eve", "Guest", "Corneta"),
+    User("Usuario de ejemplo", "Admin", "Corneta"),
+  ];
 
   @override
   State<InstrumentCreateModifyPage> createState() =>
@@ -153,6 +169,29 @@ class _InstrumentCreateModifyPageState
                 onPressed: () {
                   context.read<RouterSimpleCubit>().goBack();
                 },
+              ),
+            if (widget.instrument.img.isNotEmpty)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: ListView.builder(
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomListHeader(
+                            title: "Usuarios con ${widget.instrument.name}",
+                          ),
+                          ...widget.users.map((user) => CustomListTile(
+                                text: user.name,
+                                ca: true,
+                              )),
+                        ],
+                      );
+                    },
+                  ),
+                ),
               ),
           ],
         ),
