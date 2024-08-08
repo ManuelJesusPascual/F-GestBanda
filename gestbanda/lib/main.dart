@@ -51,6 +51,7 @@ class MainApp extends StatelessWidget {
     final appRouter = context.watch<RouterSimpleCubit>().state;
 
     return MaterialApp.router(
+      locale: const Locale('es', 'ES'),
       theme: theme,
       darkTheme: darkTheme,
       routerConfig: appRouter,

@@ -15,6 +15,24 @@ String getInitials(String name) {
 }
 
 String formatDateTime(DateTime dateTime, String pattern) {
-  final DateFormat dateFormat = DateFormat(pattern);
+  final DateFormat dateFormat = DateFormat(pattern, 'es_ES');
   return dateFormat.format(dateTime);
+}
+
+String getMonth(DateTime date) {
+  final List<String> months = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+  ];
+  return months[date.month - 1];
 }

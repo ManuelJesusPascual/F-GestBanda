@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/models/Instrument.dart';
 import 'package:gestbanda/screen/appPages/calendarPage/calendar_page.dart';
+import 'package:gestbanda/screen/appPages/homePage/new_home_page.dart';
 import 'package:gestbanda/screen/appPages/instrumentsPages/instrument_create_modify_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
@@ -62,7 +63,7 @@ final directorRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => const NewHomePage(),
     ),
     GoRoute(
       path: '/calendar',
