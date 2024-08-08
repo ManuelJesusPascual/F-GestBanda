@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 
+import '../../../config/config.dart';
 import '../../../models/Event.dart';
 import '../../../utils/enums/EventTypeEnum.dart';
 import '../../../widgets/widgets.dart';
@@ -86,77 +88,111 @@ class NewHomePage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      ElevatedButton(
+                        onPressed: () {
+                          context
+                              .read<RouterSimpleCubit>()
+                              .pushRoute("/instruments_list");
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets
+                              .zero, // Elimina el padding interno del botón
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                16), // Ajusta el borderRadius
+                          ),
+                        ),
+                        child: Container(
                           height: 150,
                           width: 150,
                           decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
                           child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(16)),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    "",
-                                cacheManager: CacheManager(
-                                  Config(
-                                    "",
-                                    stalePeriod: const Duration(days: 7),
-                                  ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  "",
+                              cacheManager: CacheManager(
+                                Config(
+                                  "",
+                                  stalePeriod: const Duration(days: 7),
                                 ),
-                                placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                                alignment: Alignment.center,
-                                fadeInDuration: Duration.zero,
-                              ))),
-                      SizedBox(
+                              ),
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              alignment: Alignment.center,
+                              fadeInDuration: Duration.zero,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text("Instrumentos")
+                      const Text(
+                        "Instrumentos",
+                      )
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      ElevatedButton(
+                        onPressed: () {
+                          // Acción del botón
+                        },
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets
+                              .zero, // Elimina el padding interno del botón
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                16), // Ajusta el borderRadius
+                          ),
+                        ),
+                        child: Container(
                           height: 150,
                           width: 150,
                           decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16))),
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
                           child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(16)),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    "",
-                                cacheManager: CacheManager(
-                                  Config(
-                                    "",
-                                    stalePeriod: const Duration(days: 7),
-                                  ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  "",
+                              cacheManager: CacheManager(
+                                Config(
+                                  "",
+                                  stalePeriod: const Duration(days: 7),
                                 ),
-                                placeholder: (context, url) => const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                                alignment: Alignment.center,
-                                fadeInDuration: Duration.zero,
-                              ))),
-                      SizedBox(
+                              ),
+                              placeholder: (context, url) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                              height: double.infinity,
+                              alignment: Alignment.center,
+                              fadeInDuration: Duration.zero,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
                         height: 5,
                       ),
-                      Text(
+                      const Text(
                         "Uniforme",
                       )
                     ],
