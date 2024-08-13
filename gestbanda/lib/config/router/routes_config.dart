@@ -1,10 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/models/Instrument.dart';
-import 'package:gestbanda/screen/appPages/calendarPage/calendar_page.dart';
 import 'package:gestbanda/screen/appPages/calendarPage/new_calendar_page.dart';
 import 'package:gestbanda/screen/appPages/homePage/new_home_page.dart';
 import 'package:gestbanda/screen/appPages/instrumentsPages/instrument_create_modify_page.dart';
+import 'package:gestbanda/screen/appPages/instrumentsPages/new_instrument_page%20.dart';
+import 'package:gestbanda/screen/appPages/userListPage/new_user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
@@ -83,7 +84,7 @@ final directorRouter = GoRouter(
     ),
     GoRoute(
       path: '/user_list',
-      builder: (context, state) => UserList(),
+      builder: (context, state) => const NewUserList(),
     ),
     GoRoute(
       path: '/code_list',
@@ -98,7 +99,7 @@ final directorRouter = GoRouter(
     ),
     GoRoute(
       path: '/instruments_list',
-      builder: (context, state) => const InstrumentPage(),
+      builder: (context, state) => NewInstrumentPage(),
     ),
     GoRoute(
       path: '/instrument_create_modify',

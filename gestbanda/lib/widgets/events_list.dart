@@ -37,7 +37,7 @@ class EventsList extends StatelessWidget {
                     .read<RouterSimpleCubit>()
                     .pushRoute("/event_detail", extra: value[index])),
                 title: Text(
-                  '${value[index].title}',
+                  value[index].title,
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onSecondary),
                 ),

@@ -25,7 +25,6 @@ Future<dynamic> showDateModal(
               _focusedDay = focusedDay;
               _rangeStart = start;
               _rangeEnd = end;
-              print('Selected Range: Start: $_rangeStart, End: $_rangeEnd');
             });
           }
 
@@ -35,7 +34,6 @@ Future<dynamic> showDateModal(
               _focusedDay = focusedDay;
               _rangeStart = selectedDay;
               _rangeEnd = selectedDay;
-              print('Selected Day: $_selectedDay');
             });
           }
 
@@ -182,8 +180,6 @@ Future<dynamic> showDateModal(
                       ElevatedButton(
                         onPressed: () {
                           if (isRangeSelection) {
-                            print(_rangeStart);
-                            print(_rangeEnd);
                             Navigator.pop(
                               context,
                               DateTimeRange(
@@ -192,7 +188,6 @@ Future<dynamic> showDateModal(
                               ),
                             );
                           } else {
-                            print(_selectedDay);
                             Navigator.pop(context, _selectedDay);
                           }
                         },

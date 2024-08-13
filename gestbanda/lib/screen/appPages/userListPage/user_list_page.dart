@@ -11,18 +11,17 @@ class UserList extends StatelessWidget {
   UserList({super.key});
 
   final List<User> users = [
-    User("Alice", "Admin", "Corneta"),
-    User("Bob", "User", "Corneta"),
-    User("Charlie Pepito Rodriguez", "User", "Trompeta"),
-    User("Dave", "Admin", "Corneta"),
-    User("Eve", "Guest", "Trompeta"),
-    User("Usuario de ejemplo", "Admin", "Corneta"),
-    User("Alice", "Admin", "Trombon"),
-    User("Bob", "User", "Trombon"),
-    User("Charlie Pepito Rodriguez", "User", "Corneta"),
-    User("Dave", "Admin", "Trombon"),
-    User("Eve", "Guest", "Corneta"),
-    User("Usuario de ejemplo", "Admin", "Corneta"),
+    User(name: "Bob", role: "User", voz: "Corneta"),
+    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Trompeta"),
+    User(name: "Dave", role: "Admin", voz: "Corneta"),
+    User(name: "Eve", role: "Guest", voz: "Trompeta"),
+    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
+    User(name: "Alice", role: "Admin", voz: "Trombon"),
+    User(name: "Bob", role: "User", voz: "Trombon"),
+    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Corneta"),
+    User(name: "Dave", role: "Admin", voz: "Trombon"),
+    User(name: "Eve", role: "Guest", voz: "Corneta"),
+    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
   ];
 
   @override

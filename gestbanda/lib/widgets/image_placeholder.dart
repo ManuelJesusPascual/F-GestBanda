@@ -10,9 +10,7 @@ class ImagePlaceholder extends StatelessWidget {
     return Placeholder(
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          // Aquí calculamos el tamaño del icono basado en el tamaño del padre
-          double iconSize = constraints.maxHeight *
-              0.5; // Ajusta el porcentaje según tus necesidades
+          double iconSize = constraints.maxHeight * 0.5;
 
           return Container(
             color: const Color.fromARGB(255, 238, 238, 238),
@@ -20,8 +18,7 @@ class ImagePlaceholder extends StatelessWidget {
               child: Icon(
                 Icons.image,
                 color: const Color.fromARGB(255, 102, 102, 102),
-                size:
-                    iconSize, // Tamaño del icono basado en el height del padre
+                size: iconSize,
               ),
             ),
           );

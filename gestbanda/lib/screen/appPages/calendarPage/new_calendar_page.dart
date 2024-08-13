@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
-import 'package:gestbanda/widgets/main_bottom_bar.dart';
-import 'package:gestbanda/widgets/main_header.dart';
 import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -180,11 +178,11 @@ class _NewCalendarPageState extends State<NewCalendarPage> {
           final differenceInHours =
               eventDate.difference(DateTime.now()).inHours;
           if (differenceInHours < -2) {
-            return 3; // Rojo (error) - Menor prioridad
+            return 3; // Rojo
           } else if (differenceInHours > 2) {
-            return 2; // Ámbar (warning) - Prioridad intermedia
+            return 2; // Ámbar
           } else {
-            return 1; // Verde (success) - Mayor prioridad
+            return 1; // Verde
           }
         }
 

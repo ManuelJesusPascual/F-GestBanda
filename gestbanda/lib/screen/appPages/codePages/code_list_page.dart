@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Code.dart';
-import 'package:gestbanda/widgets/main_header.dart';
 
 import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
@@ -12,27 +11,33 @@ class CodeList extends StatefulWidget {
     Code(
         code: "34532",
         dateCreated: DateTime.now().subtract(const Duration(days: 35)),
-        dateEnd: DateTime.now().add(const Duration(days: 20))),
+        dateEnd: DateTime.now().add(const Duration(days: 20)),
+        voz: "Sin voz"),
     Code(
         code: "42583",
         dateCreated: DateTime.now().subtract(const Duration(days: 15)),
-        dateEnd: DateTime.now().add(const Duration(days: 4))),
+        dateEnd: DateTime.now().add(const Duration(days: 4)),
+        voz: "Sin voz"),
     Code(
         code: "92745",
         dateCreated: DateTime.now().subtract(const Duration(days: 6)),
-        dateEnd: DateTime.now().add(const Duration(days: 999999999999999999))),
+        dateEnd: DateTime.now().add(const Duration(days: 999999999999999999)),
+        voz: "Sin voz"),
     Code(
         code: "09284",
         dateCreated: DateTime.now().subtract(const Duration(days: 20)),
-        dateEnd: DateTime.now().subtract(const Duration(days: 10))),
+        dateEnd: DateTime.now().subtract(const Duration(days: 10)),
+        voz: "Trompeta 1º Fuerte"),
     Code(
         code: "92874",
         dateCreated: DateTime.now().subtract(const Duration(days: 35)),
-        dateEnd: DateTime.now().add(const Duration(days: 20))),
+        dateEnd: DateTime.now().add(const Duration(days: 20)),
+        voz: "Corneta 1º Fuerte"),
     Code(
         code: "82642",
         dateCreated: DateTime.now().subtract(const Duration(days: 70)),
-        dateEnd: DateTime.now().add(const Duration(days: 90))),
+        dateEnd: DateTime.now().add(const Duration(days: 90)),
+        voz: "Sin voz"),
   ];
   @override
   State<CodeList> createState() => _CodeListState();
@@ -45,23 +50,31 @@ class _CodeListState extends State<CodeList> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
           context.read<RouterSimpleCubit>().pushRoute("/code_create_modify");
         },
-        child: const Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.surface,
+        ),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const MainHeader(),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
+              Text(
+                "Listado de códigos",
+                style: Theme.of(context).textTheme.titleLarge,
+                textAlign: TextAlign.center,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
                 child: Text(
-                  "Listado de códigos:",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  "Listado de códigos para unirse a la banda",
+                  style: Theme.of(context).textTheme.labelLarge,
+                  textAlign: TextAlign.center,
                 ),
               ),
               Expanded(
@@ -76,7 +89,7 @@ class _CodeListState extends State<CodeList> {
                             dateEnd: code.dateEnd,
                             editButtons: true,
                             textColor: code.dateEnd.isAfter(DateTime.now())
-                                ? Theme.of(context).colorScheme.primary
+                                ? const Color(0xFF388E3C)
                                 : Theme.of(context).colorScheme.error,
                             onEdit: () {
                               context.read<RouterSimpleCubit>().pushRoute(

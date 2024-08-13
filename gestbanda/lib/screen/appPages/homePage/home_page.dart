@@ -53,7 +53,6 @@ class HomePage extends StatelessWidget {
                                 imgList: [
                                   "",
                                   "",
-                                  "",
                                 ],
                                 description:
                                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus velit nec dictum mattis. Phasellus sapien neque, vulputate vitae mi eget, volutpat malesuada nisi. Sed aliquet sit amet nulla nec efficitur. Etiam quis pellentesque lacus. Maecenas iaculis nisi ultrices sapien vehicula, nec tempus lacus dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse posuere mi a nunc vestibulum consequat. Cras mattis sit amet erat non molestie.Curabitur condimentum condimentum tristique. Nunc tincidunt dictum nunc id aliquam. In efficitur posuere lorem vitae lacinia. Praesent pulvinar odio pretium ex semper, vitae blandit neque ultricies. Phasellus dignissim eros ac aliquam porta. Nam turpis nisi, tempus vel orci sed, tincidunt bibendum eros. Nunc varius turpis vel egestas dignissim. Aliquam consequat at tellus vel euismod. Aenean vestibulum facilisis risus in finibus. Quisque efficitur in tellus quis sollicitudin. Maecenas ultrices porttitor vulputate. Sed ultrices dui sed erat molestie blandit. Morbi ullamcorper elit a nisl rutrum mattis.",

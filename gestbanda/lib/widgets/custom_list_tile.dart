@@ -85,7 +85,7 @@ class CustomListTile extends StatelessWidget {
                   onPressed: onEdit ?? () {},
                   icon: Icon(
                     Icons.edit,
-                    color: textColor ?? Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 IconButton(

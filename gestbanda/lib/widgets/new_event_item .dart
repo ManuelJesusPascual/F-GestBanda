@@ -6,7 +6,6 @@ import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/utils/string_utilites.dart';
 
 import '../config/config.dart';
-import '../utils/enums/EventTypeEnum.dart';
 import 'widgets.dart';
 
 class NewEventItem extends StatelessWidget {
@@ -15,8 +14,6 @@ class NewEventItem extends StatelessWidget {
   const NewEventItem({super.key, required this.event});
   @override
   Widget build(BuildContext context) {
-    final String month = getMonth(event.initDate);
-
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(

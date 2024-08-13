@@ -65,7 +65,7 @@ class EventTile extends StatelessWidget {
                   : const ImagePlaceholder(),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Expanded(
@@ -78,11 +78,10 @@ class EventTile extends StatelessWidget {
                       child: Text(
                         event.title,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 16,
                         ),
-                        overflow: TextOverflow
-                            .ellipsis, // Agrega elipsis si es muy largo
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Container(
@@ -150,7 +149,7 @@ class EventTile extends StatelessWidget {
           ),
           Icon(
             Icons.arrow_forward_ios_outlined,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ],
       ),

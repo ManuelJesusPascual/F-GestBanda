@@ -166,37 +166,9 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                     ],
                   ),
                 ),
-                CustomTextInput(
-                  label: "Titulo",
-                  hint: "Concierto de primavera",
-                  initalValue: widget.event.title,
-                  topPadding: 20,
-                  leftPadding: 20,
-                  bottomPadding: 20,
-                  rightPadding: 20,
-                  onChanged: (val) {
-                    setState(() {
-                      widget.event.title = val;
-                    });
-                  },
-                ),
-                CustomTextInput(
-                  label: "Ubicación",
-                  hint: "Sevilla Centro",
-                  initalValue: widget.event.location,
-                  topPadding: 20,
-                  leftPadding: 20,
-                  bottomPadding: 20,
-                  rightPadding: 20,
-                  onChanged: (val) {
-                    setState(() {
-                      widget.event.location = val;
-                    });
-                  },
-                ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.only(
+                      bottom: 10, left: 20, right: 20, top: 30),
                   child: DropdownButton(
                     value: widget.event.type,
                     isExpanded: true,
@@ -222,14 +194,57 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                     },
                   ),
                 ),
+                CustomTextInput(
+                  label: "Titulo",
+                  hint: "Concierto de primavera",
+                  initalValue: widget.event.title,
+                  leftPadding: 20,
+                  rightPadding: 20,
+                  onChanged: (val) {
+                    setState(() {
+                      widget.event.title = val;
+                    });
+                  },
+                ),
+                CustomTextInput(
+                  label: "Ubicación",
+                  hint: "Sevilla Centro",
+                  initalValue: widget.event.location,
+                  topPadding: 20,
+                  leftPadding: 20,
+                  rightPadding: 20,
+                  onChanged: (val) {
+                    setState(() {
+                      widget.event.location = val;
+                    });
+                  },
+                ),
+                CustomTextInput(
+                  label: "Descripcion",
+                  hint:
+                      "Concierto de primavera en la plaza mayor",
+                  initalValue: widget.event.description,
+                  topPadding: 20,
+                  leftPadding: 20,
+                  bottomPadding: 20,
+                  rightPadding: 20,
+                  maxLines: 4,
+                  onChanged: (val) {
+                    setState(() {
+                      widget.event.description = val;
+                    });
+                  },
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 2,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 10),
                     ),
@@ -248,18 +263,24 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                             Text(
                               "${dateRange.start.day}/${dateRange.start.month}/${dateRange.start.year}   ",
                               textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary),
                             ),
                             Text(
                               "${initTime.format(context)} ",
                               textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary),
                             ),
                           ],
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 40,
                           child: VerticalDivider(
                             thickness: 0.5,
-                            color: Colors.grey,
+                            color: Theme.of(context).colorScheme.onPrimary,
                           ),
                         ),
                         Column(
@@ -268,33 +289,26 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                             Text(
                               "${dateRange.end.day}/${dateRange.end.month}/${dateRange.end.year}   ",
                               textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary),
                             ),
                             Text(
                               "${endTime.format(context)} ",
                               textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary),
                             ),
                           ],
                         ),
-                        const Icon(Icons.calendar_month_outlined)
+                        Icon(
+                          Icons.calendar_month_outlined,
+                          color: Theme.of(context).colorScheme.onPrimary,
+                        )
                       ],
                     ),
                   ),
-                ),
-                CustomTextInput(
-                  label: "Descripcion",
-                  hint:
-                      "Concierto de primavera en la plaza mayor",
-                  initalValue: widget.event.description,
-                  topPadding: 20,
-                  leftPadding: 20,
-                  bottomPadding: 40,
-                  rightPadding: 20,
-                  maxLines: 4,
-                  onChanged: (val) {
-                    setState(() {
-                      widget.event.description = val;
-                    });
-                  },
                 ),
                 CustomButton(
                   width: 250,

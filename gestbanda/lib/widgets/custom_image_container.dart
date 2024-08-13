@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -55,7 +54,7 @@ class CustomImageContainer extends StatelessWidget {
                   fadeInDuration: Duration.zero,
                 )
               else
-                ImagePlaceholder(),
+                const ImagePlaceholder(),
               Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(

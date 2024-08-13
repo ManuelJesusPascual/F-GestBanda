@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
 import 'package:gestbanda/widgets/widgets.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../config/config.dart';
 import '../../../../models/Event.dart';

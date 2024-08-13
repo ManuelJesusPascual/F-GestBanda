@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestbanda/widgets/user_tile.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
@@ -14,18 +15,17 @@ class InstrumentCreateModifyPage extends StatefulWidget {
             Instrument(name: "", img: "", quantity: 0, borrowedQuantity: 0));
 
   final List<User> users = [
-    User("Alice", "Admin", "Corneta"),
-    User("Bob", "User", "Corneta"),
-    User("Charlie Pepito Rodriguez", "User", "Trompeta"),
-    User("Dave", "Admin", "Corneta"),
-    User("Eve", "Guest", "Trompeta"),
-    User("Usuario de ejemplo", "Admin", "Corneta"),
-    User("Alice", "Admin", "Trombon"),
-    User("Bob", "User", "Trombon"),
-    User("Charlie Pepito Rodriguez", "User", "Corneta"),
-    User("Dave", "Admin", "Trombon"),
-    User("Eve", "Guest", "Corneta"),
-    User("Usuario de ejemplo", "Admin", "Corneta"),
+    User(name: "Bob", role: "User", voz: "Corneta"),
+    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Trompeta"),
+    User(name: "Dave", role: "Admin", voz: "Corneta"),
+    User(name: "Eve", role: "Guest", voz: "Trompeta"),
+    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
+    User(name: "Alice", role: "Admin", voz: "Trombon"),
+    User(name: "Bob", role: "User", voz: "Trombon"),
+    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Corneta"),
+    User(name: "Dave", role: "Admin", voz: "Trombon"),
+    User(name: "Eve", role: "Guest", voz: "Corneta"),
+    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
   ];
 
   @override
@@ -35,6 +35,8 @@ class InstrumentCreateModifyPage extends StatefulWidget {
 
 class _InstrumentCreateModifyPageState
     extends State<InstrumentCreateModifyPage> {
+  String _selectedInstrument = 'Selecciona un instrumento';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,82 +62,73 @@ class _InstrumentCreateModifyPageState
                     ),
                   )
                 : Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50.0, vertical: 20.0),
-                    child: DropdownButton(
-                      value: widget.instrument.name.isNotEmpty
-                          ? widget.instrument.name
-                          : "Selecciona un instrumento",
-                      isExpanded: true,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                      items: const [
-                        DropdownMenuItem(
-                          value: "Selecciona un instrumento",
-                          enabled: false,
-                          child: Text("Selecciona un instrumento"),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: DropdownButtonHideUnderline(
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(16.0),
                         ),
-                        DropdownMenuItem(
-                          value: "Corneta Do/Reb",
-                          child: Text("Corneta Do/Reb"),
+                        child: DropdownButtonFormField<String>(
+                          value: _selectedInstrument,
+                          icon: Icon(
+                            Icons.arrow_drop_down,
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                          iconSize: 24,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Theme.of(context).colorScheme.secondary,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          dropdownColor:
+                              Theme.of(context).colorScheme.secondary,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedInstrument = newValue!;
+                            });
+                          },
+                          items: <String>[
+                            'Selecciona un instrumento',
+                            'Trompeta Do/Sib',
+                            'Trompeta Do/Reb',
+                            'Corneta Do/Reb',
+                            'Corneta Do/Sib',
+                            'Trombon de pistones',
+                            'Trombon de varas',
+                            'Tambor',
+                            'Caja',
+                            'Tuba Do',
+                            'Bombo',
+                            'Bombardino Sib',
+                            'Clarinete',
+                            'Oboe',
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.surface),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                        DropdownMenuItem(
-                          value: "Corneta Do/Sib",
-                          child: Text("Corneta Do/Sib"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Trompeta Do",
-                          child: Text("Trompeta do"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Trompeta Si",
-                          child: Text("Corneta Do/Reb"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Trombon Do",
-                          child: Text("Corneta Do/Sib"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Trombon Si",
-                          child: Text("Trompeta do"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Tuba Do",
-                          child: Text("Tuba Do"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Tuba Si",
-                          child: Text("Tuba Si"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Oboe",
-                          child: Text("Oboe"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Tambor",
-                          child: Text("Tambor"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Caja",
-                          child: Text("Caja"),
-                        ),
-                        DropdownMenuItem(
-                          value: "Bombo",
-                          child: Text("Bombo"),
-                        ),
-                      ],
-                      onChanged: (val) {
-                        setState(() {
-                          widget.instrument.name = val!;
-                        });
-                      },
+                      ),
                     ),
                   ),
             CustomTextInput(
               label: "Cantidad",
               hint: "Cantidad",
               initalValue: widget.instrument.quantity.toString(),
-              leftPadding: 50,
-              rightPadding: 50,
+              leftPadding: 24,
+              rightPadding: 24,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onChanged: (val) {
@@ -147,7 +140,7 @@ class _InstrumentCreateModifyPageState
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 50, bottom: 30),
+              padding: const EdgeInsets.only(top: 30, bottom: 20),
               child: CustomButton(
                 width: 250,
                 height: 60,
@@ -180,12 +173,18 @@ class _InstrumentCreateModifyPageState
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomListHeader(
-                            title: "Usuarios con ${widget.instrument.name}",
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 16.0, bottom: 8.0),
+                            child: Text(
+                              "Usuarios con ${widget.instrument.name}:",
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                          ...widget.users.map((user) => CustomListTile(
-                                text: user.name,
-                                ca: true,
+                          ...widget.users.map((user) => Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: UserTile(user: user),
                               )),
                         ],
                       );

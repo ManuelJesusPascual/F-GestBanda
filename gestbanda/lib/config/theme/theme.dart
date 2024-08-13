@@ -8,7 +8,7 @@ var theme = ThemeData(
       surface: Color(0xFFFFFFFF),
       primary: Color(0xFFA1824A),
       secondary: Color(0xFF1C170D),
-      onPrimary: Color(0xFF1C170D),
+      onPrimary: Color(0xFFFFFFFF),
       onSecondary: Color(0xFFA1824A),
       onSurface: Color(0xFF1C170D),
       error: Color(0xFFB00020),

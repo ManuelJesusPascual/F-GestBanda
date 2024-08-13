@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/Code.dart';
 import 'package:gestbanda/utils/string_utilites.dart';
 
+import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
 
 class CodeCreateModify extends StatefulWidget {
@@ -11,6 +13,7 @@ class CodeCreateModify extends StatefulWidget {
       : code = (code ??
                 Code(
                     code: "",
+                    voz: "Sin voz",
                     dateCreated: DateTime.now(),
                     dateEnd: DateTime.now()))
             .copyWith();
@@ -37,7 +40,6 @@ class _CodeCreateModifyState extends State<CodeCreateModify> {
     final picked = await showTimeModal(
         context, TimeOfDay.fromDateTime(widget.code.dateEnd), "Hora");
     if (picked != null) {
-      print(picked.minute);
       setState(() {
         selectedDateTime = DateTime(
           selectedDateTime?.year ?? widget.code.dateEnd.year,
@@ -52,6 +54,8 @@ class _CodeCreateModifyState extends State<CodeCreateModify> {
 
   @override
   Widget build(BuildContext context) {
+    String selectedVoz = widget.code.voz;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -75,16 +79,57 @@ class _CodeCreateModifyState extends State<CodeCreateModify> {
                 rightPadding: 20,
                 enabled: false,
               ),
-            if (widget.code.code.isNotEmpty || selectedDateTime != null)
-              const Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Text(
-                  "Introducir fecha:",
-                  textAlign: TextAlign.left,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: DropdownButtonHideUnderline(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    value: selectedVoz,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    iconSize: 24,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.secondary,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    dropdownColor: Theme.of(context).colorScheme.secondary,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedVoz = newValue!;
+                      });
+                    },
+                    items: <String>[
+                      'Sin voz',
+                      'Corneta 1º Fuerte',
+                      'Trompeta 1º Fuerte',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.surface),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -118,9 +163,22 @@ class _CodeCreateModifyState extends State<CodeCreateModify> {
                         ),
                       ],
                     ),
-                    Icon(Icons.calendar_month_outlined)
+                    const Icon(Icons.calendar_month_outlined)
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30, bottom: 20),
+              child: CustomButton(
+                width: 250,
+                height: 60,
+                text: "Guardar",
+                color: "primary",
+                br: const BorderRadius.all(Radius.circular(16)),
+                onPressed: () {
+                  context.read<RouterSimpleCubit>().goBack();
+                },
               ),
             ),
           ],

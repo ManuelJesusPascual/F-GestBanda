@@ -96,7 +96,9 @@ class CustomButton extends StatelessWidget {
                 fontSize: 12,
                 color: color == "primary"
                     ? Theme.of(context).colorScheme.onPrimary
-                    : Theme.of(context).colorScheme.onSecondary,
+                    : color == "error"
+                        ? Theme.of(context).colorScheme.onError
+                        : Theme.of(context).colorScheme.onSecondary,
               ),
             ),
       ]),
