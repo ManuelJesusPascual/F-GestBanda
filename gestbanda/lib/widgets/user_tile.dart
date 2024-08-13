@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gestbanda/models/User.dart';
+import '../config/config.dart';
 import '../utils/string_utilites.dart';
 
 class UserTile extends StatelessWidget {
@@ -22,7 +24,11 @@ class UserTile extends StatelessWidget {
             ),
             elevation: 1,
           ),
-          onPressed: () {},
+          onPressed: () {
+            context
+                .read<RouterSimpleCubit>()
+                .pushRoute("/user_detail", extra: user);
+          },
           child: Container(
             padding: const EdgeInsets.all(8.0),
             margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4),

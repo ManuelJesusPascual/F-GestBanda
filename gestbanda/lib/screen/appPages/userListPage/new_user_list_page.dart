@@ -4,6 +4,8 @@ import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 import 'package:gestbanda/widgets/user_tile.dart';
 
 import '../../../config/config.dart';
+import '../../../models/Costume.dart';
+import '../../../models/Instrument.dart';
 import '../../../models/User.dart';
 import '../../../widgets/widgets.dart';
 
@@ -16,26 +18,260 @@ class NewUserList extends StatefulWidget {
 
 class _NewUserListState extends State<NewUserList> {
   final List<User> users = [
+    User(name: "Bob", role: "User", voz: "Corneta", instrumentList: [
+      Instrument(
+        img: "",
+        name: "Corneta Do/Sib",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Reb",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Trompeta Do",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Sib",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Reb",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Trompeta Do",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Sib",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Reb",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Trompeta Do",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+    ], costumeList: []),
     User(
-      name: "Bob",
-      role: "User",
-      voz: "Corneta",
-    ),
-    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Trompeta"),
-    User(name: "Dave", role: "Admin", voz: "Corneta"),
-    User(name: "Eve", role: "Guest", voz: "Trompeta"),
-    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
+        name: "Charlie Pepito Rodriguez",
+        role: "User",
+        voz: "Trompeta",
+        instrumentList: [],
+        costumeList: [
+          Costume(
+            img:
+                "",
+            name: "Fajin",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Cinturon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Chaqueta",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Pantalon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Hombreras",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Zapatos",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ]),
+    User(name: "Dave", role: "Admin", voz: "Corneta", instrumentList: [
+      Instrument(
+        img: "",
+        name: "Corneta Do/Sib",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Reb",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Trompeta Do",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Sib",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Reb",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Trompeta Do",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Sib",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Corneta Do/Reb",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Instrument(
+        img: "",
+        name: "Trompeta Do",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+    ], costumeList: [
+      Costume(
+        img:
+            "",
+        name: "Fajin",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Costume(
+        img:
+            "",
+        name: "Cinturon",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Costume(
+        img:
+            "",
+        name: "Chaqueta",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Costume(
+        img:
+            "",
+        name: "Pantalon",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Costume(
+        img:
+            "",
+        name: "Hombreras",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+      Costume(
+        img:
+            "",
+        name: "Zapatos",
+        quantity: 2,
+        borrowedQuantity: 1,
+      ),
+    ]),
+    User(
+        name: "Eve",
+        role: "Guest",
+        voz: "Trompeta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Usuario de ejemplo",
+        role: "Admin",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
     User(
         name: "Alice",
         role: "Admin",
         voz: "Trombon",
         img:
-            ""),
-    User(name: "Bob", role: "User", voz: "Trombon"),
-    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Corneta"),
-    User(name: "Dave", role: "Admin", voz: "Trombon"),
-    User(name: "Eve", role: "Guest", voz: "Corneta"),
-    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
+            "",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Bob",
+        role: "User",
+        voz: "Trombon",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Charlie Pepito Rodriguez",
+        role: "User",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Dave",
+        role: "Admin",
+        voz: "Trombon",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Eve",
+        role: "Guest",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Usuario de ejemplo",
+        role: "Admin",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
   ];
 
   String _selectedInstrument = 'Seleccionar Voz';

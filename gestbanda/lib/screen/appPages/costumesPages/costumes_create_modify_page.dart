@@ -16,17 +16,72 @@ class CostumeCreateModifyPage extends StatefulWidget {
             Costume(name: "", img: "", quantity: 0, borrowedQuantity: 0));
 
   final List<User> users = [
-    User(name: "Bob", role: "User", voz: "Corneta"),
-    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Trompeta"),
-    User(name: "Dave", role: "Admin", voz: "Corneta"),
-    User(name: "Eve", role: "Guest", voz: "Trompeta"),
-    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
-    User(name: "Alice", role: "Admin", voz: "Trombon"),
-    User(name: "Bob", role: "User", voz: "Trombon"),
-    User(name: "Charlie Pepito Rodriguez", role: "User", voz: "Corneta"),
-    User(name: "Dave", role: "Admin", voz: "Trombon"),
-    User(name: "Eve", role: "Guest", voz: "Corneta"),
-    User(name: "Usuario de ejemplo", role: "Admin", voz: "Corneta"),
+    User(
+        name: "Bob",
+        role: "User",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Charlie Pepito Rodriguez",
+        role: "User",
+        voz: "Trompeta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Dave",
+        role: "Admin",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Eve",
+        role: "Guest",
+        voz: "Trompeta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Usuario de ejemplo",
+        role: "Admin",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Alice",
+        role: "Admin",
+        voz: "Trombon",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Bob",
+        role: "User",
+        voz: "Trombon",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Charlie Pepito Rodriguez",
+        role: "User",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Dave",
+        role: "Admin",
+        voz: "Trombon",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Eve",
+        role: "Guest",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
+    User(
+        name: "Usuario de ejemplo",
+        role: "Admin",
+        voz: "Corneta",
+        instrumentList: [],
+        costumeList: []),
   ];
 
   @override
