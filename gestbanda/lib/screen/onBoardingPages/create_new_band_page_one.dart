@@ -48,7 +48,8 @@ class CreateNewBandPageOne extends StatelessWidget {
                           style: IconButton.styleFrom(
                             padding: EdgeInsets.zero,
                             fixedSize: const Size(150, 150),
-                            backgroundColor: const Color(0xffB0E0E6),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),

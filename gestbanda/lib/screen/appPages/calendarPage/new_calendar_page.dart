@@ -111,7 +111,7 @@ class _NewCalendarPageState extends State<NewCalendarPage> {
                                 decoration: BoxDecoration(
                                   color: Theme.of(context)
                                       .colorScheme
-                                      .secondary
+                                      .primary
                                       .withOpacity(0.3),
                                   shape: BoxShape.circle,
                                 ),
