@@ -310,15 +310,38 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                     ),
                   ),
                 ),
-                CustomButton(
-                  width: 250,
-                  height: 60,
-                  text: "Guardar",
-                  color: "primary",
-                  br: const BorderRadius.all(Radius.circular(16)),
-                  onPressed: () {
-                    context.read<RouterSimpleCubit>().goBack();
-                  },
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomButton(
+                      width: 150,
+                      height: 60,
+                      text: "Guardar",
+                      color: "primary",
+                      br: const BorderRadius.all(Radius.circular(16)),
+                      onPressed: () {
+                        context.read<RouterSimpleCubit>().goBack();
+                      },
+                    ),
+                    if (edit!)
+                      const SizedBox(
+                        width: 20,
+                      ),
+                    if (edit!)
+                      CustomButton(
+                        width: 150,
+                        height: 60,
+                        text: "Eliminar",
+                        color: "error",
+                        br: const BorderRadius.all(Radius.circular(16)),
+                        onPressed: () {
+                          context.read<RouterSimpleCubit>().goBack();
+                        },
+                      ),
+                  ],
                 ),
               ],
             ),
