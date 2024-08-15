@@ -3,18 +3,11 @@ import 'package:gestbanda/models/Costume.dart';
 import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/models/Instrument.dart';
 import 'package:gestbanda/models/User.dart';
-import 'package:gestbanda/screen/appPages/calendarPage/new_calendar_page.dart';
-import 'package:gestbanda/screen/appPages/costumesPages/costumes_list_page%20.dart';
-import 'package:gestbanda/screen/appPages/homePage/new_home_page.dart';
-import 'package:gestbanda/screen/appPages/instrumentsPages/instrument_create_modify_page.dart';
-import 'package:gestbanda/screen/appPages/instrumentsPages/new_instrument_page.dart';
-import 'package:gestbanda/screen/appPages/userDetailPage/user_detail_page.dart';
 import 'package:gestbanda/screen/appPages/userListPage/new_user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../models/Code.dart';
-import '../../screen/appPages/costumesPages/costumes_create_modify_page.dart';
 import '../../screen/pages.dart';
 
 final unauthenticatedRouter = GoRouter(

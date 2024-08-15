@@ -7,10 +7,10 @@ Future<dynamic> showDateModal(
   DateTime? initialDate,
   required bool isRangeSelection,
 }) async {
-  DateTime? _focusedDay = DateTime.now();
-  DateTime? _selectedDay = initialDate;
-  DateTime? _rangeStart = initialDateRange?.start;
-  DateTime? _rangeEnd = initialDateRange?.end;
+  DateTime? focusedDay = DateTime.now();
+  DateTime? selectedDay = initialDate;
+  DateTime? rangeStart = initialDateRange?.start;
+  DateTime? rangeEnd = initialDateRange?.end;
 
   return await showModalBottomSheet<dynamic>(
     context: context,
@@ -19,21 +19,21 @@ Future<dynamic> showDateModal(
       return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
           void onRangeSelected(
-              DateTime? start, DateTime? end, DateTime focusedDay) {
+              DateTime? start, DateTime? end, DateTime newFocusedDay) {
             setState(() {
-              _selectedDay = null;
-              _focusedDay = focusedDay;
-              _rangeStart = start;
-              _rangeEnd = end;
+              selectedDay = null;
+              focusedDay = newFocusedDay;
+              rangeStart = start;
+              rangeEnd = end;
             });
           }
 
-          void onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+          void onDaySelected(DateTime newSelectedDay, DateTime newFocusedDay) {
             setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-              _rangeStart = selectedDay;
-              _rangeEnd = selectedDay;
+              selectedDay = newSelectedDay;
+              focusedDay = newFocusedDay;
+              rangeStart = selectedDay;
+              rangeEnd = selectedDay;
             });
           }
 
@@ -45,9 +45,9 @@ Future<dynamic> showDateModal(
                 Expanded(
                   child: TableCalendar(
                     locale: 'es_ES',
-                    focusedDay: _focusedDay!,
-                    rangeStartDay: isRangeSelection ? _rangeStart : null,
-                    rangeEndDay: isRangeSelection ? _rangeEnd : null,
+                    focusedDay: focusedDay!,
+                    rangeStartDay: isRangeSelection ? rangeStart : null,
+                    rangeEndDay: isRangeSelection ? rangeEnd : null,
                     availableCalendarFormats: const {
                       CalendarFormat.month: 'Mes',
                     },
@@ -61,7 +61,7 @@ Future<dynamic> showDateModal(
                       formatButtonVisible: false,
                       titleCentered: true,
                     ),
-                    selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                    selectedDayPredicate: (day) => isSameDay(selectedDay, day),
                     onRangeSelected: isRangeSelection ? onRangeSelected : null,
                     onDaySelected: isRangeSelection ? null : onDaySelected,
                     calendarBuilders: CalendarBuilders(
@@ -183,12 +183,12 @@ Future<dynamic> showDateModal(
                             Navigator.pop(
                               context,
                               DateTimeRange(
-                                start: _rangeStart!,
-                                end: _rangeEnd!,
+                                start: rangeStart!,
+                                end: rangeEnd!,
                               ),
                             );
                           } else {
-                            Navigator.pop(context, _selectedDay);
+                            Navigator.pop(context, selectedDay);
                           }
                         },
                         child: const Text('Aceptar'),

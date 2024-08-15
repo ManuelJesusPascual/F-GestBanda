@@ -22,10 +22,10 @@ class EventCreateModify extends StatefulWidget {
             .copyWith();
 
   @override
-  _EventCreateModifyState createState() => _EventCreateModifyState();
+  EventCreateModifyState createState() => EventCreateModifyState();
 }
 
-class _EventCreateModifyState extends State<EventCreateModify> {
+class EventCreateModifyState extends State<EventCreateModify> {
   late DateTimeRange dateRange;
   late TimeOfDay initTime;
   late TimeOfDay endTime;
