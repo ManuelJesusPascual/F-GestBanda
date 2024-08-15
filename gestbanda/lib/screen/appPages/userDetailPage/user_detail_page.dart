@@ -70,7 +70,6 @@ class UserDetailPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Instrumentos
                     const Padding(
                       padding: EdgeInsets.only(bottom: 8.0),
                       child: Text(
@@ -99,7 +98,6 @@ class UserDetailPage extends StatelessWidget {
                             child: Text("No hay instrumentos asignados."),
                           ),
                     const SizedBox(height: 16),
-                    // Uniforme
                     const Padding(
                       padding: EdgeInsets.only(bottom: 8.0),
                       child: Text(

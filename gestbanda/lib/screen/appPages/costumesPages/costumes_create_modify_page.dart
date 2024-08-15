@@ -6,7 +6,6 @@ import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
 import '../../../models/Costume.dart';
-import '../../../models/Instrument.dart';
 import '../../../models/User.dart';
 
 class CostumeCreateModifyPage extends StatefulWidget {
@@ -176,22 +175,59 @@ class _CostumeCreateModifyPageState extends State<CostumeCreateModifyPage> {
                       ),
                     ),
                   ),
-            CustomTextInput(
-              label: "Cantidad",
-              hint: "Cantidad",
-              initalValue: widget.costume.quantity.toString(),
-              leftPadding: 24,
-              rightPadding: 24,
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: (val) {
-                setState(() {
-                  val.isEmpty
-                      ? widget.costume.quantity = 0
-                      : widget.costume.quantity = int.parse(val);
-                });
-              },
-            ),
+            Padding(
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                ),
+                child: TextFormField(
+                  initialValue: widget.costume.quantity.toString(),
+                  keyboardType: TextInputType.text,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  decoration: InputDecoration(
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              context.read<RouterSimpleCubit>().goBack();
+                            },
+                            style: TextButton.styleFrom(
+                                padding: const EdgeInsets.all(8),
+                                minimumSize: const Size(0, 0),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                iconColor: const Color(0xFF388E3C)),
+                            child: const Icon(
+                              Icons.save_as_rounded,
+                            )),
+                        if (widget.costume.img.isNotEmpty)
+                          TextButton(
+                              onPressed: () {
+                                context.read<RouterSimpleCubit>().goBack();
+                              },
+                              style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.all(8),
+                                  minimumSize: const Size(0, 0),
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  iconColor:
+                                      Theme.of(context).colorScheme.error),
+                              child: const Icon(
+                                Icons.delete_forever,
+                              )),
+                      ],
+                    ),
+                    labelText: "Cantidad",
+                    hintText: "Cantidad",
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      val.isEmpty
+                          ? widget.costume.quantity = 0
+                          : widget.costume.quantity = int.parse(val);
+                    });
+                  },
+                )),
             Padding(
               padding: const EdgeInsets.only(top: 30, bottom: 20),
               child: CustomButton(

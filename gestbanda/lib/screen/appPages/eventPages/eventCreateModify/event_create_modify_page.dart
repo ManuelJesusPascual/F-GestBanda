@@ -167,31 +167,67 @@ class _EventCreateModifyState extends State<EventCreateModify> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 10, left: 20, right: 20, top: 30),
-                  child: DropdownButton(
-                    value: widget.event.type,
-                    isExpanded: true,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                    items: const [
-                      DropdownMenuItem(
-                        value: EventType.pasacalles,
-                        child: Text("Pasacalles"),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: DropdownButtonHideUnderline(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary,
+                        borderRadius: BorderRadius.circular(16.0),
                       ),
-                      DropdownMenuItem(
-                        value: EventType.concierto,
-                        child: Text("Concierto"),
+                      child: DropdownButtonFormField<EventType>(
+                        value: widget.event.type,
+                        icon: Icon(
+                          Icons.arrow_drop_down,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                        iconSize: 24,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Theme.of(context).colorScheme.secondary,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                        dropdownColor: Theme.of(context).colorScheme.secondary,
+                        onChanged: (EventType? newValue) {
+                          setState(() {
+                            widget.event.type = newValue!;
+                          });
+                        },
+                        items: [
+                          DropdownMenuItem(
+                            value: EventType.pasacalles,
+                            child: Text(
+                              "Pasacalles",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.surface,
+                              ),
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: EventType.concierto,
+                            child: Text(
+                              "Concierto",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.surface,
+                              ),
+                            ),
+                          ),
+                          DropdownMenuItem(
+                            value: EventType.salida_procesional,
+                            child: Text(
+                              "Salida Procesional",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.surface,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      DropdownMenuItem(
-                        value: EventType.salida_procesional,
-                        child: Text("Salida Procesional"),
-                      ),
-                    ],
-                    onChanged: (val) {
-                      setState(() {
-                        widget.event.type = val!;
-                      });
-                    },
+                    ),
                   ),
                 ),
                 CustomTextInput(

@@ -178,46 +178,59 @@ class _InstrumentCreateModifyPageState
                       ),
                     ),
                   ),
-            CustomTextInput(
-              label: "Cantidad",
-              hint: "Cantidad",
-              initalValue: widget.instrument.quantity.toString(),
-              leftPadding: 24,
-              rightPadding: 24,
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: (val) {
-                setState(() {
-                  val.isEmpty
-                      ? widget.instrument.quantity = 0
-                      : widget.instrument.quantity = int.parse(val);
-                });
-              },
-            ),
             Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 20),
-              child: CustomButton(
-                width: 250,
-                height: 60,
-                text: "Guardar",
-                color: "primary",
-                br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () {
-                  context.read<RouterSimpleCubit>().goBack();
-                },
-              ),
-            ),
-            if (widget.instrument.img.isNotEmpty)
-              CustomButton(
-                width: 250,
-                height: 60,
-                text: "Eliminar",
-                color: "error",
-                br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () {
-                  context.read<RouterSimpleCubit>().goBack();
-                },
-              ),
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                ),
+                child: TextFormField(
+                  initialValue: widget.instrument.quantity.toString(),
+                  keyboardType: TextInputType.text,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  decoration: InputDecoration(
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              context.read<RouterSimpleCubit>().goBack();
+                            },
+                            style: TextButton.styleFrom(
+                                padding: const EdgeInsets.all(8),
+                                minimumSize: const Size(0, 0),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                iconColor: const Color(0xFF388E3C)),
+                            child: const Icon(
+                              Icons.save_as_rounded,
+                            )),
+                        if (widget.instrument.img.isNotEmpty)
+                          TextButton(
+                              onPressed: () {
+                                context.read<RouterSimpleCubit>().goBack();
+                              },
+                              style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.all(8),
+                                  minimumSize: const Size(0, 0),
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  iconColor:
+                                      Theme.of(context).colorScheme.error),
+                              child: const Icon(
+                                Icons.delete_forever,
+                              )),
+                      ],
+                    ),
+                    labelText: "Cantidad",
+                    hintText: "Cantidad",
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      val.isEmpty
+                          ? widget.instrument.quantity = 0
+                          : widget.instrument.quantity = int.parse(val);
+                    });
+                  },
+                )),
             if (widget.instrument.img.isNotEmpty)
               Expanded(
                 child: Padding(

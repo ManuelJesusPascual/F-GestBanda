@@ -63,9 +63,9 @@ class CreateNewBandPageOne extends StatelessWidget {
                                   radius: 100,
                                   backgroundImage: FileImage(state.img!),
                                 )
-                              : const Icon(
+                              : Icon(
                                   Icons.image_outlined,
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.surface,
                                   weight: 0.2,
                                 ),
                           iconSize: 100,
