@@ -67,7 +67,7 @@ class UserTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        user.voz,
+                        "${user.role} · ${user.voz}",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontSize: 14.0,

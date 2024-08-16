@@ -1,15 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import '../config/config.dart';
 import '../models/costume.dart';
 import '../utils/string_utilites.dart';
 
 class CostumeTile extends StatelessWidget {
-  const CostumeTile({super.key, required this.costume});
+  const CostumeTile(
+      {super.key, required this.costume, required this.onPressed});
 
   final Costume costume;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +24,7 @@ class CostumeTile extends StatelessWidget {
             ),
             elevation: 2,
           ),
-          onPressed: () {
-            context
-                .read<RouterSimpleCubit>()
-                .pushRoute("/costume_create_modify", extra: costume);
-          },
+          onPressed: onPressed,
           child: Container(
             padding: const EdgeInsets.all(8.0),
             margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4),

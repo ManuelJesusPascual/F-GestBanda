@@ -84,7 +84,14 @@ class NewInstrumentPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: InstrumentTile(instrument: instruments[index]),
+                      child: InstrumentTile(
+                        instrument: instruments[index],
+                        onPressed: () {
+                          context.read<RouterSimpleCubit>().pushRoute(
+                              "/instrument_create_modify",
+                              extra: instruments[index]);
+                        },
+                      ),
                     );
                   },
                 ),

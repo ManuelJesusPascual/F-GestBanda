@@ -88,7 +88,14 @@ class NewCustomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: CostumeTile(costume: costumes[index]),
+                      child: CostumeTile(
+                        costume: costumes[index],
+                        onPressed: () {
+                          context.read<RouterSimpleCubit>().pushRoute(
+                              "/costume_create_modify",
+                              extra: costumes[index]);
+                        },
+                      ),
                     );
                   },
                 ),

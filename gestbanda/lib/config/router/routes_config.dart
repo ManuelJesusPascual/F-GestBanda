@@ -3,9 +3,16 @@ import 'package:gestbanda/models/costume.dart';
 import 'package:gestbanda/models/event.dart';
 import 'package:gestbanda/models/instrument.dart';
 import 'package:gestbanda/models/user.dart';
+import 'package:gestbanda/screen/appPages/settingsPage/band_voice_add.dart';
+import 'package:gestbanda/screen/appPages/settingsPage/band_voices_page.dart';
 import 'package:gestbanda/screen/appPages/settingsPage/edit_user_setting_page.dart';
 import 'package:gestbanda/screen/appPages/settingsPage/settings_page.dart';
 import 'package:gestbanda/screen/appPages/settingsPage/user_settings_page.dart';
+import 'package:gestbanda/screen/appPages/userDetailPage/edit_user_detail_page.dart';
+import 'package:gestbanda/screen/appPages/userDetailPage/user_costume_create_page.dart';
+import 'package:gestbanda/screen/appPages/userDetailPage/user_costume_modify_page.dart';
+import 'package:gestbanda/screen/appPages/userDetailPage/user_instrument_create_page.dart';
+import 'package:gestbanda/screen/appPages/userDetailPage/user_instrument_modify_page.dart';
 import 'package:gestbanda/screen/appPages/userListPage/new_user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
@@ -101,6 +108,41 @@ final directorRouter = GoRouter(
       },
     ),
     GoRoute(
+      path: '/user_add_instrument',
+      builder: (context, state) {
+        return const UserInstrumentCreatePage();
+      },
+    ),
+    GoRoute(
+      path: '/user_add_costume',
+      builder: (context, state) {
+        return const UserCostumeCreatePage();
+      },
+    ),
+    GoRoute(
+      path: '/user_modify',
+      builder: (context, state) {
+        final User user = state.extra as User;
+        return EditUserDetailPage(
+          user: user,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/user_instrument_modify',
+      builder: (context, state) {
+        final Instrument instrument = state.extra as Instrument;
+        return UserInstrumentModifyPage(instrument: instrument);
+      },
+    ),
+    GoRoute(
+      path: '/user_costume_modify',
+      builder: (context, state) {
+        final Costume costume = state.extra as Costume;
+        return UserCostumeModifyPage(costume: costume);
+      },
+    ),
+    GoRoute(
       path: '/code_list',
       builder: (context, state) => CodeList(),
     ),
@@ -175,6 +217,18 @@ final directorRouter = GoRouter(
           band: band,
           setting: setting,
         );
+      },
+    ),
+    GoRoute(
+      path: '/edit_band_voices',
+      builder: (context, state) {
+        return BandVoicesPage();
+      },
+    ),
+    GoRoute(
+      path: '/add_band_voices',
+      builder: (context, state) {
+        return const BandVoiceAddPage();
       },
     ),
     GoRoute(

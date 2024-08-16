@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget {
                             name: "Usuario de ejemplo",
                             email: "support@gestbanda.com",
                             phone: "666666666",
-                            role: "User",
+                            role: "Componente",
                             voz: "Corneta",
                             instrumentList: [],
                             costumeList: []),

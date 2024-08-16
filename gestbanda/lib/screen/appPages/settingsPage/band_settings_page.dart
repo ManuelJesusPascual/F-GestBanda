@@ -102,6 +102,30 @@ class BandSettingsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    "Modificar Voces",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios_outlined),
+              onTap: () {
+                context.read<RouterSimpleCubit>().pushRoute(
+                      "/edit_band_voices",
+                    );
+              },
+            ),
+            const Divider(
+              indent: 16,
+              endIndent: 8,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            ListTile(
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
                     "Cambiar suscripcion",
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),

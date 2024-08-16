@@ -2,7 +2,7 @@ class Instrument {
   String name;
   final String img;
   int quantity;
-  final int borrowedQuantity;
+  int borrowedQuantity;
 
   Instrument({
     required this.name,

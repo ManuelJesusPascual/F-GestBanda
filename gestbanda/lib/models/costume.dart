@@ -2,7 +2,7 @@ class Costume {
   String name;
   final String img;
   int quantity;
-  final int borrowedQuantity;
+  int borrowedQuantity;
 
   Costume({
     required this.name,

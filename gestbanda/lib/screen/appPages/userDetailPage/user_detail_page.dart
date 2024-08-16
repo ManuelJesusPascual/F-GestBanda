@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gestbanda/widgets/costume_tile.dart';
 import 'package:gestbanda/widgets/instrument_tile.dart';
 
+import '../../../config/config.dart';
 import '../../../models/user.dart';
 import '../../../utils/string_utilites.dart';
 
@@ -16,6 +18,21 @@ class UserDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        elevation: 0,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit,
+                color: Theme.of(context).colorScheme.onSurface),
+            onPressed: () {
+              context
+                  .read<RouterSimpleCubit>()
+                  .pushRoute("/user_modify", extra: user);
+            },
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.error,
         onPressed: () {},
@@ -70,13 +87,23 @@ class UserDetailPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        "Instrumentos del usuario:",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Instrumentos del usuario:",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.playlist_add),
+                          onPressed: () {
+                            context.read<RouterSimpleCubit>().pushRoute(
+                                  "/user_add_instrument",
+                                );
+                          },
+                        ),
+                      ],
                     ),
                     user.instrumentList.isNotEmpty
                         ? Expanded(
@@ -87,7 +114,15 @@ class UserDetailPage extends StatelessWidget {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 4, horizontal: 16),
-                                  child: InstrumentTile(instrument: instrument),
+                                  child: InstrumentTile(
+                                    instrument: instrument,
+                                    onPressed: () {
+                                      context
+                                          .read<RouterSimpleCubit>()
+                                          .pushRoute("/user_instrument_modify",
+                                              extra: instrument);
+                                    },
+                                  ),
                                 );
                               },
                             ),
@@ -98,13 +133,23 @@ class UserDetailPage extends StatelessWidget {
                             child: Text("No hay instrumentos asignados."),
                           ),
                     const SizedBox(height: 16),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
-                      child: Text(
-                        "Uniforme del usuario:",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Uniforme del usuario:",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.playlist_add),
+                          onPressed: () {
+                            context.read<RouterSimpleCubit>().pushRoute(
+                                  "/user_add_costume",
+                                );
+                          },
+                        ),
+                      ],
                     ),
                     user.costumeList.isNotEmpty
                         ? Expanded(
@@ -115,7 +160,15 @@ class UserDetailPage extends StatelessWidget {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 4, horizontal: 16),
-                                  child: CostumeTile(costume: costume),
+                                  child: CostumeTile(
+                                    costume: costume,
+                                    onPressed: () {
+                                      context
+                                          .read<RouterSimpleCubit>()
+                                          .pushRoute("/user_costume_modify",
+                                              extra: costume);
+                                    },
+                                  ),
                                 );
                               },
                             ),
