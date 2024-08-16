@@ -2,15 +2,19 @@ import 'package:gestbanda/models/Costume.dart';
 import 'package:gestbanda/models/Instrument.dart';
 
 class User {
-  final String name;
-  final String role;
-  final String voz;
+  String name;
+  String email;
+  String phone;
+  String role;
+  String voz;
   List<Instrument> instrumentList;
   List<Costume> costumeList;
   String? img;
 
   User({
     required this.name,
+    required this.email,
+    required this.phone,
     required this.role,
     required this.voz,
     required this.instrumentList,
@@ -20,6 +24,8 @@ class User {
 
   User copyWith({
     String? name,
+    String? email,
+    String? phone,
     String? role,
     String? voz,
     List<Instrument>? instrumentList,
@@ -28,6 +34,8 @@ class User {
   }) {
     return User(
       name: name ?? this.name,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
       role: role ?? this.role,
       voz: voz ?? this.voz,
       instrumentList: instrumentList ?? this.instrumentList,
@@ -38,6 +46,8 @@ class User {
 
   Map<String, dynamic> toJson() => {
         'name': name,
+        'email': email,
+        'phone': phone,
         'role': role,
         'voz': voz,
         'instrumentList': instrumentList.map((e) => e.toJson()).toList(),
@@ -48,6 +58,8 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       name: json['name'],
+      email: json['email'],
+      phone: json['phone'],
       role: json['role'],
       voz: json['voz'],
       instrumentList: (json['instrumentList'] as List<dynamic>)

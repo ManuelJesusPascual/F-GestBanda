@@ -18,64 +18,73 @@ class NewUserList extends StatefulWidget {
 
 class _NewUserListState extends State<NewUserList> {
   final List<User> users = [
-    User(name: "Bob", role: "User", voz: "Corneta", instrumentList: [
-      Instrument(
-        img: "",
-        name: "Corneta Do/Sib",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Reb",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Trompeta Do",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Sib",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Reb",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Trompeta Do",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Sib",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Reb",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Trompeta Do",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-    ], costumeList: []),
+    User(
+        name: "Bob",
+        email: "support@gestbanda.com",
+        phone: "666666666",
+        role: "User",
+        voz: "Corneta",
+        instrumentList: [
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ],
+        costumeList: []),
     User(
         name: "Charlie Pepito Rodriguez",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "User",
         voz: "Trompeta",
         instrumentList: [],
@@ -123,119 +132,132 @@ class _NewUserListState extends State<NewUserList> {
             borrowedQuantity: 1,
           ),
         ]),
-    User(name: "Dave", role: "Admin", voz: "Corneta", instrumentList: [
-      Instrument(
-        img: "",
-        name: "Corneta Do/Sib",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Reb",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Trompeta Do",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Sib",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Reb",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Trompeta Do",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Sib",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Corneta Do/Reb",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Instrument(
-        img: "",
-        name: "Trompeta Do",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-    ], costumeList: [
-      Costume(
-        img:
-            "",
-        name: "Fajin",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Costume(
-        img:
-            "",
-        name: "Cinturon",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Costume(
-        img:
-            "",
-        name: "Chaqueta",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Costume(
-        img:
-            "",
-        name: "Pantalon",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Costume(
-        img:
-            "",
-        name: "Hombreras",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-      Costume(
-        img:
-            "",
-        name: "Zapatos",
-        quantity: 2,
-        borrowedQuantity: 1,
-      ),
-    ]),
+    User(
+        name: "Dave",
+        email: "support@gestbanda.com",
+        phone: "666666666",
+        role: "Admin",
+        voz: "Corneta",
+        instrumentList: [
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ],
+        costumeList: [
+          Costume(
+            img:
+                "",
+            name: "Fajin",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Cinturon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Chaqueta",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Pantalon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Hombreras",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Zapatos",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ]),
     User(
         name: "Eve",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "Guest",
         voz: "Trompeta",
         instrumentList: [],
         costumeList: []),
     User(
         name: "Usuario de ejemplo",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "Admin",
         voz: "Corneta",
         instrumentList: [],
         costumeList: []),
     User(
         name: "Alice",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "Admin",
         voz: "Trombon",
         img:
@@ -244,30 +266,40 @@ class _NewUserListState extends State<NewUserList> {
         costumeList: []),
     User(
         name: "Bob",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "User",
         voz: "Trombon",
         instrumentList: [],
         costumeList: []),
     User(
         name: "Charlie Pepito Rodriguez",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "User",
         voz: "Corneta",
         instrumentList: [],
         costumeList: []),
     User(
         name: "Dave",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "Admin",
         voz: "Trombon",
         instrumentList: [],
         costumeList: []),
     User(
         name: "Eve",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "Guest",
         voz: "Corneta",
         instrumentList: [],
         costumeList: []),
     User(
         name: "Usuario de ejemplo",
+        email: "support@gestbanda.com",
+        phone: "666666666",
         role: "Admin",
         voz: "Corneta",
         instrumentList: [],

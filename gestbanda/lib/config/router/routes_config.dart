@@ -3,11 +3,17 @@ import 'package:gestbanda/models/Costume.dart';
 import 'package:gestbanda/models/Event.dart';
 import 'package:gestbanda/models/Instrument.dart';
 import 'package:gestbanda/models/User.dart';
+import 'package:gestbanda/screen/appPages/settingsPage/edit_user_setting_page.dart';
+import 'package:gestbanda/screen/appPages/settingsPage/settings_page.dart';
+import 'package:gestbanda/screen/appPages/settingsPage/user_settings_page.dart';
 import 'package:gestbanda/screen/appPages/userListPage/new_user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../models/Band.dart';
 import '../../models/Code.dart';
+import '../../screen/appPages/settingsPage/band_settings_page.dart';
+import '../../screen/appPages/settingsPage/edit_band_setting_page copy.dart';
 import '../../screen/pages.dart';
 
 final unauthenticatedRouter = GoRouter(
@@ -125,6 +131,50 @@ final directorRouter = GoRouter(
       builder: (context, state) {
         final Costume? costume = state.extra as Costume?;
         return CostumeCreateModifyPage(costume: costume);
+      },
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
+    ),
+    GoRoute(
+      path: '/user_settings',
+      builder: (context, state) {
+        final User user = state.extra as User;
+        return UserSettingsPage(
+          user: user,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/band_settings',
+      builder: (context, state) {
+        final Band band = state.extra as Band;
+        return BandSettingsPage(
+          band: band,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/edit_user_setting/:setting',
+      builder: (context, state) {
+        final User user = state.extra as User;
+        final String setting = state.pathParameters['setting']!;
+        return EditUserSettingPage(
+          user: user,
+          setting: setting,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/edit_band_setting/:setting',
+      builder: (context, state) {
+        final Band band = state.extra as Band;
+        final String setting = state.pathParameters['setting']!;
+        return EditBandSettingPage(
+          band: band,
+          setting: setting,
+        );
       },
     ),
     GoRoute(

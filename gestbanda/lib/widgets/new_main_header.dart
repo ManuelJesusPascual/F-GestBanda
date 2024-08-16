@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../config/config.dart';
 
 class NewHeader extends StatelessWidget {
   const NewHeader({
@@ -23,7 +26,20 @@ class NewHeader extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        Icon(Icons.settings, color: Theme.of(context).colorScheme.onSurface),
+        SizedBox(
+          width: 24,
+          height: 24,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              context.read<RouterSimpleCubit>().pushRoute("/settings");
+            },
+            icon: Icon(
+              Icons.settings,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
+        ),
       ],
     );
   }

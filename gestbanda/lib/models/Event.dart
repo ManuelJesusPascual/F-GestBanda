@@ -38,7 +38,6 @@ class Event {
     );
   }
 
-  // Hacemos que el objeto sea serializable para que se pueda pasar a través de parámetros en el GoRouter
   Map<String, dynamic> toJson() => {
         'title': title,
         'initDate': initDate.toIso8601String(),
