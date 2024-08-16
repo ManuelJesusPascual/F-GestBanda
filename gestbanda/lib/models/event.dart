@@ -1,4 +1,4 @@
-import '../utils/enums/EventTypeEnum.dart';
+import '../utils/enums/event_type_enum.dart';
 
 class Event {
   String title;

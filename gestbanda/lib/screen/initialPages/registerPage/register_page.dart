@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/BlocFormItem.dart';
+import 'package:gestbanda/models/bloc_form_item.dart';
 
 import '../../../blocs/blocs.dart';
 import '../../../config/config.dart';

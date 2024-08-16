@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/Code.dart';
+import 'package:gestbanda/models/code.dart';
 import 'package:gestbanda/utils/string_utilites.dart';
 
 import '../../../config/config.dart';

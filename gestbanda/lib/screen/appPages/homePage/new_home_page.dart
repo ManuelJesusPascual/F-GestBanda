@@ -5,8 +5,8 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Event.dart';
-import '../../../utils/enums/EventTypeEnum.dart';
+import '../../../models/event.dart';
+import '../../../utils/enums/event_type_enum.dart';
 import '../../../widgets/widgets.dart';
 
 class NewHomePage extends StatelessWidget {
@@ -66,7 +66,7 @@ class NewHomePage extends StatelessWidget {
                     NewEventItem(
                       event: Event(
                           title: "Salida extraordinaria",
-                          type: EventType.salida_procesional,
+                          type: EventType.salidaProcesional,
                           initDate: DateTime(2024, 8, 23, 12, 24),
                           endDate: DateTime(2024, 8, 28, 20, 30),
                           imgList: [

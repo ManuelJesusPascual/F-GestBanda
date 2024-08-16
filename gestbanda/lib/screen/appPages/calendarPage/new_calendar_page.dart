@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
+import 'package:gestbanda/utils/enums/event_type_enum.dart';
 import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Event.dart';
+import '../../../models/event.dart';
 import '../../../widgets/new_events_list.dart';
 import '../../../widgets/widgets.dart';
 

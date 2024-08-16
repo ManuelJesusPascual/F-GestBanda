@@ -4,9 +4,9 @@ import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 import 'package:gestbanda/widgets/user_tile.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Costume.dart';
-import '../../../models/Instrument.dart';
-import '../../../models/User.dart';
+import '../../../models/costume.dart';
+import '../../../models/instrument.dart';
+import '../../../models/user.dart';
 import '../../../widgets/widgets.dart';
 
 class NewUserList extends StatefulWidget {

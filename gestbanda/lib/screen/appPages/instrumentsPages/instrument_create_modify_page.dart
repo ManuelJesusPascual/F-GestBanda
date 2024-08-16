@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/widgets/user_tile.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Instrument.dart';
-import '../../../models/User.dart';
+import '../../../models/instrument.dart';
+import '../../../models/user.dart';
 
 class InstrumentCreateModifyPage extends StatefulWidget {
   final Instrument instrument;

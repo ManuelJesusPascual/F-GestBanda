@@ -4,7 +4,7 @@ import 'package:gestbanda/widgets/main_bottom_bar.dart';
 import 'package:gestbanda/widgets/main_header.dart';
 
 import '../../../config/config.dart';
-import '../../../models/User.dart';
+import '../../../models/user.dart';
 import '../../../widgets/widgets.dart';
 
 class UserList extends StatelessWidget {

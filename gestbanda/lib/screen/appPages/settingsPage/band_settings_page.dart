@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Band.dart';
+import '../../../models/band.dart';
 import '../../../utils/string_utilites.dart';
 
 class BandSettingsPage extends StatelessWidget {

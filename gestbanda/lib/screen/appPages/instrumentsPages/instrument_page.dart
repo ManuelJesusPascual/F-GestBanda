@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Instrument.dart';
+import '../../../models/instrument.dart';
 
 class InstrumentPage extends StatelessWidget {
   const InstrumentPage({super.key});

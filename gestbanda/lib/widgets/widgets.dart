@@ -13,4 +13,4 @@ export "./custom_list_tile.dart";
 //NUEVA UI
 
 export './new_main_header.dart';
-export './new_event_item .dart';
+export 'new_event_item dart';

@@ -1,11 +1,11 @@
-enum EventType { pasacalles, salida_procesional, concierto }
+enum EventType { pasacalles, salidaProcesional, concierto }
 
 extension EventTypeExtension on EventType {
   String get toJson {
     switch (this) {
       case EventType.pasacalles:
         return 'pasacalles';
-      case EventType.salida_procesional:
+      case EventType.salidaProcesional:
         return 'salida_procesional';
       case EventType.concierto:
         return 'concierto';
@@ -19,7 +19,7 @@ extension EventTypeExtension on EventType {
       case 'pasacalles':
         return EventType.pasacalles;
       case 'salida_procesional':
-        return EventType.salida_procesional;
+        return EventType.salidaProcesional;
       case 'concierto':
         return EventType.concierto;
       default:
@@ -31,7 +31,7 @@ extension EventTypeExtension on EventType {
     switch (type) {
       case EventType.pasacalles:
         return 'Pasacalles';
-      case EventType.salida_procesional:
+      case EventType.salidaProcesional:
         return 'Salida Procesional';
       case EventType.concierto:
         return 'Concierto';

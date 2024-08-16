@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../config/config.dart';
-import '../models/Costume.dart';
+import '../models/costume.dart';
 import '../utils/string_utilites.dart';
 
 class CostumeTile extends StatelessWidget {
@@ -38,19 +38,19 @@ class CostumeTile extends StatelessWidget {
                 CircleAvatar(
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor: Theme.of(context).colorScheme.primary,
-                  backgroundImage: costume.img != null
+                  backgroundImage: costume.img.isNotEmpty
                       ? CachedNetworkImageProvider(
-                          costume.img!,
+                          costume.img,
                           cacheManager: CacheManager(
                             Config(
-                              costume.img!,
+                              costume.img,
                               stalePeriod: const Duration(days: 7),
                             ),
                           ),
                         )
                       : null,
                   radius: 25,
-                  child: costume.img != null
+                  child: costume.img.isNotEmpty
                       ? null
                       : Text(getInitials(costume.name)),
                 ),

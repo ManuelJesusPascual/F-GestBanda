@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Band.dart';
-import '../../../models/User.dart';
+import '../../../models/band.dart';
+import '../../../models/user.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

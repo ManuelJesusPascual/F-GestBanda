@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../config/config.dart';
-import '../models/Instrument.dart';
+import '../models/instrument.dart';
 import '../utils/string_utilites.dart';
 
 class InstrumentTile extends StatelessWidget {
@@ -38,19 +38,19 @@ class InstrumentTile extends StatelessWidget {
                 CircleAvatar(
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   backgroundColor: Theme.of(context).colorScheme.primary,
-                  backgroundImage: instrument.img != null
+                  backgroundImage: instrument.img.isNotEmpty
                       ? CachedNetworkImageProvider(
-                          instrument.img!,
+                          instrument.img,
                           cacheManager: CacheManager(
                             Config(
-                              instrument.img!,
+                              instrument.img,
                               stalePeriod: const Duration(days: 7),
                             ),
                           ),
                         )
                       : null,
                   radius: 25,
-                  child: instrument.img != null
+                  child: instrument.img.isNotEmpty
                       ? null
                       : Text(getInitials(instrument.name)),
                 ),

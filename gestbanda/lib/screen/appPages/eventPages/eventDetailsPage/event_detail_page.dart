@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
+import 'package:gestbanda/utils/enums/event_type_enum.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../../config/config.dart';
-import '../../../../models/Event.dart';
+import '../../../../models/event.dart';
 import '../../../../utils/string_utilites.dart';
 
 class EventDetailPage extends StatefulWidget {

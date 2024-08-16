@@ -4,7 +4,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gestbanda/widgets/costume_tile.dart';
 import 'package:gestbanda/widgets/instrument_tile.dart';
 
-import '../../../models/User.dart';
+import '../../../models/user.dart';
 import '../../../utils/string_utilites.dart';
 
 class UserDetailPage extends StatelessWidget {

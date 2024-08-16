@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/Event.dart';
+import 'package:gestbanda/models/event.dart';
 
 import '../config/config.dart';
-import '../utils/enums/EventTypeEnum.dart';
+import '../utils/enums/event_type_enum.dart';
 
 class EventItem extends StatelessWidget {
   final Event event;

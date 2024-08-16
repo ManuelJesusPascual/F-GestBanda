@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/Costume.dart';
-import 'package:gestbanda/models/Event.dart';
-import 'package:gestbanda/models/Instrument.dart';
-import 'package:gestbanda/models/User.dart';
+import 'package:gestbanda/models/costume.dart';
+import 'package:gestbanda/models/event.dart';
+import 'package:gestbanda/models/instrument.dart';
+import 'package:gestbanda/models/user.dart';
 import 'package:gestbanda/screen/appPages/settingsPage/edit_user_setting_page.dart';
 import 'package:gestbanda/screen/appPages/settingsPage/settings_page.dart';
 import 'package:gestbanda/screen/appPages/settingsPage/user_settings_page.dart';
@@ -10,10 +10,10 @@ import 'package:gestbanda/screen/appPages/userListPage/new_user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/Band.dart';
-import '../../models/Code.dart';
+import '../../models/band.dart';
+import '../../models/code.dart';
 import '../../screen/appPages/settingsPage/band_settings_page.dart';
-import '../../screen/appPages/settingsPage/edit_band_setting_page copy.dart';
+import '../../screen/appPages/settingsPage/edit_band_setting_page.dart';
 import '../../screen/pages.dart';
 
 final unauthenticatedRouter = GoRouter(

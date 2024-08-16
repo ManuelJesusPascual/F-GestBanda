@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/Code.dart';
+import 'package:gestbanda/models/code.dart';
 
 import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
 
 class CodeList extends StatefulWidget {
   CodeList({super.key});
-  List<Code> codes = [
+  final List<Code> codes = [
     Code(
         code: "34532",
         dateCreated: DateTime.now().subtract(const Duration(days: 35)),

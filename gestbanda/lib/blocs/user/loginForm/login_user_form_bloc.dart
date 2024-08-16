@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:gestbanda/blocs/blocs.dart';
-import 'package:gestbanda/models/BlocFormItem.dart';
+import 'package:gestbanda/models/bloc_form_item.dart';
 import 'package:gestbanda/utils/extensions.dart';
 
 class LoginUserFormBloc extends Bloc<LoginUserFormEvent, LoginUserFormState> {

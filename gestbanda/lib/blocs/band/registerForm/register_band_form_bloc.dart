@@ -7,7 +7,7 @@ import 'package:gestbanda/blocs/band/registerForm/register_band_form_bloc_state.
 import 'package:gestbanda/utils/extensions.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../models/BlocFormItem.dart';
+import '../../../models/bloc_form_item.dart';
 
 class RegisterBandFormBloc
     extends Bloc<RegisterBandFormEvents, RegisterBandFormState> {

@@ -5,7 +5,7 @@ import 'package:gestbanda/blocs/blocs.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../config/config.dart';
-import '../../models/BlocFormItem.dart';
+import '../../models/bloc_form_item.dart';
 
 class CreateNewBandPageOne extends StatelessWidget {
   const CreateNewBandPageOne({super.key});

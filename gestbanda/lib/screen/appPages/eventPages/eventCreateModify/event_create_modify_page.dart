@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../config/router/routes_config.dart';
 import '../../../../widgets/widgets.dart';
-import '../../../../models/Event.dart';
-import '../../../../utils/enums/EventTypeEnum.dart';
+import '../../../../models/event.dart';
+import '../../../../utils/enums/event_type_enum.dart';
 
 class EventCreateModify extends StatefulWidget {
   final Event event;
@@ -217,7 +217,7 @@ class EventCreateModifyState extends State<EventCreateModify> {
                             ),
                           ),
                           DropdownMenuItem(
-                            value: EventType.salida_procesional,
+                            value: EventType.salidaProcesional,
                             child: Text(
                               "Salida Procesional",
                               style: TextStyle(

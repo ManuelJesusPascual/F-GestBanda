@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../config/config.dart';
-import '../models/Event.dart';
+import '../models/event.dart';
 
 class EventsList extends StatelessWidget {
   const EventsList({

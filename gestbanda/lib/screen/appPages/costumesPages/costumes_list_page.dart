@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Costume.dart';
+import '../../../models/costume.dart';
 import '../../../widgets/costume_tile.dart';
 
 class NewCustomePage extends StatelessWidget {

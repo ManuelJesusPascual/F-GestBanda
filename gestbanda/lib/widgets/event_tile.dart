@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:gestbanda/models/Event.dart';
+import 'package:gestbanda/models/event.dart';
 
 import '../config/config.dart';
-import '../utils/enums/EventTypeEnum.dart';
+import '../utils/enums/event_type_enum.dart';
 import 'widgets.dart';
 
 class EventTile extends StatelessWidget {

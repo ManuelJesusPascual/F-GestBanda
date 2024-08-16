@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/Event.dart';
-import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
+import 'package:gestbanda/models/event.dart';
+import 'package:gestbanda/utils/enums/event_type_enum.dart';
 import 'package:gestbanda/widgets/main_bottom_bar.dart';
 import 'package:gestbanda/widgets/main_header.dart';
 import '../../../config/config.dart';
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                           EventItem(
                             event: Event(
                                 title: "Salida extraordinaria",
-                                type: EventType.salida_procesional,
+                                type: EventType.salidaProcesional,
                                 initDate: DateTime(2024, 8, 23, 12, 24),
                                 endDate: DateTime(2024, 8, 28, 20, 30),
                                 imgList: [

@@ -5,8 +5,8 @@ import 'package:gestbanda/widgets/user_tile.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Costume.dart';
-import '../../../models/User.dart';
+import '../../../models/costume.dart';
+import '../../../models/user.dart';
 
 class CostumeCreateModifyPage extends StatefulWidget {
   final Costume costume;

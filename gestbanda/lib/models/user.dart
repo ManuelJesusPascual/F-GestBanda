@@ -1,5 +1,5 @@
-import 'package:gestbanda/models/Costume.dart';
-import 'package:gestbanda/models/Instrument.dart';
+import 'package:gestbanda/models/costume.dart';
+import 'package:gestbanda/models/instrument.dart';
 
 class User {
   String name;

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
+import 'package:gestbanda/utils/enums/event_type_enum.dart';
 import 'package:gestbanda/widgets/main_bottom_bar.dart';
 import 'package:gestbanda/widgets/main_header.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../config/config.dart';
-import '../../../models/Event.dart';
+import '../../../models/event.dart';
 import '../../../widgets/widgets.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -185,49 +185,49 @@ class _CalendarPageState extends State<CalendarPage> {
         location: "Almeria"),
     Event(
         title: 'Salida extraordinaria',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 16, 15, 30),
         endDate: DateTime(2024, 7, 16, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Salida extraordinaria',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 16, 16, 30),
         endDate: DateTime(2024, 7, 16, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Salida extraordinaria',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 16, 17, 30),
         endDate: DateTime(2024, 7, 16, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Salida extraordinaria',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 16, 18, 30),
         endDate: DateTime(2024, 7, 16, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Salida extraordinaria',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 16, 19, 30),
         endDate: DateTime(2024, 7, 16, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Salida extraordinaria',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 16, 20, 30),
         endDate: DateTime(2024, 7, 16, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Lunes Santo',
-        type: EventType.salida_procesional,
+        type: EventType.salidaProcesional,
         initDate: DateTime(2024, 7, 15),
         endDate: DateTime(2024, 7, 15, 20, 30),
         description: "a",

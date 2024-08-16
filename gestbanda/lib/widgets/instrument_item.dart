@@ -106,7 +106,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../config/config.dart';
-import '../models/Instrument.dart';
+import '../models/instrument.dart';
 
 class InstrumentItem extends StatelessWidget {
   final Instrument instrument;
