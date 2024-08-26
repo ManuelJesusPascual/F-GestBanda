@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainHeader extends StatelessWidget {
-  const MainHeader({
+import '../config/config.dart';
+
+class Header extends StatelessWidget {
+  const Header({
     super.key,
   });
 
@@ -12,22 +15,30 @@ class MainHeader extends StatelessWidget {
         const CircleAvatar(
           backgroundImage: AssetImage("assets/logoBanda.png"),
           backgroundColor: Colors.transparent,
-          radius: 30,
+          radius: 20,
         ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 7.0),
-            child: Text(
-              "Banda Municipal de Villaejemplo",
-              style: Theme.of(context).textTheme.titleSmall,
-              textAlign: TextAlign.center,
-            ),
+        const Expanded(
+          child: Text(
+            "Banda Municipal de Villaejemplo",
+            textAlign: TextAlign.center,
+            softWrap: true,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
-        IconButton(
-          icon: const Icon(Icons.settings),
-          color: Theme.of(context).colorScheme.onSurface,
-          onPressed: () {},
+        SizedBox(
+          width: 24,
+          height: 24,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              context.read<RouterSimpleCubit>().pushRoute("/settings");
+            },
+            icon: Icon(
+              Icons.settings,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+          ),
         ),
       ],
     );

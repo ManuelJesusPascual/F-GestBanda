@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/widgets/instrument_tile.dart';
 import 'package:gestbanda/widgets/voice_tile.dart';
 
 import '../../../config/config.dart';
-import '../../../models/instrument.dart';
 
 class BandVoicesPage extends StatelessWidget {
   BandVoicesPage({super.key});

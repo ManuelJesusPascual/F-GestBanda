@@ -1,16 +1,16 @@
+export './costume_tile.dart';
 export './custom_button.dart';
-export './custom_text_input.dart';
-export './event_item.dart';
-export './instrument_item.dart';
-export './events_list.dart';
-export './date_modal.dart';
-export './time_modal.dart';
 export './custom_image_container.dart';
+export './custom_list_tile.dart';
+export './custom_text_input.dart';
+export './date_modal.dart';
+export './event_tile.dart';
 export './image_placeholder.dart';
-export './custom_list_header.dart';
-export "./custom_list_tile.dart";
-
-//NUEVA UI
-
+export './instrument_tile.dart';
+export './new_event_item.dart';
+export './new_events_list.dart';
+export './new_main_bottom_bar.dart';
 export './new_main_header.dart';
-export 'new_event_item dart';
+export './time_modal.dart';
+export './user_tile.dart';
+export './voice_tile.dart';

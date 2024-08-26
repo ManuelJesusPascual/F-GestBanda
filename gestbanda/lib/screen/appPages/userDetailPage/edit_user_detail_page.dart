@@ -27,7 +27,7 @@ class _EditUserDetailPageState extends State<EditUserDetailPage> {
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              Text("Selecciona el rol del componente:"),
+              const Text("Selecciona el rol del componente:"),
               DropdownButtonHideUnderline(
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 20),
@@ -75,7 +75,7 @@ class _EditUserDetailPageState extends State<EditUserDetailPage> {
                   ),
                 ),
               ),
-              Text("Selecciona la voz del componente:"),
+              const Text("Selecciona la voz del componente:"),
               DropdownButtonHideUnderline(
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 20),

@@ -7,7 +7,7 @@ import '../../../models/instrument.dart';
 
 class UserInstrumentModifyPage extends StatefulWidget {
   final Instrument instrument;
-  UserInstrumentModifyPage({super.key, required this.instrument});
+  const UserInstrumentModifyPage({super.key, required this.instrument});
 
   @override
   State<UserInstrumentModifyPage> createState() =>

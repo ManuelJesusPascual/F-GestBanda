@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gestbanda/models/event.dart';
+import 'package:gestbanda/utils/string_utilites.dart';
 
 import '../config/config.dart';
-import '../utils/enums/event_type_enum.dart';
+import 'widgets.dart';
 
 class EventItem extends StatelessWidget {
   final Event event;
@@ -11,81 +14,75 @@ class EventItem extends StatelessWidget {
   const EventItem({super.key, required this.event});
   @override
   Widget build(BuildContext context) {
-    final String month = getMonth(event.initDate);
-
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(12),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
         padding: const EdgeInsets.all(8.0),
-        fixedSize: const Size(100, 130),
+        fixedSize: const Size(400, 100),
       ),
       onPressed: () {
         context
             .read<RouterSimpleCubit>()
             .pushRoute("/event_detail", extra: event);
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Text(
-                event.initDate.day.toString(),
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  event.title,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Text(
-                month,
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                EventTypeExtension.eventTypeToString(event.type),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                  fontSize: 10,
+                Text(
+                  formatDateTime(event.initDate, "d MMMM yyyy"),
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal),
                 ),
-                textAlign: TextAlign.center,
-              ),
+              ],
             ),
-          ),
-        ],
+            Container(
+                height: 100,
+                width: 120,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  child: (event.imgList != null && event.imgList!.isNotEmpty)
+                      ? CachedNetworkImage(
+                          imageUrl: event.imgList!.first,
+                          cacheManager: CacheManager(
+                            Config(
+                              event.imgList!.first,
+                              stalePeriod: const Duration(days: 7),
+                            ),
+                          ),
+                          placeholder: (context, url) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          alignment: Alignment.center,
+                          fadeInDuration: Duration.zero,
+                        )
+                      : const ImagePlaceholder(),
+                ))
+          ],
+        ),
       ),
     );
-  }
-
-  String getMonth(DateTime date) {
-    final List<String> months = [
-      'Enero',
-      'Febrero',
-      'Marzo',
-      'Abril',
-      'Mayo',
-      'Junio',
-      'Julio',
-      'Agosto',
-      'Septiembre',
-      'Octubre',
-      'Noviembre',
-      'Diciembre'
-    ];
-    return months[date.month - 1];
   }
 }

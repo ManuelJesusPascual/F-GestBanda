@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/utils/enums/event_type_enum.dart';
-import 'package:gestbanda/widgets/new_main_bottom_bar.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../config/config.dart';
 import '../../../models/event.dart';
-import '../../../widgets/new_events_list.dart';
 import '../../../widgets/widgets.dart';
 
 class NewCalendarPage extends StatefulWidget {
@@ -39,7 +37,7 @@ class _NewCalendarPageState extends State<NewCalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const NewMainBottomBar(currentIndex: 0),
+      bottomNavigationBar: const MainBottomBar(currentIndex: 0),
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.onSurface,
@@ -58,7 +56,7 @@ class _NewCalendarPageState extends State<NewCalendarPage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const NewHeader(),
+              const Header(),
               Expanded(
                 child: Stack(
                   children: [
@@ -151,7 +149,7 @@ class _NewCalendarPageState extends State<NewCalendarPage> {
                         ),
                         const SizedBox(height: 25.0),
                         Expanded(
-                          child: NewEventsList(selectedEvents: _selectedEvents),
+                          child: EventsList(selectedEvents: _selectedEvents),
                         ),
                       ],
                     ),

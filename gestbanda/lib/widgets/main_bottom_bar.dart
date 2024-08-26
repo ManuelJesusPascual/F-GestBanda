@@ -12,11 +12,13 @@ class MainBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       selectedItemColor: Theme.of(context).colorScheme.secondary,
-      unselectedItemColor: Theme.of(context).colorScheme.surface,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
+      unselectedItemColor: Theme.of(context).colorScheme.primary,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      selectedFontSize: 10,
+      unselectedFontSize: 10,
       currentIndex: currentIndex,
       onTap: (value) {
         if (value != currentIndex) {
@@ -30,15 +32,15 @@ class MainBottomBar extends StatelessWidget {
       },
       items: const [
         BottomNavigationBarItem(
-          label: "Calendar",
+          label: "Calendario",
           icon: Icon(Icons.calendar_month),
         ),
         BottomNavigationBarItem(
-          label: "Home",
+          label: "Inicio",
           icon: Icon(Icons.home),
         ),
         BottomNavigationBarItem(
-          label: "Profile",
+          label: "Listado Usuarios",
           icon: Icon(Icons.people),
         ),
       ],

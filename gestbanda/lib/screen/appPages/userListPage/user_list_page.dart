@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/widgets/main_bottom_bar.dart';
-import 'package:gestbanda/widgets/main_header.dart';
 
 import '../../../config/config.dart';
+import '../../../models/costume.dart';
+import '../../../models/instrument.dart';
 import '../../../models/user.dart';
 import '../../../widgets/widgets.dart';
 
-class UserList extends StatelessWidget {
-  UserList({super.key});
+class UserList extends StatefulWidget {
+  const UserList({super.key});
 
+  @override
+  State<UserList> createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
   final List<User> users = [
     User(
         name: "Bob",
@@ -17,7 +22,62 @@ class UserList extends StatelessWidget {
         phone: "666666666",
         role: "Componente",
         voz: "Corneta",
-        instrumentList: [],
+        instrumentList: [
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 5,
+            borrowedQuantity: 3,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ],
         costumeList: []),
     User(
         name: "Charlie Pepito Rodriguez",
@@ -26,15 +86,156 @@ class UserList extends StatelessWidget {
         role: "Componente",
         voz: "Trompeta",
         instrumentList: [],
-        costumeList: []),
+        costumeList: [
+          Costume(
+            img:
+                "",
+            name: "Fajin",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Cinturon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Chaqueta",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Pantalon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Hombreras",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Zapatos",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ]),
     User(
         name: "Dave",
         email: "support@gestbanda.com",
         phone: "666666666",
         role: "Director General",
         voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
+        instrumentList: [
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Sib",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Corneta Do/Reb",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Instrument(
+            img: "",
+            name: "Trompeta Do",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ],
+        costumeList: [
+          Costume(
+            img:
+                "",
+            name: "Fajin",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Cinturon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Chaqueta",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Pantalon",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Hombreras",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+          Costume(
+            img:
+                "",
+            name: "Zapatos",
+            quantity: 2,
+            borrowedQuantity: 1,
+          ),
+        ]),
     User(
         name: "Eve",
         email: "support@gestbanda.com",
@@ -57,6 +258,8 @@ class UserList extends StatelessWidget {
         phone: "666666666",
         role: "Director General",
         voz: "Trombon",
+        img:
+            "",
         instrumentList: [],
         costumeList: []),
     User(
@@ -101,23 +304,30 @@ class UserList extends StatelessWidget {
         costumeList: []),
   ];
 
+  String _selectedInstrument = 'Seleccionar Voz';
+
   @override
   Widget build(BuildContext context) {
-    final Map<String, List<User>> usersByVoz = {};
-    for (var user in users) {
-      if (!usersByVoz.containsKey(user.voz)) {
-        usersByVoz[user.voz] = [];
-      }
-      usersByVoz[user.voz]!.add(user);
+    List<User> filteredUsers = _selectedInstrument == 'Seleccionar Voz'
+        ? users
+        : users.where((user) => user.voz == _selectedInstrument).toList();
+
+    if (_selectedInstrument == 'Seleccionar Voz') {
+      filteredUsers.sort((a, b) => a.voz.compareTo(b.voz));
     }
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       bottomNavigationBar: const MainBottomBar(currentIndex: 2),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
         onPressed: () {
           context.read<RouterSimpleCubit>().pushRoute("/code_list");
         },
-        child: const Icon(Icons.qr_code),
+        child: Icon(
+          Icons.qr_code,
+          color: Theme.of(context).colorScheme.surface,
+        ),
       ),
       body: SafeArea(
         child: Padding(
@@ -125,32 +335,63 @@ class UserList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const MainHeader(),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: Text(
-                  "Listado de componentes:",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              const Header(),
+              DropdownButtonHideUnderline(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  child: DropdownButtonFormField<String>(
+                    value: _selectedInstrument,
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    iconSize: 24,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.secondary,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    dropdownColor: Theme.of(context).colorScheme.secondary,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedInstrument = newValue!;
+                      });
+                    },
+                    items: <String>[
+                      'Seleccionar Voz',
+                      'Trompeta',
+                      'Corneta',
+                      'Trombon'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: usersByVoz.length,
-                  itemBuilder: (context, roleIndex) {
-                    String voz = usersByVoz.keys.elementAt(roleIndex);
-                    List<User> vozUsers = usersByVoz[voz]!;
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomListHeader(
-                          title: voz,
-                        ),
-                        ...vozUsers.map((user) => CustomListTile(
-                              text: user.name,
-                              ca: true,
-                            )),
-                      ],
+                  itemCount: filteredUsers.length,
+                  itemBuilder: (context, index) {
+                    User user = filteredUsers[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: UserTile(user: user),
                     );
                   },
                 ),
