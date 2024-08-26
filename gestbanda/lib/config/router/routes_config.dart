@@ -1,8 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/Event.dart';
+import 'package:gestbanda/models/costume.dart';
+import 'package:gestbanda/models/event.dart';
+import 'package:gestbanda/models/instrument.dart';
+import 'package:gestbanda/models/user.dart';
+import 'package:gestbanda/screen/appPages/userListPage/user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../models/band.dart';
+import '../../models/code.dart';
 import '../../screen/pages.dart';
 
 final unauthenticatedRouter = GoRouter(
@@ -58,7 +64,160 @@ final directorRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const MainPage(),
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: '/calendar',
+      builder: (context, state) => const NewCalendarPage(),
+    ),
+    GoRoute(
+      path: '/event_detail',
+      builder: (context, state) => EventDetailPage(event: state.extra as Event),
+    ),
+    GoRoute(
+      path: '/event_create_modify',
+      builder: (context, state) {
+        final Event? event = state.extra as Event?;
+        return EventCreateModify(event: event);
+      },
+    ),
+    GoRoute(
+      path: '/user_list',
+      builder: (context, state) => const UserList(),
+    ),
+    GoRoute(
+      path: '/user_detail',
+      builder: (context, state) {
+        final User user = state.extra
+            as User; //Este parámetro a diferencia de los otros que son opcionales porque se reutilizan las vistas de crear y modificar, este es obligatorio.
+        return UserDetailPage(
+          user: user,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/user_add_instrument',
+      builder: (context, state) {
+        return const UserInstrumentCreatePage();
+      },
+    ),
+    GoRoute(
+      path: '/user_add_costume',
+      builder: (context, state) {
+        return const UserCostumeCreatePage();
+      },
+    ),
+    GoRoute(
+      path: '/user_modify',
+      builder: (context, state) {
+        final User user = state.extra as User;
+        return EditUserDetailPage(
+          user: user,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/user_instrument_modify',
+      builder: (context, state) {
+        final Instrument instrument = state.extra as Instrument;
+        return UserInstrumentModifyPage(instrument: instrument);
+      },
+    ),
+    GoRoute(
+      path: '/user_costume_modify',
+      builder: (context, state) {
+        final Costume costume = state.extra as Costume;
+        return UserCostumeModifyPage(costume: costume);
+      },
+    ),
+    GoRoute(
+      path: '/code_list',
+      builder: (context, state) => CodeList(),
+    ),
+    GoRoute(
+      path: '/code_create_modify',
+      builder: (context, state) {
+        final Code? code = state.extra as Code?;
+        return CodeCreateModify(code: code);
+      },
+    ),
+    GoRoute(
+      path: '/instruments_list',
+      builder: (context, state) => InstrumentPage(),
+    ),
+    GoRoute(
+      path: '/instrument_create_modify',
+      builder: (context, state) {
+        final Instrument? instrument = state.extra as Instrument?;
+        return InstrumentCreateModifyPage(instrument: instrument);
+      },
+    ),
+    GoRoute(
+      path: '/costume_list',
+      builder: (context, state) => NewCustomePage(),
+    ),
+    GoRoute(
+      path: '/costume_create_modify',
+      builder: (context, state) {
+        final Costume? costume = state.extra as Costume?;
+        return CostumeCreateModifyPage(costume: costume);
+      },
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
+    ),
+    GoRoute(
+      path: '/user_settings',
+      builder: (context, state) {
+        final User user = state.extra as User;
+        return UserSettingsPage(
+          user: user,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/band_settings',
+      builder: (context, state) {
+        final Band band = state.extra as Band;
+        return BandSettingsPage(
+          band: band,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/edit_user_setting/:setting',
+      builder: (context, state) {
+        final User user = state.extra as User;
+        final String setting = state.pathParameters['setting']!;
+        return EditUserSettingPage(
+          user: user,
+          setting: setting,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/edit_band_setting/:setting',
+      builder: (context, state) {
+        final Band band = state.extra as Band;
+        final String setting = state.pathParameters['setting']!;
+        return EditBandSettingPage(
+          band: band,
+          setting: setting,
+        );
+      },
+    ),
+    GoRoute(
+      path: '/edit_band_voices',
+      builder: (context, state) {
+        return BandVoicesPage();
+      },
+    ),
+    GoRoute(
+      path: '/add_band_voices',
+      builder: (context, state) {
+        return const BandVoiceAddPage();
+      },
     ),
     GoRoute(
       path: '/return_policy',
@@ -67,10 +226,6 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/private_policy',
       builder: (context, state) => const PrivatePolicy(),
-    ),
-    GoRoute(
-      path: '/event_detail',
-      builder: (context, state) => EventDetailPage(event: state.extra as Event),
     ),
   ],
 );
@@ -83,6 +238,10 @@ class RouterSimpleCubit extends Cubit<GoRouter> {
 
   void pushRoute(String route, {Object? extra}) {
     state.push(route, extra: extra);
+  }
+
+  void go(String route, {Object? extra}) {
+    state.go(route, extra: extra);
   }
 
   void changeRouter(GoRouter router) {

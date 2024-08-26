@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestbanda/widgets/event_tile.dart';
 
-import '../config/config.dart';
-import '../models/Event.dart';
+import '../models/event.dart';
 
 class EventsList extends StatelessWidget {
   const EventsList({
@@ -20,28 +19,9 @@ class EventsList extends StatelessWidget {
         return ListView.builder(
           itemCount: value.length,
           itemBuilder: (context, index) {
-            return Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 4.0,
-              ),
-              decoration: BoxDecoration(
-                color: value[index].initDate.compareTo(DateTime.now()) < 0
-                    ? Colors.grey
-                    : Theme.of(context).colorScheme.secondary,
-                border: Border.all(),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: ListTile(
-                onTap: () => (context
-                    .read<RouterSimpleCubit>()
-                    .pushRoute("/event_detail", extra: value[index])),
-                title: Text(
-                  '${value[index].title}',
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSecondary),
-                ),
-              ),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EventTile(event: value[index]),
             );
           },
         );

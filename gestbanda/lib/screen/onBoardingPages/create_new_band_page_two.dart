@@ -70,7 +70,7 @@ class CreateNewBandPageTwo extends StatelessWidget {
                   CustomButton(
                     text: "Pack\nMensual\n\n70€",
                     color: "primary",
-                    br: BorderRadius.circular(10),
+                    br: BorderRadius.circular(16),
                     onPressed: () {
                       context
                           .read<RouterSimpleCubit>()
@@ -83,7 +83,7 @@ class CreateNewBandPageTwo extends StatelessWidget {
                   CustomButton(
                     text: "Pack\nSemestral\n\n410€",
                     color: "primary",
-                    br: BorderRadius.circular(10),
+                    br: BorderRadius.circular(16),
                     onPressed: () {
                       context
                           .read<RouterSimpleCubit>()
@@ -96,7 +96,7 @@ class CreateNewBandPageTwo extends StatelessWidget {
                   CustomButton(
                     text: "Pack\nAnual\n\n820€",
                     color: "primary",
-                    br: BorderRadius.circular(10),
+                    br: BorderRadius.circular(16),
                     onPressed: () {
                       context
                           .read<RouterSimpleCubit>()

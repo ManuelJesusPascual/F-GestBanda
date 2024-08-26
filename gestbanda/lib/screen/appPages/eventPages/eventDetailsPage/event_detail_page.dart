@@ -1,9 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:gestbanda/utils/enums/EventTypeEnum.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gestbanda/utils/enums/event_type_enum.dart';
+import 'package:gestbanda/widgets/widgets.dart';
 
-import '../../../models/Event.dart';
+import '../../../../config/config.dart';
+import '../../../../models/event.dart';
+import '../../../../utils/string_utilites.dart';
 
 class EventDetailPage extends StatefulWidget {
   final Event event;
@@ -48,13 +51,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                               fit: BoxFit.cover,
                               width: MediaQuery.of(context).size.width)))
                       .toList()
-                  : [
-                      Center(
-                          child: Image.network(
-                              "",
-                              fit: BoxFit.cover,
-                              width: MediaQuery.of(context).size.width))
-                    ],
+                  : [const Center(child: ImagePlaceholder())],
             ),
             if (widget.event.imgList != null &&
                 widget.event.imgList!.isNotEmpty)
@@ -77,10 +74,24 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 }).toList(),
               ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, top: 20),
-              child: Text(
-                widget.event.title,
-                style: Theme.of(context).textTheme.titleSmall,
+              padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.event.title,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      context.read<RouterSimpleCubit>().pushRoute(
+                          "/event_create_modify",
+                          extra: widget.event);
+                    },
+                  ),
+                ],
               ),
             ),
             Row(
@@ -111,13 +122,15 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Text(formatDateTime(widget.event.initDate)),
+                  child: Text(formatDateTime(
+                      widget.event.initDate, 'dd/MM/yyyy HH:mm')),
                 ),
                 const Text(" - "),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Text(formatDateTime(widget.event.endDate)),
+                  child: Text(
+                      formatDateTime(widget.event.endDate, 'dd/MM/yyyy HH:mm')),
                 ),
               ],
             ),
@@ -131,10 +144,5 @@ class _EventDetailPageState extends State<EventDetailPage> {
         ),
       ),
     );
-  }
-
-  String formatDateTime(DateTime dateTime) {
-    final DateFormat dateFormat = DateFormat('dd/MM/yyyy HH:mm');
-    return dateFormat.format(dateTime);
   }
 }

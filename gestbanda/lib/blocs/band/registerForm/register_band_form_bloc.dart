@@ -7,7 +7,7 @@ import 'package:gestbanda/blocs/band/registerForm/register_band_form_bloc_state.
 import 'package:gestbanda/utils/extensions.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../models/BlocFormItem.dart';
+import '../../../models/bloc_form_item.dart';
 
 class RegisterBandFormBloc
     extends Bloc<RegisterBandFormEvents, RegisterBandFormState> {
@@ -38,7 +38,7 @@ class RegisterBandFormBloc
                 : "No puedes introducir un nombre vacío")));
   }
 
-//Solucionar que si se hace doble click en el boton se lanza excepcion, hacer loadingState
+//TODO:Solucionar que si se hace doble click en el boton se lanza excepcion, hacer loadingState
   Future<void> _onImgChanged(RegisterBandFormImgChangedEvent event,
       Emitter<RegisterBandFormState> emitter) async {
     if (!loading) {

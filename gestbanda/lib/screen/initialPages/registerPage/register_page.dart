@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/BlocFormItem.dart';
+import 'package:gestbanda/models/bloc_form_item.dart';
 
 import '../../../blocs/blocs.dart';
 import '../../../config/config.dart';
@@ -147,7 +147,7 @@ class RegisterPage extends StatelessWidget {
                             child: CustomButton(
                               text: "Registrarse",
                               color: "primary",
-                              br: const BorderRadius.all(Radius.circular(10)),
+                              br: const BorderRadius.all(Radius.circular(16)),
                               onPressed: () {
                                 BlocProvider.of<RegisterUserFormBloc>(context)
                                     .add(

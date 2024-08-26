@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/BlocFormItem.dart';
+import '../../../models/bloc_form_item.dart';
 
 class RegisterBandFormState extends Equatable {
   final BlocFormItem name;

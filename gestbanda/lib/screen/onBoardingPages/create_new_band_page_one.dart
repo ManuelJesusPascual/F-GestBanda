@@ -5,7 +5,7 @@ import 'package:gestbanda/blocs/blocs.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../config/config.dart';
-import '../../models/BlocFormItem.dart';
+import '../../models/bloc_form_item.dart';
 
 class CreateNewBandPageOne extends StatelessWidget {
   const CreateNewBandPageOne({super.key});
@@ -48,7 +48,8 @@ class CreateNewBandPageOne extends StatelessWidget {
                           style: IconButton.styleFrom(
                             padding: EdgeInsets.zero,
                             fixedSize: const Size(150, 150),
-                            backgroundColor: const Color(0xffB0E0E6),
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
@@ -62,9 +63,9 @@ class CreateNewBandPageOne extends StatelessWidget {
                                   radius: 100,
                                   backgroundImage: FileImage(state.img!),
                                 )
-                              : const Icon(
+                              : Icon(
                                   Icons.image_outlined,
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.surface,
                                   weight: 0.2,
                                 ),
                           iconSize: 100,
@@ -129,7 +130,7 @@ class CreateNewBandPageOne extends StatelessWidget {
                           text: "¡Solo unos pasos más!",
                           color: "primary",
                           icon: Icons.arrow_right_alt_rounded,
-                          br: BorderRadius.circular(10),
+                          br: BorderRadius.circular(16),
                           width: 350,
                           onPressed: () {
                             BlocProvider.of<RegisterBandFormBloc>(context)

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:gestbanda/models/BlocFormItem.dart';
+import 'package:gestbanda/models/bloc_form_item.dart';
 
 class LoginUserFormState extends Equatable {
   final BlocFormItem email;

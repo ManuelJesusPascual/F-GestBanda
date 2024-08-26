@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/BlocFormItem.dart';
+import 'package:gestbanda/models/bloc_form_item.dart';
 
 import '../../../blocs/blocs.dart';
 import '../../../config/config.dart';
@@ -85,7 +85,7 @@ class LoginPage extends StatelessWidget {
                               child: CustomButton(
                                 text: "Iniciar Sesión",
                                 color: "primary",
-                                br: const BorderRadius.all(Radius.circular(10)),
+                                br: const BorderRadius.all(Radius.circular(16)),
                                 onPressed: () {
                                   BlocProvider.of<LoginUserFormBloc>(context)
                                       .add(const LoginUserFormSubmitEvent());

@@ -1,6 +1,5 @@
-
 import 'package:equatable/equatable.dart';
-import 'package:gestbanda/models/BlocFormItem.dart';
+import 'package:gestbanda/models/bloc_form_item.dart';
 
 abstract class RegisterBandFormEvents extends Equatable {
   const RegisterBandFormEvents();

@@ -61,8 +61,8 @@ class RegisterSelectorPage extends StatelessWidget {
                           .pushRoute("/create_band_one");
                     },
                     br: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
+                      topLeft: Radius.circular(16),
+                      bottomLeft: Radius.circular(16),
                     ),
                     width: 160,
                     height: 300,
@@ -77,8 +77,8 @@ class RegisterSelectorPage extends StatelessWidget {
                       context.read<RouterSimpleCubit>().pushRoute("/join_band");
                     },
                     br: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+                      topRight: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
                     ),
                     width: 160,
                     height: 300,
