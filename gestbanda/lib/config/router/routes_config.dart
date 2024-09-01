@@ -1,15 +1,15 @@
-import 'package:gestbanda/models/costume.dart';
-import 'package:gestbanda/models/event.dart';
-import 'package:gestbanda/models/instrument.dart';
-import 'package:gestbanda/models/user.dart';
-import 'package:gestbanda/screen/appPages/userListPage/user_list_page.dart';
-import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
+import 'package:gestbanda/domain/models/costume.dart';
+import 'package:gestbanda/domain/models/event.dart';
+import 'package:gestbanda/domain/models/instrument.dart';
+import 'package:gestbanda/domain/models/user.dart';
+import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_page.dart';
+import 'package:gestbanda/presentation/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../models/band.dart';
-import '../../models/code.dart';
-import '../../screen/pages.dart';
+import '../../domain/models/band.dart';
+import '../../domain/models/code.dart';
+import '../../presentation/screen/pages.dart';
 
 part 'routes_config.g.dart';
 
@@ -233,7 +233,7 @@ final directorRouter = GoRouter(
 );
 
 @riverpod
-class appRouter extends _$appRouter {
+class AppRouter extends _$AppRouter {
   @override
   GoRouter build() => unauthenticatedRouter;
 

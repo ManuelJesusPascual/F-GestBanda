@@ -6,13 +6,13 @@ part of 'routes_config.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appRouterHash() => r'77105e20e0c6a4bc8b892bc09fffe9ce8639b426';
+String _$appRouterHash() => r'3afbcb2be82d2e611284f29602f58069bded4e16';
 
-/// See also [appRouter].
-@ProviderFor(appRouter)
+/// See also [AppRouter].
+@ProviderFor(AppRouter)
 final appRouterProvider =
-    AutoDisposeNotifierProvider<appRouter, GoRouter>.internal(
-  appRouter.new,
+    AutoDisposeNotifierProvider<AppRouter, GoRouter>.internal(
+  AppRouter.new,
   name: r'appRouterProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$appRouterHash,
@@ -20,6 +20,6 @@ final appRouterProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$appRouter = AutoDisposeNotifier<GoRouter>;
+typedef _$AppRouter = AutoDisposeNotifier<GoRouter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
