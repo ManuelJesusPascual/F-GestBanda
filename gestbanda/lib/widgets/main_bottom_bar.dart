@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/config/router/routes_config.dart';
 
-class MainBottomBar extends StatelessWidget {
+class MainBottomBar extends ConsumerWidget {
   const MainBottomBar({
     super.key,
     required this.currentIndex,
@@ -10,7 +10,7 @@ class MainBottomBar extends StatelessWidget {
   final int currentIndex;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).colorScheme.surface,
       selectedItemColor: Theme.of(context).colorScheme.secondary,
@@ -27,7 +27,7 @@ class MainBottomBar extends StatelessWidget {
             '/',
             '/user_list',
           ];
-          context.read<RouterSimpleCubit>().go(routes[value]);
+          ref.read(appRouterProvider).go(routes[value]);
         }
       },
       items: const [

@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/models/event.dart';
 
-import '../config/config.dart';
+import '../config/router/routes_config.dart';
 import '../utils/enums/event_type_enum.dart';
 import 'widgets.dart';
 
-class EventTile extends StatelessWidget {
+class EventTile extends ConsumerWidget {
   final Event event;
 
   const EventTile({super.key, required this.event});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final DateTime now = DateTime.now();
 
     // Calcula la diferencia de tiempo en horas
@@ -29,9 +29,7 @@ class EventTile extends StatelessWidget {
         fixedSize: const Size(100, 70),
       ),
       onPressed: () {
-        context
-            .read<RouterSimpleCubit>()
-            .pushRoute("/event_detail", extra: event);
+        ref.read(appRouterProvider).push("/event_detail", extra: event);
       },
       child: Row(
         children: [

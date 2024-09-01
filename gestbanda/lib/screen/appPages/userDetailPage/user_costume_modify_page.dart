@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../../models/costume.dart';
 
-class UserCostumeModifyPage extends StatefulWidget {
+class UserCostumeModifyPage extends ConsumerStatefulWidget {
   final Costume costume;
   const UserCostumeModifyPage({super.key, required this.costume});
 
   @override
-  State<UserCostumeModifyPage> createState() => _UserCostumeModifyPageState();
+  ConsumerState<UserCostumeModifyPage> createState() =>
+      _UserCostumeModifyPageState();
 }
 
-class _UserCostumeModifyPageState extends State<UserCostumeModifyPage> {
+class _UserCostumeModifyPageState extends ConsumerState<UserCostumeModifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +53,7 @@ class _UserCostumeModifyPageState extends State<UserCostumeModifyPage> {
                       children: [
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),
@@ -63,7 +65,7 @@ class _UserCostumeModifyPageState extends State<UserCostumeModifyPage> {
                             )),
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),

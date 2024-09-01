@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../config/router/routes_config.dart';
 import '../../../../widgets/widgets.dart';
 import '../../../../models/event.dart';
 import '../../../../utils/enums/event_type_enum.dart';
 
-class EventCreateModify extends StatefulWidget {
+class EventCreateModify extends ConsumerStatefulWidget {
   final Event event;
   EventCreateModify({super.key, Event? event})
       : event = (event ??
@@ -25,7 +25,7 @@ class EventCreateModify extends StatefulWidget {
   EventCreateModifyState createState() => EventCreateModifyState();
 }
 
-class EventCreateModifyState extends State<EventCreateModify> {
+class EventCreateModifyState extends ConsumerState<EventCreateModify> {
   late DateTimeRange dateRange;
   late TimeOfDay initTime;
   late TimeOfDay endTime;
@@ -359,7 +359,7 @@ class EventCreateModifyState extends State<EventCreateModify> {
                       color: "primary",
                       br: const BorderRadius.all(Radius.circular(16)),
                       onPressed: () {
-                        context.read<RouterSimpleCubit>().goBack();
+                        ref.read(appRouterProvider).pop();
                       },
                     ),
                     if (edit!)
@@ -374,7 +374,7 @@ class EventCreateModifyState extends State<EventCreateModify> {
                         color: "error",
                         br: const BorderRadius.all(Radius.circular(16)),
                         onPressed: () {
-                          context.read<RouterSimpleCubit>().goBack();
+                          ref.read(appRouterProvider).pop();
                         },
                       ),
                   ],

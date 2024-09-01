@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../config/config.dart';
 
-class RegisterSelectorPage extends StatelessWidget {
+class RegisterSelectorPage extends ConsumerWidget {
   const RegisterSelectorPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -25,8 +25,8 @@ class RegisterSelectorPage extends StatelessWidget {
                     overlayColor: Colors.transparent,
                   ),
                   onPressed: () {
-                    context
-                        .read<RouterSimpleCubit>()
+                    ref
+                        .read(appRouterProvider.notifier)
                         .changeRouter(unauthenticatedRouter);
                   },
                   child: const Icon(Icons.logout_outlined),
@@ -56,9 +56,7 @@ class RegisterSelectorPage extends StatelessWidget {
                     imgHeight: 150,
                     imgWidth: 150,
                     onPressed: () {
-                      context
-                          .read<RouterSimpleCubit>()
-                          .pushRoute("/create_band_one");
+                      ref.read(appRouterProvider).push("/create_band_one");
                     },
                     br: const BorderRadius.only(
                       topLeft: Radius.circular(16),
@@ -74,7 +72,7 @@ class RegisterSelectorPage extends StatelessWidget {
                     imgHeight: 150,
                     imgWidth: 150,
                     onPressed: () {
-                      context.read<RouterSimpleCubit>().pushRoute("/join_band");
+                      ref.read(appRouterProvider).push("/join_band");
                     },
                     br: const BorderRadius.only(
                       topRight: Radius.circular(16),

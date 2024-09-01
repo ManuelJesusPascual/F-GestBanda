@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/instrument_tile.dart';
 
 import '../../../config/config.dart';
 import '../../../models/instrument.dart';
 
-class InstrumentPage extends StatelessWidget {
+class InstrumentPage extends ConsumerWidget {
   InstrumentPage({super.key});
 
   final List<Instrument> instruments = [
@@ -48,15 +48,13 @@ class InstrumentPage extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          context
-              .read<RouterSimpleCubit>()
-              .pushRoute("/instrument_create_modify");
+          ref.read(appRouterProvider).push("/instrument_create_modify");
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
@@ -87,7 +85,7 @@ class InstrumentPage extends StatelessWidget {
                       child: InstrumentTile(
                         instrument: instruments[index],
                         onPressed: () {
-                          context.read<RouterSimpleCubit>().pushRoute(
+                          ref.read(appRouterProvider).push(
                               "/instrument_create_modify",
                               extra: instruments[index]);
                         },

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/band.dart';
 
-class EditBandSettingPage extends StatefulWidget {
+class EditBandSettingPage extends ConsumerStatefulWidget {
   final String setting;
   final Band band;
 
@@ -12,10 +12,11 @@ class EditBandSettingPage extends StatefulWidget {
       {super.key, required this.setting, required this.band});
 
   @override
-  State<EditBandSettingPage> createState() => _EditBandSettingPageState();
+  ConsumerState<EditBandSettingPage> createState() =>
+      _EditBandSettingPageState();
 }
 
-class _EditBandSettingPageState extends State<EditBandSettingPage> {
+class _EditBandSettingPageState extends ConsumerState<EditBandSettingPage> {
   String _getInitialValue() {
     switch (widget.setting) {
       case 'Nombre':
@@ -65,7 +66,7 @@ class _EditBandSettingPageState extends State<EditBandSettingPage> {
                       children: [
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/costume_tile.dart';
 import 'package:gestbanda/widgets/instrument_tile.dart';
 
@@ -9,13 +9,13 @@ import '../../../config/config.dart';
 import '../../../models/user.dart';
 import '../../../utils/string_utilites.dart';
 
-class UserDetailPage extends StatelessWidget {
+class UserDetailPage extends ConsumerWidget {
   const UserDetailPage({super.key, required this.user});
 
   final User user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
@@ -26,9 +26,7 @@ class UserDetailPage extends StatelessWidget {
             icon: Icon(Icons.edit,
                 color: Theme.of(context).colorScheme.onSurface),
             onPressed: () {
-              context
-                  .read<RouterSimpleCubit>()
-                  .pushRoute("/user_modify", extra: user);
+              ref.read(appRouterProvider).push("/user_modify", extra: user);
             },
           ),
         ],
@@ -98,7 +96,7 @@ class UserDetailPage extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.playlist_add),
                           onPressed: () {
-                            context.read<RouterSimpleCubit>().pushRoute(
+                            ref.read(appRouterProvider).push(
                                   "/user_add_instrument",
                                 );
                           },
@@ -117,10 +115,9 @@ class UserDetailPage extends StatelessWidget {
                                   child: InstrumentTile(
                                     instrument: instrument,
                                     onPressed: () {
-                                      context
-                                          .read<RouterSimpleCubit>()
-                                          .pushRoute("/user_instrument_modify",
-                                              extra: instrument);
+                                      ref.read(appRouterProvider).push(
+                                          "/user_instrument_modify",
+                                          extra: instrument);
                                     },
                                   ),
                                 );
@@ -144,7 +141,7 @@ class UserDetailPage extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.playlist_add),
                           onPressed: () {
-                            context.read<RouterSimpleCubit>().pushRoute(
+                            ref.read(appRouterProvider).push(
                                   "/user_add_costume",
                                 );
                           },
@@ -163,10 +160,9 @@ class UserDetailPage extends StatelessWidget {
                                   child: CostumeTile(
                                     costume: costume,
                                     onPressed: () {
-                                      context
-                                          .read<RouterSimpleCubit>()
-                                          .pushRoute("/user_costume_modify",
-                                              extra: costume);
+                                      ref.read(appRouterProvider).push(
+                                          "/user_costume_modify",
+                                          extra: costume);
                                     },
                                   ),
                                 );

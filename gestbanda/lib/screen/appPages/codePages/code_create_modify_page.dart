@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/models/code.dart';
 import 'package:gestbanda/utils/string_utilites.dart';
 
 import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
 
-class CodeCreateModify extends StatefulWidget {
+class CodeCreateModify extends ConsumerStatefulWidget {
   final Code code;
 
   CodeCreateModify({super.key, Code? code})
@@ -19,10 +19,10 @@ class CodeCreateModify extends StatefulWidget {
             .copyWith();
 
   @override
-  State<CodeCreateModify> createState() => _CodeCreateModifyState();
+  ConsumerState<CodeCreateModify> createState() => _CodeCreateModifyState();
 }
 
-class _CodeCreateModifyState extends State<CodeCreateModify> {
+class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
   DateTime? selectedDateTime;
 
   Future<void> _selectDateTime(BuildContext context) async {
@@ -177,7 +177,7 @@ class _CodeCreateModifyState extends State<CodeCreateModify> {
                 color: "primary",
                 br: const BorderRadius.all(Radius.circular(16)),
                 onPressed: () {
-                  context.read<RouterSimpleCubit>().goBack();
+                  ref.read(appRouterProvider).pop();
                 },
               ),
             ),

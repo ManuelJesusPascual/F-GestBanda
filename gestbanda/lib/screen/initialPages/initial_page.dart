@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../config/config.dart';
 import '../../widgets/widgets.dart';
 
-class InitialPage extends StatelessWidget {
+class InitialPage extends ConsumerWidget {
   const InitialPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
@@ -57,7 +57,7 @@ class InitialPage extends StatelessWidget {
                       bottomLeft: Radius.circular(16),
                     ),
                     onPressed: () {
-                      context.read<RouterSimpleCubit>().pushRoute("/login");
+                      ref.read(appRouterProvider).push("/login");
                     },
                   ),
                   CustomButton(
@@ -68,7 +68,7 @@ class InitialPage extends StatelessWidget {
                       bottomRight: Radius.circular(16),
                     ),
                     onPressed: () {
-                      context.read<RouterSimpleCubit>().pushRoute("/register");
+                      ref.read(appRouterProvider).push("/register");
                     },
                   ),
                 ],

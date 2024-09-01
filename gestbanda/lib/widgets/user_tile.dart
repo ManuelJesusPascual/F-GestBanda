@@ -1,18 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/models/user.dart';
 import '../config/config.dart';
 import '../utils/string_utilites.dart';
 
-class UserTile extends StatelessWidget {
+class UserTile extends ConsumerWidget {
   const UserTile({super.key, required this.user});
 
   final User user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
         ElevatedButton(
@@ -25,9 +25,7 @@ class UserTile extends StatelessWidget {
             elevation: 1,
           ),
           onPressed: () {
-            context
-                .read<RouterSimpleCubit>()
-                .pushRoute("/user_detail", extra: user);
+            ref.read(appRouterProvider).push("/user_detail", extra: user);
           },
           child: Container(
             padding: const EdgeInsets.all(8.0),

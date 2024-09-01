@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/costume.dart';
 import '../../../models/user.dart';
 import '../../../widgets/widgets.dart';
 
-class CostumeCreateModifyPage extends StatefulWidget {
+class CostumeCreateModifyPage extends ConsumerStatefulWidget {
   final Costume costume;
   CostumeCreateModifyPage({super.key, Costume? costume})
       : costume = (costume ??
@@ -105,11 +105,12 @@ class CostumeCreateModifyPage extends StatefulWidget {
   ];
 
   @override
-  State<CostumeCreateModifyPage> createState() =>
+  ConsumerState<CostumeCreateModifyPage> createState() =>
       _CostumeCreateModifyPageState();
 }
 
-class _CostumeCreateModifyPageState extends State<CostumeCreateModifyPage> {
+class _CostumeCreateModifyPageState
+    extends ConsumerState<CostumeCreateModifyPage> {
   String _selectedCostume = 'Selecciona una parte del traje';
 
   @override
@@ -211,7 +212,7 @@ class _CostumeCreateModifyPageState extends State<CostumeCreateModifyPage> {
                       children: [
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),
@@ -224,7 +225,7 @@ class _CostumeCreateModifyPageState extends State<CostumeCreateModifyPage> {
                         if (widget.costume.img.isNotEmpty)
                           TextButton(
                               onPressed: () {
-                                context.read<RouterSimpleCubit>().goBack();
+                                ref.read(appRouterProvider).pop();
                               },
                               style: TextButton.styleFrom(
                                   padding: const EdgeInsets.all(8),
@@ -258,7 +259,7 @@ class _CostumeCreateModifyPageState extends State<CostumeCreateModifyPage> {
                 color: "primary",
                 br: const BorderRadius.all(Radius.circular(16)),
                 onPressed: () {
-                  context.read<RouterSimpleCubit>().goBack();
+                  ref.read(appRouterProvider).pop();
                 },
               ),
             ),
@@ -270,7 +271,7 @@ class _CostumeCreateModifyPageState extends State<CostumeCreateModifyPage> {
                 color: "error",
                 br: const BorderRadius.all(Radius.circular(16)),
                 onPressed: () {
-                  context.read<RouterSimpleCubit>().goBack();
+                  ref.read(appRouterProvider).pop();
                 },
               ),
             if (widget.costume.img.isNotEmpty)

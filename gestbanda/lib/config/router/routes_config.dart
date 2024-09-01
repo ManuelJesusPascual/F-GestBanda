@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gestbanda/models/costume.dart';
 import 'package:gestbanda/models/event.dart';
 import 'package:gestbanda/models/instrument.dart';
@@ -6,10 +5,13 @@ import 'package:gestbanda/models/user.dart';
 import 'package:gestbanda/screen/appPages/userListPage/user_list_page.dart';
 import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../models/band.dart';
 import '../../models/code.dart';
 import '../../screen/pages.dart';
+
+part 'routes_config.g.dart';
 
 final unauthenticatedRouter = GoRouter(
   initialLocation: '/',
@@ -230,21 +232,12 @@ final directorRouter = GoRouter(
   ],
 );
 
-class RouterSimpleCubit extends Cubit<GoRouter> {
-  RouterSimpleCubit(super.router);
-  void goBack() {
-    state.pop();
-  }
-
-  void pushRoute(String route, {Object? extra}) {
-    state.push(route, extra: extra);
-  }
-
-  void go(String route, {Object? extra}) {
-    state.go(route, extra: extra);
-  }
+@riverpod
+class appRouter extends _$appRouter {
+  @override
+  GoRouter build() => unauthenticatedRouter;
 
   void changeRouter(GoRouter router) {
-    emit(router);
+    state = router;
   }
 }

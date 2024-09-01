@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/utils/enums/event_type_enum.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -7,14 +7,14 @@ import '../../../config/config.dart';
 import '../../../models/event.dart';
 import '../../../widgets/widgets.dart';
 
-class NewCalendarPage extends StatefulWidget {
+class NewCalendarPage extends ConsumerStatefulWidget {
   const NewCalendarPage({super.key});
 
   @override
-  State<NewCalendarPage> createState() => _NewCalendarPageState();
+  ConsumerState<NewCalendarPage> createState() => _NewCalendarPageState();
 }
 
-class _NewCalendarPageState extends State<NewCalendarPage> {
+class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   late final ValueNotifier<List<Event>> _selectedEvents;
@@ -42,7 +42,7 @@ class _NewCalendarPageState extends State<NewCalendarPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.onSurface,
         onPressed: () {
-          context.read<RouterSimpleCubit>().pushRoute(
+          ref.read(appRouterProvider).push(
                 "/event_create_modify",
               );
         },

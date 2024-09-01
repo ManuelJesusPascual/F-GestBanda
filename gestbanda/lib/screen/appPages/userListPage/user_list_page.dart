@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/costume.dart';
@@ -7,14 +7,14 @@ import '../../../models/instrument.dart';
 import '../../../models/user.dart';
 import '../../../widgets/widgets.dart';
 
-class UserList extends StatefulWidget {
+class UserList extends ConsumerStatefulWidget {
   const UserList({super.key});
 
   @override
-  State<UserList> createState() => _UserListState();
+  ConsumerState<UserList> createState() => _UserListState();
 }
 
-class _UserListState extends State<UserList> {
+class _UserListState extends ConsumerState<UserList> {
   final List<User> users = [
     User(
         name: "Bob",
@@ -322,7 +322,7 @@ class _UserListState extends State<UserList> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.onSurface,
         onPressed: () {
-          context.read<RouterSimpleCubit>().pushRoute("/code_list");
+          ref.read(appRouterProvider).push("/code_list");
         },
         child: Icon(
           Icons.qr_code,

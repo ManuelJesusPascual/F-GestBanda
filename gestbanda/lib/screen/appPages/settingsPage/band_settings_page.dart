@@ -1,18 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/band.dart';
 import '../../../utils/string_utilites.dart';
 
-class BandSettingsPage extends StatelessWidget {
+class BandSettingsPage extends ConsumerWidget {
   const BandSettingsPage({super.key, required this.band});
   final Band band;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -84,7 +84,7 @@ class BandSettingsPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
               onTap: () {
-                context.read<RouterSimpleCubit>().pushRoute(
+                ref.read(appRouterProvider).push(
                       "/edit_band_setting/Nombre",
                       extra: band,
                     );
@@ -109,7 +109,7 @@ class BandSettingsPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
               onTap: () {
-                context.read<RouterSimpleCubit>().pushRoute(
+                ref.read(appRouterProvider).push(
                       "/edit_band_voices",
                     );
               },

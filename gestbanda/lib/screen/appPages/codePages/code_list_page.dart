@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/models/code.dart';
 
 import '../../../config/config.dart';
 import '../../../widgets/widgets.dart';
 
-class CodeList extends StatefulWidget {
+class CodeList extends ConsumerStatefulWidget {
   CodeList({super.key});
   final List<Code> codes = [
     Code(
@@ -40,10 +40,10 @@ class CodeList extends StatefulWidget {
         voz: "Sin voz"),
   ];
   @override
-  State<CodeList> createState() => _CodeListState();
+  ConsumerState<CodeList> createState() => _CodeListState();
 }
 
-class _CodeListState extends State<CodeList> {
+class _CodeListState extends ConsumerState<CodeList> {
   @override
   Widget build(BuildContext context) {
     widget.codes.sort((a, b) => b.dateEnd.compareTo(a.dateEnd));
@@ -52,7 +52,7 @@ class _CodeListState extends State<CodeList> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          context.read<RouterSimpleCubit>().pushRoute("/code_create_modify");
+          ref.read(appRouterProvider).push("/code_create_modify");
         },
         child: Icon(
           Icons.add,
@@ -92,9 +92,9 @@ class _CodeListState extends State<CodeList> {
                                 ? const Color(0xFF388E3C)
                                 : Theme.of(context).colorScheme.error,
                             onEdit: () {
-                              context.read<RouterSimpleCubit>().pushRoute(
-                                  "/code_create_modify",
-                                  extra: code);
+                              ref
+                                  .read(appRouterProvider)
+                                  .push("/code_create_modify", extra: code);
                             },
                             onDelete: () {
                               setState(() {

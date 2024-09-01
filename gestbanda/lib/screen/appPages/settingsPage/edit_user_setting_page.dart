@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/user.dart';
 
-class EditUserSettingPage extends StatefulWidget {
+class EditUserSettingPage extends ConsumerStatefulWidget {
   final String setting;
   final User user;
 
@@ -12,10 +12,11 @@ class EditUserSettingPage extends StatefulWidget {
       {super.key, required this.setting, required this.user});
 
   @override
-  State<EditUserSettingPage> createState() => _EditUserSettingPageState();
+  ConsumerState<EditUserSettingPage> createState() =>
+      _EditUserSettingPageState();
 }
 
-class _EditUserSettingPageState extends State<EditUserSettingPage> {
+class _EditUserSettingPageState extends ConsumerState<EditUserSettingPage> {
   String _getInitialValue() {
     switch (widget.setting) {
       case 'Nombre':
@@ -79,7 +80,7 @@ class _EditUserSettingPageState extends State<EditUserSettingPage> {
                       children: [
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),

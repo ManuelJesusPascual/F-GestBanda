@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../config/config.dart';
 
-class Header extends StatelessWidget {
+class Header extends ConsumerWidget {
   const Header({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       children: [
         const CircleAvatar(
@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
           child: IconButton(
             padding: EdgeInsets.zero,
             onPressed: () {
-              context.read<RouterSimpleCubit>().pushRoute("/settings");
+              ref.read(appRouterProvider).push("/settings");
             },
             icon: Icon(
               Icons.settings,

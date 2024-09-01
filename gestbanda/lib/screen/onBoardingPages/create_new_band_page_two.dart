@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../config/config.dart';
 
-class CreateNewBandPageTwo extends StatelessWidget {
+class CreateNewBandPageTwo extends ConsumerWidget {
   const CreateNewBandPageTwo({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
@@ -72,10 +72,10 @@ class CreateNewBandPageTwo extends StatelessWidget {
                     color: "primary",
                     br: BorderRadius.circular(16),
                     onPressed: () {
-                      context
-                          .read<RouterSimpleCubit>()
+                      ref
+                          .read(appRouterProvider.notifier)
                           .changeRouter(directorRouter);
-                      context.read<RouterSimpleCubit>().pushRoute("/");
+                      ref.read(appRouterProvider).push("/");
                     },
                     width: 110,
                     height: 150,
@@ -85,10 +85,10 @@ class CreateNewBandPageTwo extends StatelessWidget {
                     color: "primary",
                     br: BorderRadius.circular(16),
                     onPressed: () {
-                      context
-                          .read<RouterSimpleCubit>()
+                      ref
+                          .read(appRouterProvider.notifier)
                           .changeRouter(directorRouter);
-                      context.read<RouterSimpleCubit>().pushRoute("/");
+                      ref.read(appRouterProvider).push("/");
                     },
                     width: 110,
                     height: 150,
@@ -98,10 +98,11 @@ class CreateNewBandPageTwo extends StatelessWidget {
                     color: "primary",
                     br: BorderRadius.circular(16),
                     onPressed: () {
-                      context
-                          .read<RouterSimpleCubit>()
+                      ref
+                          .read(appRouterProvider.notifier)
                           .changeRouter(directorRouter);
-                      context.read<RouterSimpleCubit>().pushRoute("/");
+
+                      ref.read(appRouterProvider).push("/");
                     },
                     width: 110,
                     height: 150,
@@ -119,9 +120,7 @@ class CreateNewBandPageTwo extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      context
-                          .read<RouterSimpleCubit>()
-                          .pushRoute("/return_policy");
+                      ref.read(appRouterProvider).push("/return_policy");
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.primary,

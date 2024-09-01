@@ -1,18 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/event.dart';
 import '../../../utils/enums/event_type_enum.dart';
 import '../../../widgets/widgets.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       bottomNavigationBar: const MainBottomBar(
@@ -87,9 +87,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          context
-                              .read<RouterSimpleCubit>()
-                              .pushRoute("/instruments_list");
+                          ref.read(appRouterProvider).push("/instruments_list");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
@@ -142,9 +140,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          context
-                              .read<RouterSimpleCubit>()
-                              .pushRoute("/costume_list");
+                          ref.read(appRouterProvider).push("/costume_list");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/costume.dart';
 import '../../../widgets/costume_tile.dart';
 
-class NewCustomePage extends StatelessWidget {
+class NewCustomePage extends ConsumerWidget {
   NewCustomePage({super.key});
 
   final List<Costume> costumes = [
@@ -54,13 +54,13 @@ class NewCustomePage extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          context.read<RouterSimpleCubit>().pushRoute("/costume_create_modify");
+          ref.read(appRouterProvider).push("/costume_create_modify");
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
@@ -91,7 +91,7 @@ class NewCustomePage extends StatelessWidget {
                       child: CostumeTile(
                         costume: costumes[index],
                         onPressed: () {
-                          context.read<RouterSimpleCubit>().pushRoute(
+                          ref.read(appRouterProvider).push(
                               "/costume_create_modify",
                               extra: costumes[index]);
                         },

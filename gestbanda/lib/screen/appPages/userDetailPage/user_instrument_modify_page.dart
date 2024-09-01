@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../../models/instrument.dart';
 
-class UserInstrumentModifyPage extends StatefulWidget {
+class UserInstrumentModifyPage extends ConsumerStatefulWidget {
   final Instrument instrument;
   const UserInstrumentModifyPage({super.key, required this.instrument});
 
   @override
-  State<UserInstrumentModifyPage> createState() =>
+  ConsumerState<UserInstrumentModifyPage> createState() =>
       _UserInstrumentModifyPageState();
 }
 
-class _UserInstrumentModifyPageState extends State<UserInstrumentModifyPage> {
+class _UserInstrumentModifyPageState
+    extends ConsumerState<UserInstrumentModifyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +54,7 @@ class _UserInstrumentModifyPageState extends State<UserInstrumentModifyPage> {
                       children: [
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),
@@ -64,7 +66,7 @@ class _UserInstrumentModifyPageState extends State<UserInstrumentModifyPage> {
                             )),
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop;
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/user_tile.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../config/config.dart';
 import '../../../models/instrument.dart';
 import '../../../models/user.dart';
 
-class InstrumentCreateModifyPage extends StatefulWidget {
+class InstrumentCreateModifyPage extends ConsumerStatefulWidget {
   final Instrument instrument;
   InstrumentCreateModifyPage({super.key, Instrument? instrument})
       : instrument = (instrument ??
@@ -105,12 +106,12 @@ class InstrumentCreateModifyPage extends StatefulWidget {
   ];
 
   @override
-  State<InstrumentCreateModifyPage> createState() =>
+  ConsumerState<InstrumentCreateModifyPage> createState() =>
       _InstrumentCreateModifyPageState();
 }
 
 class _InstrumentCreateModifyPageState
-    extends State<InstrumentCreateModifyPage> {
+    extends ConsumerState<InstrumentCreateModifyPage> {
   String _selectedInstrument = 'Selecciona un instrumento';
 
   @override
@@ -214,7 +215,7 @@ class _InstrumentCreateModifyPageState
                       children: [
                         TextButton(
                             onPressed: () {
-                              context.read<RouterSimpleCubit>().goBack();
+                              ref.read(appRouterProvider).pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),
@@ -227,7 +228,7 @@ class _InstrumentCreateModifyPageState
                         if (widget.instrument.img.isNotEmpty)
                           TextButton(
                               onPressed: () {
-                                context.read<RouterSimpleCubit>().goBack();
+                                ref.read(appRouterProvider).pop();
                               },
                               style: TextButton.styleFrom(
                                   padding: const EdgeInsets.all(8),

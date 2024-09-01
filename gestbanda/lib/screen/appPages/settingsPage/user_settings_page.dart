@@ -1,18 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../config/config.dart';
 import '../../../models/user.dart';
 import '../../../utils/string_utilites.dart';
 
-class UserSettingsPage extends StatelessWidget {
+class UserSettingsPage extends ConsumerWidget {
   const UserSettingsPage({super.key, required this.user});
   final User user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -75,9 +75,9 @@ class UserSettingsPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
               onTap: () {
-                context
-                    .read<RouterSimpleCubit>()
-                    .pushRoute("/edit_user_setting/Nombre", extra: user);
+                ref
+                    .read(appRouterProvider)
+                    .push("/edit_user_setting/Nombre", extra: user);
               },
             ),
             const Divider(
@@ -103,9 +103,9 @@ class UserSettingsPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
               onTap: () {
-                context
-                    .read<RouterSimpleCubit>()
-                    .pushRoute("/edit_user_setting/Email", extra: user);
+                ref
+                    .read(appRouterProvider)
+                    .push("/edit_user_setting/Email", extra: user);
               },
             ),
             const Divider(
@@ -131,9 +131,9 @@ class UserSettingsPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
               onTap: () {
-                context
-                    .read<RouterSimpleCubit>()
-                    .pushRoute("/edit_user_setting/Contraseña", extra: user);
+                ref
+                    .read(appRouterProvider)
+                    .push("/edit_user_setting/Contraseña", extra: user);
               },
             ),
             const Divider(
@@ -159,7 +159,7 @@ class UserSettingsPage extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
               onTap: () {
-                context.read<RouterSimpleCubit>().pushRoute(
+                ref.read(appRouterProvider).push(
                       "/edit_user_setting/Telefono",
                       extra: user,
                     );

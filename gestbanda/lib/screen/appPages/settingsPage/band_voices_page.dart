@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/voice_tile.dart';
 
 import '../../../config/config.dart';
 
-class BandVoicesPage extends StatelessWidget {
+class BandVoicesPage extends ConsumerWidget {
   BandVoicesPage({super.key});
 
   final List<String> voices = [
@@ -20,13 +20,13 @@ class BandVoicesPage extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
         onPressed: () {
-          context.read<RouterSimpleCubit>().pushRoute("/add_band_voices");
+          ref.read(appRouterProvider).push("/add_band_voices");
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),

@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/utils/enums/event_type_enum.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
@@ -8,16 +8,16 @@ import '../../../../config/config.dart';
 import '../../../../models/event.dart';
 import '../../../../utils/string_utilites.dart';
 
-class EventDetailPage extends StatefulWidget {
+class EventDetailPage extends ConsumerStatefulWidget {
   final Event event;
 
   const EventDetailPage({super.key, required this.event});
 
   @override
-  State<EventDetailPage> createState() => _EventDetailPageState();
+  ConsumerState<EventDetailPage> createState() => _EventDetailPageState();
 }
 
-class _EventDetailPageState extends State<EventDetailPage> {
+class _EventDetailPageState extends ConsumerState<EventDetailPage> {
   int _current = 0;
 
   @override
@@ -86,9 +86,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
                   IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {
-                      context.read<RouterSimpleCubit>().pushRoute(
-                          "/event_create_modify",
-                          extra: widget.event);
+                      ref
+                          .read(appRouterProvider)
+                          .push("/event_create_modify", extra: widget.event);
                     },
                   ),
                 ],
