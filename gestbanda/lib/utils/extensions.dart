@@ -10,7 +10,7 @@ extension StringExtension on String {
   }
 
   bool get isValidPhone {
-    final phoneRegExp = RegExp(r'^[0-9]+$');
+    final phoneRegExp = RegExp(r'^[67]\d{8}$');
     return phoneRegExp.hasMatch(this);
   }
 
@@ -43,9 +43,5 @@ extension StringExtension on String {
     final passwordRegExp = RegExp(
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$');
     return passwordRegExp.hasMatch(this);
-  }
-
-  bool isValidConfirmPassword(String password) {
-    return password == this;
   }
 }

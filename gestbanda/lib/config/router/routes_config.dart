@@ -1,7 +1,12 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:gestbanda/domain/models/costume.dart';
 import 'package:gestbanda/domain/models/event.dart';
 import 'package:gestbanda/domain/models/instrument.dart';
 import 'package:gestbanda/domain/models/user.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_page.dart';
 import 'package:gestbanda/presentation/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +27,7 @@ final unauthenticatedRouter = GoRouter(
     ),
     GoRoute(
       path: '/register',
-      builder: (context, state) => const RegisterPage(),
+      builder: (context, state) => RegisterPage(),
     ),
     GoRoute(
       path: '/login',
@@ -234,10 +239,64 @@ final directorRouter = GoRouter(
 
 @riverpod
 class AppRouter extends _$AppRouter {
+  StreamSubscription<String?>? _userSubscription;
+
   @override
-  GoRouter build() => unauthenticatedRouter;
+  Future<GoRouter> build() async {
+    // Inicializar el router basado en el estado actual
+    GoRouter initialRouter = await _determineInitialRouter();
+
+    // Configurar el stream para escuchar cambios en SharedPreferences
+    _setupUserListener();
+
+    return initialRouter;
+  }
+
+  Future<GoRouter> _determineInitialRouter() async {
+    UserDTO? user = await loadUser();
+    return user != null ? authenticatedRouter : unauthenticatedRouter;
+  }
+
+  void _setupUserListener() {
+    _userSubscription?.cancel();
+    _userSubscription = _createUserStream().listen((userJson) {
+      if (userJson == null) {
+        // El usuario ha sido eliminado, cambiar a unauthenticatedRouter
+        changeRouter(unauthenticatedRouter);
+      } else {
+        // El usuario existe, cambiar a authenticatedRouter
+        changeRouter(authenticatedRouter);
+      }
+    });
+  }
+
+  Stream<String?> _createUserStream() async* {
+    while (true) {
+      yield await ref
+          .read(sharedPreferencesProviderProvider.notifier)
+          .getString(key: "user");
+      await Future.delayed(
+          const Duration(seconds: 1)); // Ajusta según sea necesario
+    }
+  }
+
+  Future<UserDTO?> loadUser() async {
+    final String? userJSON = await ref
+        .read(sharedPreferencesProviderProvider.notifier)
+        .getString(key: "user");
+
+    if (userJSON != null && userJSON.isNotEmpty) {
+      try {
+        final Map<String, dynamic> userMap = json.decode(userJSON);
+        return UserDTO.fromJson(userMap);
+      } catch (e) {
+        print('Error al decodificar el JSON: $e');
+      }
+    }
+    return null;
+  }
 
   void changeRouter(GoRouter router) {
-    state = router;
+    state = AsyncValue.data(router);
   }
 }

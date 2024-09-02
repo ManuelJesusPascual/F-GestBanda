@@ -86,8 +86,11 @@ class HomePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          ref.read(appRouterProvider).push("/instruments_list");
+                        onPressed: () async {
+                          final router =
+                              await ref.read(appRouterProvider.future);
+
+                          router.push("/instruments_list");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,
@@ -139,8 +142,11 @@ class HomePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          ref.read(appRouterProvider).push("/costume_list");
+                        onPressed: () async {
+                          final router =
+                              await ref.read(appRouterProvider.future);
+
+                          router.push("/costume_list");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.zero,

@@ -71,11 +71,13 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     text: "Pack\nMensual\n\n70€",
                     color: "primary",
                     br: BorderRadius.circular(16),
-                    onPressed: () {
+                    onPressed: () async {
                       ref
                           .read(appRouterProvider.notifier)
                           .changeRouter(directorRouter);
-                      ref.read(appRouterProvider).push("/");
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.push("/");
                     },
                     width: 110,
                     height: 150,
@@ -84,11 +86,13 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     text: "Pack\nSemestral\n\n410€",
                     color: "primary",
                     br: BorderRadius.circular(16),
-                    onPressed: () {
+                    onPressed: () async {
                       ref
                           .read(appRouterProvider.notifier)
                           .changeRouter(directorRouter);
-                      ref.read(appRouterProvider).push("/");
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.push("/");
                     },
                     width: 110,
                     height: 150,
@@ -97,12 +101,14 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     text: "Pack\nAnual\n\n820€",
                     color: "primary",
                     br: BorderRadius.circular(16),
-                    onPressed: () {
+                    onPressed: () async {
                       ref
                           .read(appRouterProvider.notifier)
                           .changeRouter(directorRouter);
 
-                      ref.read(appRouterProvider).push("/");
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.push("/");
                     },
                     width: 110,
                     height: 150,
@@ -119,8 +125,10 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                   TextButton(
-                    onPressed: () {
-                      ref.read(appRouterProvider).push("/return_policy");
+                    onPressed: () async {
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.push("/return_policy");
                     },
                     style: TextButton.styleFrom(
                       foregroundColor: Theme.of(context).colorScheme.primary,

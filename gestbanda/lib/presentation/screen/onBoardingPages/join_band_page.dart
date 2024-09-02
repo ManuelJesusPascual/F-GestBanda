@@ -53,11 +53,13 @@ class JoinBandPage extends ConsumerWidget {
               CustomButton(
                 text: 'Unirse a la banda',
                 color: "primary",
-                onPressed: () {
+                onPressed: () async {
                   ref
                       .read(appRouterProvider.notifier)
                       .changeRouter(directorRouter);
-                  ref.read(appRouterProvider).push("/");
+                  final router = await ref.read(appRouterProvider.future);
+
+                  router.push("/");
                 },
                 width: 350,
                 br: BorderRadius.circular(16),

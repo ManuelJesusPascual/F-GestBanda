@@ -2,22 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
+import 'package:gestbanda/presentation/providers/registerProvider/register_provider.dart';
 
 import '../../../../config/config.dart';
 import '../../../../widgets/widgets.dart';
-import "../../../../utils/extensions.dart";
 
 class RegisterPage extends ConsumerWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+  final GlobalKey<FormState> formKey =
+      GlobalKey<FormState>(); //No se recomienda meter en riverpod
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final registerProvider = ref.watch(registerProviderProvider.notifier);
+
+    final errorMessage = ref.watch(errorProviderProvider);
+
+    if (errorMessage.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+          ),
+        );
+        // Limpiar el mensaje de error después de mostrar el snackbar
+        ref.read(errorProviderProvider.notifier).setError("");
+      });
+    }
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Form(
-              key: GlobalKey<FormState>(),
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -40,12 +60,13 @@ class RegisterPage extends ConsumerWidget {
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      registerProvider.changeName(val);
+                    },
                     validator: (val) {
-                      if (val != null && val.isValidName) {
-                        return null;
-                      }
-                      return "Debes introducir un nombre válido";
+                      return ref
+                          .read(registerProviderProvider.notifier)
+                          .validateName(val);
                     },
                   ),
                   CustomTextInput(
@@ -55,12 +76,13 @@ class RegisterPage extends ConsumerWidget {
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      registerProvider.changeEmail(val);
+                    },
                     validator: (val) {
-                      if (val != null && val.isValidEmail) {
-                        return null;
-                      }
-                      return "Debes introducir un email válido";
+                      return ref
+                          .read(registerProviderProvider.notifier)
+                          .validateEmail(val);
                     },
                   ),
                   CustomTextInput(
@@ -74,12 +96,13 @@ class RegisterPage extends ConsumerWidget {
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      registerProvider.changePhone(val);
+                    },
                     validator: (val) {
-                      if (val != null && val.isValidPhone) {
-                        return null;
-                      }
-                      return "Debes introducir un teléfono válido";
+                      return ref
+                          .read(registerProviderProvider.notifier)
+                          .validatePhone(val);
                     },
                   ),
                   CustomTextInput(
@@ -89,23 +112,13 @@ class RegisterPage extends ConsumerWidget {
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      registerProvider.changePassword(val);
+                    },
                     validator: (val) {
-                      if (val != null && !val.isValidPasswordLength) {
-                        return "La contraseña debe tener al menos 8 caracteres";
-                      } else if (val != null && !val.isValidPasswordMayus) {
-                        return "La contraseña debe tener al menos una letra mayúscula";
-                      } else if (val != null && !val.isValidPasswordMinus) {
-                        return "La contraseña debe tener al menos una letra minúscula";
-                      } else if (val != null && !val.isValidPasswordNumber) {
-                        return "La contraseña debe tener al menos un número";
-                      } else if (val != null &&
-                          !val.isValidPasswordSpecialCharacters) {
-                        return "La contraseña debe tener al menos un caracter especial";
-                      } else if (val != null && val.isValidPassword) {
-                        return null;
-                      }
-                      return "Debes introducir una contraseña válida";
+                      return ref
+                          .read(registerProviderProvider.notifier)
+                          .validatePassword(val);
                     },
                   ),
                   CustomTextInput(
@@ -115,13 +128,13 @@ class RegisterPage extends ConsumerWidget {
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
-                    onChanged: (val) {},
+                    onChanged: (val) {
+                      registerProvider.changeConfirmPassword(val);
+                    },
                     validator: (val) {
-                      if (val != null && val.isValidConfirmPassword(val)) {
-                        //val.isValidConfirmPassword(ref), pero como ref aun falta por implementar se pone val
-                        return null;
-                      }
-                      return "Las contrasenias no coinciden";
+                      return ref
+                          .read(registerProviderProvider.notifier)
+                          .validateConfirmPassword(val);
                     },
                   ),
                   Center(
@@ -134,10 +147,11 @@ class RegisterPage extends ConsumerWidget {
                           color: "primary",
                           br: const BorderRadius.all(Radius.circular(16)),
                           onPressed: () {
-                            ref
-                                .read(appRouterProvider.notifier)
-                                .changeRouter(authenticatedRouter);
-                            ref.read(appRouterProvider).push("/");
+                            if (formKey.currentState?.validate() ?? false) {
+                              ref
+                                  .read(registerProviderProvider.notifier)
+                                  .register();
+                            }
                           },
                         ),
                       ),
@@ -153,8 +167,10 @@ class RegisterPage extends ConsumerWidget {
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         TextButton(
-                          onPressed: () {
-                            ref.read(appRouterProvider).push("/private_policy");
+                          onPressed: () async {
+                            final router =
+                                await ref.read(appRouterProvider.future);
+                            router.push("/private_policy");
                           },
                           style: TextButton.styleFrom(
                             foregroundColor:

@@ -59,8 +59,10 @@ class NewCustomePage extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-          ref.read(appRouterProvider).push("/costume_create_modify");
+        onPressed: () async {
+          final router = await ref.read(appRouterProvider.future);
+
+          router.push("/costume_create_modify");
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
@@ -90,9 +92,11 @@ class NewCustomePage extends ConsumerWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: CostumeTile(
                         costume: costumes[index],
-                        onPressed: () {
-                          ref.read(appRouterProvider).push(
-                              "/costume_create_modify",
+                        onPressed: () async {
+                          final router =
+                              await ref.read(appRouterProvider.future);
+
+                          router.push("/costume_create_modify",
                               extra: costumes[index]);
                         },
                       ),

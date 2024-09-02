@@ -79,8 +79,11 @@ class _EditUserSettingPageState extends ConsumerState<EditUserSettingPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
-                            onPressed: () {
-                              ref.read(appRouterProvider).pop();
+                            onPressed: () async {
+                              final router =
+                                  await ref.read(appRouterProvider.future);
+
+                              router.pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),

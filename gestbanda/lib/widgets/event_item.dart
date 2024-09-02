@@ -22,8 +22,10 @@ class EventItem extends ConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         fixedSize: const Size(400, 100),
       ),
-      onPressed: () {
-        ref.read(appRouterProvider).push("/event_detail", extra: event);
+      onPressed: () async {
+        final router = await ref.read(appRouterProvider.future);
+
+        router.push("/event_detail", extra: event);
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),

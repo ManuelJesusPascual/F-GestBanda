@@ -28,8 +28,10 @@ class EventTile extends ConsumerWidget {
         padding: const EdgeInsets.all(8.0),
         fixedSize: const Size(100, 70),
       ),
-      onPressed: () {
-        ref.read(appRouterProvider).push("/event_detail", extra: event);
+      onPressed: () async {
+        final router = await ref.read(appRouterProvider.future);
+
+        router.push("/event_detail", extra: event);
       },
       child: Row(
         children: [

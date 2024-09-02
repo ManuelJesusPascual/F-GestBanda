@@ -53,8 +53,10 @@ class InstrumentPage extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-          ref.read(appRouterProvider).push("/instrument_create_modify");
+        onPressed: () async {
+          final router = await ref.read(appRouterProvider.future);
+
+          router.push("/instrument_create_modify");
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),
@@ -84,9 +86,11 @@ class InstrumentPage extends ConsumerWidget {
                       padding: const EdgeInsets.all(4.0),
                       child: InstrumentTile(
                         instrument: instruments[index],
-                        onPressed: () {
-                          ref.read(appRouterProvider).push(
-                              "/instrument_create_modify",
+                        onPressed: () async {
+                          final router =
+                              await ref.read(appRouterProvider.future);
+
+                          router.push("/instrument_create_modify",
                               extra: instruments[index]);
                         },
                       ),

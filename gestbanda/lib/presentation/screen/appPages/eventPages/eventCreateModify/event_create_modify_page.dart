@@ -358,8 +358,10 @@ class EventCreateModifyState extends ConsumerState<EventCreateModify> {
                       text: "Guardar",
                       color: "primary",
                       br: const BorderRadius.all(Radius.circular(16)),
-                      onPressed: () {
-                        ref.read(appRouterProvider).pop();
+                      onPressed: () async {
+                        final router = await ref.read(appRouterProvider.future);
+
+                        router.pop();
                       },
                     ),
                     if (edit!)
@@ -373,8 +375,11 @@ class EventCreateModifyState extends ConsumerState<EventCreateModify> {
                         text: "Eliminar",
                         color: "error",
                         br: const BorderRadius.all(Radius.circular(16)),
-                        onPressed: () {
-                          ref.read(appRouterProvider).pop();
+                        onPressed: () async {
+                          final router =
+                              await ref.read(appRouterProvider.future);
+
+                          router.pop();
                         },
                       ),
                   ],

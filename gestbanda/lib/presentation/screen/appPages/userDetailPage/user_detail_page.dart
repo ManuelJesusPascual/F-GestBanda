@@ -25,8 +25,10 @@ class UserDetailPage extends ConsumerWidget {
           IconButton(
             icon: Icon(Icons.edit,
                 color: Theme.of(context).colorScheme.onSurface),
-            onPressed: () {
-              ref.read(appRouterProvider).push("/user_modify", extra: user);
+            onPressed: () async {
+              final router = await ref.read(appRouterProvider.future);
+
+              router.push("/user_modify", extra: user);
             },
           ),
         ],
@@ -95,10 +97,13 @@ class UserDetailPage extends ConsumerWidget {
                         ),
                         IconButton(
                           icon: const Icon(Icons.playlist_add),
-                          onPressed: () {
-                            ref.read(appRouterProvider).push(
-                                  "/user_add_instrument",
-                                );
+                          onPressed: () async {
+                            final router =
+                                await ref.read(appRouterProvider.future);
+
+                            router.push(
+                              "/user_add_instrument",
+                            );
                           },
                         ),
                       ],
@@ -114,9 +119,11 @@ class UserDetailPage extends ConsumerWidget {
                                       vertical: 4, horizontal: 16),
                                   child: InstrumentTile(
                                     instrument: instrument,
-                                    onPressed: () {
-                                      ref.read(appRouterProvider).push(
-                                          "/user_instrument_modify",
+                                    onPressed: () async {
+                                      final router = await ref
+                                          .read(appRouterProvider.future);
+
+                                      router.push("/user_instrument_modify",
                                           extra: instrument);
                                     },
                                   ),
@@ -140,10 +147,13 @@ class UserDetailPage extends ConsumerWidget {
                         ),
                         IconButton(
                           icon: const Icon(Icons.playlist_add),
-                          onPressed: () {
-                            ref.read(appRouterProvider).push(
-                                  "/user_add_costume",
-                                );
+                          onPressed: () async {
+                            final router =
+                                await ref.read(appRouterProvider.future);
+
+                            router.push(
+                              "/user_add_costume",
+                            );
                           },
                         ),
                       ],
@@ -159,9 +169,11 @@ class UserDetailPage extends ConsumerWidget {
                                       vertical: 4, horizontal: 16),
                                   child: CostumeTile(
                                     costume: costume,
-                                    onPressed: () {
-                                      ref.read(appRouterProvider).push(
-                                          "/user_costume_modify",
+                                    onPressed: () async {
+                                      final router = await ref
+                                          .read(appRouterProvider.future);
+
+                                      router.push("/user_costume_modify",
                                           extra: costume);
                                     },
                                   ),

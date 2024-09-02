@@ -211,8 +211,10 @@ class _CostumeCreateModifyPageState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
-                            onPressed: () {
-                              ref.read(appRouterProvider).pop();
+                            onPressed: () async {
+                              final router =
+                                  await ref.read(appRouterProvider.future);
+                              router.pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),
@@ -224,8 +226,10 @@ class _CostumeCreateModifyPageState
                             )),
                         if (widget.costume.img.isNotEmpty)
                           TextButton(
-                              onPressed: () {
-                                ref.read(appRouterProvider).pop();
+                              onPressed: () async {
+                                final router =
+                                    await ref.read(appRouterProvider.future);
+                                router.pop();
                               },
                               style: TextButton.styleFrom(
                                   padding: const EdgeInsets.all(8),
@@ -258,8 +262,10 @@ class _CostumeCreateModifyPageState
                 text: "Guardar",
                 color: "primary",
                 br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () {
-                  ref.read(appRouterProvider).pop();
+                onPressed: () async {
+                  final router = await ref.read(appRouterProvider.future);
+
+                  router.pop();
                 },
               ),
             ),
@@ -270,8 +276,10 @@ class _CostumeCreateModifyPageState
                 text: "Eliminar",
                 color: "error",
                 br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () {
-                  ref.read(appRouterProvider).pop();
+                onPressed: () async {
+                  final router = await ref.read(appRouterProvider.future);
+
+                  router.pop();
                 },
               ),
             if (widget.costume.img.isNotEmpty)

@@ -67,11 +67,14 @@ class LoginPage extends ConsumerWidget {
                             text: "Iniciar Sesión",
                             color: "primary",
                             br: const BorderRadius.all(Radius.circular(16)),
-                            onPressed: () {
+                            onPressed: () async {
                               ref
                                   .read(appRouterProvider.notifier)
                                   .changeRouter(authenticatedRouter);
-                              ref.read(appRouterProvider).push("/");
+                              final router =
+                                  await ref.read(appRouterProvider.future);
+
+                              router.push("/");
                             },
                           ),
                         ),

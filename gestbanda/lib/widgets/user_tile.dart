@@ -24,8 +24,10 @@ class UserTile extends ConsumerWidget {
             ),
             elevation: 1,
           ),
-          onPressed: () {
-            ref.read(appRouterProvider).push("/user_detail", extra: user);
+          onPressed: () async {
+            final router = await ref.read(appRouterProvider.future);
+
+            router.push("/user_detail", extra: user);
           },
           child: Container(
             padding: const EdgeInsets.all(8.0),

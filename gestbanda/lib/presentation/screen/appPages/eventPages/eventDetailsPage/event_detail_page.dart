@@ -85,10 +85,9 @@ class _EventDetailPageState extends ConsumerState<EventDetailPage> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      ref
-                          .read(appRouterProvider)
-                          .push("/event_create_modify", extra: widget.event);
+                    onPressed: () async {
+                      final router = await ref.read(appRouterProvider.future);
+                      router.push("/event_create_modify", extra: widget.event);
                     },
                   ),
                 ],

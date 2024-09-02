@@ -56,8 +56,10 @@ class InitialPage extends ConsumerWidget {
                       topLeft: Radius.circular(16),
                       bottomLeft: Radius.circular(16),
                     ),
-                    onPressed: () {
-                      ref.read(appRouterProvider).push("/login");
+                    onPressed: () async {
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.push("/login");
                     },
                   ),
                   CustomButton(
@@ -67,8 +69,10 @@ class InitialPage extends ConsumerWidget {
                       topRight: Radius.circular(16),
                       bottomRight: Radius.circular(16),
                     ),
-                    onPressed: () {
-                      ref.read(appRouterProvider).push("/register");
+                    onPressed: () async {
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.push("/register");
                     },
                   ),
                 ],

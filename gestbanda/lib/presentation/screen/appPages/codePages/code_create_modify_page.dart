@@ -176,8 +176,9 @@ class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
                 text: "Guardar",
                 color: "primary",
                 br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () {
-                  ref.read(appRouterProvider).pop();
+                onPressed: () async {
+                  final router = await ref.read(appRouterProvider.future);
+                  router.pop();
                 },
               ),
             ),

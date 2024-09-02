@@ -83,11 +83,13 @@ class BandSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {
-                ref.read(appRouterProvider).push(
-                      "/edit_band_setting/Nombre",
-                      extra: band,
-                    );
+              onTap: () async {
+                final router = await ref.read(appRouterProvider.future);
+
+                router.push(
+                  "/edit_band_setting/Nombre",
+                  extra: band,
+                );
               },
             ),
             const Divider(
@@ -108,10 +110,12 @@ class BandSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {
-                ref.read(appRouterProvider).push(
-                      "/edit_band_voices",
-                    );
+              onTap: () async {
+                final router = await ref.read(appRouterProvider.future);
+
+                router.push(
+                  "/edit_band_voices",
+                );
               },
             ),
             const Divider(

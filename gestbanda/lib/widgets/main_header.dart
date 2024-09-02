@@ -31,8 +31,10 @@ class Header extends ConsumerWidget {
           height: 24,
           child: IconButton(
             padding: EdgeInsets.zero,
-            onPressed: () {
-              ref.read(appRouterProvider).push("/settings");
+            onPressed: () async {
+              final router = await ref.read(appRouterProvider.future);
+
+              router.push("/settings");
             },
             icon: Icon(
               Icons.settings,

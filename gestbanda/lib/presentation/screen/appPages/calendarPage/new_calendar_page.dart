@@ -41,10 +41,11 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.onSurface,
-        onPressed: () {
-          ref.read(appRouterProvider).push(
-                "/event_create_modify",
-              );
+        onPressed: () async {
+          final router = await ref.read(appRouterProvider.future);
+          router.push(
+            "/event_create_modify",
+          );
         },
         child: Icon(
           Icons.add,

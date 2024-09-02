@@ -7,12 +7,10 @@ import 'config/config.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
-    DeviceOrientation
-        .portraitUp, //Hace que no se pueda poner la aplicación en horizontal
+    DeviceOrientation.portraitUp,
   ]);
-  initializeDateFormatting().then((_) => runApp(const ProviderScope(
-      child:
-          MainApp()))); //El initializeDateFormatting para que el calendario pueda estar en español
+  await initializeDateFormatting();
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends ConsumerWidget {
@@ -20,13 +18,29 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appRouter = ref.watch(appRouterProvider);
+    final asyncRouter = ref.watch(appRouterProvider);
 
-    return MaterialApp.router(
-      locale: const Locale('es', 'ES'),
-      theme: theme,
-      darkTheme: darkTheme,
-      routerConfig: appRouter,
+    return asyncRouter.when(
+      loading: () => const MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      ),
+      error: (error, stackTrace) => MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Text('Error: $error'),
+          ),
+        ),
+      ),
+      data: (router) => MaterialApp.router(
+        locale: const Locale('es', 'ES'),
+        theme: theme,
+        darkTheme: darkTheme,
+        routerConfig: router,
+      ),
     );
   }
 }

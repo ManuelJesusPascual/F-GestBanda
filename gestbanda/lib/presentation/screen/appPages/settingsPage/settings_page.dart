@@ -30,18 +30,20 @@ class SettingsPage extends ConsumerWidget {
                 ),
                 title: const Text("Ajustes de Usuario"),
                 trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                onTap: () {
-                  ref.read(appRouterProvider).push(
-                        "/user_settings",
-                        extra: User(
-                            name: "Usuario de ejemplo",
-                            email: "support@gestbanda.com",
-                            phone: "666666666",
-                            role: "Componente",
-                            voz: "Corneta",
-                            instrumentList: [],
-                            costumeList: []),
-                      );
+                onTap: () async {
+                  final router = await ref.read(appRouterProvider.future);
+
+                  router.push(
+                    "/user_settings",
+                    extra: User(
+                        name: "Usuario de ejemplo",
+                        email: "support@gestbanda.com",
+                        phone: "666666666",
+                        role: "Componente",
+                        voz: "Corneta",
+                        instrumentList: [],
+                        costumeList: []),
+                  );
                 },
               ),
               const Divider(
@@ -55,8 +57,10 @@ class SettingsPage extends ConsumerWidget {
                 ),
                 title: const Text("Ajustes de Banda"),
                 trailing: const Icon(Icons.arrow_forward_ios_outlined),
-                onTap: () {
-                  ref.read(appRouterProvider).push("/band_settings",
+                onTap: () async {
+                  final router = await ref.read(appRouterProvider.future);
+
+                  router.push("/band_settings",
                       extra: Band(
                           name: "Banda Municipal de Villaejemplo",
                           suscription: "Suscripcion Anual"));

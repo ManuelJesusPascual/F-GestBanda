@@ -51,8 +51,9 @@ class _CodeListState extends ConsumerState<CodeList> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-          ref.read(appRouterProvider).push("/code_create_modify");
+        onPressed: () async {
+          final router = await ref.read(appRouterProvider.future);
+          router.push("/code_create_modify");
         },
         child: Icon(
           Icons.add,
@@ -91,10 +92,10 @@ class _CodeListState extends ConsumerState<CodeList> {
                             textColor: code.dateEnd.isAfter(DateTime.now())
                                 ? const Color(0xFF388E3C)
                                 : Theme.of(context).colorScheme.error,
-                            onEdit: () {
-                              ref
-                                  .read(appRouterProvider)
-                                  .push("/code_create_modify", extra: code);
+                            onEdit: () async {
+                              final router =
+                                  await ref.read(appRouterProvider.future);
+                              router.push("/code_create_modify", extra: code);
                             },
                             onDelete: () {
                               setState(() {

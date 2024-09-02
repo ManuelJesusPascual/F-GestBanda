@@ -25,8 +25,10 @@ class BandVoicesPage extends ConsumerWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-          ref.read(appRouterProvider).push("/add_band_voices");
+        onPressed: () async {
+          final router = await ref.read(appRouterProvider.future);
+
+          router.push("/add_band_voices");
         },
         child: Icon(Icons.add, color: Theme.of(context).colorScheme.surface),
       ),

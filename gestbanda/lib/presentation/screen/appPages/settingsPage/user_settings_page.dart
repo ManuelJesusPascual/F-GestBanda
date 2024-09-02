@@ -74,10 +74,9 @@ class UserSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {
-                ref
-                    .read(appRouterProvider)
-                    .push("/edit_user_setting/Nombre", extra: user);
+              onTap: () async {
+                final router = await ref.read(appRouterProvider.future);
+                router.push("/edit_user_setting/Nombre", extra: user);
               },
             ),
             const Divider(
@@ -102,10 +101,9 @@ class UserSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {
-                ref
-                    .read(appRouterProvider)
-                    .push("/edit_user_setting/Email", extra: user);
+              onTap: () async {
+                final router = await ref.read(appRouterProvider.future);
+                router.push("/edit_user_setting/Email", extra: user);
               },
             ),
             const Divider(
@@ -130,10 +128,9 @@ class UserSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {
-                ref
-                    .read(appRouterProvider)
-                    .push("/edit_user_setting/Contraseña", extra: user);
+              onTap: () async {
+                final router = await ref.read(appRouterProvider.future);
+                router.push("/edit_user_setting/Contraseña", extra: user);
               },
             ),
             const Divider(
@@ -158,11 +155,13 @@ class UserSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {
-                ref.read(appRouterProvider).push(
-                      "/edit_user_setting/Telefono",
-                      extra: user,
-                    );
+              onTap: () async {
+                final router = await ref.read(appRouterProvider.future);
+
+                router.push(
+                  "/edit_user_setting/Telefono",
+                  extra: user,
+                );
               },
             ),
             const Divider(

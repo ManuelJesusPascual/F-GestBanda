@@ -321,8 +321,10 @@ class _UserListState extends ConsumerState<UserList> {
       bottomNavigationBar: const MainBottomBar(currentIndex: 2),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.onSurface,
-        onPressed: () {
-          ref.read(appRouterProvider).push("/code_list");
+        onPressed: () async {
+          final router = await ref.read(appRouterProvider.future);
+
+          router.push("/code_list");
         },
         child: Icon(
           Icons.qr_code,

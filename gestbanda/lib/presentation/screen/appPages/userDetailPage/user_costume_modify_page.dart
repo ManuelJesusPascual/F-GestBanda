@@ -51,8 +51,11 @@ class _UserCostumeModifyPageState extends ConsumerState<UserCostumeModifyPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
-                            onPressed: () {
-                              ref.read(appRouterProvider).pop();
+                            onPressed: () async {
+                              final router =
+                                  await ref.read(appRouterProvider.future);
+
+                              router.pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),
@@ -63,8 +66,11 @@ class _UserCostumeModifyPageState extends ConsumerState<UserCostumeModifyPage> {
                               Icons.save_as_rounded,
                             )),
                         TextButton(
-                            onPressed: () {
-                              ref.read(appRouterProvider).pop();
+                            onPressed: () async {
+                              final router =
+                                  await ref.read(appRouterProvider.future);
+
+                              router.pop();
                             },
                             style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(8),

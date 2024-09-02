@@ -20,14 +20,16 @@ class MainBottomBar extends ConsumerWidget {
       selectedFontSize: 10,
       unselectedFontSize: 10,
       currentIndex: currentIndex,
-      onTap: (value) {
+      onTap: (value) async {
         if (value != currentIndex) {
           final routes = [
             '/calendar',
             '/',
             '/user_list',
           ];
-          ref.read(appRouterProvider).go(routes[value]);
+          final router = await ref.read(appRouterProvider.future);
+
+          router.go(routes[value]);
         }
       },
       items: const [
