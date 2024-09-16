@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:gestbanda/models/event.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/models/event.dart';
 import 'package:gestbanda/utils/string_utilites.dart';
 
 import '../config/config.dart';
 import 'widgets.dart';
 
-class EventItem extends StatelessWidget {
+class EventItem extends ConsumerWidget {
   final Event event;
 
   const EventItem({super.key, required this.event});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
@@ -22,10 +22,10 @@ class EventItem extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         fixedSize: const Size(400, 100),
       ),
-      onPressed: () {
-        context
-            .read<RouterSimpleCubit>()
-            .pushRoute("/event_detail", extra: event);
+      onPressed: () async {
+        final router = await ref.read(appRouterProvider.future);
+
+        router.push("/event_detail", extra: event);
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),

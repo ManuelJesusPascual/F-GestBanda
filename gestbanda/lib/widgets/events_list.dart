@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestbanda/widgets/event_tile.dart';
 
-import '../models/event.dart';
+import '../domain/models/event.dart';
 
 class EventsList extends StatelessWidget {
   const EventsList({

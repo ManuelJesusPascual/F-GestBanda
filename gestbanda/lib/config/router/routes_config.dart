@@ -1,15 +1,22 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gestbanda/models/costume.dart';
-import 'package:gestbanda/models/event.dart';
-import 'package:gestbanda/models/instrument.dart';
-import 'package:gestbanda/models/user.dart';
-import 'package:gestbanda/screen/appPages/userListPage/user_list_page.dart';
-import 'package:gestbanda/screen/onBoardingPages/create_new_band_page_two.dart';
-import 'package:go_router/go_router.dart';
+import 'dart:async';
+import 'dart:convert';
 
-import '../../models/band.dart';
-import '../../models/code.dart';
-import '../../screen/pages.dart';
+import 'package:gestbanda/domain/models/costume.dart';
+import 'package:gestbanda/domain/models/event.dart';
+import 'package:gestbanda/domain/models/instrument.dart';
+import 'package:gestbanda/domain/models/user.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
+import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_page.dart';
+import 'package:gestbanda/presentation/screen/onBoardingPages/create_new_band_page_two.dart';
+import 'package:go_router/go_router.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../domain/models/band.dart';
+import '../../domain/models/code.dart';
+import '../../presentation/screen/pages.dart';
+
+part 'routes_config.g.dart';
 
 final unauthenticatedRouter = GoRouter(
   initialLocation: '/',
@@ -20,7 +27,7 @@ final unauthenticatedRouter = GoRouter(
     ),
     GoRoute(
       path: '/register',
-      builder: (context, state) => const RegisterPage(),
+      builder: (context, state) => RegisterPage(),
     ),
     GoRoute(
       path: '/login',
@@ -230,21 +237,65 @@ final directorRouter = GoRouter(
   ],
 );
 
-class RouterSimpleCubit extends Cubit<GoRouter> {
-  RouterSimpleCubit(super.router);
-  void goBack() {
-    state.pop();
+@riverpod
+class AppRouter extends _$AppRouter {
+  StreamSubscription<String?>? _userSubscription;
+
+  @override
+  Future<GoRouter> build() async {
+    // Inicializar el router basado en el estado actual
+    GoRouter initialRouter = await _determineInitialRouter();
+
+    // Configurar el stream para escuchar cambios en SharedPreferences
+    _setupUserListener();
+
+    return initialRouter;
   }
 
-  void pushRoute(String route, {Object? extra}) {
-    state.push(route, extra: extra);
+  Future<GoRouter> _determineInitialRouter() async {
+    UserDTO? user = await loadUser();
+    return user != null ? authenticatedRouter : unauthenticatedRouter;
   }
 
-  void go(String route, {Object? extra}) {
-    state.go(route, extra: extra);
+  void _setupUserListener() {
+    _userSubscription?.cancel();
+    _userSubscription = _createUserStream().listen((userJson) {
+      if (userJson == null) {
+        // El usuario ha sido eliminado, cambiar a unauthenticatedRouter
+        changeRouter(unauthenticatedRouter);
+      } else {
+        // El usuario existe, cambiar a authenticatedRouter
+        changeRouter(authenticatedRouter);
+      }
+    });
+  }
+
+  Stream<String?> _createUserStream() async* {
+    while (true) {
+      yield await ref
+          .read(sharedPreferencesProviderProvider.notifier)
+          .getString(key: "user");
+      await Future.delayed(const Duration(seconds: 1));
+    }
+  }
+
+  Future<UserDTO?> loadUser() async {
+    final String? userJSON = await ref
+        .read(sharedPreferencesProviderProvider.notifier)
+        .getString(key: "user");
+
+    if (userJSON != null && userJSON.isNotEmpty) {
+      try {
+        final Map<String, dynamic> userMap = json.decode(userJSON);
+        return UserDTO.fromJson(userMap);
+      } catch (e) {
+        print('Error al decodificar el JSON: $e');
+      }
+    }
+    return null;
   }
 
   void changeRouter(GoRouter router) {
-    emit(router);
+    state = AsyncValue.data(router);
   }
 }
