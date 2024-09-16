@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'shared_preferences_provider.g.dart';
 
+/// Provider que usaremos para manejar las SharedPreferences.
 @riverpod
 class SharedPreferencesProvider extends _$SharedPreferencesProvider {
   @override
@@ -11,6 +12,7 @@ class SharedPreferencesProvider extends _$SharedPreferencesProvider {
     return await SharedPreferences.getInstance();
   }
 
+  /// Método que almacena un String en SharedPreferences.
   Future<void> saveString({required String key, required String value}) async {
     final prefs = await build();
 
@@ -29,6 +31,7 @@ class SharedPreferencesProvider extends _$SharedPreferencesProvider {
     }
   }
 
+  /// Método que extrae un String de SharedPreferences.
   Future<String?> getString({required String key}) async {
     final prefs = await build();
 
@@ -42,6 +45,7 @@ class SharedPreferencesProvider extends _$SharedPreferencesProvider {
     }
   }
 
+  /// Método que elimina un String de SharedPreferences.
   Future<void> removeString({required String key}) async {
     final prefs = await build();
 

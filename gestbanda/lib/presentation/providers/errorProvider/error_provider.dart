@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'error_provider.g.dart';
 
+/// Provider que usaremos para mostrar errores por pantalla.
 @riverpod
 class ErrorProvider extends _$ErrorProvider {
   @override
@@ -9,6 +10,7 @@ class ErrorProvider extends _$ErrorProvider {
     return "";
   }
 
+  /// Método que establece el mensaje de error.
   void setError(String error) {
     state = error;
   }

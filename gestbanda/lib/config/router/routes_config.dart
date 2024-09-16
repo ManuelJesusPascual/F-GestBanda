@@ -275,8 +275,7 @@ class AppRouter extends _$AppRouter {
       yield await ref
           .read(sharedPreferencesProviderProvider.notifier)
           .getString(key: "user");
-      await Future.delayed(
-          const Duration(seconds: 1)); // Ajusta según sea necesario
+      await Future.delayed(const Duration(seconds: 1));
     }
   }
 

@@ -12,6 +12,7 @@ import "../../../../utils/extensions.dart";
 
 part 'register_provider.g.dart';
 
+/// Provider que usaremos para la lógica de registro de un usuario.
 @riverpod
 class RegisterProvider extends _$RegisterProvider {
   String api = "http://localhost:3000/api";
@@ -20,40 +21,47 @@ class RegisterProvider extends _$RegisterProvider {
   RegisterUserDTO build() => RegisterUserDTO(
       name: "", email: "", phone: "", password: "", confirmPassword: "");
 
+  /// Método para cambiar el valor de la variable name.
   void changeName(String name) {
     if (state.name != name) {
       state = state.copyWith(name: name);
     }
   }
 
+  /// Método para cambiar el valor de la variable email.
   void changeEmail(String email) {
     if (state.email != email) {
       state = state.copyWith(email: email);
     }
   }
 
+  /// Método para cambiar el valor de la variable phone.
   void changePhone(String phone) {
     if (state.phone != phone) {
       state = state.copyWith(phone: phone);
     }
   }
 
+  /// Método para cambiar el valor de la variable password.
   void changePassword(String password) {
     if (state.password != password) {
       state = state.copyWith(password: password);
     }
   }
 
+  /// Método para cambiar el valor de la variable confirmPassword.
   void changeConfirmPassword(String confirmPassword) {
     if (state.confirmPassword != confirmPassword) {
       state = state.copyWith(confirmPassword: confirmPassword);
     }
   }
 
+  /// Método que comprueba si la contraseñas son iguales.
   bool isValidConfirmPassword() {
     return state.confirmPassword == state.password;
   }
 
+  /// Método que comprueba si el nombre es válido.
   String? validateName(String? val) {
     if (val != null && val.isValidName) {
       return null;
@@ -61,6 +69,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir un nombre válido";
   }
 
+  /// Método que comprueba si el email es válido.
   String? validateEmail(String? val) {
     if (val != null && val.isValidEmail) {
       return null;
@@ -68,6 +77,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir un email válido";
   }
 
+  /// Método que comprueba si el teléfono es válido.
   String? validatePhone(String? val) {
     if (val != null && val.isValidPhone) {
       return null;
@@ -75,6 +85,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir un teléfono válido";
   }
 
+  /// Método que comprueba si la contraseña es válida.
   String? validatePassword(String? val) {
     if (val != null && !val.isValidPasswordLength) {
       return "La contraseña debe tener al menos 8 caracteres";
@@ -92,6 +103,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir una contraseña válida";
   }
 
+  /// Método que comprueba si las contraseñas son iguales.
   String? validateConfirmPassword(String? val) {
     if (val != null && isValidConfirmPassword()) {
       return null;
@@ -99,6 +111,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Las contraseñas no coinciden";
   }
 
+  /// Método que realiza una petición a la API para registrar un usuario. Recoge el token de la respuesta y lo almacena en SharedPreferences. Tras eso cambia el router.
   Future<void> register() async {
     try {
       final response = await http.post(Uri.parse("$api/users/registerUser"),
@@ -110,7 +123,7 @@ class RegisterProvider extends _$RegisterProvider {
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
 
-        // Extrae el token de los headers si es necesario
+        // Extrae el token de los headers
         final token = response.headers['authorization'] ?? '';
 
         final UserDTO user =
