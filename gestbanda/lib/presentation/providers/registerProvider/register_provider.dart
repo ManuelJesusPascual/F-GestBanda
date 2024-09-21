@@ -15,7 +15,7 @@ part 'register_provider.g.dart';
 /// Provider que usaremos para la lógica de registro de un usuario.
 @riverpod
 class RegisterProvider extends _$RegisterProvider {
-  String api = "http://localhost:3000/api";
+  String api = "http://192.168.1.50:3000/api";
 
   @override
   RegisterUserDTO build() => RegisterUserDTO(
@@ -142,9 +142,8 @@ class RegisterProvider extends _$RegisterProvider {
             .setError(data["message"].toString());
       }
     } catch (e) {
-      ref
-          .read(errorProviderProvider.notifier)
-          .setError("Exception: ${e.toString()}");
+      ref.read(errorProviderProvider.notifier).setError(
+          "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
     }
   }
 }
