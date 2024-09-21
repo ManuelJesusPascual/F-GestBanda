@@ -9,7 +9,9 @@ part of 'shared_preferences_provider.dart';
 String _$sharedPreferencesProviderHash() =>
     r'6b4ade257d0c270396d527823d2ac81d9faba6b0';
 
-/// See also [SharedPreferencesProvider].
+/// Provider que usaremos para manejar las SharedPreferences.
+///
+/// Copied from [SharedPreferencesProvider].
 @ProviderFor(SharedPreferencesProvider)
 final sharedPreferencesProviderProvider = AutoDisposeAsyncNotifierProvider<
     SharedPreferencesProvider, SharedPreferences>.internal(

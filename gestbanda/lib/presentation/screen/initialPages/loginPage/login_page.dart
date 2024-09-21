@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gestbanda/config/router/routes_config.dart';
+import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 
 import '../../../../widgets/widgets.dart';
-import "../../../../utils/extensions.dart";
+import '../../../providers/loginProvider/login_provider.dart';
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loginProvider = ref.watch(loginProviderProvider.notifier);
+    final errorMessage = ref.watch(errorProviderProvider);
+
+    if (errorMessage.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+          ),
+        );
+        // Limpiar el mensaje de error después de mostrar el snackbar
+        ref.read(errorProviderProvider.notifier).setError("");
+      });
+    }
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: SafeArea(
@@ -17,7 +34,7 @@ class LoginPage extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: Form(
-                key: GlobalKey<FormState>(),
+                key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -35,20 +52,20 @@ class LoginPage extends ConsumerWidget {
                       textAlign: TextAlign.center,
                     ),
                     CustomTextInput(
-                      label: "Email",
-                      hint: "nombre@example.com",
-                      keyboardType: TextInputType.emailAddress,
-                      topPadding: 20.0,
-                      leftPadding: 40.0,
-                      rightPadding: 40.0,
-                      onChanged: (val) {},
-                      validator: (val) {
-                        if (val != null && val.isValidEmail) {
-                          return null;
-                        }
-                        return "Debes introducir un email válido";
-                      },
-                    ),
+                        label: "Email",
+                        hint: "nombre@example.com",
+                        keyboardType: TextInputType.emailAddress,
+                        topPadding: 20.0,
+                        leftPadding: 40.0,
+                        rightPadding: 40.0,
+                        onChanged: (val) {
+                          loginProvider.changeEmail(val);
+                        },
+                        validator: (val) {
+                          return ref
+                              .read(loginProviderProvider.notifier)
+                              .validateEmail(val);
+                        }),
                     CustomTextInput(
                       label: "Contraseña",
                       hint: "**********",
@@ -56,7 +73,9 @@ class LoginPage extends ConsumerWidget {
                       topPadding: 20.0,
                       leftPadding: 40.0,
                       rightPadding: 40.0,
-                      onChanged: (val) {},
+                      onChanged: (val) {
+                        loginProvider.changePassword(val);
+                      },
                     ),
                     Center(
                       child: SizedBox(
@@ -68,13 +87,11 @@ class LoginPage extends ConsumerWidget {
                             color: "primary",
                             br: const BorderRadius.all(Radius.circular(16)),
                             onPressed: () async {
-                              ref
-                                  .read(appRouterProvider.notifier)
-                                  .changeRouter(authenticatedRouter);
-                              final router =
-                                  await ref.read(appRouterProvider.future);
-
-                              router.push("/");
+                              if (formKey.currentState?.validate() ?? false) {
+                                ref
+                                    .read(loginProviderProvider.notifier)
+                                    .login();
+                              }
                             },
                           ),
                         ),

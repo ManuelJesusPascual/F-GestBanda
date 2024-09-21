@@ -6,9 +6,11 @@ part of 'register_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$registerProviderHash() => r'24602be782c741d94af6a7146906c591aa36497b';
+String _$registerProviderHash() => r'285df12f4c3897e9430ad17646bef3ef6bfba682';
 
-/// See also [RegisterProvider].
+/// Provider que usaremos para la lógica de registro de un usuario.
+///
+/// Copied from [RegisterProvider].
 @ProviderFor(RegisterProvider)
 final registerProviderProvider =
     AutoDisposeNotifierProvider<RegisterProvider, RegisterUserDTO>.internal(

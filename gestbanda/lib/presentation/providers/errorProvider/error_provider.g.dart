@@ -8,7 +8,9 @@ part of 'error_provider.dart';
 
 String _$errorProviderHash() => r'9ca8c0005f75a02399bf2a88781a1b6beeedc36d';
 
-/// See also [ErrorProvider].
+/// Provider que usaremos para mostrar errores por pantalla.
+///
+/// Copied from [ErrorProvider].
 @ProviderFor(ErrorProvider)
 final errorProviderProvider =
     AutoDisposeNotifierProvider<ErrorProvider, String>.internal(
