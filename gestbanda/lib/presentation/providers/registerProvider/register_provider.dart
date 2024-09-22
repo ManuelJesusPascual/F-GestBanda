@@ -12,7 +12,7 @@ import "../../../../utils/extensions.dart";
 
 part 'register_provider.g.dart';
 
-/// Provider que usaremos para la lógica de registro de un usuario.
+/// Provider that we will use for the user registration logic.
 @riverpod
 class RegisterProvider extends _$RegisterProvider {
   String api = "http://192.168.1.50:3000/api";
@@ -21,47 +21,47 @@ class RegisterProvider extends _$RegisterProvider {
   RegisterUserDTO build() => RegisterUserDTO(
       name: "", email: "", phone: "", password: "", confirmPassword: "");
 
-  /// Método para cambiar el valor de la variable name.
+  /// Method to change the value of the name variable.
   void changeName(String name) {
     if (state.name != name) {
       state = state.copyWith(name: name);
     }
   }
 
-  /// Método para cambiar el valor de la variable email.
+  /// Method to change the value of the email variable.
   void changeEmail(String email) {
     if (state.email != email) {
       state = state.copyWith(email: email);
     }
   }
 
-  /// Método para cambiar el valor de la variable phone.
+  /// Method to change the value of the phone variable.
   void changePhone(String phone) {
     if (state.phone != phone) {
       state = state.copyWith(phone: phone);
     }
   }
 
-  /// Método para cambiar el valor de la variable password.
+  /// Method to change the value of the password variable.
   void changePassword(String password) {
     if (state.password != password) {
       state = state.copyWith(password: password);
     }
   }
 
-  /// Método para cambiar el valor de la variable confirmPassword.
+  /// Method to change the value of the confirmPassword variable.
   void changeConfirmPassword(String confirmPassword) {
     if (state.confirmPassword != confirmPassword) {
       state = state.copyWith(confirmPassword: confirmPassword);
     }
   }
 
-  /// Método que comprueba si la contraseñas son iguales.
+  /// Method that checks if the passwords are the same.
   bool isValidConfirmPassword() {
     return state.confirmPassword == state.password;
   }
 
-  /// Método que comprueba si el nombre es válido.
+  /// Method that checks if the name is valid.
   String? validateName(String? val) {
     if (val != null && val.isValidName) {
       return null;
@@ -69,7 +69,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir un nombre válido";
   }
 
-  /// Método que comprueba si el email es válido.
+  /// Method that checks if the email is valid.
   String? validateEmail(String? val) {
     if (val != null && val.isValidEmail) {
       return null;
@@ -77,7 +77,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir un email válido";
   }
 
-  /// Método que comprueba si el teléfono es válido.
+  /// Method that checks if the phone number is valid.
   String? validatePhone(String? val) {
     if (val != null && val.isValidPhone) {
       return null;
@@ -85,7 +85,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir un teléfono válido";
   }
 
-  /// Método que comprueba si la contraseña es válida.
+  /// Method that checks if the password is valid.
   String? validatePassword(String? val) {
     if (val != null && !val.isValidPasswordLength) {
       return "La contraseña debe tener al menos 8 caracteres";
@@ -103,7 +103,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Debes introducir una contraseña válida";
   }
 
-  /// Método que comprueba si las contraseñas son iguales.
+  /// Method that checks if the passwords match.
   String? validateConfirmPassword(String? val) {
     if (val != null && isValidConfirmPassword()) {
       return null;
@@ -111,7 +111,7 @@ class RegisterProvider extends _$RegisterProvider {
     return "Las contraseñas no coinciden";
   }
 
-  /// Método que realiza una petición a la API para registrar un usuario. Recoge el token de la respuesta y lo almacena en SharedPreferences. Tras eso cambia el router.
+  /// Method that makes a request to the API to register a user. It collects the token from the response and stores it in SharedPreferences. After that, it changes the router.
   Future<void> register() async {
     try {
       final response = await http.post(Uri.parse("$api/users/registerUser"),
@@ -123,7 +123,7 @@ class RegisterProvider extends _$RegisterProvider {
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
 
-        // Extrae el token de los headers
+        // Extracts the token from the headers
         final token = response.headers['authorization'] ?? '';
 
         final UserDTO user =

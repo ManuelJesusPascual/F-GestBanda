@@ -11,12 +11,11 @@ import '../../../../widgets/widgets.dart';
 class RegisterPage extends ConsumerWidget {
   RegisterPage({super.key});
   final GlobalKey<FormState> formKey =
-      GlobalKey<FormState>(); //No se recomienda meter en riverpod
+      GlobalKey<FormState>(); // It's not recommended to put this in Riverpod
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final registerProvider = ref.watch(registerProviderProvider.notifier);
-
     final errorMessage = ref.watch(errorProviderProvider);
 
     if (errorMessage.isNotEmpty) {
@@ -27,7 +26,7 @@ class RegisterPage extends ConsumerWidget {
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
         );
-        // Limpiar el mensaje de error después de mostrar el snackbar
+        // Clear the error message after showing the snackbar
         ref.read(errorProviderProvider.notifier).setError("");
       });
     }

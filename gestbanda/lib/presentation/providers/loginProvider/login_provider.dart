@@ -19,21 +19,21 @@ class LoginProvider extends _$LoginProvider {
   @override
   LoginUserDTO build() => LoginUserDTO(email: "", password: "");
 
-  /// Método para cambiar el valor de la variable email.
+  /// Method to change the value of the email variable.
   void changeEmail(String email) {
     if (state.email != email) {
       state = state.copyWith(email: email);
     }
   }
 
-  /// Método para cambiar el valor de la variable password.
+  /// Method to change the value of the password variable.
   void changePassword(String password) {
     if (state.password != password) {
       state = state.copyWith(password: password);
     }
   }
 
-  /// Método que comprueba si el email es válido.
+  /// Method that checks if the email is valid.
   String? validateEmail(String? val) {
     if (val != null && val.isValidEmail) {
       return null;
@@ -41,7 +41,7 @@ class LoginProvider extends _$LoginProvider {
     return "Debes introducir un email válido";
   }
 
-  /// Método que realiza una petición a la API para registrar un usuario. Recoge el token de la respuesta y lo almacena en SharedPreferences. Tras eso cambia el router.
+  /// Method that makes a request to the API to log in a user. It collects the token from the response and stores it in SharedPreferences. After that, it changes the router.
   Future<void> login() async {
     try {
       final response = await http.post(Uri.parse("$api/users/login"),
@@ -53,7 +53,7 @@ class LoginProvider extends _$LoginProvider {
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
 
-        // Extrae el token de los headers
+        // Extracts the token from the headers
         final token = response.headers['authorization'] ?? '';
 
         final UserDTO user =

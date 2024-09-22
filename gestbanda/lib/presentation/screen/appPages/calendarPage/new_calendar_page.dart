@@ -172,29 +172,29 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
             event.initDate.day == day.day)
         .toList()
       ..sort((a, b) {
-        // Determinar el color del evento
+        // Determine the color of the event
         int colorPriority(DateTime eventDate) {
           final differenceInHours =
               eventDate.difference(DateTime.now()).inHours;
           if (differenceInHours < -2) {
-            return 3; // Rojo
+            return 3; // Red
           } else if (differenceInHours > 2) {
-            return 2; // Ámbar
+            return 2; // Amber
           } else {
-            return 1; // Verde
+            return 1; // Green
           }
         }
 
-        // Comparar por prioridad del color
+        // Compare by color priority
         final colorPriorityA = colorPriority(a.initDate);
         final colorPriorityB = colorPriority(b.initDate);
 
         if (colorPriorityA != colorPriorityB) {
-          // Primero ordenar por prioridad del color
+          // First order by color priority
           return colorPriorityA.compareTo(colorPriorityB);
         }
 
-        // Dentro del mismo grupo de color, ordenar por fecha (más próxima primero)
+        // Within the same color group, order by date (closest first)
         return a.initDate.compareTo(b.initDate);
       });
   }

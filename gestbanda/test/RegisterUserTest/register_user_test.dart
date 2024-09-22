@@ -9,7 +9,7 @@ import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/share
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 import 'package:gestbanda/config/router/routes_config.dart';
 
-// Clases simuladas (mocks) para simular el comportamiento de dependencias externas
+// Mock classes to simulate the behavior of external dependencies
 class ClienteMock extends Mock implements http.Client {}
 
 class ProveedorPreferenciasCompartidasMock extends Mock
@@ -21,7 +21,7 @@ class EnrutadorAppMock extends Mock implements AppRouter {}
 
 class HttpMock extends Mock implements http.Client {}
 
-// Creamos una versión mock de RegisterProvider para usarla en las pruebas
+// We create a mock version of RegisterProvider to use in tests
 class RegisterProviderMock extends RegisterProvider {
   @override
   RegisterUserDTO build() => RegisterUserDTO(
@@ -34,14 +34,14 @@ void main() {
   late ProveedorErrorMock errorProveedorMock;
   late EnrutadorAppMock enrutadorAppMock;
 
-  // Configuración que se ejecuta antes de cada prueba
+  // Setup that runs before each test
   setUp(() {
-    // Inicialización de los mocks
+    // Initialization of mocks
     preferenciasMock = ProveedorPreferenciasCompartidasMock();
     errorProveedorMock = ProveedorErrorMock();
     enrutadorAppMock = EnrutadorAppMock();
 
-    // Creación del contenedor de proveedores con sobreescrituras para usar los mocks
+    // Creation of the provider container with overrides to use mocks
     contenedor = ProviderContainer(
       overrides: [
         registerProviderProvider.overrideWith(() => RegisterProviderMock()),
@@ -52,16 +52,16 @@ void main() {
     );
   });
 
-  // Limpieza que se ejecuta después de cada prueba
+  // Cleanup that runs after each test
   tearDown(() {
     contenedor.dispose();
   });
 
-  // Prueba del estado inicial del proveedor
+  // Test the initial state of the provider
   test('Estado inicial', () {
     final proveedorRegistro =
         contenedor.read(registerProviderProvider.notifier);
-    // Verifica que todos los campos estén vacíos inicialmente
+    // Check that all fields are empty initially
     expect(proveedorRegistro.state.name, '',
         reason: 'El nombre debe estar vacío inicialmente');
     expect(proveedorRegistro.state.email, '',
@@ -74,7 +74,7 @@ void main() {
         reason: 'La confirmación de contraseña debe estar vacía inicialmente');
   });
 
-  // Grupo de pruebas para los métodos de cambio de campo
+  // Group of tests for field change methods
   group('Métodos de cambio de campo', () {
     test('changeName actualiza el nombre', () {
       final proveedorRegistro =
@@ -118,7 +118,7 @@ void main() {
     });
   });
 
-  // Grupo de pruebas para los métodos de validación
+  // Group of tests for validation methods
   group('Métodos de validación', () {
     test('validateName devuelve null para un nombre válido', () {
       final proveedorRegistro =

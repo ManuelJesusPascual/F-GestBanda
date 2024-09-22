@@ -96,7 +96,7 @@ final directorRouter = GoRouter(
       path: '/user_detail',
       builder: (context, state) {
         final User user = state.extra
-            as User; //Este parámetro a diferencia de los otros que son opcionales porque se reutilizan las vistas de crear y modificar, este es obligatorio.
+            as User; // This parameter is mandatory unlike others which are optional because the views for create and modify are reused.
         return UserDetailPage(
           user: user,
         );
@@ -243,10 +243,10 @@ class AppRouter extends _$AppRouter {
 
   @override
   Future<GoRouter> build() async {
-    // Inicializar el router basado en el estado actual
+    // Initialize the router based on the current state
     GoRouter initialRouter = await _determineInitialRouter();
 
-    // Configurar el stream para escuchar cambios en SharedPreferences
+    // Set up the stream to listen for changes in SharedPreferences
     _setupUserListener();
 
     return initialRouter;
@@ -261,10 +261,10 @@ class AppRouter extends _$AppRouter {
     _userSubscription?.cancel();
     _userSubscription = _createUserStream().listen((userJson) {
       if (userJson == null) {
-        // El usuario ha sido eliminado, cambiar a unauthenticatedRouter
+        // The user has been deleted, switch to unauthenticatedRouter
         changeRouter(unauthenticatedRouter);
       } else {
-        // El usuario existe, cambiar a authenticatedRouter
+        // The user exists, switch to authenticatedRouter
         changeRouter(authenticatedRouter);
       }
     });
@@ -289,7 +289,7 @@ class AppRouter extends _$AppRouter {
         final Map<String, dynamic> userMap = json.decode(userJSON);
         return UserDTO.fromJson(userMap);
       } catch (e) {
-        print('Error al decodificar el JSON: $e');
+        print('Error al decodificar JSON: $e');
       }
     }
     return null;
