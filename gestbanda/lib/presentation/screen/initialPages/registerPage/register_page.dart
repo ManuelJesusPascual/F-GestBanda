@@ -56,6 +56,7 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Nombre",
                     hint: "Juan Rodriguez Perez",
+                    initalValue: ref.watch(registerProviderProvider).name,
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
@@ -71,6 +72,7 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Email",
                     hint: "nombre@example.com",
+                    initalValue: ref.watch(registerProviderProvider).email,
                     keyboardType: TextInputType.emailAddress,
                     topPadding: 20.0,
                     leftPadding: 40.0,
@@ -88,6 +90,7 @@ class RegisterPage extends ConsumerWidget {
                     label: "Teléfono",
                     hint: "612345678",
                     prefixText: "+34 ",
+                    initalValue: ref.watch(registerProviderProvider).phone,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
@@ -108,6 +111,7 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Contraseña",
                     hint: "**********",
+                    initalValue: ref.watch(registerProviderProvider).password,
                     obscure: true,
                     topPadding: 20.0,
                     leftPadding: 40.0,
@@ -124,6 +128,8 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Confirma tu contraseña",
                     hint: "**********",
+                    initalValue:
+                        ref.watch(registerProviderProvider).confirmPassword,
                     obscure: true,
                     topPadding: 20.0,
                     leftPadding: 40.0,
