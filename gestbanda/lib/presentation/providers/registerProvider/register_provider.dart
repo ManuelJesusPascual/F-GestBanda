@@ -64,7 +64,11 @@ class RegisterProvider extends _$RegisterProvider {
   /// Method that checks if the name is valid.
   String? validateName(String? val) {
     if (val != null && val.isValidName) {
-      return null;
+      if (val.length < 60) {
+        return null;
+      } else {
+        return "El nombre es demasiado largo";
+      }
     }
     return "Debes introducir un nombre válido";
   }
