@@ -254,34 +254,6 @@ class _CostumeCreateModifyPageState
                     });
                   },
                 )),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 20),
-              child: CustomButton(
-                width: 250,
-                height: 60,
-                text: "Guardar",
-                color: "primary",
-                br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () async {
-                  final router = await ref.read(appRouterProvider.future);
-
-                  router.pop();
-                },
-              ),
-            ),
-            if (widget.costume.img.isNotEmpty)
-              CustomButton(
-                width: 250,
-                height: 60,
-                text: "Eliminar",
-                color: "error",
-                br: const BorderRadius.all(Radius.circular(16)),
-                onPressed: () async {
-                  final router = await ref.read(appRouterProvider.future);
-
-                  router.pop();
-                },
-              ),
             if (widget.costume.img.isNotEmpty)
               Expanded(
                 child: Padding(
