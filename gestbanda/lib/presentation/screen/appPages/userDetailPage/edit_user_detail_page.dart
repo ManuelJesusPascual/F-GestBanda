@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
+import '../../../../config/config.dart';
 import '../../../../domain/models/user.dart';
 
-class EditUserDetailPage extends StatefulWidget {
+class EditUserDetailPage extends ConsumerStatefulWidget {
   const EditUserDetailPage({super.key, required this.user});
 
   final User user;
 
   @override
-  State<EditUserDetailPage> createState() => _EditUserDetailPageState();
+  ConsumerState<EditUserDetailPage> createState() => _EditUserDetailPageState();
 }
 
-class _EditUserDetailPageState extends State<EditUserDetailPage> {
+class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,7 +128,10 @@ class _EditUserDetailPageState extends State<EditUserDetailPage> {
               ),
               CustomButton(
                 color: "primary",
-                onPressed: () {},
+                onPressed: () async {
+                  final router = await ref.read(appRouterProvider.future);
+                  router.pop();
+                },
                 br: BorderRadius.circular(16),
                 text: "Guardar",
               )

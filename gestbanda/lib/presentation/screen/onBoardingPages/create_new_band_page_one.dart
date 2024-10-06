@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/config/router/routes_config.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
-class CreateNewBandPageOne extends StatelessWidget {
+class CreateNewBandPageOne extends ConsumerWidget {
   const CreateNewBandPageOne({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: SafeArea(
@@ -42,7 +44,7 @@ class CreateNewBandPageOne extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {},
-                      icon: /* state.img != null
+                      icon: /* state.img != null   ///SE COMENTA PORQUE ESTA LÓGICA ESTABA HECHA CON BLOC, AL CAMBIAR A RIVERPOD, HAY QUE IMPLEMENTARLO DE NUEVO
                           ? CircleAvatar(
                               radius: 100,
                               backgroundImage: FileImage(state.img!),
@@ -109,7 +111,11 @@ class CreateNewBandPageOne extends StatelessWidget {
                       icon: Icons.arrow_right_alt_rounded,
                       br: BorderRadius.circular(16),
                       width: 350,
-                      onPressed: () {},
+                      onPressed: () async {
+                        final router = await ref.read(appRouterProvider.future);
+
+                        router.push("/create_band_two");
+                      },
                     ),
                     const SizedBox(height: 20),
                   ],

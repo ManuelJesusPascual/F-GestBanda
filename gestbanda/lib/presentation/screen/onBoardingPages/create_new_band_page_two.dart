@@ -25,13 +25,13 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                 '¡Crea tu propia banda!',
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
-              ).animate().fade(duration: 500.ms).scale(),
+              ),
               const SizedBox(height: 30),
               Text(
                 "Selecciona el paquete que quieres comprar",
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
-              ).animate().fade(duration: 500.ms).scale(),
+              ),
               const SizedBox(height: 30),
               SvgPicture.asset(
                 "assets/svg/create_new_band_page_two.svg",
@@ -77,7 +77,7 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                           .changeRouter(directorRouter);
                       final router = await ref.read(appRouterProvider.future);
 
-                      router.push("/");
+                      router.go("/");
                     },
                     width: 110,
                     height: 150,
@@ -92,7 +92,7 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                           .changeRouter(directorRouter);
                       final router = await ref.read(appRouterProvider.future);
 
-                      router.push("/");
+                      router.go("/");
                     },
                     width: 110,
                     height: 150,
@@ -108,7 +108,7 @@ class CreateNewBandPageTwo extends ConsumerWidget {
 
                       final router = await ref.read(appRouterProvider.future);
 
-                      router.push("/");
+                      router.go("/");
                     },
                     width: 110,
                     height: 150,

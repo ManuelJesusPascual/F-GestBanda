@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/widgets/widgets.dart';
@@ -25,27 +24,32 @@ class RegisterSelectorPage extends ConsumerWidget {
                   style: TextButton.styleFrom(
                     overlayColor: Colors.transparent,
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     ref
                         .read(sharedPreferencesProviderProvider.notifier)
                         .removeString(key: "user");
+                    ref
+                        .read(appRouterProvider.notifier)
+                        .changeRouter(unauthenticatedRouter);
+                    final router = await ref.read(appRouterProvider.future);
+
+                    router.go("/");
                   },
                   child: const Icon(Icons.logout_outlined),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 40, bottom: 20.0),
-                child: Text(
-                  'Selecciona una opción',
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.center,
-                ).animate().fade(duration: 500.ms).scale(),
-              ),
+                  padding: const EdgeInsets.only(top: 40, bottom: 20.0),
+                  child: Text(
+                    'Selecciona una opción',
+                    style: Theme.of(context).textTheme.titleLarge,
+                    textAlign: TextAlign.center,
+                  )),
               Text(
                 "Elige cómo quieres continuar con tu cuenta",
                 style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
-              ).animate().fade(duration: 500.ms).scale(),
+              ),
               const SizedBox(height: 120),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

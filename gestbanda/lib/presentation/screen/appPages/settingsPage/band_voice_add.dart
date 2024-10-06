@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../config/config.dart';
 import '../../../../widgets/custom_button.dart';
 
-class BandVoiceAddPage extends StatelessWidget {
+class BandVoiceAddPage extends ConsumerWidget {
   const BandVoiceAddPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -77,7 +79,10 @@ class BandVoiceAddPage extends StatelessWidget {
             ),
             CustomButton(
               color: "primary",
-              onPressed: () {},
+              onPressed: () async {
+                final router = await ref.read(appRouterProvider.future);
+                router.pop();
+              },
               br: BorderRadius.circular(16),
               text: "Guardar",
             )

@@ -247,7 +247,7 @@ class AppRouter extends _$AppRouter {
     GoRouter initialRouter = await _determineInitialRouter();
 
     // Set up the stream to listen for changes in SharedPreferences
-    _setupUserListener();
+    // _setupUserListener();
 
     return initialRouter;
   }
