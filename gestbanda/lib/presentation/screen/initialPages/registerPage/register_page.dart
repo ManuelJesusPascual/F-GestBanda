@@ -87,6 +87,7 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Teléfono",
                     hint: "612345678",
+                    prefixText: "+34 ",
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,

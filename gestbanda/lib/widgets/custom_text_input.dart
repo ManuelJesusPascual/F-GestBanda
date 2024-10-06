@@ -17,7 +17,8 @@ class CustomTextInput extends StatelessWidget {
       this.obscure = false,
       this.initalValue,
       this.maxLines = 1,
-      this.enabled = true});
+      this.enabled = true,
+      this.prefixText = ""});
 
   final String label;
   final String hint;
@@ -33,6 +34,7 @@ class CustomTextInput extends StatelessWidget {
   final String? initalValue;
   final int? maxLines;
   final bool? enabled;
+  final String? prefixText;
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +53,8 @@ class CustomTextInput extends StatelessWidget {
           maxLines: maxLines,
           enabled: enabled,
           decoration: InputDecoration(
-            labelText: label,
-            hintText: hint,
-          ),
+              labelText: label, hintText: hint, prefixText: prefixText),
           onChanged: onChanged,
         ));
   }
 }
-
-
-/**
- *     return TextFormField(
-      decoration: InputDecoration(
-        floatingLabelAlignment: FloatingLabelAlignment.center,
-        alignLabelWithHint: true,
-        labelText: label,
-        hintText: hint,
-      ),
-    )
- */
