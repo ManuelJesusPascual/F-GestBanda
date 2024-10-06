@@ -78,7 +78,7 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
                           startingDayOfWeek: StartingDayOfWeek.monday,
                           calendarStyle: CalendarStyle(
                             markerDecoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.secondary,
+                              color: Theme.of(context).colorScheme.primary,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -172,29 +172,29 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
             event.initDate.day == day.day)
         .toList()
       ..sort((a, b) {
-        // Determinar el color del evento
+        // Determine the color of the event
         int colorPriority(DateTime eventDate) {
           final differenceInHours =
               eventDate.difference(DateTime.now()).inHours;
           if (differenceInHours < -2) {
-            return 3; // Rojo
+            return 3; // Red
           } else if (differenceInHours > 2) {
-            return 2; // Ámbar
+            return 2; // Amber
           } else {
-            return 1; // Verde
+            return 1; // Green
           }
         }
 
-        // Comparar por prioridad del color
+        // Compare by color priority
         final colorPriorityA = colorPriority(a.initDate);
         final colorPriorityB = colorPriority(b.initDate);
 
         if (colorPriorityA != colorPriorityB) {
-          // Primero ordenar por prioridad del color
+          // First order by color priority
           return colorPriorityA.compareTo(colorPriorityB);
         }
 
-        // Dentro del mismo grupo de color, ordenar por fecha (más próxima primero)
+        // Within the same color group, order by date (closest first)
         return a.initDate.compareTo(b.initDate);
       });
   }
@@ -203,53 +203,67 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
     Event(
         title: 'Concierto Almería',
         type: EventType.concierto,
-        initDate: DateTime(2024, 8, 8, 18, 30),
-        endDate: DateTime(2024, 8, 8, 20, 30),
+        initDate: DateTime(2024, 9, 26, 19, 30),
+        endDate: DateTime(2024, 9, 26, 20, 30),
         description: "a",
         location: "Almeria"),
     Event(
         title: 'Concierto Almería',
         type: EventType.concierto,
-        initDate: DateTime(2024, 8, 8, 8, 30),
-        endDate: DateTime(2024, 8, 8, 20, 30),
+        initDate: DateTime(2024, 9, 26, 8, 30),
+        endDate: DateTime(2024, 9, 26, 9, 30),
         description: "a",
         location: "Almeria"),
     Event(
         title: 'Concierto Almería',
         type: EventType.concierto,
-        initDate: DateTime(2024, 8, 8, 23, 30),
+        initDate: DateTime(2024, 9, 27, 23, 30),
         imgList: [
           ""
         ],
-        endDate: DateTime(2024, 8, 8, 20, 30),
+        endDate: DateTime(2024, 9, 27, 20, 30),
         description: "a",
         location: "Almeria"),
     Event(
         title: 'Lunes Santo',
         type: EventType.pasacalles,
-        initDate: DateTime(2024, 8, 15),
-        endDate: DateTime(2024, 8, 15, 20, 30),
+        initDate: DateTime(2024, 9, 27, 1, 0),
+        endDate: DateTime(2024, 9, 27, 1, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Lunes Santo',
+        type: EventType.pasacalles,
+        initDate: DateTime(2024, 9, 26, 11, 30),
+        endDate: DateTime(2024, 9, 26, 12, 30),
+        description: "a",
+        location: "Sanlucar de Barrameda"),
+    Event(
+        title: 'Lunes Santo',
+        type: EventType.pasacalles,
+        initDate: DateTime(2024, 9, 15),
+        endDate: DateTime(2024, 9, 15, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Pasacalles Navideño',
         type: EventType.pasacalles,
-        initDate: DateTime(2024, 8, 1),
-        endDate: DateTime(2024, 8, 1, 20, 30),
+        initDate: DateTime(2024, 9, 1),
+        endDate: DateTime(2024, 9, 1, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Pasacalles Pasión',
         type: EventType.pasacalles,
         initDate: DateTime(2024, 7, 1),
-        endDate: DateTime(2024, 8, 23, 20, 30),
+        endDate: DateTime(2024, 9, 23, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Concierto de otoño',
         type: EventType.concierto,
-        initDate: DateTime(2024, 8, 23),
-        endDate: DateTime(2024, 8, 23, 20, 30),
+        initDate: DateTime(2024, 9, 23),
+        endDate: DateTime(2024, 9, 23, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
     Event(
@@ -258,8 +272,8 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
           ""
         ],
         type: EventType.concierto,
-        initDate: DateTime(2024, 8, 1),
-        endDate: DateTime(2024, 8, 1, 20, 30),
+        initDate: DateTime(2024, 9, 1),
+        endDate: DateTime(2024, 9, 1, 20, 30),
         description: "a",
         location: "Sanlucar de Barrameda"),
   ];

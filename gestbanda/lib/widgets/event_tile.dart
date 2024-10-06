@@ -16,7 +16,7 @@ class EventTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final DateTime now = DateTime.now();
 
-    // Calcula la diferencia de tiempo en horas
+    // Calculate the time difference in hours
     final Duration difference = event.initDate.difference(now);
     final double differenceInHours = difference.inMinutes / 60.0;
 

@@ -9,7 +9,7 @@ import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/share
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 import 'package:gestbanda/config/router/routes_config.dart';
 
-// Clases simuladas (mocks) para simular el comportamiento de dependencias externas
+// Mock classes to simulate the behavior of external dependencies
 class ClienteMock extends Mock implements http.Client {}
 
 class ProveedorPreferenciasCompartidasMock extends Mock
@@ -21,7 +21,7 @@ class EnrutadorAppMock extends Mock implements AppRouter {}
 
 class HttpMock extends Mock implements http.Client {}
 
-// Creamos una versión mock de LoginProvider para usarla en las pruebas
+// Create a mock version of LoginProvider to use in tests
 class LoginProviderMock extends LoginProvider {
   @override
   LoginUserDTO build() => LoginUserDTO(
@@ -36,14 +36,14 @@ void main() {
   late ProveedorErrorMock errorProveedorMock;
   late EnrutadorAppMock enrutadorAppMock;
 
-  // Configuración que se ejecuta antes de cada prueba
+  // Setup that runs before each test
   setUp(() {
-    // Inicialización de los mocks
+    // Initialization of mocks
     preferenciasMock = ProveedorPreferenciasCompartidasMock();
     errorProveedorMock = ProveedorErrorMock();
     enrutadorAppMock = EnrutadorAppMock();
 
-    // Creación del contenedor de proveedores con sobreescrituras para usar los mocks
+    // Creation of the provider container with overrides to use mocks
     contenedor = ProviderContainer(
       overrides: [
         loginProviderProvider.overrideWith(() => LoginProviderMock()),
@@ -54,22 +54,22 @@ void main() {
     );
   });
 
-  // Limpieza que se ejecuta después de cada prueba
+  // Cleanup that runs after each test
   tearDown(() {
     contenedor.dispose();
   });
 
-  // Prueba del estado inicial del proveedor
+  // Test the initial state of the provider
   test('Estado inicial', () {
     final proveedorRegistro = contenedor.read(loginProviderProvider.notifier);
-    // Verifica que todos los campos estén vacíos inicialmente
+    // Verify that all fields are empty initially
     expect(proveedorRegistro.state.email, '',
         reason: 'El email debe estar vacío inicialmente');
     expect(proveedorRegistro.state.password, '',
         reason: 'La contraseña debe estar vacía inicialmente');
   });
 
-  // Grupo de pruebas para los métodos de cambio de campo
+  // Group of tests for field change methods
   group('Métodos de cambio de campo', () {
     test('changeEmail actualiza el correo electrónico', () {
       final proveedorRegistro = contenedor.read(loginProviderProvider.notifier);
@@ -86,7 +86,7 @@ void main() {
     });
   });
 
-  // Grupo de pruebas para los métodos de validación
+  // Group of tests for validation methods
   group('Métodos de validación', () {
     test('validateEmail devuelve null para un correo electrónico válido', () {
       final proveedorRegistro = contenedor.read(loginProviderProvider.notifier);

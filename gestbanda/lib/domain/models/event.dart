@@ -7,7 +7,7 @@ class Event {
   EventType type;
   List<String>? imgList;
   String description;
-  String location; //Esto hay que cambiarlo para que sea lat y lang
+  String location; //This needs to be changed to be lat and lang.
 
   Event(
       {required this.title,

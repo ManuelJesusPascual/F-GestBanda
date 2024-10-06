@@ -22,7 +22,7 @@ class LoginPage extends ConsumerWidget {
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
         );
-        // Limpiar el mensaje de error después de mostrar el snackbar
+        // Clear the error message after showing the snackbar
         ref.read(errorProviderProvider.notifier).setError("");
       });
     }
