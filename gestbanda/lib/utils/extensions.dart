@@ -35,7 +35,8 @@ extension StringExtension on String {
   }
 
   bool get isValidPasswordSpecialCharacters {
-    final passwordRegExp = RegExp(r'^(?=.*?[#?!@$%^&*\-]).*$');
+    final passwordRegExp =
+        RegExp(r'^(?=.*?[#?!@$%^&*\-+=_/~.,<>;:{}[\]()|\\]).*$');
     return passwordRegExp.hasMatch(this);
   }
 
