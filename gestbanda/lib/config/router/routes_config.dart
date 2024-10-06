@@ -239,8 +239,6 @@ final directorRouter = GoRouter(
 
 @riverpod
 class AppRouter extends _$AppRouter {
-  StreamSubscription<String?>? _userSubscription;
-
   @override
   Future<GoRouter> build() async {
     // Initialize the router based on the current state
@@ -255,28 +253,6 @@ class AppRouter extends _$AppRouter {
   Future<GoRouter> _determineInitialRouter() async {
     UserDTO? user = await loadUser();
     return user != null ? authenticatedRouter : unauthenticatedRouter;
-  }
-
-  void _setupUserListener() {
-    _userSubscription?.cancel();
-    _userSubscription = _createUserStream().listen((userJson) {
-      if (userJson == null) {
-        // The user has been deleted, switch to unauthenticatedRouter
-        changeRouter(unauthenticatedRouter);
-      } else {
-        // The user exists, switch to authenticatedRouter
-        changeRouter(authenticatedRouter);
-      }
-    });
-  }
-
-  Stream<String?> _createUserStream() async* {
-    while (true) {
-      yield await ref
-          .read(sharedPreferencesProviderProvider.notifier)
-          .getString(key: "user");
-      await Future.delayed(const Duration(seconds: 1));
-    }
   }
 
   Future<UserDTO?> loadUser() async {
