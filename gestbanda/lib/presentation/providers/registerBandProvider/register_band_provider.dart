@@ -117,12 +117,6 @@ class RegisterBandProvider extends _$RegisterBandProvider {
           contentType: MediaType('application', 'json', {'charset': 'utf-8'})));
       request.headers['Authorization'] = state.user.token;
 
-      // Debugging logs
-      print("registerBand: ${state.toJson()}");
-      print("registerBand: ${state.user.toJson()}");
-      print("registerBand: ${state.user.token}");
-      print("registerBand: ${state.img.path}");
-
       // Send the request
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
@@ -130,7 +124,6 @@ class RegisterBandProvider extends _$RegisterBandProvider {
       // Handle API response
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
-        print("registerBand: ${jsonResponse}");
 
         // Save band details in SharedPreferences
         final BandDTO band = BandDTO.fromJson(jsonResponse);
@@ -142,7 +135,6 @@ class RegisterBandProvider extends _$RegisterBandProvider {
         final router = await ref.read(appRouterProvider.future);
         router.push("/");
       } else {
-        print("registerBand: ${response.body}");
         final data = json.decode(response.body);
         ref
             .read(errorProviderProvider.notifier)

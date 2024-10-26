@@ -52,7 +52,7 @@ final authenticatedRouter = GoRouter(
     ),
     GoRoute(
       path: '/join_band',
-      builder: (context, state) => const JoinBandPage(),
+      builder: (context, state) => JoinBandPage(),
     ),
     GoRoute(
       path: '/create_band_one',
@@ -258,8 +258,8 @@ class AppRouter extends _$AppRouter {
     if (user == null) {
       router = unauthenticatedRouter;
     } else if (band != null) {
-      router =
-          directorRouter; //User will never be null because it has already been checked in the previous if statement.
+      //User will never be null because it has already been checked in the previous if statement.
+      router = directorRouter;
     } else {
       router = authenticatedRouter;
     }

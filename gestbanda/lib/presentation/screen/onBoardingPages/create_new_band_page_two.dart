@@ -5,12 +5,27 @@ import 'package:gestbanda/presentation/providers/registerBandProvider/register_b
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
+import '../../providers/errorProvider/error_provider.dart';
 
 class CreateNewBandPageTwo extends ConsumerWidget {
   const CreateNewBandPageTwo({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final errorMessage = ref.watch(errorProviderProvider);
+    if (errorMessage.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+          ),
+        );
+        // Clear the error message after showing the snackbar
+        ref.read(errorProviderProvider.notifier).setError("");
+      });
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(

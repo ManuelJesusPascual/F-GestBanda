@@ -6,9 +6,12 @@ part of 'login_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginProviderHash() => r'8dbec8cbcc1524073f536075a3785ed6569133f0';
+String _$loginProviderHash() => r'b3127a650727a7ba140c067d033ff463184a8839';
 
-/// See also [LoginProvider].
+/// Provider for handling user login operations and managing login state
+/// such as email and password, as well as API interactions for user login.
+///
+/// Copied from [LoginProvider].
 @ProviderFor(LoginProvider)
 final loginProviderProvider =
     AutoDisposeNotifierProvider<LoginProvider, LoginUserDTO>.internal(

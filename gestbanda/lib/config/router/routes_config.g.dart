@@ -6,9 +6,11 @@ part of 'routes_config.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appRouterHash() => r'37b9f2f381e34d159cd372746dc0d020ff0475d4';
+String _$appRouterHash() => r'70558f24eb31ea7316c73f8261be81f452d582a6';
 
-/// See also [AppRouter].
+/// Riverpod provider for managing the app's router based on user authentication state.
+///
+/// Copied from [AppRouter].
 @ProviderFor(AppRouter)
 final appRouterProvider =
     AutoDisposeAsyncNotifierProvider<AppRouter, GoRouter>.internal(
