@@ -9,6 +9,11 @@ extension StringExtension on String {
     return nameRegExp.hasMatch(this);
   }
 
+  bool get isValidBandName {
+    final bandNameRegExp = RegExp(r'^[a-zA-Z. ]+$');
+    return bandNameRegExp.hasMatch(this);
+  }
+
   bool get isValidPhone {
     final phoneRegExp = RegExp(r'^[67]\d{8}$');
     return phoneRegExp.hasMatch(this);

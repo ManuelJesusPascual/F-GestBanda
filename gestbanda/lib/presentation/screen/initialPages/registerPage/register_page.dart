@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 import 'package:gestbanda/presentation/providers/registerProvider/register_provider.dart';
@@ -46,13 +45,13 @@ class RegisterPage extends ConsumerWidget {
                       '¡Bienvenido!',
                       style: Theme.of(context).textTheme.titleLarge,
                       textAlign: TextAlign.center,
-                    ).animate().fade(duration: 500.ms).scale(),
+                    ),
                   ),
                   Text(
                     "Por favor, introduce tus datos para crear una cuenta.",
                     style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
-                  ).animate().fade(duration: 500.ms).scale(),
+                  ),
                   CustomTextInput(
                     label: "Nombre",
                     hint: "Juan Rodriguez Perez",

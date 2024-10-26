@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
@@ -25,7 +24,7 @@ class JoinBandPage extends ConsumerWidget {
                   'Introduce el código',
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
-                ).animate().fade(duration: 500.ms).scale(),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -33,7 +32,7 @@ class JoinBandPage extends ConsumerWidget {
                   "Introduce el código proporcionado por el administrador de tu banda",
                   style: Theme.of(context).textTheme.bodyMedium,
                   textAlign: TextAlign.center,
-                ).animate().fade(duration: 500.ms).scale(),
+                ),
               ),
               const SizedBox(height: 30),
               CustomTextInput(

@@ -5,6 +5,7 @@ import 'package:gestbanda/domain/models/costume.dart';
 import 'package:gestbanda/domain/models/event.dart';
 import 'package:gestbanda/domain/models/instrument.dart';
 import 'package:gestbanda/domain/models/user.dart';
+import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_page.dart';
@@ -18,6 +19,7 @@ import '../../presentation/screen/pages.dart';
 
 part 'routes_config.g.dart';
 
+/// Router configuration for unauthenticated users.
 final unauthenticatedRouter = GoRouter(
   initialLocation: '/',
   routes: [
@@ -40,6 +42,7 @@ final unauthenticatedRouter = GoRouter(
   ],
 );
 
+/// Router configuration for authenticated users without a specific band association.
 final authenticatedRouter = GoRouter(
   initialLocation: '/',
   routes: [
@@ -53,7 +56,7 @@ final authenticatedRouter = GoRouter(
     ),
     GoRoute(
       path: '/create_band_one',
-      builder: (context, state) => const CreateNewBandPageOne(),
+      builder: (context, state) => CreateNewBandPageOne(),
     ),
     GoRoute(
       path: '/create_band_two',
@@ -66,6 +69,7 @@ final authenticatedRouter = GoRouter(
   ],
 );
 
+/// Router configuration for users with director role and specific band association.
 final directorRouter = GoRouter(
   initialLocation: '/',
   routes: [
@@ -95,8 +99,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/user_detail',
       builder: (context, state) {
-        final User user = state.extra
-            as User; // This parameter is mandatory unlike others which are optional because the views for create and modify are reused.
+        final User user = state.extra as User;
         return UserDetailPage(
           user: user,
         );
@@ -237,29 +240,37 @@ final directorRouter = GoRouter(
   ],
 );
 
+/// Riverpod provider for managing the app's router based on user authentication state.
 @riverpod
 class AppRouter extends _$AppRouter {
+  /// Builds the initial GoRouter configuration based on the current user state.
   @override
   Future<GoRouter> build() async {
-    // Initialize the router based on the current state
     GoRouter initialRouter = await _determineInitialRouter();
-
-    // Set up the stream to listen for changes in SharedPreferences
-    // _setupUserListener();
-
     return initialRouter;
   }
 
+  /// Determines the initial router configuration based on the user's authentication and band state.
   Future<GoRouter> _determineInitialRouter() async {
+    GoRouter router = unauthenticatedRouter;
     UserDTO? user = await loadUser();
-    return user != null ? authenticatedRouter : unauthenticatedRouter;
+    BandDTO? band = await loadBand();
+    if (user == null) {
+      router = unauthenticatedRouter;
+    } else if (band != null) {
+      router =
+          directorRouter; //User will never be null because it has already been checked in the previous if statement.
+    } else {
+      router = authenticatedRouter;
+    }
+    return router;
   }
 
+  /// Loads the user data from shared preferences and decodes the JSON string to a UserDTO object.
   Future<UserDTO?> loadUser() async {
     final String? userJSON = await ref
         .read(sharedPreferencesProviderProvider.notifier)
         .getString(key: "user");
-
     if (userJSON != null && userJSON.isNotEmpty) {
       try {
         final Map<String, dynamic> userMap = json.decode(userJSON);
@@ -271,6 +282,23 @@ class AppRouter extends _$AppRouter {
     return null;
   }
 
+  /// Loads the band data from shared preferences and decodes the JSON string to a BandDTO object.
+  Future<BandDTO?> loadBand() async {
+    final String? bandJSON = await ref
+        .read(sharedPreferencesProviderProvider.notifier)
+        .getString(key: "band");
+    if (bandJSON != null && bandJSON.isNotEmpty) {
+      try {
+        final Map<String, dynamic> bandMap = json.decode(bandJSON);
+        return BandDTO.fromJson(bandMap);
+      } catch (e) {
+        print('Error al decodificar JSON: $e');
+      }
+    }
+    return null;
+  }
+
+  /// Updates the app's router state with a new GoRouter configuration.
   void changeRouter(GoRouter router) {
     state = AsyncValue.data(router);
   }

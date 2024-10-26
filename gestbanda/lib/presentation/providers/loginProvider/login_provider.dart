@@ -1,39 +1,48 @@
 import 'dart:convert';
 
+import 'package:gestbanda/domain/newmodels/userBandsModels/user_bands_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/login_user_dto.dart';
 import 'package:gestbanda/utils/extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../config/config.dart';
+import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 
 part 'login_provider.g.dart';
 
+/// Provider for handling user login operations and managing login state
+/// such as email and password, as well as API interactions for user login.
 @riverpod
 class LoginProvider extends _$LoginProvider {
+  // The base URL of the API
   String api = "http://192.168.1.50:3000/api";
 
+  // Initializes the provider with a default LoginUserDTO object.
   @override
   LoginUserDTO build() => LoginUserDTO(email: "", password: "");
 
-  /// Method to change the value of the email variable.
+  /// Updates the email in the current login state.
+  /// Only updates if the new email is different from the current one.
   void changeEmail(String email) {
     if (state.email != email) {
       state = state.copyWith(email: email);
     }
   }
 
-  /// Method to change the value of the password variable.
+  /// Updates the password in the current login state.
+  /// Only updates if the new password is different from the current one.
   void changePassword(String password) {
     if (state.password != password) {
       state = state.copyWith(password: password);
     }
   }
 
-  /// Method that checks if the email is valid.
+  /// Validates the email format using an extension method.
+  /// Returns an error message if invalid, otherwise returns null.
   String? validateEmail(String? val) {
     if (val != null && val.isValidEmail) {
       return null;
@@ -41,14 +50,18 @@ class LoginProvider extends _$LoginProvider {
     return "Debes introducir un email válido";
   }
 
-  /// Method that makes a request to the API to log in a user. It collects the token from the response and stores it in SharedPreferences. After that, it changes the router.
+  /// Handles the login process by sending the login data to the API.
+  /// If successful, it saves the user and token in SharedPreferences and
+  /// fetches the bands associated with the user.
   Future<void> login() async {
     try {
-      final response = await http.post(Uri.parse("$api/users/login"),
-          headers: <String, String>{
-            'Content-Type': 'application/json',
-          },
-          body: jsonEncode(state));
+      final response = await http.post(
+        Uri.parse("$api/users/login"),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(state),
+      );
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
@@ -58,13 +71,10 @@ class LoginProvider extends _$LoginProvider {
 
         final UserDTO user =
             UserDTO.fromJson(jsonResponse).copyWith(token: token);
-
+        await getBands(user.id, token);
         await ref
             .read(sharedPreferencesProviderProvider.notifier)
             .saveString(key: "user", value: json.encode(user.toJson()));
-        ref.read(appRouterProvider.notifier).changeRouter(authenticatedRouter);
-        final router = await ref.read(appRouterProvider.future);
-        router.push("/");
       } else {
         final data = json.decode(response.body);
         ref
@@ -74,6 +84,53 @@ class LoginProvider extends _$LoginProvider {
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
+    }
+  }
+
+  /// Fetches the list of bands associated with the user.
+  /// If the user has bands, the first band is saved in SharedPreferences,
+  /// and the router navigates to the director's main page.
+  /// Otherwise, it navigates to the authenticated user's main page.
+  Future<void> getBands(String id, String token) async {
+    try {
+      final response = await http.get(
+        Uri.parse("$api/userBands/getUserBands?id=$id"),
+        headers: <String, String>{
+          'Authorization': token,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+
+        final List<UserBandsDTO> userBands =
+            UserBandsDTO.listFromJson(jsonResponse);
+
+        if (userBands.isNotEmpty) {
+          final BandDTO band = userBands.first
+              .band; // It is not yet implemented for the user to be in multiple bands on the front end, so we are taking the first one.
+          await ref
+              .read(sharedPreferencesProviderProvider.notifier)
+              .saveString(key: "band", value: json.encode(band));
+          ref.read(appRouterProvider.notifier).changeRouter(directorRouter);
+          final router = await ref.read(appRouterProvider.future);
+          router.push("/");
+        } else {
+          ref
+              .read(appRouterProvider.notifier)
+              .changeRouter(authenticatedRouter);
+          final router = await ref.read(appRouterProvider.future);
+          router.push("/");
+        }
+      } else {
+        final data = json.decode(response.body);
+        ref
+            .read(errorProviderProvider.notifier)
+            .setError(data["message"].toString());
+      }
+    } catch (e) {
+      ref.read(errorProviderProvider.notifier).setError(
+          "Ha ocurrido un error al obtener tu banda. Intentalo más tarde.");
     }
   }
 }

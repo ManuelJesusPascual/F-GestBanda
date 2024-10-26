@@ -6,9 +6,9 @@ part of 'register_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$registerProviderHash() => r'285df12f4c3897e9430ad17646bef3ef6bfba682';
+String _$registerProviderHash() => r'b334a11f9dab2bea19df869f805cb9fcaec75f90';
 
-/// Provider que usaremos para la lógica de registro de un usuario.
+/// Provider that we will use for the user registration logic.
 ///
 /// Copied from [RegisterProvider].
 @ProviderFor(RegisterProvider)
