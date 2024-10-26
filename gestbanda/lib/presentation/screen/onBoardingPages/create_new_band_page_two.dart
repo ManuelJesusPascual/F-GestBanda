@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gestbanda/presentation/providers/registerBandProvider/register_band_provider.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../config/config.dart';
@@ -72,11 +73,8 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     br: BorderRadius.circular(16),
                     onPressed: () async {
                       ref
-                          .read(appRouterProvider.notifier)
-                          .changeRouter(directorRouter);
-                      final router = await ref.read(appRouterProvider.future);
-
-                      router.go("/");
+                          .read(registerBandProviderProvider.notifier)
+                          .registerBand();
                     },
                     width: 110,
                     height: 150,
@@ -87,11 +85,8 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     br: BorderRadius.circular(16),
                     onPressed: () async {
                       ref
-                          .read(appRouterProvider.notifier)
-                          .changeRouter(directorRouter);
-                      final router = await ref.read(appRouterProvider.future);
-
-                      router.go("/");
+                          .read(registerBandProviderProvider.notifier)
+                          .registerBand();
                     },
                     width: 110,
                     height: 150,
@@ -102,12 +97,8 @@ class CreateNewBandPageTwo extends ConsumerWidget {
                     br: BorderRadius.circular(16),
                     onPressed: () async {
                       ref
-                          .read(appRouterProvider.notifier)
-                          .changeRouter(directorRouter);
-
-                      final router = await ref.read(appRouterProvider.future);
-
-                      router.go("/");
+                          .read(registerBandProviderProvider.notifier)
+                          .registerBand();
                     },
                     width: 110,
                     height: 150,

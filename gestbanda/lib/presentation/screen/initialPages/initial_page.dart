@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -26,7 +25,7 @@ class InitialPage extends ConsumerWidget {
                 width: screenWidth * 0.8,
                 height: screenHeight * 0.4,
                 semanticsLabel: "Imagen de una persona tocando la trompeta",
-              ).animate().fade(duration: 800.ms).scale(),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20.0, vertical: 10.0),
@@ -34,7 +33,7 @@ class InitialPage extends ConsumerWidget {
                   '¡Gestiona tu banda \n en unos simples pasos!',
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
-                ).animate().fade(duration: 800.ms).scale(),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -43,7 +42,7 @@ class InitialPage extends ConsumerWidget {
                   "Trajes, componentes, instrumentos, salidas \n ¡Y mucho más!",
                   style: Theme.of(context).textTheme.bodyMedium,
                   textAlign: TextAlign.center,
-                ).animate().fade(duration: 800.ms).scale(),
+                ),
               ),
               const SizedBox(height: 50),
               Row(
@@ -76,7 +75,7 @@ class InitialPage extends ConsumerWidget {
                     },
                   ),
                 ],
-              ).animate().fade(duration: 800.ms).scale(),
+              ),
             ],
           ),
         ),

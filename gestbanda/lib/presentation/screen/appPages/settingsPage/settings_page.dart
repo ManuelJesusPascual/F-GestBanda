@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
+import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/band.dart';
@@ -69,6 +71,26 @@ class SettingsPage extends ConsumerWidget {
               const Divider(
                 indent: 10,
                 endIndent: 10,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 25),
+                child: CustomButton(
+                    color: "error",
+                    height: 75,
+                    width: 250,
+                    br: BorderRadius.circular(16),
+                    text: "Salir de la banda",
+                    onPressed: () async {
+                      ref
+                          .read(sharedPreferencesProviderProvider.notifier)
+                          .removeString(key: "band");
+                      ref
+                          .read(appRouterProvider.notifier)
+                          .changeRouter(authenticatedRouter);
+                      final router = await ref.read(appRouterProvider.future);
+
+                      router.go("/");
+                    }),
               ),
             ],
           ),
