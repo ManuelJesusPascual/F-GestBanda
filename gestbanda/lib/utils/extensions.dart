@@ -14,6 +14,11 @@ extension StringExtension on String {
     return bandNameRegExp.hasMatch(this);
   }
 
+  bool get isValidCode {
+    final codeRegExp = RegExp(r'^[0-9]+$');
+    return codeRegExp.hasMatch(this);
+  }
+
   bool get isValidPhone {
     final phoneRegExp = RegExp(r'^[67]\d{8}$');
     return phoneRegExp.hasMatch(this);

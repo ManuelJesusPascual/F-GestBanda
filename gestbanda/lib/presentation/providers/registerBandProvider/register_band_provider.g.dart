@@ -7,9 +7,13 @@ part of 'register_band_provider.dart';
 // **************************************************************************
 
 String _$registerBandProviderHash() =>
-    r'7e36c24c7f50e14a4339e9e29ddfa4159834ba08';
+    r'0f6bc053b567270d8372cea1617be3acae392d0c';
 
-/// See also [RegisterBandProvider].
+/// Provider for handling band registration logic.
+/// This class manages the registration form state and handles interactions
+/// with the API to register a new band.
+///
+/// Copied from [RegisterBandProvider].
 @ProviderFor(RegisterBandProvider)
 final registerBandProviderProvider =
     AutoDisposeNotifierProvider<RegisterBandProvider, RegisterBandDTO>.internal(

@@ -21,6 +21,9 @@ class LoginProvider extends _$LoginProvider {
   // The base URL of the API
   String api = "http://192.168.1.50:3000/api";
 
+  /// State to indicate if a request is currently loading
+  bool isLoading = false;
+
   // Initializes the provider with a default LoginUserDTO object.
   @override
   LoginUserDTO build() => LoginUserDTO(email: "", password: "");
@@ -54,6 +57,10 @@ class LoginProvider extends _$LoginProvider {
   /// If successful, it saves the user and token in SharedPreferences and
   /// fetches the bands associated with the user.
   Future<void> login() async {
+    if (isLoading) return;
+
+    // Start loading
+    isLoading = true;
     try {
       final response = await http.post(
         Uri.parse("$api/users/login"),
@@ -84,6 +91,8 @@ class LoginProvider extends _$LoginProvider {
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
+    } finally {
+      isLoading = false;
     }
   }
 

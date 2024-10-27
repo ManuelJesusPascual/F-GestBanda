@@ -31,8 +31,9 @@ class RegisterPage extends ConsumerWidget {
     }
 
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        body: SafeArea(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Stack(children: [
+        SafeArea(
           child: SingleChildScrollView(
             child: Form(
               key: formKey,
@@ -55,7 +56,7 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Nombre",
                     hint: "Juan Rodriguez Perez",
-                    initalValue: ref.watch(registerProviderProvider).name,
+                    initalValue: registerProviderProvider.name,
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
@@ -194,6 +195,15 @@ class RegisterPage extends ConsumerWidget {
               ),
             ),
           ),
-        ));
+        ),
+        if (registerProvider.isLoading)
+          Container(
+            color: Colors.black54,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+      ]),
+    );
   }
 }

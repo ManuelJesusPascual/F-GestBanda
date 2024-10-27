@@ -23,6 +23,9 @@ class RegisterBandProvider extends _$RegisterBandProvider {
   // Base API endpoint
   String api = "http://192.168.1.50:3000/api";
 
+  /// State to indicate if a request is currently loading
+  bool isLoading = false;
+
   // Initial state, setting default values for a new RegisterBandDTO object.
   @override
   RegisterBandDTO build() => RegisterBandDTO(
@@ -99,6 +102,10 @@ class RegisterBandProvider extends _$RegisterBandProvider {
   /// Registers the band by sending data to the API.
   /// This includes the band details in JSON and the selected image as a file.
   Future<void> registerBand() async {
+    if (isLoading) return;
+
+    // Start loading
+    isLoading = true;
     try {
       await getUser(); // Ensure user details are available
 
@@ -117,12 +124,6 @@ class RegisterBandProvider extends _$RegisterBandProvider {
           contentType: MediaType('application', 'json', {'charset': 'utf-8'})));
       request.headers['Authorization'] = state.user.token;
 
-      // Debugging logs
-      print("registerBand: ${state.toJson()}");
-      print("registerBand: ${state.user.toJson()}");
-      print("registerBand: ${state.user.token}");
-      print("registerBand: ${state.img.path}");
-
       // Send the request
       final streamedResponse = await request.send();
       final response = await http.Response.fromStream(streamedResponse);
@@ -130,7 +131,6 @@ class RegisterBandProvider extends _$RegisterBandProvider {
       // Handle API response
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
-        print("registerBand: ${jsonResponse}");
 
         // Save band details in SharedPreferences
         final BandDTO band = BandDTO.fromJson(jsonResponse);
@@ -142,7 +142,6 @@ class RegisterBandProvider extends _$RegisterBandProvider {
         final router = await ref.read(appRouterProvider.future);
         router.push("/");
       } else {
-        print("registerBand: ${response.body}");
         final data = json.decode(response.body);
         ref
             .read(errorProviderProvider.notifier)
@@ -151,6 +150,8 @@ class RegisterBandProvider extends _$RegisterBandProvider {
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
+    } finally {
+      isLoading = false;
     }
   }
 }
