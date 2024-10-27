@@ -6,7 +6,7 @@ part of 'login_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginProviderHash() => r'b3127a650727a7ba140c067d033ff463184a8839';
+String _$loginProviderHash() => r'b9216da80fa27d89f8cc0dd06d381d5a34c27992';
 
 /// Provider for handling user login operations and managing login state
 /// such as email and password, as well as API interactions for user login.

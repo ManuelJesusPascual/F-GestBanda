@@ -23,6 +23,9 @@ class RegisterBandProvider extends _$RegisterBandProvider {
   // Base API endpoint
   String api = "http://192.168.1.50:3000/api";
 
+  /// State to indicate if a request is currently loading
+  bool isLoading = false;
+
   // Initial state, setting default values for a new RegisterBandDTO object.
   @override
   RegisterBandDTO build() => RegisterBandDTO(
@@ -99,6 +102,10 @@ class RegisterBandProvider extends _$RegisterBandProvider {
   /// Registers the band by sending data to the API.
   /// This includes the band details in JSON and the selected image as a file.
   Future<void> registerBand() async {
+    if (isLoading) return;
+
+    // Start loading
+    isLoading = true;
     try {
       await getUser(); // Ensure user details are available
 
@@ -143,6 +150,8 @@ class RegisterBandProvider extends _$RegisterBandProvider {
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
+    } finally {
+      isLoading = false;
     }
   }
 }

@@ -17,6 +17,9 @@ part 'register_provider.g.dart';
 class RegisterProvider extends _$RegisterProvider {
   String api = "http://192.168.1.50:3000/api";
 
+  /// State to indicate if a request is currently loading
+  bool isLoading = false;
+
   @override
   RegisterUserDTO build() => RegisterUserDTO(
       name: "", email: "", phone: "", password: "", confirmPassword: "");
@@ -117,6 +120,7 @@ class RegisterProvider extends _$RegisterProvider {
 
   /// Method that makes a request to the API to register a user. It collects the token from the response and stores it in SharedPreferences. After that, it changes the router.
   Future<void> register() async {
+    isLoading = true;
     try {
       final response = await http.post(Uri.parse("$api/users/registerUser"),
           headers: <String, String>{
@@ -148,6 +152,8 @@ class RegisterProvider extends _$RegisterProvider {
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
+    } finally {
+      isLoading = false;
     }
   }
 }

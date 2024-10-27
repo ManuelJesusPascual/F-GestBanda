@@ -20,6 +20,9 @@ part 'join_band_provider.g.dart';
 class JoinBandProvider extends _$JoinBandProvider {
   String api = "http://192.168.1.50:3000/api";
 
+  /// State to indicate if a request is currently loading
+  bool isLoading = false;
+
   /// Builds an initial JoinBandDTO object with default values.
   @override
   JoinBandDTO build() => JoinBandDTO(
@@ -70,6 +73,11 @@ class JoinBandProvider extends _$JoinBandProvider {
   /// If successful, it saves the band data and navigates to the director's home screen.
   /// If an error occurs, it sets an appropriate error message in the error provider.
   Future<void> joinBandByCode() async {
+    if (isLoading) return;
+
+    // Start loading
+    isLoading = true;
+
     await getUser();
     try {
       final response = await http.post(
@@ -101,6 +109,8 @@ class JoinBandProvider extends _$JoinBandProvider {
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
+    } finally {
+      isLoading = false;
     }
   }
 }

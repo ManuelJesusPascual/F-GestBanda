@@ -29,79 +29,88 @@ class LoginPage extends ConsumerWidget {
 
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 30.0, top: 10),
-                      child: Text(
-                        '¡Bienvenido de nuevo!',
-                        style: Theme.of(context).textTheme.titleLarge,
+        body: Stack(children: [
+          SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30.0, top: 10),
+                        child: Text(
+                          '¡Bienvenido de nuevo!',
+                          style: Theme.of(context).textTheme.titleLarge,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Text(
+                        "Por favor, inicia sesión con tus credenciales.",
+                        style: Theme.of(context).textTheme.bodyMedium,
                         textAlign: TextAlign.center,
                       ),
-                    ),
-                    Text(
-                      "Por favor, inicia sesión con tus credenciales.",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    CustomTextInput(
-                        label: "Email",
-                        hint: "nombre@example.com",
-                        keyboardType: TextInputType.emailAddress,
+                      CustomTextInput(
+                          label: "Email",
+                          hint: "nombre@example.com",
+                          keyboardType: TextInputType.emailAddress,
+                          topPadding: 20.0,
+                          leftPadding: 40.0,
+                          rightPadding: 40.0,
+                          onChanged: (val) {
+                            loginProvider.changeEmail(val);
+                          },
+                          validator: (val) {
+                            return ref
+                                .read(loginProviderProvider.notifier)
+                                .validateEmail(val);
+                          }),
+                      CustomTextInput(
+                        label: "Contraseña",
+                        hint: "**********",
+                        obscure: true,
                         topPadding: 20.0,
                         leftPadding: 40.0,
                         rightPadding: 40.0,
                         onChanged: (val) {
-                          loginProvider.changeEmail(val);
+                          loginProvider.changePassword(val);
                         },
-                        validator: (val) {
-                          return ref
-                              .read(loginProviderProvider.notifier)
-                              .validateEmail(val);
-                        }),
-                    CustomTextInput(
-                      label: "Contraseña",
-                      hint: "**********",
-                      obscure: true,
-                      topPadding: 20.0,
-                      leftPadding: 40.0,
-                      rightPadding: 40.0,
-                      onChanged: (val) {
-                        loginProvider.changePassword(val);
-                      },
-                    ),
-                    Center(
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 50),
-                          child: CustomButton(
-                            text: "Iniciar Sesión",
-                            color: "primary",
-                            br: const BorderRadius.all(Radius.circular(16)),
-                            onPressed: () async {
-                              if (formKey.currentState?.validate() ?? false) {
-                                ref
-                                    .read(loginProviderProvider.notifier)
-                                    .login();
-                              }
-                            },
+                      ),
+                      Center(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 50),
+                            child: CustomButton(
+                              text: "Iniciar Sesión",
+                              color: "primary",
+                              br: const BorderRadius.all(Radius.circular(16)),
+                              onPressed: () async {
+                                if (formKey.currentState?.validate() ?? false) {
+                                  ref
+                                      .read(loginProviderProvider.notifier)
+                                      .login();
+                                }
+                              },
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ));
+          if (loginProvider.isLoading)
+            Container(
+              color: Colors.black54,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+        ]));
   }
 }

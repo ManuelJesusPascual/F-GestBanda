@@ -6,7 +6,7 @@ part of 'join_band_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$joinBandProviderHash() => r'36b82503c66f484355d555c7e4bd688ee4e952a0';
+String _$joinBandProviderHash() => r'e62297b80cb082561d32c1ea45cef6fb5fa71cb5';
 
 /// Provider class for managing the joining of a band by code.
 /// Uses Riverpod for state management, handling the join process and validation,
