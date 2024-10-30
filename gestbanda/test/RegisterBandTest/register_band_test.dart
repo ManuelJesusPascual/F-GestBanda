@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
-import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/presentation/providers/registerBandProvider/register_band_provider.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
