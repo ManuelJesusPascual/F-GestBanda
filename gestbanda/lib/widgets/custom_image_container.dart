@@ -79,7 +79,9 @@ class CustomImageContainer extends StatelessWidget {
                           backgroundColor:
                               Theme.of(context).colorScheme.secondary,
                           content: const Text(
-                              'No se ha seleccionado ninguna imagen.')));
+                            'No se ha seleccionado ninguna imagen.',
+                            locale: Locale('es', 'ES'),
+                          )));
                     } else {
                       onImageChanged?.call(image);
                     }
