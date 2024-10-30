@@ -56,7 +56,7 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Nombre",
                     hint: "Juan Rodriguez Perez",
-                    initalValue: registerProviderProvider.name,
+                    initalValue: ref.watch(registerProviderProvider).name,
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
