@@ -3,15 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 
 var theme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF2E7D32),
+  colorScheme: const ColorScheme(
       brightness: Brightness.light,
-      surface: const Color(0xFFFFFFFF),
-      primary: const Color(0xFF2E7D32),
-      secondary: const Color(0xFFC5E1A5),
-      onPrimary: const Color(0xFFFFFFFF),
-      onSecondary: const Color(0xFFFFFFFF),
-      onSurface: const Color(0xFF000000)),
+      surface: Color(0xFFFFFFFF),
+      primary: Color(0xFFA1824A),
+      secondary: Color(0xFF1C170D),
+      onPrimary: Color(0xFFFFFFFF),
+      onSecondary: Color(0xFFA1824A),
+      onSurface: Color(0xFF1C170D),
+      error: Color(0xFFB00020),
+      onError: Color(0xFFFFFFFF)),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
       fontSize: 50,
@@ -34,15 +35,16 @@ var theme = ThemeData(
 
 var darkTheme = ThemeData(
   useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-      seedColor: const Color(0xFF2E7D32),
+  colorScheme: const ColorScheme(
       brightness: Brightness.dark,
-      surface: const Color(0xFF121212),
-      primary: const Color(0xFF81C784),
-      secondary: const Color(0xFFC5E1A5),
-      onPrimary: const Color(0xFF121212),
-      onSecondary: const Color(0xFFFFFFFF),
-      onSurface: const Color(0xFFFFFFFF)),
+      surface: Color(0xFF1A1A1A),
+      primary: Color(0xFFB09C6C),
+      secondary: Color(0xFFFFFFFF),
+      onPrimary: Color(0xFFFFFFFF),
+      onSecondary: Color(0xFFB09C6C),
+      onSurface: Color(0xFFFFFFFF),
+      error: Color(0xFFB00020),
+      onError: Color(0xFFFFFFFF)),
   textTheme: TextTheme(
     displayLarge: const TextStyle(
       fontSize: 50,
