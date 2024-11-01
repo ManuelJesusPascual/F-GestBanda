@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/config/router/routes_config.dart';
 import 'package:gestbanda/domain/newmodels/userModels/register_user_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
@@ -157,3 +159,20 @@ class RegisterProvider extends _$RegisterProvider {
     }
   }
 }
+
+class PasswordVisibilityNotifier extends StateNotifier<bool> {
+  PasswordVisibilityNotifier() : super(true); // true = password hidden
+
+  Icon get icon => state
+      ? const Icon(Icons.remove_red_eye)
+      : const Icon(Icons.visibility_off);
+
+  void toggle() {
+    state = !state;
+  }
+}
+
+final passwordVisibilityProvider =
+    StateNotifierProvider<PasswordVisibilityNotifier, bool>((ref) {
+  return PasswordVisibilityNotifier();
+});

@@ -19,7 +19,9 @@ class CustomTextInput extends StatelessWidget {
       this.maxLines = 1,
       this.enabled = true,
       this.prefixText = "",
-      this.tooltipText = ""});
+      this.tooltipText = "",
+      this.suffixIcon,
+      this.suffixButton});
 
   final String label;
   final String hint;
@@ -37,6 +39,8 @@ class CustomTextInput extends StatelessWidget {
   final bool? enabled;
   final String? prefixText;
   final String? tooltipText;
+  final Widget? suffixIcon;
+  final void Function()? suffixButton;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,13 @@ class CustomTextInput extends StatelessWidget {
             maxLines: maxLines,
             enabled: enabled,
             decoration: InputDecoration(
-                labelText: label, hintText: hint, prefixText: prefixText),
+              labelText: label,
+              hintText: hint,
+              prefixText: prefixText,
+              suffixIcon: (suffixButton != null && suffixIcon != null)
+                  ? IconButton(onPressed: suffixButton, icon: suffixIcon!)
+                  : null,
+            ),
             onChanged: onChanged,
           ),
           if (tooltipText!.isNotEmpty)

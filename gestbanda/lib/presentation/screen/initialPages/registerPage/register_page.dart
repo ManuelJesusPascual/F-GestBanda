@@ -117,7 +117,12 @@ class RegisterPage extends ConsumerWidget {
                     tooltipText:
                         "Usa mayúsculas, minúsculas, números, un carácter especial y al menos 8 caracteres.",
                     initalValue: ref.watch(registerProviderProvider).password,
-                    obscure: true,
+                    suffixIcon:
+                        ref.watch(passwordVisibilityProvider.notifier).icon,
+                    suffixButton: () {
+                      ref.read(passwordVisibilityProvider.notifier).toggle();
+                    },
+                    obscure: ref.watch(passwordVisibilityProvider),
                     topPadding: 20.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
@@ -135,7 +140,7 @@ class RegisterPage extends ConsumerWidget {
                     hint: "**********",
                     initalValue:
                         ref.watch(registerProviderProvider).confirmPassword,
-                    obscure: true,
+                    obscure: ref.watch(passwordVisibilityProvider),
                     topPadding: 10.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
