@@ -19,7 +19,10 @@ class JoinBandPage extends ConsumerWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(errorMessage),
+            content: Text(
+              errorMessage,
+              locale: const Locale('es', 'ES'),
+            ),
             backgroundColor: Theme.of(context).colorScheme.secondary,
           ),
         );

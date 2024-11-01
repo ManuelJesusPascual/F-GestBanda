@@ -1,16 +1,16 @@
 extension StringExtension on String {
   bool get isValidEmail {
-    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final emailRegExp = RegExp(r'^[\w\ñÑ.-]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegExp.hasMatch(this);
   }
 
   bool get isValidName {
-    final nameRegExp = RegExp(r'^[a-zA-Z ]+$');
+    final nameRegExp = RegExp(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$');
     return nameRegExp.hasMatch(this);
   }
 
   bool get isValidBandName {
-    final bandNameRegExp = RegExp(r'^[a-zA-Z. ]+$');
+    final bandNameRegExp = RegExp(r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ. ]+$');
     return bandNameRegExp.hasMatch(this);
   }
 
@@ -30,12 +30,12 @@ extension StringExtension on String {
   }
 
   bool get isValidPasswordMayus {
-    final passwordRegExp = RegExp(r'^(?=.*[A-Z]).*$');
+    final passwordRegExp = RegExp(r'^(?=.*[A-ZÑÁÉÍÓÚ]).*$');
     return passwordRegExp.hasMatch(this);
   }
 
   bool get isValidPasswordMinus {
-    final passwordRegExp = RegExp(r'^(?=.*[a-z]).*$');
+    final passwordRegExp = RegExp(r'^(?=.*[a-zñáéíóú]).*$');
     return passwordRegExp.hasMatch(this);
   }
 
@@ -52,7 +52,7 @@ extension StringExtension on String {
 
   bool get isValidPassword {
     final passwordRegExp = RegExp(
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$');
+        r'^(?=.*?[A-ZÑÁÉÍÓÚ])(?=.*?[a-zñáéíóú])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
     return passwordRegExp.hasMatch(this);
   }
 }

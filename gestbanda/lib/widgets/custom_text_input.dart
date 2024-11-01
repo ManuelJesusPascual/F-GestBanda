@@ -18,7 +18,10 @@ class CustomTextInput extends StatelessWidget {
       this.initalValue,
       this.maxLines = 1,
       this.enabled = true,
-      this.prefixText = ""});
+      this.prefixText = "",
+      this.tooltipText = "",
+      this.suffixIcon,
+      this.suffixButton});
 
   final String label;
   final String hint;
@@ -35,6 +38,9 @@ class CustomTextInput extends StatelessWidget {
   final int? maxLines;
   final bool? enabled;
   final String? prefixText;
+  final String? tooltipText;
+  final Widget? suffixIcon;
+  final void Function()? suffixButton;
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +50,35 @@ class CustomTextInput extends StatelessWidget {
             left: leftPadding,
             right: rightPadding,
             bottom: bottomPadding),
-        child: TextFormField(
-          initialValue: initalValue,
-          obscureText: obscure,
-          keyboardType: TextInputType.text,
-          inputFormatters: inputFormatters,
-          validator: validator,
-          maxLines: maxLines,
-          enabled: enabled,
-          decoration: InputDecoration(
-              labelText: label, hintText: hint, prefixText: prefixText),
-          onChanged: onChanged,
-        ));
+        child: Column(children: [
+          TextFormField(
+            initialValue: initalValue,
+            obscureText: obscure,
+            keyboardType: TextInputType.text,
+            inputFormatters: inputFormatters,
+            validator: validator,
+            maxLines: maxLines,
+            enabled: enabled,
+            decoration: InputDecoration(
+              labelText: label,
+              hintText: hint,
+              prefixText: prefixText,
+              suffixIcon: (suffixButton != null && suffixIcon != null)
+                  ? IconButton(onPressed: suffixButton, icon: suffixIcon!)
+                  : null,
+            ),
+            onChanged: onChanged,
+          ),
+          if (tooltipText!.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                tooltipText!,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey[600], // Color gris para el texto
+                    ),
+              ),
+            ),
+        ]));
   }
 }
