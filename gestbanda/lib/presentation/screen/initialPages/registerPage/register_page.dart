@@ -114,6 +114,8 @@ class RegisterPage extends ConsumerWidget {
                   CustomTextInput(
                     label: "Contraseña",
                     hint: "**********",
+                    tooltipText:
+                        "Usa mayúsculas, minúsculas, números, un carácter especial y al menos 8 caracteres.",
                     initalValue: ref.watch(registerProviderProvider).password,
                     obscure: true,
                     topPadding: 20.0,
@@ -134,7 +136,7 @@ class RegisterPage extends ConsumerWidget {
                     initalValue:
                         ref.watch(registerProviderProvider).confirmPassword,
                     obscure: true,
-                    topPadding: 20.0,
+                    topPadding: 10.0,
                     leftPadding: 40.0,
                     rightPadding: 40.0,
                     onChanged: (val) {
