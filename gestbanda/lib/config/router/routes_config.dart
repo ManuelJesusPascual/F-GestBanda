@@ -12,9 +12,12 @@ import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_pa
 import 'package:gestbanda/presentation/screen/onBoardingPages/create_new_band_page_two.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:http/http.dart' as http;
 
 import '../../domain/models/band.dart';
 import '../../domain/models/code.dart';
+import '../../domain/newmodels/userBandsModels/user_bands_dto.dart';
+import '../../presentation/providers/errorProvider/error_provider.dart';
 import '../../presentation/screen/pages.dart';
 
 part 'routes_config.g.dart';
@@ -226,7 +229,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/add_band_voices',
       builder: (context, state) {
-        return const BandVoiceAddPage();
+        return BandVoiceAddPage();
       },
     ),
     GoRoute(
@@ -254,7 +257,10 @@ class AppRouter extends _$AppRouter {
   Future<GoRouter> _determineInitialRouter() async {
     GoRouter router = unauthenticatedRouter;
     UserDTO? user = await loadUser();
-    BandDTO? band = await loadBand();
+    BandDTO? band;
+    if (user != null) {
+      band = await loadBand(user);
+    }
     if (user == null) {
       router = unauthenticatedRouter;
     } else if (band != null) {
@@ -274,7 +280,9 @@ class AppRouter extends _$AppRouter {
     if (userJSON != null && userJSON.isNotEmpty) {
       try {
         final Map<String, dynamic> userMap = json.decode(userJSON);
-        return UserDTO.fromJson(userMap);
+        UserDTO userSaved = UserDTO.fromJson(userMap);
+        UserDTO? user = await updateUserInfo(userSaved);
+        return user;
       } catch (e) {
         print('Error al decodificar JSON: $e');
       }
@@ -282,8 +290,47 @@ class AppRouter extends _$AppRouter {
     return null;
   }
 
+  Future<UserDTO?> updateUserInfo(UserDTO userSaved) async {
+    String api = "http://192.168.1.50:3000/api";
+
+    try {
+      final response = await http.get(
+        Uri.parse("$api/users/getUserByID?id=${userSaved.id}"),
+        headers: <String, String>{
+          'Authorization': userSaved.token,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+
+        final UserDTO user =
+            UserDTO.fromJson(jsonResponse).copyWith(token: userSaved.token);
+        await ref
+            .read(sharedPreferencesProviderProvider.notifier)
+            .saveString(key: "user", value: json.encode(user.toJson()));
+        return user;
+      } else {
+        final data = json.decode(response.body);
+        ref
+            .read(errorProviderProvider.notifier)
+            .setError(data["message"].toString());
+        await ref.read(sharedPreferencesProviderProvider.notifier).removeString(
+              key: "user",
+            );
+      }
+    } catch (e) {
+      await ref.read(sharedPreferencesProviderProvider.notifier).removeString(
+            key: "user",
+          );
+      return null;
+    }
+
+    return null;
+  }
+
   /// Loads the band data from shared preferences and decodes the JSON string to a BandDTO object.
-  Future<BandDTO?> loadBand() async {
+  Future<BandDTO?> loadBand(UserDTO user) async {
     final String? bandJSON = await ref
         .read(sharedPreferencesProviderProvider.notifier)
         .getString(key: "band");
@@ -295,6 +342,50 @@ class AppRouter extends _$AppRouter {
         print('Error al decodificar JSON: $e');
       }
     }
+    return null;
+  }
+
+  Future<BandDTO?> updateBandInfo(BandDTO bandSaved, UserDTO user) async {
+    String api = "http://192.168.1.50:3000/api";
+
+    try {
+      final response = await http.get(
+        Uri.parse("$api/userBands/getUserBands?id=${bandSaved.id}"),
+        headers: <String, String>{
+          'Authorization': user.token,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+
+        final List<UserBandsDTO> userBands =
+            UserBandsDTO.listFromJson(jsonResponse);
+        if (userBands.isNotEmpty) {
+          final BandDTO band = userBands.first
+              .band; // It is not yet implemented for the user to be in multiple bands on the front end, so we are taking the first one.
+
+          await ref
+              .read(sharedPreferencesProviderProvider.notifier)
+              .saveString(key: "band", value: json.encode(band.toJson()));
+          return band;
+        }
+      } else {
+        final data = json.decode(response.body);
+        ref
+            .read(errorProviderProvider.notifier)
+            .setError(data["message"].toString());
+        await ref.read(sharedPreferencesProviderProvider.notifier).removeString(
+              key: "band",
+            );
+      }
+    } catch (e) {
+      await ref.read(sharedPreferencesProviderProvider.notifier).removeString(
+            key: "band",
+          );
+      return null;
+    }
+
     return null;
   }
 
