@@ -145,7 +145,7 @@ class VoicesProvider extends _$VoicesProvider {
     try {
       final response = await http.delete(
         Uri.parse(
-            "$api/bandVoices/deleteVoiceBand?idVoice=${idVoice}&idBand=${state.band.id}"),
+            "$api/bandVoices/deleteVoiceBand?idVoice=$idVoice&idBand=${state.band.id}"),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Authorization': state.user.token,
@@ -197,10 +197,6 @@ class VoicesProvider extends _$VoicesProvider {
       );
 
       if (response.statusCode == 201) {
-        final jsonResponse = jsonDecode(response.body);
-
-        final VoiceDTO voice = VoiceDTO.fromJson(jsonResponse);
-
         final router = await ref.read(appRouterProvider.future);
         router.pop();
       } else {

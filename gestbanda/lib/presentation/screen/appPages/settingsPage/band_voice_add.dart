@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../config/config.dart';
 import '../../../../domain/newmodels/voiceModels/voice_dto.dart';
 import '../../../../widgets/custom_button.dart';
 import '../../../providers/errorProvider/error_provider.dart';
@@ -22,6 +21,21 @@ class BandVoiceAddPage extends ConsumerWidget {
         isFirstLoad = false;
       }
     });
+
+    if (errorMessage.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              errorMessage,
+              locale: const Locale('es', 'ES'),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+          ),
+        );
+        ref.read(errorProviderProvider.notifier).setError("");
+      });
+    }
 
     final voicesNotAdded = ref.watch(voicesProviderProvider).voicesBandNotHave;
 
