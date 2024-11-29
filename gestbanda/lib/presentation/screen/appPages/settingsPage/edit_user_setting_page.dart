@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/user.dart';
 
 class EditUserSettingPage extends ConsumerStatefulWidget {
   final String setting;
-  final User user;
+  final UserDTO user;
 
   const EditUserSettingPage(
       {super.key, required this.setting, required this.user});

@@ -42,4 +42,8 @@ class Costume {
       borrowedQuantity: json['borrowedQuantity'],
     );
   }
+
+  static listFromJson(json) {
+    return json.map((e) => Costume.fromJson(e)).toList();
+  }
 }

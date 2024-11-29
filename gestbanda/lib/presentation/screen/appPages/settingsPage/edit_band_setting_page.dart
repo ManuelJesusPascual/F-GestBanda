@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/band.dart';
 
 class EditBandSettingPage extends ConsumerStatefulWidget {
   final String setting;
-  final Band band;
+  final BandDTO band;
 
   const EditBandSettingPage(
       {super.key, required this.setting, required this.band});

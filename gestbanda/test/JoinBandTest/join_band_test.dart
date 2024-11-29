@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/domain/newmodels/voiceModels/voice_dto.dart';
 import 'package:gestbanda/presentation/providers/joinBandProvider/join_band_provider.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
@@ -224,6 +226,11 @@ void main() {
             email: 'test@test.com',
             phone: '123456789',
             token: 'test-token',
+            img: '',
+            role: RoleDTO(id: '1', name: 'Test Role', router: ""),
+            voz: VoiceDTO(id: '1', name: 'Test Voice'),
+            instrumentList: [],
+            costumeList: [],
           ),
         );
 

@@ -72,7 +72,7 @@ class BandVoicesPage extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 20),
                     child: Text(
-                      "No hay voces asignadas a esta banda",
+                      "No hay voces asignadas a esta banda.\n Por favor añade una nueva.",
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Colors.grey,
                           ),
@@ -95,12 +95,70 @@ class BandVoicesPage extends ConsumerWidget {
                                     .watch(voicesProviderProvider)
                                     .bandVoices[index]
                                     .name,
-                                onPressed: () {
-                                  voicesProvider.removeVoiceFromBand(ref
-                                      .watch(voicesProviderProvider)
-                                      .bandVoices[index]
-                                      .id);
-                                },
+                                onPressed: ref
+                                            .watch(voicesProviderProvider)
+                                            .bandVoices[index]
+                                            .name ==
+                                        "Sin Voz"
+                                    ? null
+                                    : () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text(
+                                                  "¿Estas seguro?",
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                Text(
+                                                    ref
+                                                        .watch(
+                                                            voicesProviderProvider)
+                                                        .bandVoices[index]
+                                                        .name,
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary))
+                                              ],
+                                            ),
+                                            icon: const Icon(Icons.delete,
+                                                color: Colors.red),
+                                            content: const Text(
+                                              "¿Estás seguro de que deseas eliminar este código?",
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(); // Cerrar el diálogo
+                                                },
+                                                child: const Text(
+                                                  "Cancelar",
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  voicesProvider
+                                                      .removeVoiceFromBand(ref
+                                                          .watch(
+                                                              voicesProviderProvider)
+                                                          .bandVoices[index]
+                                                          .id);
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text("Eliminar",
+                                                    style: TextStyle(
+                                                        color: Colors.red)),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                               ),
                             );
                           },

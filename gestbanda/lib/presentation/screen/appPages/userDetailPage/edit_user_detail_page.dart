@@ -1,22 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/presentation/providers/rolesProvider/roles_provider.dart';
+import 'package:gestbanda/presentation/providers/userBandProvider/user_band_provider.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
-import '../../../../config/config.dart';
-import '../../../../domain/models/user.dart';
+import '../../../../domain/newmodels/voiceModels/voice_dto.dart';
+import '../../../providers/voicesProvider/voices_provider.dart';
 
 class EditUserDetailPage extends ConsumerStatefulWidget {
   const EditUserDetailPage({super.key, required this.user});
 
-  final User user;
+  final UserDTO user;
 
   @override
   ConsumerState<EditUserDetailPage> createState() => _EditUserDetailPageState();
 }
 
 class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
+  bool isFirstLoad = true;
+  @override
+  void initState() {
+    super.initState();
+    // Cargar las listas desde los notifiers
+    ref.read(voicesProviderProvider.notifier).getVoiceList();
+    ref.read(rolesProviderProvider.notifier).getRolesList();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(userBandProviderProvider.notifier).updateUserModify(widget.user);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userBandState = ref.watch(userBandProviderProvider);
+    UserDTO user = userBandState.userModify.copyWith();
+
+    List<VoiceDTO> voices = ref.watch(voicesProviderProvider).bandVoices;
+    List<RoleDTO> roles = ref.watch(rolesProviderProvider).roles;
+
+    // Mostrar un indicador de carga si las listas están vacías
+    if (voices.isEmpty || roles.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    VoiceDTO selectedVoz = voices.firstWhere(
+      (voice) => voice.id == userBandState.userModify.voz!.id,
+      orElse: () => voices.first,
+    );
+
+    RoleDTO selectedRol = roles.firstWhere(
+      (rol) => rol.id == userBandState.userModify.role!.id,
+      orElse: () => roles.first,
+    );
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -25,7 +63,7 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
           child: Column(
             children: [
               Text(
-                widget.user.name,
+                userBandState.userModify.name,
                 style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
@@ -38,8 +76,8 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  child: DropdownButtonFormField<String>(
-                    value: widget.user.role,
+                  child: DropdownButtonFormField<RoleDTO>(
+                    value: selectedRol,
                     icon: Icon(
                       Icons.arrow_drop_down,
                       color: Theme.of(context).colorScheme.surface,
@@ -54,20 +92,17 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
                       ),
                     ),
                     dropdownColor: Theme.of(context).colorScheme.secondary,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        widget.user.role = newValue!;
-                      });
+                    onChanged: (RoleDTO? newValue) {
+                      if (newValue != null) {
+                        user.role = newValue;
+                      }
                     },
-                    items: <String>[
-                      'Componente',
-                      'Jefe de Voz',
-                      'Director General',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
+                    items:
+                        roles.map<DropdownMenuItem<RoleDTO>>((RoleDTO value) {
+                      return DropdownMenuItem<RoleDTO>(
                         value: value,
                         child: Text(
-                          value,
+                          value.name,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.surface,
                           ),
@@ -86,8 +121,8 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  child: DropdownButtonFormField<String>(
-                    value: widget.user.voz,
+                  child: DropdownButtonFormField<VoiceDTO>(
+                    value: selectedVoz,
                     icon: Icon(
                       Icons.arrow_drop_down,
                       color: Theme.of(context).colorScheme.surface,
@@ -102,21 +137,17 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
                       ),
                     ),
                     dropdownColor: Theme.of(context).colorScheme.secondary,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        widget.user.voz = newValue!;
-                      });
+                    onChanged: (VoiceDTO? newValue) {
+                      if (newValue != null) {
+                        user.voz = newValue;
+                      }
                     },
-                    items: <String>[
-                      'Seleccionar Voz',
-                      'Trompeta',
-                      'Corneta',
-                      'Trombon'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
+                    items: voices
+                        .map<DropdownMenuItem<VoiceDTO>>((VoiceDTO value) {
+                      return DropdownMenuItem<VoiceDTO>(
                         value: value,
                         child: Text(
-                          value,
+                          value.name,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.surface,
                           ),
@@ -129,8 +160,9 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
               CustomButton(
                 color: "primary",
                 onPressed: () async {
-                  final router = await ref.read(appRouterProvider.future);
-                  router.pop();
+                  await ref
+                      .read(userBandProviderProvider.notifier)
+                      .modifyUserBand(user);
                 },
                 br: BorderRadius.circular(16),
                 text: "Guardar",

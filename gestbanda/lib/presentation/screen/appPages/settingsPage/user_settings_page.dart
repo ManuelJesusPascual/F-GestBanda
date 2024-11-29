@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/user.dart';
 import '../../../../utils/string_utilites.dart';
 
 class UserSettingsPage extends ConsumerWidget {
   const UserSettingsPage({super.key, required this.user});
-  final User user;
+  final UserDTO user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

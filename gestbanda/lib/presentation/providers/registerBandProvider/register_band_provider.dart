@@ -11,6 +11,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../config/config.dart';
+import '../../../domain/newmodels/roleModels/role_dto.dart';
+import '../../../domain/newmodels/voiceModels/voice_dto.dart';
 import '../errorProvider/error_provider.dart';
 
 part 'register_band_provider.g.dart';
@@ -31,12 +33,16 @@ class RegisterBandProvider extends _$RegisterBandProvider {
   RegisterBandDTO build() => RegisterBandDTO(
       name: "",
       user: UserDTO(
-        id: '',
-        name: '',
-        email: '',
-        phone: '',
-        token: '',
-      ),
+          id: "",
+          email: "",
+          token: "",
+          name: "",
+          phone: "",
+          img: "",
+          role: RoleDTO(id: "", name: "", router: ""),
+          voz: VoiceDTO(id: "", name: ""),
+          instrumentList: [],
+          costumeList: []),
       img: XFile(""));
 
   /// Updates the band name in the state.

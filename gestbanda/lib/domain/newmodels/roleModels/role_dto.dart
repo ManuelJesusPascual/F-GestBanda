@@ -34,4 +34,8 @@ class RoleDTO {
       router: json['router'],
     );
   }
+
+  static listFromJson(json) {
+    return json.map((e) => RoleDTO.fromJson(e)).toList();
+  }
 }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/domain/newmodels/voiceModels/voice_dto.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/widgets/widgets.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/band.dart';
-import '../../../../domain/models/user.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -37,12 +39,15 @@ class SettingsPage extends ConsumerWidget {
 
                   router.push(
                     "/user_settings",
-                    extra: User(
+                    extra: UserDTO(
+                        id: "",
                         name: "Usuario de ejemplo",
                         email: "support@gestbanda.com",
                         phone: "666666666",
-                        role: "Componente",
-                        voz: "Corneta",
+                        img: null,
+                        token: "",
+                        role: RoleDTO(id: "", name: "Componente", router: ""),
+                        voz: VoiceDTO(id: "", name: ""),
                         instrumentList: [],
                         costumeList: []),
                   );
@@ -63,9 +68,12 @@ class SettingsPage extends ConsumerWidget {
                   final router = await ref.read(appRouterProvider.future);
 
                   router.push("/band_settings",
-                      extra: Band(
+                      extra: BandDTO(
+                          id: "",
                           name: "Banda Municipal de Villaejemplo",
-                          suscription: "Suscripcion Anual"));
+                          img: null,
+                          subscriptionID: "",
+                          substriptionEndDate: DateTime.now()));
                 },
               ),
               const Divider(

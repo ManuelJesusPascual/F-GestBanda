@@ -1,52 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gestbanda/domain/models/code.dart';
+import 'package:gestbanda/presentation/providers/codesProvider/codes_provider.dart';
+import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 
 import '../../../../config/config.dart';
+import '../../../../domain/newmodels/codesModels/codes.dart';
 import '../../../../widgets/widgets.dart';
 
-class CodeList extends ConsumerStatefulWidget {
+class CodeList extends ConsumerWidget {
   CodeList({super.key});
-  final List<Code> codes = [
-    Code(
-        code: "34532",
-        dateCreated: DateTime.now().subtract(const Duration(days: 35)),
-        dateEnd: DateTime.now().add(const Duration(days: 20)),
-        voz: "Sin voz"),
-    Code(
-        code: "42583",
-        dateCreated: DateTime.now().subtract(const Duration(days: 15)),
-        dateEnd: DateTime.now().add(const Duration(days: 4)),
-        voz: "Sin voz"),
-    Code(
-        code: "92745",
-        dateCreated: DateTime.now().subtract(const Duration(days: 6)),
-        dateEnd: DateTime.now().add(const Duration(days: 999999999999999999)),
-        voz: "Sin voz"),
-    Code(
-        code: "09284",
-        dateCreated: DateTime.now().subtract(const Duration(days: 20)),
-        dateEnd: DateTime.now().subtract(const Duration(days: 10)),
-        voz: "Trompeta 1º Fuerte"),
-    Code(
-        code: "92874",
-        dateCreated: DateTime.now().subtract(const Duration(days: 35)),
-        dateEnd: DateTime.now().add(const Duration(days: 20)),
-        voz: "Corneta 1º Fuerte"),
-    Code(
-        code: "82642",
-        dateCreated: DateTime.now().subtract(const Duration(days: 70)),
-        dateEnd: DateTime.now().add(const Duration(days: 90)),
-        voz: "Sin voz"),
-  ];
-  @override
-  ConsumerState<CodeList> createState() => _CodeListState();
-}
 
-class _CodeListState extends ConsumerState<CodeList> {
+  bool isFirstLoad = true;
+
   @override
-  Widget build(BuildContext context) {
-    widget.codes.sort((a, b) => b.dateEnd.compareTo(a.dateEnd));
+  Widget build(BuildContext context, WidgetRef ref) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (isFirstLoad) {
+        ref.watch(codesProviderProvider.notifier).getBandCodes();
+        isFirstLoad = false;
+      }
+    });
+    final errorMessage = ref.watch(errorProviderProvider);
+
+    // Obtener la lista de códigos y el mensaje de error
+    final List<CodesDTO> codes = ref.watch(codesProviderProvider).codes;
+
+    codes.sort((a, b) => b.endDate.compareTo(a.endDate));
+
+    if (errorMessage.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              errorMessage,
+              locale: const Locale('es', 'ES'),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+          ),
+        );
+        ref.read(errorProviderProvider.notifier).setError("");
+      });
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
@@ -79,17 +74,17 @@ class _CodeListState extends ConsumerState<CodeList> {
                 ),
               ),
               Expanded(
-                child: widget.codes.isNotEmpty
+                child: codes.isNotEmpty
                     ? ListView.builder(
-                        itemCount: widget.codes.length,
+                        itemCount: codes.length,
                         itemBuilder: (context, index) {
-                          final code = widget.codes[index];
+                          final code = codes[index];
                           return CustomListTile(
                             text: code.code,
-                            dateCreated: code.dateCreated,
-                            dateEnd: code.dateEnd,
+                            dateCreated: code.createdDate,
+                            dateEnd: code.endDate,
                             editButtons: true,
-                            textColor: code.dateEnd.isAfter(DateTime.now())
+                            textColor: code.endDate.isAfter(DateTime.now())
                                 ? const Color(0xFF388E3C)
                                 : Theme.of(context).colorScheme.error,
                             onEdit: () async {
@@ -98,17 +93,78 @@ class _CodeListState extends ConsumerState<CodeList> {
                               router.push("/code_create_modify", extra: code);
                             },
                             onDelete: () {
-                              setState(() {
-                                widget.codes.removeAt(index);
-                              });
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      const Text(
+                                        "¿Estas seguro?",
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      Text(
+                                        code.code,
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    ],
+                                  ),
+                                  icon: const Icon(Icons.delete,
+                                      color: Colors.red),
+                                  content: const Text(
+                                    "¿Estás seguro de que deseas eliminar este código?",
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); // Cerrar el diálogo
+                                      },
+                                      child: const Text(
+                                        "Cancelar",
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        ref
+                                            .watch(
+                                                codesProviderProvider.notifier)
+                                            .removeCode(code.id);
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text("Eliminar",
+                                          style: TextStyle(color: Colors.red)),
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
                           );
                         },
                       )
-                    : Text(
-                        "La banda no tiene ningun código, por favor genera uno nuevo",
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.error),
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Text(
+                              "La banda no tiene ningún código, por favor genera uno nuevo.",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: Colors.grey,
+                                  ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
               ),
             ],

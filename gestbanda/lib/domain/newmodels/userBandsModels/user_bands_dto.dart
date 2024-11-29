@@ -1,3 +1,5 @@
+import 'package:gestbanda/domain/newmodels/voiceModels/voice_dto.dart';
+
 import '../bandModels/band_dto.dart';
 import '../roleModels/role_dto.dart';
 import '../userModels/user_dto.dart';
@@ -6,29 +8,28 @@ class UserBandsDTO {
   UserDTO user;
   BandDTO band;
   RoleDTO role;
+  VoiceDTO voice;
 
-  UserBandsDTO({
-    required this.user,
-    required this.band,
-    required this.role,
-  });
+  UserBandsDTO(
+      {required this.user,
+      required this.band,
+      required this.role,
+      required this.voice});
 
-  UserBandsDTO copyWith({
-    UserDTO? user,
-    BandDTO? band,
-    RoleDTO? role,
-  }) {
+  UserBandsDTO copyWith(
+      {UserDTO? user, BandDTO? band, RoleDTO? role, VoiceDTO? voice}) {
     return UserBandsDTO(
-      user: user ?? this.user,
-      band: band ?? this.band,
-      role: role ?? this.role,
-    );
+        user: user ?? this.user,
+        band: band ?? this.band,
+        role: role ?? this.role,
+        voice: voice ?? this.voice);
   }
 
   Map<String, dynamic> toJson() => {
         'user': user.toJson(),
         'band': band.toJson(),
         'role': role.toJson(),
+        'voice': voice.toJson(),
       };
 
   static UserBandsDTO fromJson(Map<String, dynamic> json) {
@@ -36,6 +37,7 @@ class UserBandsDTO {
       user: UserDTO.fromJson(json['user']),
       band: BandDTO.fromJson(json['band']),
       role: RoleDTO.fromJson(json['role']),
+      voice: VoiceDTO.fromJson(json['voice']),
     );
   }
 

@@ -7,6 +7,7 @@ import 'package:gestbanda/domain/newmodels/voiceModels/voice_provider_dto.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../config/config.dart';
+import '../../../domain/newmodels/roleModels/role_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
@@ -27,7 +28,17 @@ class VoicesProvider extends _$VoicesProvider {
   VoiceProviderDTO build() => VoiceProviderDTO(
       bandVoices: [],
       voicesBandNotHave: [],
-      user: UserDTO(id: '', name: '', email: '', phone: '', token: ''),
+      user: UserDTO(
+          id: "",
+          email: "",
+          token: "",
+          name: "",
+          phone: "",
+          img: "",
+          role: RoleDTO(id: "", name: "", router: ""),
+          voz: VoiceDTO(id: "", name: ""),
+          instrumentList: [],
+          costumeList: []),
       band: BandDTO(
           id: "",
           name: "",

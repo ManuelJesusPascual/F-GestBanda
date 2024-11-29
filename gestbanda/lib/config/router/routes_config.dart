@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:gestbanda/domain/models/costume.dart';
 import 'package:gestbanda/domain/models/event.dart';
 import 'package:gestbanda/domain/models/instrument.dart';
-import 'package:gestbanda/domain/models/user.dart';
 import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
+import 'package:gestbanda/domain/newmodels/codesModels/codes.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_page.dart';
@@ -14,8 +14,6 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../domain/models/band.dart';
-import '../../domain/models/code.dart';
 import '../../domain/newmodels/userBandsModels/user_bands_dto.dart';
 import '../../presentation/providers/errorProvider/error_provider.dart';
 import '../../presentation/screen/pages.dart';
@@ -102,10 +100,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/user_detail',
       builder: (context, state) {
-        final User user = state.extra as User;
-        return UserDetailPage(
-          user: user,
-        );
+        return const UserDetailPage();
       },
     ),
     GoRoute(
@@ -123,7 +118,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/user_modify',
       builder: (context, state) {
-        final User user = state.extra as User;
+        final UserDTO user = state.extra as UserDTO;
         return EditUserDetailPage(
           user: user,
         );
@@ -150,7 +145,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/code_create_modify',
       builder: (context, state) {
-        final Code? code = state.extra as Code?;
+        final CodesDTO? code = state.extra as CodesDTO?;
         return CodeCreateModify(code: code);
       },
     ),
@@ -183,7 +178,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/user_settings',
       builder: (context, state) {
-        final User user = state.extra as User;
+        final UserDTO user = state.extra as UserDTO;
         return UserSettingsPage(
           user: user,
         );
@@ -192,7 +187,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/band_settings',
       builder: (context, state) {
-        final Band band = state.extra as Band;
+        final BandDTO band = state.extra as BandDTO;
         return BandSettingsPage(
           band: band,
         );
@@ -201,7 +196,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/edit_user_setting/:setting',
       builder: (context, state) {
-        final User user = state.extra as User;
+        final UserDTO user = state.extra as UserDTO;
         final String setting = state.pathParameters['setting']!;
         return EditUserSettingPage(
           user: user,
@@ -212,7 +207,7 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/edit_band_setting/:setting',
       builder: (context, state) {
-        final Band band = state.extra as Band;
+        final BandDTO band = state.extra as BandDTO;
         final String setting = state.pathParameters['setting']!;
         return EditBandSettingPage(
           band: band,
