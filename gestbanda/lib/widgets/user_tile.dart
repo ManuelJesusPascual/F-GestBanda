@@ -2,14 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gestbanda/domain/models/user.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/presentation/providers/userBandProvider/user_band_provider.dart';
 import '../config/config.dart';
 import '../utils/string_utilites.dart';
 
 class UserTile extends ConsumerWidget {
   const UserTile({super.key, required this.user});
 
-  final User user;
+  final UserDTO user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,8 +27,8 @@ class UserTile extends ConsumerWidget {
           ),
           onPressed: () async {
             final router = await ref.read(appRouterProvider.future);
-
-            router.push("/user_detail", extra: user);
+            ref.read(userBandProviderProvider.notifier).updateUserModify(user);
+            router.push("/user_detail");
           },
           child: Container(
             padding: const EdgeInsets.all(8.0),
@@ -67,7 +68,7 @@ class UserTile extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        "${user.role} · ${user.voz}",
+                        "${user.role!.name} · ${user.voz!.name}",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontSize: 14.0,

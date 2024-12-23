@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/domain/newmodels/voiceModels/voice_dto.dart';
 import 'package:gestbanda/presentation/providers/registerBandProvider/register_band_provider.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
@@ -266,15 +268,19 @@ void main() {
 
         final provider = container.read(registerBandProviderProvider.notifier);
         provider.state = provider.state.copyWith(
-          name: 'Test Band',
-          img: mockFile,
-          user: UserDTO(
-              id: '123',
-              name: 'Test User',
-              email: 'test@test.com',
-              phone: '123456789',
-              token: 'test-token'),
-        );
+            name: 'Test Band',
+            img: mockFile,
+            user: UserDTO(
+                id: '123',
+                name: 'Test User',
+                email: 'test@test.com',
+                phone: '123456789',
+                img: 'test-image.jpg',
+                token: 'test-token',
+                role: RoleDTO(id: "id", name: "DIRECTOR", router: ""),
+                voz: VoiceDTO(id: "1", name: 'Test Voice'),
+                instrumentList: [],
+                costumeList: []));
 
         // Setup mock for storing band data
         when(() => mockPrefs.setString(any(), any()))

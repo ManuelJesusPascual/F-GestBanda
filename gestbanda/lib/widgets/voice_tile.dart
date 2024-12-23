@@ -37,12 +37,18 @@ class VoiceTile extends StatelessWidget {
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: onPressed,
-                icon: Icon(
-                  Icons.delete_forever,
-                  color: Theme.of(context).colorScheme.error,
-                ),
+              SizedBox(
+                height: 45, // Altura fija del botón.
+                width: 48, // Ancho fijo del botón.
+                child: onPressed != null
+                    ? IconButton(
+                        onPressed: onPressed,
+                        icon: Icon(
+                          Icons.delete_forever,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      )
+                    : null, // Mantiene el tamaño aunque no haya botón.
               ),
             ],
           ),

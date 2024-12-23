@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/domain/newmodels/voiceModels/voice_dto.dart';
+import 'package:gestbanda/presentation/providers/userBandProvider/user_band_provider.dart';
+import 'package:gestbanda/presentation/providers/voicesProvider/voices_provider.dart';
+import 'package:gestbanda/utils/extensions.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/costume.dart';
-import '../../../../domain/models/instrument.dart';
-import '../../../../domain/models/user.dart';
 import '../../../../widgets/widgets.dart';
 
 class UserList extends ConsumerStatefulWidget {
@@ -15,305 +17,32 @@ class UserList extends ConsumerStatefulWidget {
 }
 
 class _UserListState extends ConsumerState<UserList> {
-  final List<User> users = [
-    User(
-        name: "Bob",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Corneta",
-        instrumentList: [
-          Instrument(
-            img: "",
-            name: "Corneta Do/Sib",
-            quantity: 5,
-            borrowedQuantity: 3,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Reb",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Trompeta Do",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Sib",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Reb",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Trompeta Do",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Sib",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Reb",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Trompeta Do",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-        ],
-        costumeList: []),
-    User(
-        name: "Charlie Pepito Rodriguez",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Trompeta",
-        instrumentList: [],
-        costumeList: [
-          Costume(
-            img:
-                "",
-            name: "Fajin",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Cinturon",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Chaqueta",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Pantalon",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Hombreras",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Zapatos",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-        ]),
-    User(
-        name: "Dave",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Corneta",
-        instrumentList: [
-          Instrument(
-            img: "",
-            name: "Corneta Do/Sib",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Reb",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Trompeta Do",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Sib",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Reb",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Trompeta Do",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Sib",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Corneta Do/Reb",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Instrument(
-            img: "",
-            name: "Trompeta Do",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-        ],
-        costumeList: [
-          Costume(
-            img:
-                "",
-            name: "Fajin",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Cinturon",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Chaqueta",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Pantalon",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Hombreras",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-          Costume(
-            img:
-                "",
-            name: "Zapatos",
-            quantity: 2,
-            borrowedQuantity: 1,
-          ),
-        ]),
-    User(
-        name: "Eve",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Jefe de Voz",
-        voz: "Trompeta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Usuario de ejemplo",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Alice",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Trombon",
-        img:
-            "",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Bob",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Trombon",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Charlie Pepito Rodriguez",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Dave",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Trombon",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Eve",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Jefe de Voz",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Usuario de ejemplo",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-  ];
+  bool isFirstLoad = true;
 
   String _selectedInstrument = 'Seleccionar Voz';
 
   @override
   Widget build(BuildContext context) {
-    List<User> filteredUsers = _selectedInstrument == 'Seleccionar Voz'
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (isFirstLoad) {
+        await ref.watch(voicesProviderProvider.notifier).getVoiceList();
+        await ref.watch(userBandProviderProvider.notifier).getUserBands();
+        isFirstLoad = false;
+      }
+    });
+
+    final List<UserDTO> users = ref
+        .watch(userBandProviderProvider)
+        .userBands
+        .map((userBand) => userBand.toUser())
+        .toList();
+
+    List<UserDTO> filteredUsers = _selectedInstrument == 'Seleccionar Voz'
         ? users
-        : users.where((user) => user.voz == _selectedInstrument).toList();
+        : users.where((user) => user.voz!.name == _selectedInstrument).toList();
 
     if (_selectedInstrument == 'Seleccionar Voz') {
-      filteredUsers.sort((a, b) => a.voz.compareTo(b.voz));
+      filteredUsers.sort((a, b) => a.voz!.name.compareTo(b.voz!.name));
     }
 
     return Scaffold(
@@ -347,50 +76,59 @@ class _UserListState extends ConsumerState<UserList> {
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   child: DropdownButtonFormField<String>(
-                    value: _selectedInstrument,
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                    iconSize: 24,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.secondary,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
+                      value: "Seleccionar Voz",
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
-                    ),
-                    dropdownColor: Theme.of(context).colorScheme.secondary,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedInstrument = newValue!;
-                      });
-                    },
-                    items: <String>[
-                      'Seleccionar Voz',
-                      'Trompeta',
-                      'Corneta',
-                      'Trombon'
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.surface,
+                      iconSize: 24,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.secondary,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                      dropdownColor: Theme.of(context).colorScheme.secondary,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedInstrument = newValue!;
+                        });
+                      },
+                      items: [
+                        // Añade el valor predeterminado "Seleccionar Voz".
+                        DropdownMenuItem<String>(
+                          value: 'Seleccionar Voz',
+                          child: Text(
+                            "Seleccionar Voz",
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.surface),
                           ),
                         ),
-                      );
-                    }).toList(),
-                  ),
+                        // Añade los valores obtenidos de voicesProviderProvider.
+                        ...ref
+                            .watch(voicesProviderProvider)
+                            .bandVoices
+                            .map<DropdownMenuItem<String>>((VoiceDTO value) {
+                          return DropdownMenuItem<String>(
+                            value: value.name,
+                            child: Text(
+                              value.name,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.surface,
+                              ),
+                            ),
+                          );
+                        })
+                      ]),
                 ),
               ),
               Expanded(
                 child: ListView.builder(
                   itemCount: filteredUsers.length,
                   itemBuilder: (context, index) {
-                    User user = filteredUsers[index];
+                    UserDTO user = filteredUsers[index];
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: UserTile(user: user),

@@ -2,20 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+import 'package:gestbanda/presentation/providers/userBandProvider/user_band_provider.dart';
 import 'package:gestbanda/widgets/costume_tile.dart';
 import 'package:gestbanda/widgets/instrument_tile.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/user.dart';
 import '../../../../utils/string_utilites.dart';
 
 class UserDetailPage extends ConsumerWidget {
-  const UserDetailPage({super.key, required this.user});
-
-  final User user;
+  const UserDetailPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    UserDTO user = ref.watch(userBandProviderProvider).userModify;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
@@ -28,19 +28,65 @@ class UserDetailPage extends ConsumerWidget {
             onPressed: () async {
               final router = await ref.read(appRouterProvider.future);
 
-              router.push("/user_modify", extra: user);
+              await router.push("/user_modify", extra: user);
             },
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.error,
-        onPressed: () {},
-        child: Icon(
-          Icons.delete_forever,
-          color: Theme.of(context).colorScheme.onError,
-        ),
-      ),
+      floatingActionButton: user.id !=
+              ref.watch(userBandProviderProvider).user.id
+          ? FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.error,
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text(
+                          "¿Estas seguro?",
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(user.name,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Theme.of(context).colorScheme.primary))
+                      ],
+                    ),
+                    icon: const Icon(Icons.delete, color: Colors.red),
+                    content: const Text(
+                      "¿Estás seguro de que deseas eliminar este usuario de tu banda?",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop(); // Cerrar el diálogo
+                        },
+                        child: const Text(
+                          "Cancelar",
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          ref
+                              .read(userBandProviderProvider.notifier)
+                              .removeUserBand();
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Eliminar",
+                            style: TextStyle(color: Colors.red)),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: Icon(
+                Icons.delete_forever,
+                color: Theme.of(context).colorScheme.onError,
+              ),
+            )
+          : null,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -78,7 +124,7 @@ class UserDetailPage extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                "${user.role} · ${user.voz}",
+                "${user.role!.name} · ${user.voz!.name}",
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -108,12 +154,12 @@ class UserDetailPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    user.instrumentList.isNotEmpty
+                    user.instrumentList!.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
-                              itemCount: user.instrumentList.length,
+                              itemCount: user.instrumentList!.length,
                               itemBuilder: (context, index) {
-                                final instrument = user.instrumentList[index];
+                                final instrument = user.instrumentList![index];
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 4, horizontal: 16),
@@ -158,12 +204,12 @@ class UserDetailPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    user.costumeList.isNotEmpty
+                    user.costumeList!.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
-                              itemCount: user.costumeList.length,
+                              itemCount: user.costumeList!.length,
                               itemBuilder: (context, index) {
-                                final costume = user.costumeList[index];
+                                final costume = user.costumeList![index];
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 4, horizontal: 16),

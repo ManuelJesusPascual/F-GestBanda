@@ -1,3 +1,7 @@
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
+
+import '../domain/newmodels/userBandsModels/user_bands_dto.dart';
+
 extension StringExtension on String {
   bool get isValidEmail {
     final emailRegExp = RegExp(r'^[\w\ñÑ.-]+@([\w-]+\.)+[\w-]{2,4}$');
@@ -52,7 +56,24 @@ extension StringExtension on String {
 
   bool get isValidPassword {
     final passwordRegExp = RegExp(
-        r'^(?=.*?[A-ZÑÁÉÍÓÚ])(?=.*?[a-zñáéíóú])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$');
+        r'^(?=.*?[A-ZÑÁÉÍÓÚ])(?=.*?[a-zñáéíóú])(?=.*?[0-9])(?=.*?[#?!@$%^&*\-+=_/~.,<>;:{}[\]()|\\]).{8,}$');
     return passwordRegExp.hasMatch(this);
+  }
+}
+
+extension UserBandsDTOMapper on UserBandsDTO {
+  UserDTO toUser() {
+    return UserDTO(
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      img: user.img,
+      token: user.token,
+      role: role,
+      voz: voice,
+      instrumentList: [], // Debes mapear instrumentos si están disponibles
+      costumeList: [], // Debes mapear trajes si están disponibles
+    );
   }
 }

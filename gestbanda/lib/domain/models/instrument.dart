@@ -42,4 +42,8 @@ class Instrument {
       borrowedQuantity: json['borrowedQuantity'],
     );
   }
+
+  static listFromJson(json) {
+    return json.map((e) => Instrument.fromJson(e)).toList();
+  }
 }

@@ -7,7 +7,7 @@ part of 'register_band_provider.dart';
 // **************************************************************************
 
 String _$registerBandProviderHash() =>
-    r'0f6bc053b567270d8372cea1617be3acae392d0c';
+    r'a1db1d2c2fc3a8058530bafed337b6f1eb77f7bb';
 
 /// Provider for handling band registration logic.
 /// This class manages the registration form state and handles interactions
@@ -28,4 +28,4 @@ final registerBandProviderProvider =
 
 typedef _$RegisterBandProvider = AutoDisposeNotifier<RegisterBandDTO>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/bandModels/join_band_dto.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/utils/extensions.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../config/config.dart';
 import '../../../domain/newmodels/bandModels/band_dto.dart';
+import '../../../domain/newmodels/voiceModels/voice_dto.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:http/http.dart' as http;
@@ -28,12 +30,16 @@ class JoinBandProvider extends _$JoinBandProvider {
   JoinBandDTO build() => JoinBandDTO(
         code: "",
         user: UserDTO(
-          id: '',
-          name: '',
-          email: '',
-          phone: '',
-          token: '',
-        ),
+            id: "",
+            email: "",
+            token: "",
+            name: "",
+            phone: "",
+            img: "",
+            role: RoleDTO(id: "", name: "", router: ""),
+            voz: VoiceDTO(id: "", name: ""),
+            instrumentList: [],
+            costumeList: []),
       );
 
   /// Updates the code in the state if it is different from the current one.
@@ -78,8 +84,10 @@ class JoinBandProvider extends _$JoinBandProvider {
     // Start loading
     isLoading = true;
 
+    // Retrieve the current user information
     await getUser();
     try {
+      // Send a POST request to join the band by code
       final response = await http.post(
         Uri.parse("$api/codes/joinBandByCode"),
         headers: <String, String>{
@@ -89,27 +97,33 @@ class JoinBandProvider extends _$JoinBandProvider {
         body: jsonEncode(state),
       );
 
+      // Check response status and handle accordingly
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body);
 
         final BandDTO band = BandDTO.fromJson(jsonResponse);
 
+        // Save the band data in SharedPreferences
         await ref
             .read(sharedPreferencesProviderProvider.notifier)
             .saveString(key: "band", value: json.encode(band.toJson()));
+        // Change the router to the director's home screen
         ref.read(appRouterProvider.notifier).changeRouter(directorRouter);
         final router = await ref.read(appRouterProvider.future);
         router.push("/");
       } else {
+        // Handle error response from the server
         final data = json.decode(response.body);
         ref
             .read(errorProviderProvider.notifier)
             .setError(data["message"].toString());
       }
     } catch (e) {
+      // Handle any exceptions that occur
       ref.read(errorProviderProvider.notifier).setError(
           "Ha ocurrido un error en la aplicacion. Intentalo más tarde.");
     } finally {
+      // Reset loading state
       isLoading = false;
     }
   }

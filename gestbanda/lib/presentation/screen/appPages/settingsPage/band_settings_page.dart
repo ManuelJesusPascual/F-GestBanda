@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
 
 import '../../../../config/config.dart';
-import '../../../../domain/models/band.dart';
 import '../../../../utils/string_utilites.dart';
 
 class BandSettingsPage extends ConsumerWidget {
   const BandSettingsPage({super.key, required this.band});
-  final Band band;
+  final BandDTO band;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -134,7 +134,7 @@ class BandSettingsPage extends ConsumerWidget {
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text(
-                    band.suscription,
+                    band.substriptionEndDate.toString(),
                     style: Theme.of(context).textTheme.bodySmall,
                   )
                 ],

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/widgets/user_tile.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/instrument.dart';
-import '../../../../domain/models/user.dart';
 
 class InstrumentCreateModifyPage extends ConsumerStatefulWidget {
   final Instrument instrument;
@@ -13,96 +13,7 @@ class InstrumentCreateModifyPage extends ConsumerStatefulWidget {
       : instrument = (instrument ??
             Instrument(name: "", img: "", quantity: 0, borrowedQuantity: 0));
 
-  final List<User> users = [
-    User(
-        name: "Bob",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Charlie Pepito Rodriguez",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Trompeta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Dave",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Eve",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Jefe de Voz",
-        voz: "Trompeta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Usuario de ejemplo",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Alice",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Trombon",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Bob",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Trombon",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Charlie Pepito Rodriguez",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Componente",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Dave",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Trombon",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Eve",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Jefe de Voz",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-    User(
-        name: "Usuario de ejemplo",
-        email: "support@gestbanda.com",
-        phone: "666666666",
-        role: "Director General",
-        voz: "Corneta",
-        instrumentList: [],
-        costumeList: []),
-  ];
+  final List<UserDTO> users = [];
 
   @override
   ConsumerState<InstrumentCreateModifyPage> createState() =>
