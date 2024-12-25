@@ -8,6 +8,13 @@ GestBanda permite llevar una gestión de los componentes, voces, instrumentos, t
 Este es un proyecto desarollado en Flutter con Riverpod. El backend esta desarrollado en Java con Spring.
 
 
+## Documentación
+
+[Modelo Entidad Relacion](https://dbdiagram.io/d/676b8a825406798ef797c0e0)
+
+[Diagrama Técnico](https://app.eraser.io/workspace/YplnmLy3G8KaqIGRt6Uz?origin=share)
+
+
 ## Instalación
 
 Para instalar este proyecto, previamente deberemos tener descargados en VSCode las extensiones de [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) y de [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code). También deberemos tener el [JDK 21](https://www.oracle.com/es/java/technologies/downloads/#jdk21-windows).
