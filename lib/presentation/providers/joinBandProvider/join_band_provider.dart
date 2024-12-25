@@ -9,6 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../config/config.dart';
 import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/voiceModels/voice_dto.dart';
+import '../../../utils/properties_manager.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:http/http.dart' as http;
@@ -20,8 +21,6 @@ part 'join_band_provider.g.dart';
 /// including user retrieval and error handling.
 @riverpod
 class JoinBandProvider extends _$JoinBandProvider {
-  String api = "http://192.168.1.50:3000/api";
-
   /// State to indicate if a request is currently loading
   bool isLoading = false;
 
@@ -79,6 +78,8 @@ class JoinBandProvider extends _$JoinBandProvider {
   /// If successful, it saves the band data and navigates to the director's home screen.
   /// If an error occurs, it sets an appropriate error message in the error provider.
   Future<void> joinBandByCode() async {
+    final api = await loadFromProperties("api_url");
+
     if (isLoading) return;
 
     // Start loading

@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import '../../../config/config.dart';
 import '../../../domain/newmodels/roleModels/role_dto.dart';
 import '../../../domain/newmodels/voiceModels/voice_dto.dart';
+import '../../../utils/properties_manager.dart';
 import '../errorProvider/error_provider.dart';
 
 part 'register_band_provider.g.dart';
@@ -22,9 +23,6 @@ part 'register_band_provider.g.dart';
 /// with the API to register a new band.
 @riverpod
 class RegisterBandProvider extends _$RegisterBandProvider {
-  // Base API endpoint
-  String api = "http://192.168.1.50:3000/api";
-
   /// State to indicate if a request is currently loading
   bool isLoading = false;
 
@@ -108,6 +106,8 @@ class RegisterBandProvider extends _$RegisterBandProvider {
   /// Registers the band by sending data to the API.
   /// This includes the band details in JSON and the selected image as a file.
   Future<void> registerBand() async {
+    final api = await loadFromProperties("api_url");
+
     if (isLoading) return;
 
     // Start loading

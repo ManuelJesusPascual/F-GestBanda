@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
 import '../../../domain/newmodels/voiceModels/voice_dto.dart';
+import '../../../utils/properties_manager.dart';
 
 part 'roles_provider.g.dart';
 
@@ -43,14 +44,13 @@ class RolesProvider extends _$RolesProvider {
             substriptionEndDate: DateTime.now()),
       );
 
-  // The base URL of the API
-  String api = "http://192.168.1.50:3000/api";
-
   /// Fetches the list of roles from the API.
   /// It checks if a loading process is already underway to prevent multiple calls.
   /// Upon success, it updates the state with the retrieved roles.
   /// If an error occurs, it will set the appropriate error message.
   Future<void> getRolesList() async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading

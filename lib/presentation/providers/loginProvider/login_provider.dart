@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import '../../../config/config.dart';
 import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
+import '../../../utils/properties_manager.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 
@@ -18,9 +19,6 @@ part 'login_provider.g.dart';
 /// such as email and password, as well as API interactions for user login.
 @riverpod
 class LoginProvider extends _$LoginProvider {
-  // The base URL of the API
-  String api = "http://192.168.1.50:3000/api";
-
   /// State to indicate if a request is currently loading
   bool isLoading = false;
 
@@ -57,6 +55,8 @@ class LoginProvider extends _$LoginProvider {
   /// If successful, it saves the user and token in SharedPreferences and
   /// fetches the bands associated with the user.
   Future<void> login() async {
+    final api = await loadFromProperties("api_url");
+
     if (isLoading) return;
 
     // Start loading
@@ -101,6 +101,8 @@ class LoginProvider extends _$LoginProvider {
   /// and the router navigates to the director's main page.
   /// Otherwise, it navigates to the authenticated user's main page.
   Future<void> getBands(String id, String token) async {
+    final api = await loadFromProperties("api_url");
+
     try {
       final response = await http.get(
         Uri.parse("$api/userBands/getUserBands?id=$id"),

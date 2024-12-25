@@ -18,7 +18,7 @@ Tras eso obtendremos las dependencias con
   flutter pub get
 ```
 
-Tras obtener las dependencias, ejecutaremos el main ubicado en **./lib/main.dart**
+Tras obtener las dependencias, cambiaremos la ip de la api ubicada en **lib/config/properties/properties.properties** y ejecutaremos el main ubicado en **./lib/main.dart**
     
   
 ## Autor

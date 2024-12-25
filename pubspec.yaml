@@ -26,6 +26,7 @@ dependencies:
   http_parser: ^4.0.0
   uuid: ^4.5.0
   shared_preferences: ^2.3.2
+  properties: ^2.1.1
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +44,4 @@ flutter:
   assets:
     - assets/svg/
     - assets/
+    - lib/config/properties/

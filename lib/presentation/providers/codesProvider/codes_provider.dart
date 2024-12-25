@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../domain/newmodels/roleModels/role_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
+import '../../../utils/properties_manager.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 
@@ -24,7 +25,6 @@ part 'codes_provider.g.dart';
 @riverpod
 class CodesProvider extends _$CodesProvider {
   // API endpoint for making requests.
-  String api = "http://192.168.1.50:3000/api";
 
   // Overrides the build method to initialize the state with default values.
   @override
@@ -58,6 +58,8 @@ class CodesProvider extends _$CodesProvider {
 
   // Fetches the codes associated with the current band and updates the state accordingly.
   Future<void> getBandCodes() async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
@@ -104,6 +106,8 @@ class CodesProvider extends _$CodesProvider {
 
   // Creates a new code for the current band and updates the state.
   Future<void> createBandCode() async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
@@ -147,6 +151,8 @@ class CodesProvider extends _$CodesProvider {
 
   // Updates an existing code for the current band and updates the state.
   Future<void> updateBandCode() async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
@@ -191,6 +197,8 @@ class CodesProvider extends _$CodesProvider {
 
   // Removes a code from the current band and updates the state.
   Future<void> removeCode(String id) async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading

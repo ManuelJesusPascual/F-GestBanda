@@ -11,14 +11,13 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import "../../../../utils/extensions.dart";
+import '../../../utils/properties_manager.dart';
 
 part 'register_provider.g.dart';
 
 /// Provider that we will use for the user registration logic.
 @riverpod
 class RegisterProvider extends _$RegisterProvider {
-  String api = "http://192.168.1.50:3000/api";
-
   /// State to indicate if a request is currently loading
   bool isLoading = false;
 
@@ -122,6 +121,8 @@ class RegisterProvider extends _$RegisterProvider {
 
   /// Method that makes a request to the API to register a user. It collects the token from the response and stores it in SharedPreferences. After that, it changes the router.
   Future<void> register() async {
+    final api = await loadFromProperties("api_url");
+
     isLoading = true;
     try {
       final response = await http.post(Uri.parse("$api/users/registerUser"),

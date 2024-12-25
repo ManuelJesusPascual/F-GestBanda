@@ -9,6 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../config/config.dart';
 import '../../../domain/newmodels/roleModels/role_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
+import '../../../utils/properties_manager.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:http/http.dart' as http;
@@ -20,8 +21,6 @@ part 'voices_provider.g.dart';
 /// from a band, as well as managing user and band information.
 @riverpod
 class VoicesProvider extends _$VoicesProvider {
-  String api = "http://192.168.1.50:3000/api";
-
   /// Initializes the state of the VoicesProvider with default values
   /// including an empty list of band voices and user and band details.
   @override
@@ -51,6 +50,8 @@ class VoicesProvider extends _$VoicesProvider {
   /// and updates the state with the retrieved voices. If an error occurs,
   /// it sets an error message in the error provider.
   Future<void> getVoiceList() async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
@@ -99,6 +100,8 @@ class VoicesProvider extends _$VoicesProvider {
   /// and updates the state with the retrieved voices. If an error occurs,
   /// it sets an error message in the error provider.
   Future<void> getVoicesBandNotHaveList() async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
@@ -146,6 +149,8 @@ class VoicesProvider extends _$VoicesProvider {
   /// Removes a voice from the band by its ID and updates the state accordingly.
   /// If an error occurs, it sets an error message in the error provider.
   Future<void> removeVoiceFromBand(String idVoice) async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
@@ -186,6 +191,8 @@ class VoicesProvider extends _$VoicesProvider {
   /// Adds a voice to the band using the provided voice name and updates the state.
   /// If an error occurs, it sets an error message in the error provider.
   Future<void> addVoiceToBand(String voiceName) async {
+    final api = await loadFromProperties("api_url");
+
     if (state.isLoading) return;
 
     // Start loading
