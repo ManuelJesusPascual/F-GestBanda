@@ -9,10 +9,10 @@ import 'package:gestbanda/presentation/providers/errorProvider/error_provider.da
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-// Mock class for SharedPreferences
-class MockSharedPreferences extends Mock implements SharedPreferences {}
+// Mock class for FlutterSecureStorage
+class MockSecureStorage extends Mock implements FlutterSecureStorage {}
 
 // Mock class for HTTP client
 class MockHttp extends Mock implements http.Client {}
@@ -25,32 +25,32 @@ class Listener<T> extends Mock {
   void call(T? previous, T? next);
 }
 
-// Mock provider for SharedPreferences
+// Mock provider for FlutterSecureStorage
 class MockSharedPreferencesProvider
-    extends AutoDisposeAsyncNotifier<SharedPreferences>
+    extends AutoDisposeAsyncNotifier<FlutterSecureStorage>
     implements SharedPreferencesProvider {
-  final SharedPreferences mockPrefs;
+  final FlutterSecureStorage mockPrefs;
 
   MockSharedPreferencesProvider(this.mockPrefs);
 
   @override
-  Future<SharedPreferences> build() async {
+  Future<FlutterSecureStorage> build() async {
     return mockPrefs;
   }
 
   @override
   Future<void> saveString({required String key, required String value}) async {
-    await mockPrefs.setString(key, value);
+    await mockPrefs.write(key: key, value: value);
   }
 
   @override
   Future<String?> getString({required String key}) async {
-    return mockPrefs.getString(key);
+    return mockPrefs.read(key: key);
   }
 
   @override
   Future<void> removeString({required String key}) async {
-    await mockPrefs.remove(key);
+    await mockPrefs.delete(key: key);
   }
 }
 
@@ -59,7 +59,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late ProviderContainer container;
-  late MockSharedPreferences mockPrefs;
+  late MockSecureStorage mockPrefs;
   late MockHttp mockHttp;
 
   setUpAll(() {
@@ -68,7 +68,7 @@ void main() {
   });
 
   setUp(() {
-    mockPrefs = MockSharedPreferences();
+    mockPrefs = MockSecureStorage();
     mockHttp = MockHttp();
 
     // Create a provider container with overrides
@@ -88,8 +88,9 @@ void main() {
       'token': 'test-token'
     };
 
-    // Mock the SharedPreferences to return the sample user data
-    when(() => mockPrefs.getString('user')).thenReturn(jsonEncode(userJson));
+    // Mock the FlutterSecureStorage to return the sample user data
+    when(() => mockPrefs.read(key: 'user'))
+        .thenAnswer((_) async => jsonEncode(userJson));
 
     addTearDown(() {
       // Dispose of the provider container after tests
@@ -160,8 +161,9 @@ void main() {
     });
 
     group('Pruebas de obtención de usuario', () {
-      // Test that the provider updates its state with the user from SharedPreferences
-      test('Debería actualizar el estado con el usuario de SharedPreferences',
+      // Test that the provider updates its state with the user from FlutterSecureStorage
+      test(
+          'Debería actualizar el estado con el usuario de FlutterSecureStorage',
           () async {
         final userJson = {
           'id': '123',
@@ -171,9 +173,9 @@ void main() {
           'token': 'test-token'
         };
 
-        // Mock the SharedPreferences to return the sample user data
-        when(() => mockPrefs.getString('user'))
-            .thenReturn(jsonEncode(userJson));
+        // Mock the FlutterSecureStorage to return the sample user data
+        when(() => mockPrefs.read(key: 'user'))
+            .thenAnswer((_) async => jsonEncode(userJson));
 
         final provider = container.read(joinBandProviderProvider.notifier);
         await provider.getUser(); // Get user data
@@ -184,15 +186,15 @@ void main() {
         expect(state.user.name, equals('Test User'));
 
         // Verify that getString was called once
-        verify(() => mockPrefs.getString('user')).called(1);
+        verify(() => mockPrefs.read(key: 'user')).called(1);
       });
 
-      // Test that an error is set when no user is found in SharedPreferences
+      // Test that an error is set when no user is found in FlutterSecureStorage
       test(
-          'Debería establecer un error cuando no se encuentra el usuario en SharedPreferences',
+          'Debería establecer un error cuando no se encuentra el usuario en FlutterSecureStorage',
           () async {
         // Mock to return null for user data
-        when(() => mockPrefs.getString('user')).thenReturn(null);
+        when(() => mockPrefs.read(key: 'user')).thenAnswer((_) async => null);
 
         final provider = container.read(joinBandProviderProvider.notifier);
         await provider.getUser(); // Attempt to get user data
@@ -202,7 +204,7 @@ void main() {
         expect(error, equals('No se ha encontrado la sesión del usuario.'));
 
         // Verify that getString was called once
-        verify(() => mockPrefs.getString('user')).called(1);
+        verify(() => mockPrefs.read(key: 'user')).called(1);
       });
     });
 

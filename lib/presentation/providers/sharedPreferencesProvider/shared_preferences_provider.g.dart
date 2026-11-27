@@ -7,14 +7,19 @@ part of 'shared_preferences_provider.dart';
 // **************************************************************************
 
 String _$sharedPreferencesProviderHash() =>
-    r'fd37dcdd5a51bec50f59eafc17a907d8c69ea95f';
+    r'0d27c423278e949c80284b389f1176de2fda38b3';
 
-/// Provider que usaremos para manejar las SharedPreferences.
+/// Provider que usaremos para manejar el almacenamiento local de la sesión
+/// (usuario con su token y banda actual).
+///
+/// Mantiene el nombre original, pero guarda los datos con
+/// flutter_secure_storage (Keychain en iOS, cifrado con Android Keystore)
+/// en lugar de SharedPreferences, que los dejaba en texto plano.
 ///
 /// Copied from [SharedPreferencesProvider].
 @ProviderFor(SharedPreferencesProvider)
 final sharedPreferencesProviderProvider = AutoDisposeAsyncNotifierProvider<
-    SharedPreferencesProvider, SharedPreferences>.internal(
+    SharedPreferencesProvider, FlutterSecureStorage>.internal(
   SharedPreferencesProvider.new,
   name: r'sharedPreferencesProviderProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -25,6 +30,6 @@ final sharedPreferencesProviderProvider = AutoDisposeAsyncNotifierProvider<
 );
 
 typedef _$SharedPreferencesProvider
-    = AutoDisposeAsyncNotifier<SharedPreferences>;
+    = AutoDisposeAsyncNotifier<FlutterSecureStorage>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

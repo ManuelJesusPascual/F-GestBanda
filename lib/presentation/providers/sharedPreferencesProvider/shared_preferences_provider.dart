@@ -1,24 +1,27 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'shared_preferences_provider.g.dart';
 
-/// Provider que usaremos para manejar las SharedPreferences.
+/// Provider que usaremos para manejar el almacenamiento local de la sesión
+/// (usuario con su token y banda actual).
+///
+/// Mantiene el nombre original, pero guarda los datos con
+/// flutter_secure_storage (Keychain en iOS, cifrado con Android Keystore)
+/// en lugar de SharedPreferences, que los dejaba en texto plano.
 @riverpod
 class SharedPreferencesProvider extends _$SharedPreferencesProvider {
+  static const _storage = FlutterSecureStorage();
+
   @override
-  Future<SharedPreferences> build() async {
-    return await SharedPreferences.getInstance();
-  }
+  Future<FlutterSecureStorage> build() async => _storage;
 
-  /// Método que almacena un String en SharedPreferences.
+  /// Método que almacena un String.
   Future<void> saveString({required String key, required String value}) async {
-    final prefs = await build();
-
     if (key.isNotEmpty && value.isNotEmpty) {
       try {
-        await prefs.setString(key, value);
+        await _storage.write(key: key, value: value);
       } catch (e) {
         ref
             .read(errorProviderProvider.notifier)
@@ -27,12 +30,10 @@ class SharedPreferencesProvider extends _$SharedPreferencesProvider {
     }
   }
 
-  /// Método que extrae un String de SharedPreferences.
+  /// Método que extrae un String.
   Future<String?> getString({required String key}) async {
-    final prefs = await build();
-
     try {
-      return prefs.getString(key);
+      return await _storage.read(key: key);
     } catch (e) {
       ref
           .read(errorProviderProvider.notifier)
@@ -41,12 +42,10 @@ class SharedPreferencesProvider extends _$SharedPreferencesProvider {
     }
   }
 
-  /// Método que elimina un String de SharedPreferences.
+  /// Método que elimina un String.
   Future<void> removeString({required String key}) async {
-    final prefs = await build();
-
     try {
-      await prefs.remove(key);
+      await _storage.delete(key: key);
     } catch (e) {
       ref
           .read(errorProviderProvider.notifier)

@@ -11,10 +11,10 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-// Mock class for SharedPreferences to simulate its behavior in tests.
-class MockSharedPreferences extends Mock implements SharedPreferences {}
+// Mock class for FlutterSecureStorage to simulate its behavior in tests.
+class MockSecureStorage extends Mock implements FlutterSecureStorage {}
 
 // Mock class for http.Client to simulate HTTP requests in tests.
 class MockHttp extends Mock implements http.Client {}
@@ -38,34 +38,34 @@ class Listener<T> extends Mock {
 
 // Mock implementation of SharedPreferencesProvider for testing.
 class MockSharedPreferencesProvider
-    extends AutoDisposeAsyncNotifier<SharedPreferences>
+    extends AutoDisposeAsyncNotifier<FlutterSecureStorage>
     implements SharedPreferencesProvider {
-  final SharedPreferences mockPrefs;
+  final FlutterSecureStorage mockPrefs;
 
   MockSharedPreferencesProvider(this.mockPrefs);
 
   // Builds the mock shared preferences provider.
   @override
-  Future<SharedPreferences> build() async {
+  Future<FlutterSecureStorage> build() async {
     return mockPrefs;
   }
 
   // Saves a string value to shared preferences.
   @override
   Future<void> saveString({required String key, required String value}) async {
-    await mockPrefs.setString(key, value);
+    await mockPrefs.write(key: key, value: value);
   }
 
   // Retrieves a string value from shared preferences.
   @override
   Future<String?> getString({required String key}) async {
-    return mockPrefs.getString(key);
+    return mockPrefs.read(key: key);
   }
 
   // Removes a string value from shared preferences.
   @override
   Future<void> removeString({required String key}) async {
-    await mockPrefs.remove(key);
+    await mockPrefs.delete(key: key);
   }
 }
 
@@ -73,7 +73,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late ProviderContainer container; // Provider container for managing state.
-  late MockSharedPreferences mockPrefs; // Mocked shared preferences.
+  late MockSecureStorage mockPrefs; // Mocked shared preferences.
   late MockHttp mockHttp; // Mocked HTTP client.
   late MockImagePicker mockImagePicker; // Mocked image picker.
 
@@ -82,7 +82,7 @@ void main() {
   });
 
   setUp(() {
-    mockPrefs = MockSharedPreferences();
+    mockPrefs = MockSecureStorage();
     mockHttp = MockHttp();
     mockImagePicker = MockImagePicker();
 
@@ -112,8 +112,8 @@ void main() {
       'phone': '123456789',
       'token': 'test-token'
     };
-    when(() => mockPrefs.getString('user'))
-        .thenAnswer((_) => jsonEncode(userJson));
+    when(() => mockPrefs.read(key: 'user'))
+        .thenAnswer((_) async => jsonEncode(userJson));
 
     // Clean up after tests
     addTearDown(() {
@@ -178,8 +178,8 @@ void main() {
     });
 
     group('Pruebas de getUser', () {
-      // Test that the user state is updated from SharedPreferences
-      test('debe actualizar el estado con el usuario de SharedPreferences',
+      // Test that the user state is updated from FlutterSecureStorage
+      test('debe actualizar el estado con el usuario de FlutterSecureStorage',
           () async {
         final userJson = {
           'id': '123',
@@ -189,8 +189,8 @@ void main() {
           'token': 'test-token'
         };
 
-        when(() => mockPrefs.getString('user'))
-            .thenAnswer((_) => jsonEncode(userJson));
+        when(() => mockPrefs.read(key: 'user'))
+            .thenAnswer((_) async => jsonEncode(userJson));
 
         final provider = container.read(registerBandProviderProvider.notifier);
         await provider.getUser();
@@ -200,14 +200,14 @@ void main() {
         expect(state.user.name, equals('Test User'));
         expect(state.user.email, equals('test@test.com'));
 
-        verify(() => mockPrefs.getString('user')).called(1);
+        verify(() => mockPrefs.read(key: 'user')).called(1);
       });
 
-      // Test that an error is set when the user is not found in SharedPreferences
+      // Test that an error is set when the user is not found in FlutterSecureStorage
       test(
-          'debe establecer un error cuando no se encuentra el usuario en SharedPreferences',
+          'debe establecer un error cuando no se encuentra el usuario en FlutterSecureStorage',
           () async {
-        when(() => mockPrefs.getString('user')).thenReturn(null);
+        when(() => mockPrefs.read(key: 'user')).thenAnswer((_) async => null);
 
         final provider = container.read(registerBandProviderProvider.notifier);
         await provider.getUser();
@@ -215,7 +215,7 @@ void main() {
         final error = container.read(errorProviderProvider);
         expect(error, equals('No se ha encontrado la sesión del usuario.'));
 
-        verify(() => mockPrefs.getString('user')).called(1);
+        verify(() => mockPrefs.read(key: 'user')).called(1);
       });
     });
 
@@ -283,8 +283,9 @@ void main() {
                 costumeList: []));
 
         // Setup mock for storing band data
-        when(() => mockPrefs.setString(any(), any()))
-            .thenAnswer((_) async => true);
+        when(() => mockPrefs.write(
+            key: any(named: 'key'),
+            value: any(named: 'value'))).thenAnswer((_) async {});
       });
 
       // Test that the band is successfully registered
@@ -323,7 +324,7 @@ void main() {
                 'Ha ocurrido un error en la aplicacion. Intentalo más tarde.'));
 
         // Verify the user is fetched
-        verify(() => mockPrefs.getString('user')).called(1);
+        verify(() => mockPrefs.read(key: 'user')).called(1);
       });
 
       // Test that network errors are handled correctly
@@ -338,7 +339,7 @@ void main() {
             error,
             equals(
                 'Ha ocurrido un error en la aplicacion. Intentalo más tarde.'));
-        verify(() => mockPrefs.getString('user')).called(1);
+        verify(() => mockPrefs.read(key: 'user')).called(1);
       });
     });
   });
