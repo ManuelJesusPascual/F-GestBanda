@@ -71,6 +71,23 @@ compartido y las páginas los muestran en un snackbar. Tras el login, el token
 que la API devuelve en la cabecera `Authorization` de la respuesta se guarda
 con el usuario y se envía en la cabecera `Authorization` de cada petición.
 
+### Roles y errores
+
+La app lee el rol del usuario en la banda desde `getUserBands` y oculta lo que
+ese rol no permite. La API aplica las mismas reglas y responde 403.
+
+| Rol | Puede |
+|---|---|
+| `DIRECTOR` | Gestionar voces, códigos de invitación y todos los componentes, roles incluidos |
+| `JEFE DE VOZ` | Cambiar la voz o quitar de la banda a los `COMPONENTE` de su propia voz |
+| `COMPONENTE` | Solo consultar. Quien se une con un código recibe este rol |
+
+Los errores de la API se tratan en un único sitio (`lib/utils/api_errors.dart`):
+un 401 (`code` 14) cierra la sesión y vuelve al login, un 403 (`code` 12)
+explica que el rol no permite la acción, un 5xx muestra un mensaje genérico y
+cualquier otro error muestra el mensaje de la API. Los códigos de invitación se
+tratan siempre como texto de seis dígitos (por ejemplo `004821`).
+
 Endpoints principales (todos bajo `/api`):
 
 | Funcionalidad | Endpoints |

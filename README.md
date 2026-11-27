@@ -70,6 +70,23 @@ show them in a snackbar. After login, the token that the API returns in the
 `Authorization` response header is stored with the user and sent in the
 `Authorization` header of every request.
 
+### Roles and errors
+
+The app reads the user's role in the band from `getUserBands` and hides what
+the role does not allow. The API enforces the same rules and answers 403.
+
+| Role | Can do |
+|---|---|
+| `DIRECTOR` | Manage voices, invitation codes and every member, including roles |
+| `JEFE DE VOZ` | Change the voice of, or remove, `COMPONENTE` members of their own voice |
+| `COMPONENTE` | Read only. Users who join with a code get this role |
+
+Error responses are handled in one place (`lib/utils/api_errors.dart`): a 401
+(`code` 14) closes the session and goes back to the login screen, a 403
+(`code` 12) explains that the role does not allow the action, a 5xx shows a
+generic message, and any other error shows the message of the API.
+Invitation codes are always handled as six-digit text (for example `004821`).
+
 Main endpoints used (all under `/api`):
 
 | Feature | Endpoints |
