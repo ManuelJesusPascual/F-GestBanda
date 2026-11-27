@@ -348,7 +348,7 @@ class AppRouter extends _$AppRouter {
 
     try {
       final response = await http.get(
-        Uri.parse("$api/userBands/getUserBands?id=${bandSaved.id}"),
+        Uri.parse("$api/userBands/getUserBands?id=${user.id}"),
         headers: <String, String>{
           'Authorization': user.token,
         },
