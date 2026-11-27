@@ -123,8 +123,7 @@ void main() {
     test('validateName devuelve null para un nombre válido', () {
       final proveedorRegistro =
           contenedor.read(registerProviderProvider.notifier);
-      expect(proveedorRegistro.validateName('Juan Pérez'),
-          "Debes introducir un nombre válido",
+      expect(proveedorRegistro.validateName('Juan Pérez'), isNull,
           reason: 'Un nombre válido debe pasar la validación');
     });
 
