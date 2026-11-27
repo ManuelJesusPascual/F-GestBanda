@@ -20,7 +20,8 @@ class RegisterBandDTO {
     );
   }
 
-  Map<String, dynamic> toJson() => {'name': name, 'user': user};
+  // The API takes the creator from the JWT, so `user` stays local (for the token).
+  Map<String, dynamic> toJson() => {'name': name};
 
   factory RegisterBandDTO.fromJson(Map<String, dynamic> json, XFile img) {
     return RegisterBandDTO(

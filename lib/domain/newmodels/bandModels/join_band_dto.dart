@@ -18,7 +18,8 @@ class JoinBandDTO {
     );
   }
 
-  Map<String, dynamic> toJson() => {'code': code, 'user': user};
+  // The API takes the user from the JWT, so `user` stays local (for the token).
+  Map<String, dynamic> toJson() => {'code': code};
 
   factory JoinBandDTO.fromJson(Map<String, dynamic> json) {
     return JoinBandDTO(
