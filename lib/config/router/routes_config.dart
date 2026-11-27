@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import 'package:gestbanda/domain/models/costume.dart';
 import 'package:gestbanda/domain/models/event.dart';
 import 'package:gestbanda/domain/models/instrument.dart';
@@ -280,7 +282,7 @@ class AppRouter extends _$AppRouter {
         UserDTO? user = await updateUserInfo(userSaved);
         return user;
       } catch (e) {
-        print('Error al decodificar JSON: $e');
+        debugPrint('Error al decodificar JSON: $e');
       }
     }
     return null;
@@ -335,7 +337,7 @@ class AppRouter extends _$AppRouter {
         final Map<String, dynamic> bandMap = json.decode(bandJSON);
         return BandDTO.fromJson(bandMap);
       } catch (e) {
-        print('Error al decodificar JSON: $e');
+        debugPrint('Error al decodificar JSON: $e');
       }
     }
     return null;

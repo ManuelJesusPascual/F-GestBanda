@@ -7,7 +7,7 @@ part of 'shared_preferences_provider.dart';
 // **************************************************************************
 
 String _$sharedPreferencesProviderHash() =>
-    r'6b4ade257d0c270396d527823d2ac81d9faba6b0';
+    r'fd37dcdd5a51bec50f59eafc17a907d8c69ea95f';
 
 /// Provider que usaremos para manejar las SharedPreferences.
 ///

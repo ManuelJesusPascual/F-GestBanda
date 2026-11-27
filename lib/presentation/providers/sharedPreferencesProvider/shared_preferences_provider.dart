@@ -19,14 +19,10 @@ class SharedPreferencesProvider extends _$SharedPreferencesProvider {
     if (key.isNotEmpty && value.isNotEmpty) {
       try {
         await prefs.setString(key, value);
-        print("Guardado correctamente:");
-        print("Clave: $key");
-        print("Valor: $value");
       } catch (e) {
         ref
             .read(errorProviderProvider.notifier)
             .setError("Error al intentar guardar en memoria.");
-        print("Error al guardar: $e");
       }
     }
   }
