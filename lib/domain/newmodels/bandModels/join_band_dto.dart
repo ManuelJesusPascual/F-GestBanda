@@ -1,6 +1,7 @@
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 
 import '../codesModels/codes.dart';
+
 class JoinBandDTO {
   String code;
   UserDTO user;
