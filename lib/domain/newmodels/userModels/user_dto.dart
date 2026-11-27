@@ -63,7 +63,7 @@ class UserDTO {
         'img': img,
         'token': token,
         'role': role?.toJson(),
-        'voz': voz?.toJson(),
+        'voice': voz?.toJson(),
         'instrumentList':
             instrumentList?.map((instrument) => instrument.toJson()).toList(),
         'costumeList': costumeList?.map((costume) => costume.toJson()).toList(),
@@ -77,8 +77,8 @@ class UserDTO {
         phone: json['phone'],
         img: json['img'],
         token: json['token'] ?? '',
-        role: json['role'],
-        voz: (json['voz'] != null) ? VoiceDTO.fromJson(json['voz']) : null,
+        role: (json['role'] != null) ? RoleDTO.fromJson(json['role']) : null,
+        voz: (json['voice'] != null) ? VoiceDTO.fromJson(json['voice']) : null,
         instrumentList: (json['instrumentList'] != null)
             ? Instrument.listFromJson(json['instrumentList'])
             : null,
