@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 // Import necessary packages and models for configuration, HTTP requests, and state management.
@@ -91,10 +92,7 @@ class CodesProvider extends _$CodesProvider {
               .setError("El formato de respuesta no es una lista.");
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -136,10 +134,7 @@ class CodesProvider extends _$CodesProvider {
         final router = await ref.read(appRouterProvider.future);
         router.pop();
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -182,10 +177,7 @@ class CodesProvider extends _$CodesProvider {
         final router = await ref.read(appRouterProvider.future);
         router.pop();
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -219,10 +211,7 @@ class CodesProvider extends _$CodesProvider {
           codes: state.codes.where((voice) => voice.id != id).toList(),
         );
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -18,7 +19,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../domain/newmodels/userBandsModels/user_bands_dto.dart';
-import '../../presentation/providers/errorProvider/error_provider.dart';
 import '../../presentation/screen/pages.dart';
 
 part 'routes_config.g.dart';
@@ -309,10 +309,7 @@ class AppRouter extends _$AppRouter {
             .saveString(key: "user", value: json.encode(user.toJson()));
         return user;
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response, expireSession: false);
         await ref.read(sharedPreferencesProviderProvider.notifier).removeString(
               key: "user",
             );
@@ -369,10 +366,7 @@ class AppRouter extends _$AppRouter {
           return band;
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response, expireSession: false);
         await ref.read(sharedPreferencesProviderProvider.notifier).removeString(
               key: "band",
             );

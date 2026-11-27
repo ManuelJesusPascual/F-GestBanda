@@ -6,7 +6,7 @@ part of 'user_band_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userBandProviderHash() => r'da2e82176807891f78725bc732c05ee2ccceaa9e';
+String _$userBandProviderHash() => r'1b01138943c72a8e77d6f791d7668c7526d896dc';
 
 /// The UserBandProvider class is responsible for managing the state
 /// related to user bands, including fetching, modifying, and removing

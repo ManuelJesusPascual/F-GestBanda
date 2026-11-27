@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
@@ -82,10 +83,7 @@ class RolesProvider extends _$RolesProvider {
               .setError("El formato de respuesta no es una lista.");
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

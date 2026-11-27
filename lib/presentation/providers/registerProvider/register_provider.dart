@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -147,10 +148,7 @@ class RegisterProvider extends _$RegisterProvider {
         final router = await ref.read(appRouterProvider.future);
         router.push("/");
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response, authenticated: false);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

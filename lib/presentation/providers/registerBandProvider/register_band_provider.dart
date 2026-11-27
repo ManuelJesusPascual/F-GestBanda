@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
@@ -148,10 +149,7 @@ class RegisterBandProvider extends _$RegisterBandProvider {
         final router = await ref.read(appRouterProvider.future);
         router.push("/");
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

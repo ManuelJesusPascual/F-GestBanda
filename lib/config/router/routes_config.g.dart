@@ -6,7 +6,7 @@ part of 'routes_config.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appRouterHash() => r'e223ff6c4722677fb63d8a72e6acf99ffa512805';
+String _$appRouterHash() => r'a0a4b573651f03990d8765bc90c59eedb4164e46';
 
 /// Riverpod provider for managing the app's router based on user authentication state.
 ///

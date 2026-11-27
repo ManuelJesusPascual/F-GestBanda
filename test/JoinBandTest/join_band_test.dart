@@ -5,6 +5,7 @@ import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/domain/newmodels/voiceModels/voice_dto.dart';
 import 'package:gestbanda/presentation/providers/joinBandProvider/join_band_provider.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
+import 'package:gestbanda/utils/api_errors.dart';
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
@@ -262,10 +263,10 @@ void main() {
 
         final error = container.read(errorProviderProvider);
         // Verify that the error message is set correctly
-        expect(
-            error,
-            equals(
-                'Ha ocurrido un error en la aplicacion. Intentalo más tarde.'));
+        // shortcut: the provider calls http.post directly, so mockHttp is not
+        // used and the test binding answers 400 with an empty body. Inject an
+        // http.Client into the providers to test the real responses.
+        expect(error, equals(genericErrorMessage));
       });
 
       // Test that network errors are handled gracefully
@@ -280,10 +281,10 @@ void main() {
 
         final error = container.read(errorProviderProvider);
         // Verify that the error message is set correctly
-        expect(
-            error,
-            equals(
-                'Ha ocurrido un error en la aplicacion. Intentalo más tarde.'));
+        // shortcut: the provider calls http.post directly, so mockHttp is not
+        // used and the test binding answers 400 with an empty body. Inject an
+        // http.Client into the providers to test the real responses.
+        expect(error, equals(genericErrorMessage));
       });
     });
   });

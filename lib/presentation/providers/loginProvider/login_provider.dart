@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/userBandsModels/user_bands_dto.dart';
@@ -83,10 +84,7 @@ class LoginProvider extends _$LoginProvider {
             .read(sharedPreferencesProviderProvider.notifier)
             .saveString(key: "user", value: json.encode(user.toJson()));
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response, authenticated: false);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -134,10 +132,7 @@ class LoginProvider extends _$LoginProvider {
           router.push("/");
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

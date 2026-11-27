@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/userBandsModels/modify_user_bands_dto.dart';
@@ -89,10 +90,7 @@ class UserBandProvider extends _$UserBandProvider {
         final router = await ref.read(appRouterProvider.future);
         router.pop();
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -139,10 +137,7 @@ class UserBandProvider extends _$UserBandProvider {
         final router = await ref.read(appRouterProvider.future);
         router.pop(state.userModify);
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -195,10 +190,7 @@ class UserBandProvider extends _$UserBandProvider {
               .setError("El formato de respuesta no es una lista.");
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

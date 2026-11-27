@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/bandModels/band_dto.dart';
@@ -83,10 +84,7 @@ class VoicesProvider extends _$VoicesProvider {
               .setError("El formato de respuesta no es una lista.");
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -133,10 +131,7 @@ class VoicesProvider extends _$VoicesProvider {
               .setError("El formato de respuesta no es una lista.");
         }
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -175,10 +170,7 @@ class VoicesProvider extends _$VoicesProvider {
               state.bandVoices.where((voice) => voice.id != idVoice).toList(),
         );
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(
@@ -218,10 +210,7 @@ class VoicesProvider extends _$VoicesProvider {
         final router = await ref.read(appRouterProvider.future);
         router.pop();
       } else {
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       ref.read(errorProviderProvider.notifier).setError(

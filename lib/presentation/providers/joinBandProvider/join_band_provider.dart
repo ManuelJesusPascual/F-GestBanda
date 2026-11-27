@@ -1,3 +1,4 @@
+import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:convert';
 
 import 'package:gestbanda/domain/newmodels/bandModels/join_band_dto.dart';
@@ -114,10 +115,7 @@ class JoinBandProvider extends _$JoinBandProvider {
         router.push("/");
       } else {
         // Handle error response from the server
-        final data = json.decode(response.body);
-        ref
-            .read(errorProviderProvider.notifier)
-            .setError(data["message"].toString());
+        await handleApiError(ref, response);
       }
     } catch (e) {
       // Handle any exceptions that occur
