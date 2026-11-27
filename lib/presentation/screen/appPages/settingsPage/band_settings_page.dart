@@ -46,7 +46,7 @@ class BandSettingsPage extends ConsumerWidget {
               height: 5,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: null, // not implemented yet
               icon: CircleAvatar(
                 foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 backgroundColor: Theme.of(context).colorScheme.primary,
@@ -140,7 +140,7 @@ class BandSettingsPage extends ConsumerWidget {
                 ],
               ),
               trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () {},
+              onTap: null, // not implemented yet
             ),
             const Divider(
               indent: 16,

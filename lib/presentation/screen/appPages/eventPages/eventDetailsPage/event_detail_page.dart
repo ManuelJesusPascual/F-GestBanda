@@ -32,6 +32,7 @@ class _EventDetailPageState extends ConsumerState<EventDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const PreviewBanner(),
             CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,

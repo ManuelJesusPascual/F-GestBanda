@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../widgets/widgets.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/costume.dart';
@@ -65,6 +66,7 @@ class NewCustomePage extends ConsumerWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              const PreviewBanner(),
               Text(
                 "Listado de ropas",
                 style: Theme.of(context).textTheme.titleLarge,

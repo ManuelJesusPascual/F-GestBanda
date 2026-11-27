@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/widgets/instrument_tile.dart';
+import '../../../../widgets/widgets.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/instrument.dart';
@@ -65,6 +66,7 @@ class InstrumentPage extends ConsumerWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              const PreviewBanner(),
               Text(
                 "Listado de instrumentos",
                 style: Theme.of(context).textTheme.titleLarge,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../widgets/widgets.dart';
 
 import '../../../../widgets/custom_button.dart';
 
@@ -22,6 +23,7 @@ class _UserInstrumentCreatePageState extends State<UserInstrumentCreatePage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            const PreviewBanner(),
             Text(
               "Añadir Instrumento",
               style: Theme.of(context).textTheme.titleLarge,
@@ -92,7 +94,7 @@ class _UserInstrumentCreatePageState extends State<UserInstrumentCreatePage> {
             ),
             CustomButton(
               color: "primary",
-              onPressed: () {},
+              onPressed: null, // not implemented yet
               br: BorderRadius.circular(16),
               text: "Añadir",
             )

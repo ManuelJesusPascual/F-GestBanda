@@ -33,6 +33,7 @@ class _CostumeCreateModifyPageState
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            const PreviewBanner(),
             Text(
               widget.costume.img.isNotEmpty
                   ? "Modificar parte del traje"

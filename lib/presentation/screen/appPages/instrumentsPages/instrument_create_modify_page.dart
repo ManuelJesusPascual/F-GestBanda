@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/widgets/user_tile.dart';
+import '../../../../widgets/widgets.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/instrument.dart';
@@ -33,6 +34,7 @@ class _InstrumentCreateModifyPageState
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            const PreviewBanner(),
             Text(
               widget.instrument.img.isNotEmpty
                   ? "Modificar Instrumento"

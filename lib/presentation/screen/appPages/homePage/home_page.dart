@@ -42,6 +42,8 @@ class HomePage extends ConsumerWidget {
                 style: TextStyle(
                     fontSize: 16, color: Theme.of(context).colorScheme.primary),
               ),
+              const SizedBox(height: 10),
+              const PreviewBanner(),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

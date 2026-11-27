@@ -57,6 +57,7 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
+              const PreviewBanner(),
               const Header(),
               Expanded(
                 child: Stack(

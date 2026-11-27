@@ -110,6 +110,7 @@ class EventCreateModifyState extends ConsumerState<EventCreateModify> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const PreviewBanner(),
                 Text(
                   edit! ? "Modificar Evento" : "Crear Evento",
                   style: Theme.of(context).textTheme.titleLarge,

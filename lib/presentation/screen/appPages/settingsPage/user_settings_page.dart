@@ -37,7 +37,7 @@ class UserSettingsPage extends ConsumerWidget {
               height: 5,
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: null, // not implemented yet
               icon: CircleAvatar(
                 foregroundColor: Theme.of(context).colorScheme.onPrimary,
                 backgroundColor: Theme.of(context).colorScheme.primary,
