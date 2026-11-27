@@ -6,9 +6,14 @@ part of 'user_band_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userBandProviderHash() => r'19b6b17321c7a2edd55404a42881f2f96f3a6fa5';
+String _$userBandProviderHash() => r'6b14351dfa4329264546d6b8895d41badd00065a';
 
-/// See also [UserBandProvider].
+/// The UserBandProvider class is responsible for managing the state
+/// related to user bands, including fetching, modifying, and removing
+/// user band associations. It uses Riverpod for state management
+/// and handles API interactions for user band operations.
+///
+/// Copied from [UserBandProvider].
 @ProviderFor(UserBandProvider)
 final userBandProviderProvider =
     AutoDisposeNotifierProvider<UserBandProvider, UserBandProviderDTO>.internal(

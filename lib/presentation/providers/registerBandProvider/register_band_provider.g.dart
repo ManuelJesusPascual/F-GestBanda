@@ -7,7 +7,7 @@ part of 'register_band_provider.dart';
 // **************************************************************************
 
 String _$registerBandProviderHash() =>
-    r'a1db1d2c2fc3a8058530bafed337b6f1eb77f7bb';
+    r'dedf50003b542e91adf19eeeb268518a96f52589';
 
 /// Provider for handling band registration logic.
 /// This class manages the registration form state and handles interactions
