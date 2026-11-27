@@ -18,8 +18,9 @@ extension StringExtension on String {
     return bandNameRegExp.hasMatch(this);
   }
 
+  /// Invitation codes are exactly six digits, zero-padded (e.g. 004821).
   bool get isValidCode {
-    final codeRegExp = RegExp(r'^[0-9]+$');
+    final codeRegExp = RegExp(r'^[0-9]{6}$');
     return codeRegExp.hasMatch(this);
   }
 

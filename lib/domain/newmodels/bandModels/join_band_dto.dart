@@ -1,5 +1,6 @@
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 
+import '../codesModels/codes.dart';
 class JoinBandDTO {
   String code;
   UserDTO user;
@@ -20,7 +21,7 @@ class JoinBandDTO {
 
   factory JoinBandDTO.fromJson(Map<String, dynamic> json) {
     return JoinBandDTO(
-      code: json['code'],
+      code: invitationCodeFromJson(json['code']),
       user: json['user'],
     );
   }

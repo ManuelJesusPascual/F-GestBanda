@@ -42,10 +42,16 @@ class CodesDTO {
   factory CodesDTO.fromJson(Map<String, dynamic> json) {
     return CodesDTO(
       id: json['id'],
-      code: json['code'],
+      code: invitationCodeFromJson(json['code']),
       voice: VoiceDTO.fromJson(json['voice']),
       endDate: DateTime.parse(json['endDate']),
       createdDate: DateTime.parse(json['createdDate']),
     );
   }
 }
+
+/// Invitation codes are text: six digits with leading zeros (e.g. 004821).
+/// Pads a code that arrives as a number so the zeros are not lost.
+String invitationCodeFromJson(Object? value) => value is num
+    ? value.toInt().toString().padLeft(6, '0')
+    : (value as String? ?? '');

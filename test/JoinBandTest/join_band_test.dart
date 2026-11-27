@@ -146,18 +146,20 @@ void main() {
       test('Debería devolver null para un código válido', () {
         final provider = container.read(joinBandProviderProvider.notifier);
 
-        // Validate a valid code
-        expect(provider.validateCode('VALID123'),
-            'Debes introducir un código válido');
+        // Codes are six digits and keep their leading zeros
+        expect(provider.validateCode('004821'), isNull);
+        expect(provider.validateCode('123456'), isNull);
       });
 
       // Test that an invalid code returns an error message
       test('Debería devolver un mensaje de error para un código inválido', () {
         final provider = container.read(joinBandProviderProvider.notifier);
 
-        // Validate an empty code
-        expect(provider.validateCode(''),
-            equals('Debes introducir un código válido'));
+        for (final code in ['', '4821', '1234567', 'VALID1', '12 456']) {
+          expect(provider.validateCode(code),
+              equals('Debes introducir un código válido'),
+              reason: code);
+        }
       });
     });
 
