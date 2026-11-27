@@ -218,9 +218,7 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
         title: 'Concierto Almería',
         type: EventType.concierto,
         initDate: DateTime(2024, 9, 27, 23, 30),
-        imgList: [
-          ""
-        ],
+        imgList: [],
         endDate: DateTime(2024, 9, 27, 20, 30),
         description: "a",
         location: "Almeria"),
@@ -268,9 +266,7 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
         location: "Sanlucar de Barrameda"),
     Event(
         title: 'Concierto de verano',
-        imgList: [
-          ""
-        ],
+        imgList: [],
         type: EventType.concierto,
         initDate: DateTime(2024, 9, 1),
         endDate: DateTime(2024, 9, 1, 20, 30),

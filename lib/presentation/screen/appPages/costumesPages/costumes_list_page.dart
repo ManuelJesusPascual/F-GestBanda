@@ -10,43 +10,37 @@ class NewCustomePage extends ConsumerWidget {
 
   final List<Costume> costumes = [
     Costume(
-      img:
-          "",
+      img: "",
       name: "Fajin",
       quantity: 2,
       borrowedQuantity: 1,
     ),
     Costume(
-      img:
-          "",
+      img: "",
       name: "Cinturon",
       quantity: 2,
       borrowedQuantity: 1,
     ),
     Costume(
-      img:
-          "",
+      img: "",
       name: "Chaqueta",
       quantity: 2,
       borrowedQuantity: 1,
     ),
     Costume(
-      img:
-          "",
+      img: "",
       name: "Pantalon",
       quantity: 2,
       borrowedQuantity: 1,
     ),
     Costume(
-      img:
-          "",
+      img: "",
       name: "Hombreras",
       quantity: 2,
       borrowedQuantity: 1,
     ),
     Costume(
-      img:
-          "",
+      img: "",
       name: "Zapatos",
       quantity: 2,
       borrowedQuantity: 1,

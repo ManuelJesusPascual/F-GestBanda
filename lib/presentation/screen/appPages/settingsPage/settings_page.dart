@@ -42,7 +42,7 @@ class SettingsPage extends ConsumerWidget {
                     extra: UserDTO(
                         id: "",
                         name: "Usuario de ejemplo",
-                        email: "support@gestbanda.com",
+                        email: "usuario@example.com",
                         phone: "666666666",
                         img: null,
                         token: "",
@@ -58,10 +58,7 @@ class SettingsPage extends ConsumerWidget {
                 endIndent: 10,
               ),
               ListTile(
-                leading: const CircleAvatar(
-                  backgroundImage: AssetImage("assets/logoBanda.png"),
-                  backgroundColor: Colors.transparent,
-                ),
+                leading: const CircleAvatar(child: Icon(Icons.music_note)),
                 title: const Text("Ajustes de Banda"),
                 trailing: const Icon(Icons.arrow_forward_ios_outlined),
                 onTap: () async {
@@ -70,7 +67,7 @@ class SettingsPage extends ConsumerWidget {
                   router.push("/band_settings",
                       extra: BandDTO(
                           id: "",
-                          name: "Banda Municipal de Villaejemplo",
+                          name: "Banda de ejemplo",
                           img: null,
                           subscriptionID: "",
                           substriptionEndDate: DateTime.now()));

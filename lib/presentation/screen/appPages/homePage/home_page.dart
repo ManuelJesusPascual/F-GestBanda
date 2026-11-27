@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/event.dart';
@@ -28,9 +27,7 @@ class HomePage extends ConsumerWidget {
                 height: 15,
               ),
               const CircleAvatar(
-                  backgroundImage: AssetImage("assets/logoBanda.png"),
-                  backgroundColor: Colors.transparent,
-                  radius: 50),
+                  radius: 50, child: Icon(Icons.music_note, size: 50)),
               Text(
                 "¡Bienvenido a GestBanda!",
                 style: TextStyle(
@@ -55,9 +52,7 @@ class HomePage extends ConsumerWidget {
                           type: EventType.pasacalles,
                           initDate: DateTime(2024, 7, 3, 17, 30),
                           endDate: DateTime(2024, 7, 3, 20, 30),
-                          imgList: [
-                            ""
-                          ],
+                          imgList: [],
                           description:
                               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus velit nec dictum mattis. Phasellus sapien neque, vulputate vitae mi eget, volutpat malesuada nisi. Sed aliquet sit amet nulla nec efficitur. Etiam quis pellentesque lacus. Maecenas iaculis nisi ultrices sapien vehicula, nec tempus lacus dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse posuere mi a nunc vestibulum consequat. Cras mattis sit amet erat non molestie.Curabitur condimentum condimentum tristique. Nunc tincidunt dictum nunc id aliquam. In efficitur posuere lorem vitae lacinia. Praesent pulvinar odio pretium ex semper, vitae blandit neque ultricies. Phasellus dignissim eros ac aliquam porta. Nam turpis nisi, tempus vel orci sed, tincidunt bibendum eros. Nunc varius turpis vel egestas dignissim. Aliquam consequat at tellus vel euismod. Aenean vestibulum facilisis risus in finibus. Quisque efficitur in tellus quis sollicitudin. Maecenas ultrices porttitor vulputate. Sed ultrices dui sed erat molestie blandit. Morbi ullamcorper elit a nisl rutrum mattis.",
                           location: "Sevilla Centro"),
@@ -68,10 +63,7 @@ class HomePage extends ConsumerWidget {
                           type: EventType.salidaProcesional,
                           initDate: DateTime(2024, 8, 23, 12, 24),
                           endDate: DateTime(2024, 8, 28, 20, 30),
-                          imgList: [
-                            "",
-                            "",
-                          ],
+                          imgList: [],
                           description:
                               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus velit nec dictum mattis. Phasellus sapien neque, vulputate vitae mi eget, volutpat malesuada nisi. Sed aliquet sit amet nulla nec efficitur. Etiam quis pellentesque lacus. Maecenas iaculis nisi ultrices sapien vehicula, nec tempus lacus dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse posuere mi a nunc vestibulum consequat. Cras mattis sit amet erat non molestie.Curabitur condimentum condimentum tristique. Nunc tincidunt dictum nunc id aliquam. In efficitur posuere lorem vitae lacinia. Praesent pulvinar odio pretium ex semper, vitae blandit neque ultricies. Phasellus dignissim eros ac aliquam porta. Nam turpis nisi, tempus vel orci sed, tincidunt bibendum eros. Nunc varius turpis vel egestas dignissim. Aliquam consequat at tellus vel euismod. Aenean vestibulum facilisis risus in finibus. Quisque efficitur in tellus quis sollicitudin. Maecenas ultrices porttitor vulputate. Sed ultrices dui sed erat molestie blandit. Morbi ullamcorper elit a nisl rutrum mattis.",
                           location: "Sanlucar de Barrameda"),
@@ -107,25 +99,10 @@ class HomePage extends ConsumerWidget {
                           child: ClipRRect(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(16)),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "",
-                              cacheManager: CacheManager(
-                                Config(
-                                  "",
-                                  stalePeriod: const Duration(days: 7),
-                                ),
-                              ),
-                              placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                            child: SvgPicture.asset(
+                              "assets/svg/instruments_page.svg",
+                              semanticsLabel: "Instrumentos",
                               fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
-                              alignment: Alignment.center,
-                              fadeInDuration: Duration.zero,
                             ),
                           ),
                         ),
@@ -163,25 +140,10 @@ class HomePage extends ConsumerWidget {
                           child: ClipRRect(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(16)),
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "",
-                              cacheManager: CacheManager(
-                                Config(
-                                  "",
-                                  stalePeriod: const Duration(days: 7),
-                                ),
-                              ),
-                              placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                            child: SvgPicture.asset(
+                              "assets/svg/clothes_page.svg",
+                              semanticsLabel: "Trajes",
                               fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
-                              alignment: Alignment.center,
-                              fadeInDuration: Duration.zero,
                             ),
                           ),
                         ),
