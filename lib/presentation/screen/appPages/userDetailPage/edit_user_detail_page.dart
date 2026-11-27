@@ -1,3 +1,5 @@
+import 'package:gestbanda/presentation/providers/bandPermissionsProvider/band_permissions_provider.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/band_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/domain/newmodels/roleModels/role_dto.dart';
@@ -34,6 +36,8 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final permissions =
+        ref.watch(bandPermissionsProvider).valueOrNull ?? BandPermissions.none;
     final userBandState = ref.watch(userBandProviderProvider);
     UserDTO user = userBandState.userModify.copyWith();
 
@@ -92,11 +96,14 @@ class _EditUserDetailPageState extends ConsumerState<EditUserDetailPage> {
                       ),
                     ),
                     dropdownColor: Theme.of(context).colorScheme.secondary,
-                    onChanged: (RoleDTO? newValue) {
-                      if (newValue != null) {
-                        user.role = newValue;
-                      }
-                    },
+                    // JEFE DE VOZ can only change the voice; the API answers 403.
+                    onChanged: permissions.canChangeRoles
+                        ? (RoleDTO? newValue) {
+                            if (newValue != null) {
+                              user.role = newValue;
+                            }
+                          }
+                        : null,
                     items:
                         roles.map<DropdownMenuItem<RoleDTO>>((RoleDTO value) {
                       return DropdownMenuItem<RoleDTO>(

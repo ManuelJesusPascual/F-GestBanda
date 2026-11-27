@@ -1,3 +1,5 @@
+import 'package:gestbanda/presentation/providers/bandPermissionsProvider/band_permissions_provider.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/band_permissions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -13,6 +15,8 @@ class BandSettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final permissions =
+        ref.watch(bandPermissionsProvider).valueOrNull ?? BandPermissions.none;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
@@ -99,32 +103,34 @@ class BandSettingsPage extends ConsumerWidget {
             const SizedBox(
               height: 15,
             ),
-            ListTile(
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Modificar Voces",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios_outlined),
-              onTap: () async {
-                final router = await ref.read(appRouterProvider.future);
+            if (permissions.canManageVoices) ...[
+              ListTile(
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Modificar Voces",
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ],
+                ),
+                trailing: const Icon(Icons.arrow_forward_ios_outlined),
+                onTap: () async {
+                  final router = await ref.read(appRouterProvider.future);
 
-                router.push(
-                  "/edit_band_voices",
-                );
-              },
-            ),
-            const Divider(
-              indent: 16,
-              endIndent: 8,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
+                  router.push(
+                    "/edit_band_voices",
+                  );
+                },
+              ),
+              const Divider(
+                indent: 16,
+                endIndent: 8,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+            ],
             ListTile(
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -109,7 +109,7 @@ class JoinBandProvider extends _$JoinBandProvider {
         await ref
             .read(sharedPreferencesProviderProvider.notifier)
             .saveString(key: "band", value: json.encode(band.toJson()));
-        // Change the router to the director's home screen
+        // Go to the band's home screen; members who join get the COMPONENTE role
         ref.read(appRouterProvider.notifier).changeRouter(directorRouter);
         final router = await ref.read(appRouterProvider.future);
         router.push("/");

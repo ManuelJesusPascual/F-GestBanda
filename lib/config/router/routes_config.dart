@@ -1,3 +1,4 @@
+import 'package:gestbanda/presentation/providers/bandPermissionsProvider/band_permissions_provider.dart';
 import 'package:gestbanda/utils/api_errors.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -383,6 +384,7 @@ class AppRouter extends _$AppRouter {
 
   /// Updates the app's router state with a new GoRouter configuration.
   void changeRouter(GoRouter router) {
+    ref.invalidate(bandPermissionsProvider);
     state = AsyncValue.data(router);
   }
 }

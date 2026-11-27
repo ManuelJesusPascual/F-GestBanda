@@ -1,3 +1,5 @@
+import 'package:gestbanda/presentation/providers/bandPermissionsProvider/band_permissions_provider.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/band_permissions.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -16,25 +18,29 @@ class UserDetailPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     UserDTO user = ref.watch(userBandProviderProvider).userModify;
+    final permissions =
+        ref.watch(bandPermissionsProvider).valueOrNull ?? BandPermissions.none;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: Icon(Icons.edit,
-                color: Theme.of(context).colorScheme.onSurface),
-            onPressed: () async {
-              final router = await ref.read(appRouterProvider.future);
+          if (permissions.canManageMember(user))
+            IconButton(
+              icon: Icon(Icons.edit,
+                  color: Theme.of(context).colorScheme.onSurface),
+              onPressed: () async {
+                final router = await ref.read(appRouterProvider.future);
 
-              await router.push("/user_modify", extra: user);
-            },
-          ),
+                await router.push("/user_modify", extra: user);
+              },
+            ),
         ],
       ),
       floatingActionButton: user.id !=
-              ref.watch(userBandProviderProvider).user.id
+                  ref.watch(userBandProviderProvider).user.id &&
+              permissions.canManageMember(user)
           ? FloatingActionButton(
               backgroundColor: Theme.of(context).colorScheme.error,
               onPressed: () {

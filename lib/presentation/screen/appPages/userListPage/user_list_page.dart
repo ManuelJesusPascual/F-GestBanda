@@ -1,3 +1,5 @@
+import 'package:gestbanda/presentation/providers/bandPermissionsProvider/band_permissions_provider.dart';
+import 'package:gestbanda/domain/newmodels/roleModels/band_permissions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
@@ -23,6 +25,8 @@ class _UserListState extends ConsumerState<UserList> {
 
   @override
   Widget build(BuildContext context) {
+    final permissions =
+        ref.watch(bandPermissionsProvider).valueOrNull ?? BandPermissions.none;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (isFirstLoad) {
         await ref.watch(voicesProviderProvider.notifier).getVoiceList();
@@ -48,18 +52,20 @@ class _UserListState extends ConsumerState<UserList> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       bottomNavigationBar: const MainBottomBar(currentIndex: 2),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
-        onPressed: () async {
-          final router = await ref.read(appRouterProvider.future);
+      floatingActionButton: permissions.canManageCodes
+          ? FloatingActionButton(
+              backgroundColor: Theme.of(context).colorScheme.onSurface,
+              onPressed: () async {
+                final router = await ref.read(appRouterProvider.future);
 
-          router.push("/code_list");
-        },
-        child: Icon(
-          Icons.qr_code,
-          color: Theme.of(context).colorScheme.surface,
-        ),
-      ),
+                router.push("/code_list");
+              },
+              child: Icon(
+                Icons.qr_code,
+                color: Theme.of(context).colorScheme.surface,
+              ),
+            )
+          : null,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
