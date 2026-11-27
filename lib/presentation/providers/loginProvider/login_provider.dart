@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 import '../../../config/config.dart';
 import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
-import '../../../utils/properties_manager.dart';
+import '../../../config/api_config.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 
@@ -55,7 +55,7 @@ class LoginProvider extends _$LoginProvider {
   /// If successful, it saves the user and token in SharedPreferences and
   /// fetches the bands associated with the user.
   Future<void> login() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (isLoading) return;
 
@@ -101,7 +101,7 @@ class LoginProvider extends _$LoginProvider {
   /// and the router navigates to the director's main page.
   /// Otherwise, it navigates to the authenticated user's main page.
   Future<void> getBands(String id, String token) async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     try {
       final response = await http.get(

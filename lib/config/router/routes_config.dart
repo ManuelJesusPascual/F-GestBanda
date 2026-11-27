@@ -12,7 +12,7 @@ import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
 import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:gestbanda/presentation/screen/appPages/userListPage/user_list_page.dart';
 import 'package:gestbanda/presentation/screen/onBoardingPages/create_new_band_page_two.dart';
-import 'package:gestbanda/utils/properties_manager.dart';
+import 'package:gestbanda/config/api_config.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
@@ -289,7 +289,7 @@ class AppRouter extends _$AppRouter {
   }
 
   Future<UserDTO?> updateUserInfo(UserDTO userSaved) async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     try {
       final response = await http.get(
@@ -344,7 +344,7 @@ class AppRouter extends _$AppRouter {
   }
 
   Future<BandDTO?> updateBandInfo(BandDTO bandSaved, UserDTO user) async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     try {
       final response = await http.get(

@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../domain/newmodels/roleModels/role_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
-import '../../../utils/properties_manager.dart';
+import '../../../config/api_config.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 
@@ -58,7 +58,7 @@ class CodesProvider extends _$CodesProvider {
 
   // Fetches the codes associated with the current band and updates the state accordingly.
   Future<void> getBandCodes() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 
@@ -106,7 +106,7 @@ class CodesProvider extends _$CodesProvider {
 
   // Creates a new code for the current band and updates the state.
   Future<void> createBandCode() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 
@@ -151,7 +151,7 @@ class CodesProvider extends _$CodesProvider {
 
   // Updates an existing code for the current band and updates the state.
   Future<void> updateBandCode() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 
@@ -197,7 +197,7 @@ class CodesProvider extends _$CodesProvider {
 
   // Removes a code from the current band and updates the state.
   Future<void> removeCode(String id) async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 

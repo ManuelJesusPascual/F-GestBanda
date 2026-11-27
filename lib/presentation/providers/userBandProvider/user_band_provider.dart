@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../domain/newmodels/userModels/user_dto.dart';
 import '../../../domain/newmodels/voiceModels/voice_dto.dart';
-import '../../../utils/properties_manager.dart';
+import '../../../config/api_config.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 
@@ -65,7 +65,7 @@ class UserBandProvider extends _$UserBandProvider {
   /// to the API. Handles loading state and manages potential errors
   /// that may occur during the operation.
   Future<void> removeUserBand() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 
@@ -106,7 +106,7 @@ class UserBandProvider extends _$UserBandProvider {
   /// to the API. It starts by loading the current user and band information
   /// before sending the modification request and handling any errors.
   Future<void> modifyUserBand(UserDTO user) async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 
@@ -162,7 +162,7 @@ class UserBandProvider extends _$UserBandProvider {
   /// by making a GET request to the API. It manages the loading state
   /// and handles errors that may arise during the request.
   Future<void> getUserBands() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 

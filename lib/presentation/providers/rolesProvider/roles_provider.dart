@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/userModels/user_dto.dart';
 import '../../../domain/newmodels/voiceModels/voice_dto.dart';
-import '../../../utils/properties_manager.dart';
+import '../../../config/api_config.dart';
 
 part 'roles_provider.g.dart';
 
@@ -49,7 +49,7 @@ class RolesProvider extends _$RolesProvider {
   /// Upon success, it updates the state with the retrieved roles.
   /// If an error occurs, it will set the appropriate error message.
   Future<void> getRolesList() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (state.isLoading) return;
 

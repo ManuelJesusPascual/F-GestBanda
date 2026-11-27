@@ -11,7 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 
 import "../../../../utils/extensions.dart";
-import '../../../utils/properties_manager.dart';
+import '../../../config/api_config.dart';
 
 part 'register_provider.g.dart';
 
@@ -121,7 +121,7 @@ class RegisterProvider extends _$RegisterProvider {
 
   /// Method that makes a request to the API to register a user. It collects the token from the response and stores it in SharedPreferences. After that, it changes the router.
   Future<void> register() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     isLoading = true;
     try {

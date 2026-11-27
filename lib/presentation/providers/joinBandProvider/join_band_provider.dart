@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../config/config.dart';
 import '../../../domain/newmodels/bandModels/band_dto.dart';
 import '../../../domain/newmodels/voiceModels/voice_dto.dart';
-import '../../../utils/properties_manager.dart';
+import '../../../config/api_config.dart';
 import '../errorProvider/error_provider.dart';
 import '../sharedPreferencesProvider/shared_preferences_provider.dart';
 import 'package:http/http.dart' as http;
@@ -78,7 +78,7 @@ class JoinBandProvider extends _$JoinBandProvider {
   /// If successful, it saves the band data and navigates to the director's home screen.
   /// If an error occurs, it sets an appropriate error message in the error provider.
   Future<void> joinBandByCode() async {
-    final api = await loadFromProperties("api_url");
+    const api = apiUrl;
 
     if (isLoading) return;
 
