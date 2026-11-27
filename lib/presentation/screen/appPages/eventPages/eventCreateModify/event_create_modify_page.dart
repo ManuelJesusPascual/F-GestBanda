@@ -258,8 +258,7 @@ class EventCreateModifyState extends ConsumerState<EventCreateModify> {
                 ),
                 CustomTextInput(
                   label: "Descripcion",
-                  hint:
-                      "Concierto de primavera en la plaza mayor",
+                  hint: "Concierto de primavera en la plaza mayor",
                   initalValue: widget.event.description,
                   topPadding: 20,
                   leftPadding: 20,
