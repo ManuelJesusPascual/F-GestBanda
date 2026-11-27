@@ -6,22 +6,25 @@ import 'package:gestbanda/widgets/voice_tile.dart';
 import '../../../../config/config.dart';
 import '../../../providers/errorProvider/error_provider.dart';
 
-class BandVoicesPage extends ConsumerWidget {
-  BandVoicesPage({super.key});
-
-  bool isFirstLoad = true;
+class BandVoicesPage extends ConsumerStatefulWidget {
+  const BandVoicesPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BandVoicesPage> createState() => _BandVoicesPageState();
+}
+
+class _BandVoicesPageState extends ConsumerState<BandVoicesPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => ref.read(voicesProviderProvider.notifier).getVoiceList());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final voicesProvider = ref.watch(voicesProviderProvider.notifier);
     final errorMessage = ref.watch(errorProviderProvider);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isFirstLoad) {
-        voicesProvider.getVoiceList();
-        isFirstLoad = false;
-      }
-    });
 
     if (errorMessage.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

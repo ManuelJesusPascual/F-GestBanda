@@ -4,7 +4,6 @@ import '../../../../widgets/widgets.dart';
 
 import '../../../../config/config.dart';
 import '../../../../domain/models/costume.dart';
-import '../../../../widgets/costume_tile.dart';
 
 class NewCustomePage extends ConsumerWidget {
   NewCustomePage({super.key});

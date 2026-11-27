@@ -25,17 +25,15 @@ class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
     super.initState();
     // Inicializa el provider si se pasa un code desde la navegación
     if (widget.code != null) {
-      ref.read(codesProviderProvider.notifier).state.createModifyCode =
-          widget.code!;
+      ref.read(codesProviderProvider).createModifyCode = widget.code!;
       selectedDateTime = widget.code!.endDate;
     } else {
-      ref.read(codesProviderProvider.notifier).state.createModifyCode =
-          CodesDTO(
-              id: "",
-              code: "",
-              voice: VoiceDTO(id: "", name: ""),
-              endDate: DateTime.now(),
-              createdDate: DateTime.now());
+      ref.read(codesProviderProvider).createModifyCode = CodesDTO(
+          id: "",
+          code: "",
+          voice: VoiceDTO(id: "", name: ""),
+          endDate: DateTime.now(),
+          createdDate: DateTime.now());
       selectedDateTime = DateTime.now();
     }
   }
@@ -48,7 +46,7 @@ class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
     if (newDate != null) {
       setState(() {
         selectedDateTime = newDate;
-        ref.read(codesProviderProvider.notifier).state.createModifyCode =
+        ref.read(codesProviderProvider).createModifyCode =
             ref.read(codesProviderProvider).createModifyCode.copyWith(
                   endDate: DateTime(
                     newDate.year,
@@ -78,7 +76,7 @@ class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
           picked.hour,
           picked.minute,
         );
-        ref.read(codesProviderProvider.notifier).state.createModifyCode =
+        ref.read(codesProviderProvider).createModifyCode =
             ref.read(codesProviderProvider).createModifyCode.copyWith(
                   endDate: selectedDateTime!,
                 );
@@ -103,7 +101,7 @@ class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
       ),
     );
 
-    ref.read(codesProviderProvider.notifier).state.createModifyCode =
+    ref.read(codesProviderProvider).createModifyCode =
         code.copyWith(voice: selectedVoz);
 
     return Scaffold(
@@ -157,10 +155,7 @@ class _CodeCreateModifyState extends ConsumerState<CodeCreateModify> {
                       dropdownColor: Theme.of(context).colorScheme.secondary,
                       onChanged: (VoiceDTO? newValue) {
                         selectedVoz = newValue!;
-                        ref
-                                .read(codesProviderProvider.notifier)
-                                .state
-                                .createModifyCode =
+                        ref.read(codesProviderProvider).createModifyCode =
                             code.copyWith(voice: selectedVoz);
                       },
                       items: [

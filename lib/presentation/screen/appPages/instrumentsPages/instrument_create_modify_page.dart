@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gestbanda/domain/newmodels/userModels/user_dto.dart';
-import 'package:gestbanda/widgets/user_tile.dart';
 import '../../../../widgets/widgets.dart';
 
 import '../../../../config/config.dart';

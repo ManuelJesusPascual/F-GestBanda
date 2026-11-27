@@ -1,38 +1,38 @@
 class ModifyUserBandsDTO {
-  String user_id;
-  String voz_id;
-  String role_id;
-  String band_id;
+  String userId;
+  String voiceId;
+  String roleId;
+  String bandId;
 
   ModifyUserBandsDTO({
-    required this.user_id,
-    required this.voz_id,
-    required this.role_id,
-    required this.band_id,
+    required this.userId,
+    required this.voiceId,
+    required this.roleId,
+    required this.bandId,
   });
 
   ModifyUserBandsDTO copyWith(
       {required userID, required vozID, required roleID, required bandID}) {
     return ModifyUserBandsDTO(
-        user_id: userID ?? this.user_id,
-        voz_id: vozID ?? this.voz_id,
-        role_id: roleID ?? this.role_id,
-        band_id: bandID ?? this.band_id);
+        userId: userID ?? userId,
+        voiceId: vozID ?? voiceId,
+        roleId: roleID ?? roleId,
+        bandId: bandID ?? bandId);
   }
 
   Map<String, dynamic> toJson() => {
-        'user_id': user_id,
-        'voice_id': voz_id,
-        'role_id': role_id,
-        'band_id': band_id,
+        'user_id': userId,
+        'voice_id': voiceId,
+        'role_id': roleId,
+        'band_id': bandId,
       };
 
   static ModifyUserBandsDTO fromJson(Map<String, dynamic> json) {
     return ModifyUserBandsDTO(
-      user_id: json['user_id'],
-      voz_id: json['voice_id'],
-      role_id: json['role_id'],
-      band_id: json['band_id'],
+      userId: json['user_id'],
+      voiceId: json['voice_id'],
+      roleId: json['role_id'],
+      bandId: json['band_id'],
     );
   }
 

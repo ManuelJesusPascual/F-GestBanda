@@ -117,10 +117,10 @@ class UserBandProvider extends _$UserBandProvider {
     await getBand();
 
     ModifyUserBandsDTO userModify = ModifyUserBandsDTO(
-        user_id: state.userModify.id,
-        voz_id: user.voz!.id,
-        role_id: user.role!.id,
-        band_id: state.band.id);
+        userId: state.userModify.id,
+        voiceId: user.voz!.id,
+        roleId: user.role!.id,
+        bandId: state.band.id);
 
     try {
       final response = await http.put(

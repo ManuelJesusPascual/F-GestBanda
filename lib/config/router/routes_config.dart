@@ -143,7 +143,7 @@ final directorRouter = GoRouter(
     ),
     GoRoute(
       path: '/code_list',
-      builder: (context, state) => CodeList(),
+      builder: (context, state) => const CodeList(),
     ),
     GoRoute(
       path: '/code_create_modify',
@@ -221,13 +221,13 @@ final directorRouter = GoRouter(
     GoRoute(
       path: '/edit_band_voices',
       builder: (context, state) {
-        return BandVoicesPage();
+        return const BandVoicesPage();
       },
     ),
     GoRoute(
       path: '/add_band_voices',
       builder: (context, state) {
-        return BandVoiceAddPage();
+        return const BandVoiceAddPage();
       },
     ),
     GoRoute(

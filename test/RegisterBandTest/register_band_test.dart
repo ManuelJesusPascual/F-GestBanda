@@ -10,7 +10,7 @@ import 'package:gestbanda/presentation/providers/errorProvider/error_provider.da
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // Mock class for FlutterSecureStorage to simulate its behavior in tests.

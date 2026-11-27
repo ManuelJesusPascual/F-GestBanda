@@ -8,7 +8,7 @@ import 'package:gestbanda/presentation/providers/sharedPreferencesProvider/share
 import 'package:gestbanda/presentation/providers/errorProvider/error_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // Mock class for FlutterSecureStorage

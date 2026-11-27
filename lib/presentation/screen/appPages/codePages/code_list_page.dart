@@ -7,19 +7,23 @@ import '../../../../config/config.dart';
 import '../../../../domain/newmodels/codesModels/codes.dart';
 import '../../../../widgets/widgets.dart';
 
-class CodeList extends ConsumerWidget {
-  CodeList({super.key});
-
-  bool isFirstLoad = true;
+class CodeList extends ConsumerStatefulWidget {
+  const CodeList({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isFirstLoad) {
-        ref.watch(codesProviderProvider.notifier).getBandCodes();
-        isFirstLoad = false;
-      }
-    });
+  ConsumerState<CodeList> createState() => _CodeListState();
+}
+
+class _CodeListState extends ConsumerState<CodeList> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => ref.read(codesProviderProvider.notifier).getBandCodes());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final errorMessage = ref.watch(errorProviderProvider);
 
     // Obtener la lista de códigos y el mensaje de error

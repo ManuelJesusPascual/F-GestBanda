@@ -101,9 +101,10 @@ class EventTile extends ConsumerWidget {
                                 ? Theme.of(context)
                                     .colorScheme
                                     .error
-                                    .withOpacity(0.7)
+                                    .withValues(alpha: 0.7)
                                 : differenceInHours > 2
-                                    ? const Color(0xFFFFC107).withOpacity(0.7)
+                                    ? const Color(0xFFFFC107)
+                                        .withValues(alpha: 0.7)
                                     : const Color(0xFF66BB6A),
                             differenceInHours < -2
                                 ? Theme.of(context).colorScheme.error
@@ -120,16 +121,18 @@ class EventTile extends ConsumerWidget {
                                 ? Theme.of(context)
                                     .colorScheme
                                     .error
-                                    .withOpacity(0.6)
+                                    .withValues(alpha: 0.6)
                                 : differenceInHours > 2
-                                    ? const Color(0xFFFFC107).withOpacity(0.6)
-                                    : const Color(0xFF66BB6A).withOpacity(0.6),
+                                    ? const Color(0xFFFFC107)
+                                        .withValues(alpha: 0.6)
+                                    : const Color(0xFF66BB6A)
+                                        .withValues(alpha: 0.6),
                             blurRadius: 3,
                             spreadRadius: 1,
                           ),
                         ],
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                           width: 1.5,
                         ),
                       ),

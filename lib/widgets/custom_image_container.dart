@@ -74,6 +74,7 @@ class CustomImageContainer extends StatelessWidget {
                       source: ImageSource.gallery,
                       imageQuality: 25,
                     );
+                    if (!context.mounted) return;
                     if (image == null) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           backgroundColor:

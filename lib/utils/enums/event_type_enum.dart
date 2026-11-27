@@ -9,8 +9,6 @@ extension EventTypeExtension on EventType {
         return 'salida_procesional';
       case EventType.concierto:
         return 'concierto';
-      default:
-        return '';
     }
   }
 
@@ -35,8 +33,6 @@ extension EventTypeExtension on EventType {
         return 'Salida Procesional';
       case EventType.concierto:
         return 'Concierto';
-      default:
-        return 'Desconocido';
     }
   }
 }

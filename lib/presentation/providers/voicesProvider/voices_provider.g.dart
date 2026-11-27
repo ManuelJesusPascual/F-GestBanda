@@ -6,7 +6,7 @@ part of 'voices_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$voicesProviderHash() => r'bff5dd845c3cd5d366146f2a5761e1f51bffb554';
+String _$voicesProviderHash() => r'ce5ebce0cdca3665641751c1f258e4afd6ac62e2';
 
 /// The VoicesProvider class is responsible for managing the state related
 /// to voices in a band. It handles fetching, adding, and removing voices

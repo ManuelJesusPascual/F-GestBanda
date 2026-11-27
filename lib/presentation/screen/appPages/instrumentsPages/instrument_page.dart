@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gestbanda/widgets/instrument_tile.dart';
 import '../../../../widgets/widgets.dart';
 
 import '../../../../config/config.dart';

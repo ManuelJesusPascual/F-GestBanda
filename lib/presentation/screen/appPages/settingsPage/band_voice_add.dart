@@ -6,21 +6,25 @@ import '../../../../widgets/custom_button.dart';
 import '../../../providers/errorProvider/error_provider.dart';
 import '../../../providers/voicesProvider/voices_provider.dart';
 
-class BandVoiceAddPage extends ConsumerWidget {
-  BandVoiceAddPage({super.key});
-  bool isFirstLoad = true;
+class BandVoiceAddPage extends ConsumerStatefulWidget {
+  const BandVoiceAddPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final voicesProvider = ref.watch(voicesProviderProvider.notifier);
+  ConsumerState<BandVoiceAddPage> createState() => _BandVoiceAddPageState();
+}
+
+class _BandVoiceAddPageState extends ConsumerState<BandVoiceAddPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        ref.read(voicesProviderProvider.notifier).getVoicesBandNotHaveList());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final errorMessage = ref.watch(errorProviderProvider);
     String newVoiceName = "";
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (isFirstLoad) {
-        voicesProvider.getVoicesBandNotHaveList();
-        isFirstLoad = false;
-      }
-    });
 
     if (errorMessage.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

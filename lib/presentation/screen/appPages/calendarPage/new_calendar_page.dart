@@ -91,7 +91,7 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
                                   color: Theme.of(context)
                                       .colorScheme
                                       .primary
-                                      .withOpacity(0.2),
+                                      .withValues(alpha: 0.2),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
@@ -112,7 +112,7 @@ class _NewCalendarPageState extends ConsumerState<NewCalendarPage> {
                                   color: Theme.of(context)
                                       .colorScheme
                                       .primary
-                                      .withOpacity(0.3),
+                                      .withValues(alpha: 0.3),
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(

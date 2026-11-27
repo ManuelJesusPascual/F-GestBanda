@@ -72,7 +72,7 @@ Future<dynamic> showDateModal(
                             color: Theme.of(context)
                                 .colorScheme
                                 .primary
-                                .withOpacity(0.2),
+                                .withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -91,7 +91,7 @@ Future<dynamic> showDateModal(
                             color: Theme.of(context)
                                 .colorScheme
                                 .primary
-                                .withOpacity(0.2),
+                                .withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -111,7 +111,7 @@ Future<dynamic> showDateModal(
                               color: Theme.of(context)
                                   .colorScheme
                                   .primary
-                                  .withOpacity(0.3),
+                                  .withValues(alpha: 0.3),
                               shape: BoxShape.circle,
                             ),
                             child: Center(
@@ -133,7 +133,7 @@ Future<dynamic> showDateModal(
                             color: Theme.of(context)
                                 .colorScheme
                                 .secondary
-                                .withOpacity(0.3),
+                                .withValues(alpha: 0.3),
                             shape: BoxShape.circle,
                           ),
                           child: Center(
@@ -153,7 +153,7 @@ Future<dynamic> showDateModal(
                             color: Theme.of(context)
                                 .colorScheme
                                 .primary
-                                .withOpacity(0.3),
+                                .withValues(alpha: 0.3),
                             shape: BoxShape.circle,
                           ),
                           child: Center(

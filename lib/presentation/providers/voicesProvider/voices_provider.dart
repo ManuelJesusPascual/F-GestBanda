@@ -202,7 +202,7 @@ class VoicesProvider extends _$VoicesProvider {
     await getBand();
 
     AddVoiceToBandDTO addVoiceToBandDTO =
-        AddVoiceToBandDTO(band_uuid: state.band.id, voice_name: voiceName);
+        AddVoiceToBandDTO(bandUuid: state.band.id, voiceName: voiceName);
 
     try {
       final response = await http.post(
